@@ -1,36 +1,51 @@
 "use client";
-import React, { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
 
 type Props = {};
 
 const ThemeToggler = (props: Props): ReactNode => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [theme, setTheme] = useState("light");
 
+  // useEffect(() => {
+  //   const mode = localStorage.getItem("theme");
+  //   if (mode === "dark") {
+  //     setTheme("dark");
+  //   }
+  // }, []);
+
+  // checking browser schema and acting with that
   useEffect(() => {
-    const mode = localStorage.getItem("theme");
-    if (mode === "dark") {
-      setDarkMode(true);
+    if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+      setTheme("dark")
+    }else{
+      setTheme("light")
     }
   }, []);
 
   useEffect(() => {
-    if (darkMode) {
+    if (theme === "dark") {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [darkMode]);
+  }, [theme]);
 
   return (
     <div
       // className="relative w-16 h-8 flex items-center dark:bg-black bg-white rounded-full cursor-pointer p-1"
-      onClick={() => setDarkMode(!darkMode)}
+      onClick={() => {
+        if (theme === "light") {
+          setTheme("dark");
+        } else {
+          setTheme("light");
+        }
+      }}
     >
-      {darkMode ? (
+      {theme === "dark" ? (
         <FaMoon className="text-[#FFD700]" size={20} color="#FFD700" />
       ) : (
         <BsSunFill className="text-black" size={20} />

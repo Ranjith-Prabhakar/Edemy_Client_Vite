@@ -9,14 +9,14 @@ type Props = {}
 
 const Home = (props: Props) => {
   return (
-    <>
-    <Header />
+    <div className="dark:bg-black dark:text-white">
+      <Header />
       <Carousal />
       <Hero />
       <Slider />
       <Testimonial />
       <Footer />
-    </>
+    </div>
   );
 }
 
