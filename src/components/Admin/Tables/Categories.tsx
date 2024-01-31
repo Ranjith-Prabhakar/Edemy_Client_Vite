@@ -1,10 +1,9 @@
-
 import { Data } from "./Data";
 type Props = {};
 
 const Categories = (props: Props) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2  dark:bg-gray-950 text-[#FFD700] p-3 rounded-md">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -42,11 +41,12 @@ const Categories = (props: Props) => {
 
       <div>
         <input type="text" className="bg-gray-800 rounded-md" />
-        <button className="bg-[#FFD700] text-black mt-2 px-3 rounded-sm">add new</button>
+        <button className="bg-[#FFD700] text-black mt-2 px-3 rounded-sm">
+          add new
+        </button>
       </div>
     </div>
   );
 };
 //#212121
 export default Categories;
-

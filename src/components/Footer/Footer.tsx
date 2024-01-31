@@ -8,7 +8,7 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <div className="flex justify-between mt-[110px] mx-2 border-t-[1px] border-[#FFD700] py-6">
+    <div className="flex max-w-[90%] w-full mx-auto justify-between mt-[110px] mx-2 border-t-[1px] border-[#FFD700] py-6">
       <div className="flex flex-col ms-2">
         <Link to={"/home"}>
           <img src={logo} alt="Logo image" className="w-[100px] h-[80px]" />

@@ -5,9 +5,16 @@ import Hero from "../components/Hero/Hero";
 import Slider from "../components/Slider/Slider";
 import Testimonial from "../components/Testimonial/Testimonial";
 
-type Props = {}
+
+
+
+type Props = {};
 
 const Home = (props: Props) => {
+
+ 
+
+
   return (
     <div className="dark:bg-black dark:text-white">
       <Header />
@@ -18,6 +25,6 @@ const Home = (props: Props) => {
       <Footer />
     </div>
   );
-}
+};
 
-export default Home
+export default Home;

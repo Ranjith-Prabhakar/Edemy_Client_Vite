@@ -8,21 +8,21 @@ type Props = {};
 const ThemeToggler = (props: Props): ReactNode => {
   const [theme, setTheme] = useState("light");
 
-  // useEffect(() => {
-  //   const mode = localStorage.getItem("theme");
-  //   if (mode === "dark") {
-  //     setTheme("dark");
-  //   }
-  // }, []);
-
-  // checking browser schema and acting with that
   useEffect(() => {
-    if(window.matchMedia('(prefers-color-scheme:dark)').matches){
-      setTheme("dark")
-    }else{
-      setTheme("light")
+    const mode = localStorage.getItem("theme");
+    if (mode === "dark") {
+      setTheme("dark");
     }
   }, []);
+
+  // checking browser schema and acting with that
+  // useEffect(() => {
+  //   if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+  //     setTheme("dark")
+  //   }else{
+  //     setTheme("light")
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (theme === "dark") {
