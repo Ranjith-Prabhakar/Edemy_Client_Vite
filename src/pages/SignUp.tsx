@@ -1,14 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import { signupSchema } from "../schema/schemas";
 
 import { useRegisterMutation } from "../redux/features/auth/authApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 type Props = {};
 
 const SignUp = (props: Props) => {
-  const [register, { isSuccess, isError, error, data }] = useRegisterMutation();
+  const [register, { isSuccess}] = useRegisterMutation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("otp has been sent to your mail");
+      navigate("/otp_verification", { state: { fromSignup: true } });
+    }
+  }, [isSuccess]);
 
   const {
     values,
@@ -27,26 +37,15 @@ const SignUp = (props: Props) => {
     },
     validationSchema: signupSchema,
     onSubmit: async (values, actions) => {
-      console.log("submitted", values);
-
       await register({
         name: values.name,
         email: values.email,
         password: values.password,
         confirmPassword: values.confirmPassword,
       });
-
-      if(isSuccess){
-        console.log("success",data)
-      }else if(isError){
-        console.log("error",error)
-      }
       actions.resetForm(); // after submission to clear the fields
     },
   });
-
-  // console.log(values);
-  console.log(errors);
 
   return (
     <section className="dark:bg-black dark:text-white">
@@ -121,9 +120,12 @@ const SignUp = (props: Props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700]"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
                   required
                 />
+                {errors.password && touched.password && (
+                  <p className="text-red-600">{errors.password}</p>
+                )}
               </div>
               <div>
                 <label
@@ -133,16 +135,19 @@ const SignUp = (props: Props) => {
                   Confirm confirmPassword
                 </label>
                 <input
-                  type="confirmPassword"
+                  type="password"
                   name="confirmPassword"
                   id="confirmPassword"
                   value={values.confirmPassword}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700]"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
                   required
                 />
+                {errors.confirmPassword && touched.confirmPassword && (
+                  <p className="text-red-600">{errors.confirmPassword}</p>
+                )}
               </div>
 
               <div className="flex items-center justify-between">

@@ -36,15 +36,17 @@ export const authApi = apiSlice.injectEndpoints({
       // },
     }),
 
-    activation: builder.mutation({
-      query: ({ activation_token, activation_code }) => ({
-        url: "activate-user",
-        method: "POST",
-        body: { activation_token, activation_code },
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: "create_user",
+        method:"post",
+        body:data,
+        credentials:"include" as const,
       }),
-      //invalidateTags:["todos"] // for mutate the cache otherwise the cached one will remain the same even after we make any update
     }),
+
+    //invalidateTags:["todos"] // for mutate the cache otherwise the cached one will remain the same even after we make any update
   }),
 });
 
-export const { useRegisterMutation, useActivationMutation } = authApi;
+export const { useRegisterMutation,useCreateUserMutation  } = authApi;
