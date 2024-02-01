@@ -20,7 +20,7 @@ const categorySlice = createSlice({
       state.categoryData = action.payload;
     },
     createCategory: (state, action) => {
-      state.categoryData = [...state.categoryData, action.payload];
+      state.categoryData = [...state.categoryData, action.payload.data];
     },
     freezCategory: (state, action) => {
       const index = state.categoryData.findIndex(
