@@ -1,14 +1,30 @@
 "use client";
 
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoGithub } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import { loginSchema } from "../schema/schemas";
+import { useLoginMutation } from "../redux/features/auth/authApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+
 type Props = {};
 
 const Login = (props: Props) => {
+  const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("user logged in successfully");
+    } else if (isLoading) {
+      toast.loading;
+    } else if (isError) {
+      console.log(error);
+    }
+  }, [isSuccess, isLoading, isError]);
+
   const {
     values,
     errors,
@@ -23,14 +39,13 @@ const Login = (props: Props) => {
       password: "",
     },
     validationSchema: loginSchema,
-    onSubmit: (values, actions) => {
-      console.log("submitted");
+    onSubmit: async (values, actions) => {
+      await login({ email: values.email, password: values.password });
       actions.resetForm(); // after submission to clear the fields
     },
   });
 
-  // console.log(values);
-  console.log(errors);
+ 
 
   return (
     <section className="dark:bg-black dark:text-white">
@@ -160,4 +175,3 @@ const Login = (props: Props) => {
 };
 
 export default Login;
-

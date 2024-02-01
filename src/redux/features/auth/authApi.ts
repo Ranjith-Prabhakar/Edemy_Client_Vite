@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-// import { userRegistration } from "./authSlice";
+import { userLoggedIn } from "./authSlice";
 
 type RegistrationResponse = {
   message: string;
@@ -11,42 +11,48 @@ type RegistrationData = {};
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<RegistrationResponse, RegistrationData>({
-      // apiendpint
+      // api endpoint
+      // Register -----------------------------------------------------------------------------
       query: (data) => ({
         url: "register",
         method: "post",
         body: data,
         credentials: "include" as const,
       }),
-      // transformResponse:res=>res.sort((a,b)=>a-b)
-      // provideTags:["todos"] // to start  cached data
-      //state updation after result
-
-      // async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-      //   try {
-      //     const result = await queryFulfilled;
-      //     dispatch(
-      //       userRegistration({
-      //         token: result.data.activationToken,
-      //       })
-      //     );
-      //   } catch (error: any) {
-      //     console.log(error);
-      //   }
-      // },
     }),
-
+    // create user -----------------------------------------------------------------------------
     createUser: builder.mutation({
       query: (data) => ({
         url: "create_user",
-        method:"post",
-        body:data,
-        credentials:"include" as const,
+        method: "post",
+        body: data,
+        credentials: "include" as const,
       }),
     }),
+    // login -----------------------------------------------------------------------------
+    login: builder.mutation({
+      query: (data) => ({
+        url: "login",
+        method: "post",
+        body: data,
+        credentials:"include" as const
+      }),
 
-    //invalidateTags:["todos"] // for mutate the cache otherwise the cached one will remain the same even after we make any update
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(
+            userLoggedIn({
+              userData: result.data,
+            })
+          );
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useRegisterMutation,useCreateUserMutation  } = authApi;
+export const { useRegisterMutation, useCreateUserMutation, useLoginMutation } =
+  authApi;
