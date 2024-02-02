@@ -10,8 +10,11 @@ import { IoIosChatbubbles } from "react-icons/io";
 import { MdOutlineEventNote } from "react-icons/md";
 
 import { CgProfile } from "react-icons/cg";
+type props = {
+  setSideMenuItem: React.Dispatch<React.SetStateAction<number>>;
+};
 
-const SideBar = () => {
+const SideBar = ({ setSideMenuItem }: props) => {
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
     { name: "Courses", icon: FaPhotoVideo },
@@ -33,6 +36,9 @@ const SideBar = () => {
             <div
               className="flex justify-start items-center gap-2 cursor-pointer "
               key={item.name}
+              onClick={() => {
+                setSideMenuItem(index + 1);
+              }}
             >
               <item.icon />
               <h1> {item.name}</h1>
