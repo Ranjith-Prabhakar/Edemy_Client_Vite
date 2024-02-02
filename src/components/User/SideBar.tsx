@@ -9,19 +9,12 @@ import { IoIosNotifications } from "react-icons/io";
 import { IoIosChatbubbles } from "react-icons/io";
 import { MdOutlineEventNote } from "react-icons/md";
 
-type Props = {
-  setSidebarElement: React.Dispatch<React.SetStateAction<number>>;
-  
-};
+import { CgProfile } from "react-icons/cg";
 
-const SideBar = ({ setSidebarElement }: Props) => {
+const SideBar = () => {
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
-    { name: "Users", icon: FaUsers },
-    { name: "Trainers", icon: GiTeacher },
-    { name: "Categories", icon: TbCategoryPlus },
     { name: "Courses", icon: FaPhotoVideo },
-    { name: "Payments", icon: FaMoneyCheckDollar },
     { name: "Accounts", icon: MdAccountBalance },
     { name: "Notifications", icon: IoIosNotifications },
     { name: "Chat", icon: IoIosChatbubbles },
@@ -29,19 +22,23 @@ const SideBar = ({ setSidebarElement }: Props) => {
   ];
   return (
     <div className="flex flex-col   max-w-[15%] w-full m-auto rounded-lg text-xl p-[25px] dark:bg-gray-950 text-gray-500 dark:text-gray-400 space-y-3">
-      {dashBordItems &&
-        dashBordItems.map((item, index) => (
-          <div
-            className="flex justify-start items-center gap-2 cursor-pointer "
-            onClick={() => {
-              setSidebarElement(index + 1);
-            }}
-            key={item.name}
-          >
-            <item.icon />
-            <h1> {item.name}</h1>
-          </div>
-        ))}
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2 items-center justify-center mb-8">
+          <CgProfile size={60} />
+          <h1>Ranjith</h1>
+        </div>
+
+        {dashBordItems &&
+          dashBordItems.map((item, index) => (
+            <div
+              className="flex justify-start items-center gap-2 cursor-pointer "
+              key={item.name}
+            >
+              <item.icon />
+              <h1> {item.name}</h1>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

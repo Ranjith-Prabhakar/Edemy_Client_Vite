@@ -1,11 +1,10 @@
-"use client";
-
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoGithub } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import { loginSchema } from "../schema/schemas";
+import { loginSchema } from "../schema/authSchema";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -13,11 +12,13 @@ import toast from "react-hot-toast";
 type Props = {};
 
 const Login = (props: Props) => {
+  const navigate = useNavigate();
   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
 
   useEffect(() => {
     if (isSuccess) {
       toast.success("user logged in successfully");
+      navigate("/");
     } else if (isLoading) {
       toast.loading;
     } else if (isError) {
@@ -44,8 +45,6 @@ const Login = (props: Props) => {
       actions.resetForm(); // after submission to clear the fields
     },
   });
-
- 
 
   return (
     <section className="dark:bg-black dark:text-white">

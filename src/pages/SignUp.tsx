@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import { signupSchema } from "../schema/schemas";
+import { signupSchema } from "../schema/authSchema";
 
 import { useRegisterMutation } from "../redux/features/auth/authApi";
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 type Props = {};
 
 const SignUp = (props: Props) => {
-  const [register, { isSuccess}] = useRegisterMutation();
+  const [register, { isSuccess }] = useRegisterMutation();
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -1,5 +1,7 @@
+import toast from "react-hot-toast";
 import { apiSlice } from "../../api/apiSlice";
-import { createCategory } from "./categorySlice";
+import { createCategory, getCategories } from "./categorySlice";
+
 const categoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCategory: builder.mutation({
@@ -9,16 +11,41 @@ const categoryApi = apiSlice.injectEndpoints({
         body: data,
         credentials: "include" as const,
       }),
-      
+
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          if (!result.data.success) {
+            toast.error(result.data.message);
+          } else {
+            dispatch(
+              createCategory({
+                data: result,
+              })
+            );
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+
+    fetchCategories: builder.query({
+      query: () => ({
+        url: "admin/get_categories",
+        method: "get",
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
           dispatch(
-            createCategory({
-              data: result,
+            getCategories({
+              data: result.data.data,
             })
           );
-        } catch (error) {
+        } catch (error: any) {
           console.log(error);
         }
       },
@@ -26,4 +53,5 @@ const categoryApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateCategoryMutation } = categoryApi;
+export const { useCreateCategoryMutation, useFetchCategoriesQuery } =
+  categoryApi;

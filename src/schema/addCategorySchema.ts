@@ -6,6 +6,6 @@ export const addCategoryValidation = yup.object().shape({
   category: yup
     .string()
     .matches(stringRegex, "Invalid characters")
-    .min(3)
+    .min(5)
     .required("Please enter a valid category"),
 });

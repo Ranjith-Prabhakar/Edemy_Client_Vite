@@ -1,22 +1,61 @@
-import { FaRegCircleStop } from "react-icons/fa6";
-import { FaBackward } from "react-icons/fa";
-import { FaForward } from "react-icons/fa";
+import { TbCategoryPlus } from "react-icons/tb";
 import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
-interface Category {
-  name: string;
-  noOfCourses?: number;
-  status: "active" | "freez";
-}
+import { FaBackward } from "react-icons/fa";
+import { FaForward } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaRegCircleStop } from "react-icons/fa6";
+import AddCategory from "./AddCategoryForm";
+import { useFetchCategoriesQuery } from "../../../redux/features/admin/category/categoryApi";
+import Table from "../Tables/Table";
+type Props = {};
 
-type Props = {
-  data: Array<Category>;
-};
+const Categories = (props: Props) => {
+  const [addCategory, setAddCategory] = useState(false);
 
-const Table = ({ data }: Props) => {
+  const fetchCategoriesQuery = useFetchCategoriesQuery({});
+  const { data } = fetchCategoriesQuery;
+
+  const fetchData = async () => {
+    try {
+      await fetchCategoriesQuery.refetch(); // Refetch if needed
+    } catch (error) {
+      console.error("Error fetching categories", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <div>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="flex flex-col gap-2  dark:bg-gray-950 text-[#FFD700] p-3 rounded-md w-full relative">
+      <div className="flex items-center justify-between">
+        <button
+          className="dark:bg-gray-700 dark:text-gray-400  px-3 rounded-sm h-[30px] flex items-center gap-1 font-bold"
+          onClick={() => {
+            setAddCategory(!addCategory);
+          }}
+        >
+          Add new <TbCategoryPlus className="" />
+        </button>
+        <h2 className="font-bold tracking-[2px] text-[25px] text-gray-500 dark:text-gray-400">
+          Categories
+        </h2>
+        {/* <h1>{data}</h1> */}
+        <div className="flex gap-2">
+          <input type="text" className="bg-gray-800 rounded-md h-[30px]" />
+          <button className=" px-3 rounded-sm h-[30px] font-bold dark:bg-gray-700 dark:text-gray-400">
+            Search
+          </button>
+        </div>
+      </div>
+
+      {addCategory && <AddCategory />}
+
+      <Table data={data?.data} />
+
+      {/* <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -45,7 +84,7 @@ const Table = ({ data }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item: any, index: any) => (
+            {data?.data?.map((item: any, index: any) => (
               <tr
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 key={index}
@@ -89,9 +128,8 @@ const Table = ({ data }: Props) => {
             <FaForward />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
-
-export default Table;
+export default Categories;

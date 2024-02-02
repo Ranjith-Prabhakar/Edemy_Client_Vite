@@ -1,24 +1,11 @@
 import { useCreateCategoryMutation } from "../../../redux/features/admin/category/categoryApi";
 import { useFormik } from "formik";
 import { addCategoryValidation } from "../../../schema/addCategorySchema";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
 
 type Props = {};
 
 const AddCategory = (props: Props) => {
-  const [createCategory, {isSuccess,isError, isLoading}] = useCreateCategoryMutation();
-
-    useEffect(()=>{
-      if(isSuccess){
-        toast.success("success")
-      }else if(isError){
-        toast.error("error")
-      }else if (isLoading){
-        toast.loading("loading")
-      }
-    },[isSuccess,isError,isLoading])
-
+  const [createCategory] = useCreateCategoryMutation();
   const {
     values,
     errors,
@@ -33,13 +20,12 @@ const AddCategory = (props: Props) => {
     },
     validationSchema: addCategoryValidation,
     onSubmit: async (values, action) => {
-    try {
-        const result = await createCategory({category:values.category});
-        console.log(result)
-    } catch (error) {
-      console.log(error)
-    }
-
+      try {
+        const result = await createCategory({ category: values.category });
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
   return (

@@ -4,19 +4,26 @@ import { userLoggedIn } from "../auth/authSlice";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASEURL, 
-    
+    baseUrl: import.meta.env.VITE_BASEURL,
   }),
   endpoints: (builder) => ({
+    refreshToken: builder.query({
+      query: () => ({
+        url: "refresh",
+        method: "get",
+        credentials: "include" as const,
+      }),
+    }),
+    
     loadUser: builder.query({
-      query: (data) => ({
+      query: () => ({
         url: "user_session",
         method: "GET",
         credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          const result = await queryFulfilled; 
+          const result = await queryFulfilled;
           dispatch(
             userLoggedIn({
               userData: result.data,
