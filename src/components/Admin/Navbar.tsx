@@ -5,7 +5,7 @@ type Props = {};
 
 const AdminNavbar = (props: Props) => {
   return (
-    <div className="px-7 pt-7 w-screen ">
+    <div className="px-7 pt-7 w-full">
       <div className="flex items-center justify-end gap-2 me-7">
         <FaRegMessage size={20} />
         <ThemeToggler />

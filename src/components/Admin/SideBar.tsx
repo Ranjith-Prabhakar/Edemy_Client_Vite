@@ -11,7 +11,6 @@ import { MdOutlineEventNote } from "react-icons/md";
 
 type Props = {
   setSidebarElement: React.Dispatch<React.SetStateAction<number>>;
-  
 };
 
 const SideBar = ({ setSidebarElement }: Props) => {
@@ -28,7 +27,7 @@ const SideBar = ({ setSidebarElement }: Props) => {
     { name: "Event", icon: MdOutlineEventNote },
   ];
   return (
-    <div className="flex flex-col   max-w-[15%] w-full m-auto rounded-lg text-xl p-[25px] dark:bg-gray-950 text-gray-500 dark:text-gray-400 space-y-3">
+    <div className="flex flex-col   max-w-[15%] w-full h-full rounded-lg text-xl p-[25px] dark:bg-gray-950 text-gray-500 dark:text-gray-400 space-y-3">
       {dashBordItems &&
         dashBordItems.map((item, index) => (
           <div
