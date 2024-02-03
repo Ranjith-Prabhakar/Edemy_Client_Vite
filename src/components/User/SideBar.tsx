@@ -8,13 +8,15 @@ import { MdAccountBalance } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { IoIosChatbubbles } from "react-icons/io";
 import { MdOutlineEventNote } from "react-icons/md";
-
+import { useSelector } from "react-redux";
+import { IUserState } from "../../redux/features/auth/authSlice";
 import { CgProfile } from "react-icons/cg";
 type props = {
   setSideMenuItem: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SideBar = ({ setSideMenuItem }: props) => {
+  const userData = useSelector((state: IUserState) => state.user.userData);
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
     { name: "Courses", icon: FaPhotoVideo },
@@ -28,7 +30,7 @@ const SideBar = ({ setSideMenuItem }: props) => {
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-2 items-center justify-center mb-8">
           <CgProfile size={60} />
-          <h1>Ranjith</h1>
+          <h1>{userData.name}</h1>
         </div>
 
         {dashBordItems &&

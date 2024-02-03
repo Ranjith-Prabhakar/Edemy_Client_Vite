@@ -11,7 +11,7 @@ export const apiSlice = createApi({
       query: () => ({
         url: "refresh",
         method: "get",
-        credentials: "include" as const,
+        credentials: "include" 
       }),
     }),
     
@@ -19,7 +19,7 @@ export const apiSlice = createApi({
       query: () => ({
         url: "user_session",
         method: "GET",
-        credentials: "include" as const,
+        credentials: "include",
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {

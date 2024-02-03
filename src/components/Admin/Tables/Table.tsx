@@ -3,17 +3,16 @@ import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
-interface Category {
-  name: string;
-  noOfCourses?: number;
-  status: "active" | "freez";
-}
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-type Props = {
-  data: Array<Category>;
-};
+const Table = () => {
+  const [tableData, setTableData] = useState([]);
+  const { categoryData } = useSelector((state: any) => state.category);
+  useEffect(() => {
+    setTableData(categoryData);
+  }, [categoryData]);
 
-const Table = ({ data }: Props) => {
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -45,7 +44,7 @@ const Table = ({ data }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item: any, index: any) => (
+            {tableData?.map((item: any, index: any) => (
               <tr
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 key={index}

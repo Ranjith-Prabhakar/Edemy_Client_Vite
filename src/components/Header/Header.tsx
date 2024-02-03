@@ -62,7 +62,7 @@ const Header = (props: Props) => {
 
           {name !== "" ? (
             <Link to={"/profile"}>
-              <h1 className="border border-[2px] border-[#FFD700] rounded-full p-2">
+              <h1 className="border-[2px] border-[#FFD700] rounded-[100%] p-1">
                 {name}
               </h1>
             </Link>

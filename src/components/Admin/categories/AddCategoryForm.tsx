@@ -1,10 +1,14 @@
 import { useCreateCategoryMutation } from "../../../redux/features/admin/category/categoryApi";
 import { useFormik } from "formik";
 import { addCategoryValidation } from "../../../schema/addCategorySchema";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
-type Props = {};
+type Props = {
+  setAddCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  addCategory:boolean
+};
 
-const AddCategory = (props: Props) => {
+const AddCategory = ({ setAddCategory, addCategory }: Props) => {
   const [createCategory] = useCreateCategoryMutation();
   const {
     values,
@@ -21,8 +25,8 @@ const AddCategory = (props: Props) => {
     validationSchema: addCategoryValidation,
     onSubmit: async (values, action) => {
       try {
-        const result = await createCategory({ category: values.category });
-        console.log(result);
+        await createCategory({ category: values.category });
+        action.resetForm();
       } catch (error) {
         console.log(error);
       }
@@ -31,6 +35,14 @@ const AddCategory = (props: Props) => {
   return (
     <div className=" bg-black opacity-[0.8] absolute z-10 left-[20%] top-[20%] flex items-start justify-center w-[400px] h-[200px] rounded-lg ">
       <form className="max-w-md mx-auto my-auto" onSubmit={handleSubmit}>
+        <IoIosCloseCircleOutline
+          size={25}
+          className="absolute top-2 right-4"
+          onClick={() => {
+            setAddCategory(!addCategory);
+          }}
+        />
+
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
