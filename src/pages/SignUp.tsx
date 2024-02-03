@@ -6,19 +6,35 @@ import { signupSchema } from "../schema/authSchema";
 import { useRegisterMutation } from "../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-
+import ThemeToggler from "../components/utils/ThemeToggler";
+import { useSelector } from "react-redux";
+import { IUserState } from "../redux/features/auth/authSlice"; 
 type Props = {};
 
 const SignUp = (props: Props) => {
-  const [register, { isSuccess }] = useRegisterMutation();
+   const userData = useSelector((state: IUserState) => state.user.userData);
+
+  const [register, { isSuccess,isError,error }] = useRegisterMutation();
   const navigate = useNavigate();
+
+ useEffect(() => {
+  if(userData.name){
+    navigate("/")
+  }
+ }, [userData]);
 
   useEffect(() => {
     if (isSuccess) {
       toast.success("otp has been sent to your mail");
       navigate("/otp_verification", { state: { fromSignup: true } });
+    } else if (isError) {
+      if (error?.data) {
+        toast.error(error.data.message);
+      }
     }
-  }, [isSuccess]);
+  }, [isSuccess, isError, error]);
+
+ 
 
   const {
     values,
@@ -56,9 +72,13 @@ const SignUp = (props: Props) => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-[#979494] mb-4">
                 Sign up to your account
               </h1>
-              <Link to={"/"}>
-                <IoHome color={"#FFd700"} className="dark:text-[#FFD700]" />
-              </Link>
+              <div className="flex justify-center items-center gap-3">
+                {" "}
+                <Link to={"/"}>
+                  <IoHome color={"#FFd700"} className="dark:text-[#FFD700]" />
+                </Link>
+                <ThemeToggler />
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-1 md:space-y-2">
@@ -76,7 +96,7 @@ const SignUp = (props: Props) => {
                   value={values.name}
                   onChange={handleChange}
                   onBlur={handleBlur} // to check whether click on the field
-                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
+                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
                   placeholder="name@company.com"
                 />
                 {errors.name && touched.name && (
@@ -98,7 +118,7 @@ const SignUp = (props: Props) => {
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur} // to check whether click on the field
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700]"
+                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
                   placeholder="name@company.com"
                 />
                 {errors.email && touched.email && (
@@ -120,7 +140,7 @@ const SignUp = (props: Props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
+                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
                   required
                 />
                 {errors.password && touched.password && (
@@ -142,7 +162,7 @@ const SignUp = (props: Props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
+                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
                   required
                 />
                 {errors.confirmPassword && touched.confirmPassword && (

@@ -8,13 +8,22 @@ import { loginSchema } from "../schema/authSchema";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import ThemeToggler from "../components/utils/ThemeToggler";
+import { useSelector } from "react-redux";
+import { IUserState } from "../redux/features/auth/authSlice";
 
 type Props = {};
 
 const Login = (props: Props) => {
+  const userData = useSelector((state: IUserState) => state.user.userData);
   const navigate = useNavigate();
   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
-
+  useEffect(() => {
+    if (userData.name) {
+      navigate("/");
+    }
+  }, [userData]);
+  
   useEffect(() => {
     if (isSuccess) {
       toast.success("user logged in successfully");
@@ -22,7 +31,9 @@ const Login = (props: Props) => {
     } else if (isLoading) {
       toast.loading;
     } else if (isError) {
-      console.log(error);
+      if (error?.data) {
+        toast.error(error.data.message);
+      }
     }
   }, [isSuccess, isLoading, isError]);
 
@@ -55,9 +66,13 @@ const Login = (props: Props) => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-[#FFd700]">
                 Sign in to your account
               </h1>
-              <Link to={"/"}>
-                <IoHome color={"#FFd700"} />
-              </Link>
+              <div className="flex justify-center items-center gap-3">
+                {" "}
+                <Link to={"/"}>
+                  <IoHome color={"#FFd700"} className="dark:text-[#FFD700]" />
+                </Link>
+                <ThemeToggler />
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
@@ -97,9 +112,12 @@ const Login = (props: Props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700]"
+                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
                   required
                 />
+                {errors.password && touched.password && (
+                  <p className="text-red-600">{errors.password}</p>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
@@ -112,6 +130,7 @@ const Login = (props: Props) => {
                       required
                     />
                   </div>
+                  <br />
                   <div className="ml-3 text-sm">
                     <label
                       htmlFor="remember"

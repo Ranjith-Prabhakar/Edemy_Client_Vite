@@ -16,7 +16,6 @@ const Home = (props: Props) => {
       <Slider />
       <Testimonial />
       <Footer />
-      
     </div>
   );
 };
