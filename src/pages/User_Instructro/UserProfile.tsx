@@ -1,10 +1,10 @@
-import SideBar from "../components/User/SideBar";
-import Table from "../components/User/Tables/Table";
-import Courses from "../components/User/Course/Courses";
+import SideBar from "../../components/User/SideBar";
+import Table from "../../components/User/Tables/Table";
+import Courses from "../../components/User/Course/Courses";
 import { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
+import Header from "../../components/Header/Header";
 import { useSelector } from "react-redux";
-import { IUserState } from "../redux/features/auth/authSlice";
+import { IUserState } from "../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 type Props = {};
@@ -12,12 +12,12 @@ type Props = {};
 const UserProfile = (props: Props) => {
   const userData = useSelector((state: IUserState) => state.user.userData);
   const [sideMenuItem, setSideMenuItem] = useState(1);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-    if(!userData.name){
-      navigate('/login')
+    if (!userData.name) {
+      navigate("/login");
     }
-    if(userData.role === "admin"){
+    if (userData.role === "admin") {
       navigate("/admin_dashbord");
     }
   }, [userData]);

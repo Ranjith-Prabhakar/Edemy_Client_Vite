@@ -1,7 +1,7 @@
 import { TbCategoryPlus } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import AddCategory from "./AddCategoryForm";
-import { useFetchCategoriesQuery } from "../../../redux/features/admin/category/categoryApi";
+import { useFetchCategoriesQuery } from "../../../redux/features/admin/Categories/categoryApi";
 import Table from "./Tables/Table";
 type Props = {};
 

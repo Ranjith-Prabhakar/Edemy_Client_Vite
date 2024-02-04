@@ -1,11 +1,11 @@
-import { useCreateCategoryMutation } from "../../../redux/features/admin/category/categoryApi";
+import { useCreateCategoryMutation } from "../../../redux/features/admin/Categories/categoryApi";
 import { useFormik } from "formik";
 import { addCategoryValidation } from "../../../schema/addCategorySchema";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 type Props = {
   setAddCategory: React.Dispatch<React.SetStateAction<boolean>>;
-  addCategory:boolean
+  addCategory: boolean;
 };
 
 const AddCategory = ({ setAddCategory, addCategory }: Props) => {

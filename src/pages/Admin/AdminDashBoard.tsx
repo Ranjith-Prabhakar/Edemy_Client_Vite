@@ -1,8 +1,8 @@
-import  { useState } from "react";
-import AdminNavbar from "../components/Admin/Navbar";
-import Sidebar from "../components/Admin/SideBar";
-import Categories from "../components/Admin/Categories/Categories";
-import Users from "../components/Admin/Users/Users";
+import { useState } from "react";
+import AdminNavbar from "../../components/Admin/Navbar";
+import Sidebar from "../../components/Admin/SideBar";
+import Categories from "../../components/Admin/Categories/Categories";
+import Users from "../../components/Admin/Users/Users";
 
 const AdminDash = () => {
   const [sidebarElement, setSidebarElement] = useState(1);

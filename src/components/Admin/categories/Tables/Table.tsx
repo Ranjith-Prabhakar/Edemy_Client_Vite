@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import {
   useFreezCategoriesMutation,
   useUnFreezCategoriesMutation,
-} from "../../../../redux/features/admin/category/categoryApi";
+} from "../../../../redux/features/admin/Categories/categoryApi";
 
 const Table = () => {
   const [tableData, setTableData] = useState([]);

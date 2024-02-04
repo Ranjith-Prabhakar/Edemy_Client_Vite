@@ -3,8 +3,29 @@ import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useFreezUserMutation } from "../../../../redux/features/admin/Users/userApi";
 
 const Table = () => {
+  const navigate = useNavigate();
+  const [tableData, setTableData] = useState([]);
+  const { usersData } = useSelector((state: any) => state.users);
+
+  const [freezUser, { data, isSuccess, isError, error }] =
+    useFreezUserMutation();
+
+  useEffect(() => {
+    setTableData(usersData);
+    console.log("table data", tableData);
+  }, [usersData]);
+
+  useEffect(() => {
+    if (isSuccess) console.log("inside table ", data);
+    else if (isError) console.log("inside table ", error);
+  }, [isSuccess, isError]);
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
@@ -19,8 +40,12 @@ const Table = () => {
             <th scope="col" className="px-6 py-3">
               Name
             </th>
+
             <th scope="col" className="px-6 py-3">
-              No Of Courses
+              Enrolled course
+            </th>
+            <th scope="col" className="px-6 py-3">
+              courses
             </th>
             <th scope="col" className="px-6 py-3">
               Status
@@ -35,20 +60,30 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3.1].map((item: any, index: any) => (
+          {tableData.map((item: any, index: any) => (
             <tr
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               key={index}
             >
               <td className="px-6 py-4">{index + 1}</td>
-              <td className="px-6 py-4">{item._id}</td>
-              <td className="px-6 py-4">{item.name}</td>
-              <td className="px-6 py-4">
-                {item.No_Of_Courses ? item.No_Of_Courses : 0}
+              <td
+                className="px-6 py-4 cursor-pointer"
+                onClick={() => {
+                  navigate("/user_details", { state: { id: item._id } });
+                }}
+              >
+                {item._id}
               </td>
+              <td className="px-6 py-4">{item.name}</td>
+              <td className="px-6 py-4">{item.enrolledCourses.length}</td>
+              <td className="px-6 py-4">{item.courses.length}</td>
               <td className="px-6 py-4">{item.status}</td>
               <td className="px-6 py-4">
-                <FaRegCircleStop />
+                {item.status === "active" ? (
+                  <FaRegCircleStop onClick={() => freezUser(item._id)} />
+                ) : (
+                  <FaRegCircleStop color="red" />
+                )}
               </td>
             </tr>
           ))}

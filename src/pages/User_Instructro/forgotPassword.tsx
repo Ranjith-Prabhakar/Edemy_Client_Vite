@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import ThemeToggler from "../components/utils/ThemeToggler";
-import { forgotPasswordEmailSchema } from "../schema/forgotPasswordSchema";
-import { useForgotPasswordEmailSubmissionMutation } from "../redux/features/auth/authApi";
+import ThemeToggler from "../../components/utils/ThemeToggler";
+import { forgotPasswordEmailSchema } from "../../schema/forgotPasswordSchema";
+import { useForgotPasswordEmailSubmissionMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 

@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import { signupSchema } from "../schema/authSchema";
+import { signupSchema } from "../../schema/authSchema";
 
-import { useRegisterMutation } from "../redux/features/auth/authApi";
+import { useRegisterMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import ThemeToggler from "../components/utils/ThemeToggler";
+import ThemeToggler from "../../components/utils/ThemeToggler";
 import { useSelector } from "react-redux";
-import { IUserState } from "../redux/features/auth/authSlice";
+import { IUserState } from "../../redux/features/auth/authSlice";
 type Props = {};
 
 const SignUp = (props: Props) => {

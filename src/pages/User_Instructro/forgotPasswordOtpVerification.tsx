@@ -1,14 +1,17 @@
 import { useState, ChangeEvent, KeyboardEvent, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import { BsShieldLockFill } from "react-icons/bs";
-import { useCreateUserMutation } from "../redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
+import { useForgotPasswordOtpVerificationMutation } from "../../redux/features/auth/authApi";
 
 type Props = {};
 
-const OtpVerification = (): JSX.Element => {
-  const [createUser, { isLoading, isSuccess, isError, data }] =
-    useCreateUserMutation();
+const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
+  const [
+    forgotPasswordOtpVerification,
+    { isSuccess, data, isError, error, isLoading },
+  ] = useForgotPasswordOtpVerificationMutation();
+
   const navigate = useNavigate();
   const length = 4;
   const [otp, setOtp] = useState(new Array(length).fill(""));
@@ -25,15 +28,16 @@ const OtpVerification = (): JSX.Element => {
     if (isLoading) {
       <div>Loading...</div>;
     } else if (isSuccess) {
-      navigate("/Login");
-      toast.success("user has been created successfully , please login");
+      console.log(data);
+      toast.success("enter the new password");
+      navigate("/reset_forgot_password");
     } else if (isError) {
       toast.error(data.message);
     }
   }, [isLoading, isSuccess]);
 
-  const onSubmit = (newOtp: string) => {
-    createUser({ verificationCode: newOtp });
+  const onSubmit = async (newOtp: string) => {
+    await forgotPasswordOtpVerification({ verificationCode: newOtp });
   };
 
   const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
@@ -104,4 +108,4 @@ const OtpVerification = (): JSX.Element => {
   );
 };
 
-export default OtpVerification;
+export default ForgotOtpPasswordOtpVerification;
