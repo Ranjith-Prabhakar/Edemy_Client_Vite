@@ -34,16 +34,24 @@ const userSlice = createSlice({
       state.usersData = action.payload.data;
       state.isLoading = false;
     },
-    freezUser:(state,action)=>{
+    blockUser: (state, action) => {
       const index = state.usersData.findIndex(
         (item) => item.name === action.payload.userName
       );
       if (index !== -1) {
-        state.usersData[index].status = "frozen"; // Update status directly
+        state.usersData[index].status = "frozen";
       }
-    }
+    },
+    unBlockUser: (state, action) => {
+      const index = state.usersData.findIndex(
+        (item) => item.name === action.payload.userName
+      );
+      if (index !== -1) {
+        state.usersData[index].status = "active";
+      }
+    },
   },
 });
 
-export const { getUsers, freezUser } = userSlice.actions;
+export const { getUsers, blockUser, unBlockUser } = userSlice.actions;
 export default userSlice.reducer;

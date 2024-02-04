@@ -1,5 +1,5 @@
 import { apiSlice } from "../../api/apiSlice";
-import { freezUser, getUsers } from "./userSlice";
+import { blockUser, getUsers, unBlockUser } from "./userSlice";
 import { IUser } from "./userSlice";
 
 const userApi = apiSlice.injectEndpoints({
@@ -20,8 +20,8 @@ const userApi = apiSlice.injectEndpoints({
       },
     }),
 
-    freezUser: builder.mutation<IUser, string>({
-      query: (id) => ({
+    freezUser: builder.mutation({
+      query: (id: string) => ({
         url: `admin/freezUser/${id}`,
         method: "post",
         credentials: "include",
@@ -29,8 +29,23 @@ const userApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("result.data", result.data);
-          dispatch(freezUser(result.data));
+          dispatch(blockUser({ userName: result.data.data.name }));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+
+    unFreezUser: builder.mutation({
+      query: (id: string) => ({
+        url: `admin/unFreezUser/${id}`,
+        method: "post",
+        credentials: "include",
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(unBlockUser({ userName: result.data.data.name }));
         } catch (error) {
           console.log(error);
         }
@@ -39,4 +54,4 @@ const userApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery,useFreezUserMutation } = userApi;
+export const { useGetUsersQuery,useFreezUserMutation,useUnFreezUserMutation } = userApi;

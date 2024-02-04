@@ -6,15 +6,27 @@ import { IoCaretForwardOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useFreezUserMutation } from "../../../../redux/features/admin/Users/userApi";
+import {
+  useFreezUserMutation,
+  useUnFreezUserMutation,
+} from "../../../../redux/features/admin/Users/userApi";
+import toast from "react-hot-toast";
 
 const Table = () => {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const { usersData } = useSelector((state: any) => state.users);
 
-  const [freezUser, { data, isSuccess, isError, error }] =
+  const [freezUser, { data, isSuccess, isError }] =
     useFreezUserMutation();
+  const [
+    unFreezUser,
+    {
+      data: unFreezUserData,
+      isSuccess: unFreezUserIsSuccess,
+      isError: unFreezUserIsError,
+    },
+  ] = useUnFreezUserMutation();
 
   useEffect(() => {
     setTableData(usersData);
@@ -22,10 +34,14 @@ const Table = () => {
   }, [usersData]);
 
   useEffect(() => {
-    if (isSuccess) console.log("inside table ", data);
-    else if (isError) console.log("inside table ", error);
+    if (isSuccess) toast.success(data.message);
+    else if (isError)toast.error("exicution failed");
   }, [isSuccess, isError]);
 
+  useEffect(() => {
+    if (unFreezUserIsSuccess) toast.success(unFreezUserData.message);
+    else if (unFreezUserIsError) toast.error("exicution failed");
+  }, [unFreezUserIsSuccess, unFreezUserIsError]);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
@@ -80,9 +96,14 @@ const Table = () => {
               <td className="px-6 py-4">{item.status}</td>
               <td className="px-6 py-4">
                 {item.status === "active" ? (
-                  <FaRegCircleStop onClick={() => freezUser(item._id)} />
+                  <FaRegCircleStop
+                    onClick={async () => await freezUser(item._id)}
+                  />
                 ) : (
-                  <FaRegCircleStop color="red" />
+                  <FaRegCircleStop
+                    color="red"
+                    onClick={() => unFreezUser(item._id)}
+                  />
                 )}
               </td>
             </tr>
