@@ -35,7 +35,7 @@ export const authApi = apiSlice.injectEndpoints({
         url: "login",
         method: "post",
         body: data,
-        credentials:"include"
+        credentials: "include",
       }),
 
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
@@ -51,8 +51,41 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    //forgotPassword-------------------------------------------------------------------------------------
+    forgotPasswordEmailSubmission: builder.mutation({
+      query: (data) => ({
+        url: "forgot_password_email_submission",
+        method: "post",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
+    //forgotPassword otp verification-------------------------------------------------------------------------------------
+    forgotPasswordOtpVerification: builder.mutation({
+      query: (data) => ({
+        url: "forgot_password_otp_verification",
+        method: "post",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
+    //forgotPassword otp verification-------------------------------------------------------------------------------------
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: "/reset_forgot_password",
+        method: "post",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useCreateUserMutation, useLoginMutation } =
-  authApi;
+export const {
+  useRegisterMutation,
+  useCreateUserMutation,
+  useLoginMutation,
+  useForgotPasswordEmailSubmissionMutation,
+  useForgotPasswordOtpVerificationMutation,
+  useResetPasswordMutation,
+} = authApi;

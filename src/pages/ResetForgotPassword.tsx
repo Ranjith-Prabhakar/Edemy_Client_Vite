@@ -1,12 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import ThemeToggler from "../utils/ThemeToggler";
-import { forgotPasswordEmailSchema } from "../../schema/forgotPassword";
+import ThemeToggler from "../components/utils/ThemeToggler";
+import { resetForgotPasswordSchema } from "../schema/resetForgotPasswordSchema";
 
-type Props = {};
+import { useResetPasswordMutation } from "../redux/features/auth/authApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
-const Login = (props: Props) => {
+const ResetForgotPassword = () => {
+  const navigate = useNavigate();
+  const [resetPassword, { isSuccess, data, isError, error }] =
+    useResetPasswordMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("success", data);
+      toast.success(data.message);
+      navigate("/login");
+    } else if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError]);
   const {
     values,
     errors,
@@ -17,12 +32,13 @@ const Login = (props: Props) => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      email: "",
       password: "",
     },
-    validationSchema: forgotPasswordEmailSchema,
+    validationSchema: resetForgotPasswordSchema,
     onSubmit: async (values, actions) => {
-      actions.resetForm(); // after submission to clear the fields
+      console.log("onsubmit", values.password);
+      await resetPassword({ password: values.password });
+      actions.resetForm();
     },
   });
 
@@ -33,7 +49,7 @@ const Login = (props: Props) => {
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-[#FFd700]">
-                Forgot Password
+                New Password
               </h1>
               <div className="flex justify-center items-center gap-3">
                 {" "}
@@ -47,23 +63,24 @@ const Login = (props: Props) => {
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-[#FFd700]"
                 >
-                  Your email
+                  Password
                 </label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={values.email}
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={values.password}
                   onChange={handleChange}
-                  onBlur={handleBlur} // to check whether click on the field
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700]"
-                  placeholder="name@company.com"
+                  onBlur={handleBlur}
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
+                  required
                 />
-                {errors.email && touched.email && (
-                  <p className="text-red-600">{errors.email}</p>
+                {errors.password && touched.password && (
+                  <p className="text-red-600">{errors.password}</p>
                 )}
               </div>
               <button
@@ -73,13 +90,6 @@ const Login = (props: Props) => {
               >
                 Submit
               </button>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
-                disabled={isSubmitting} //
-              >
-                Cancel
-              </button>
             </form>
           </div>
         </div>
@@ -88,4 +98,4 @@ const Login = (props: Props) => {
   );
 };
 
-export default Login;
+export default ResetForgotPassword;

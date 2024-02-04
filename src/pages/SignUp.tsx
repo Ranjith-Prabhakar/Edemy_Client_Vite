@@ -8,20 +8,20 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../components/utils/ThemeToggler";
 import { useSelector } from "react-redux";
-import { IUserState } from "../redux/features/auth/authSlice"; 
+import { IUserState } from "../redux/features/auth/authSlice";
 type Props = {};
 
 const SignUp = (props: Props) => {
-   const userData = useSelector((state: IUserState) => state.user.userData);
+  const userData = useSelector((state: IUserState) => state.user.userData);
 
-  const [register, { isSuccess,isError,error }] = useRegisterMutation();
+  const [register, { isSuccess, isError, error }] = useRegisterMutation();
   const navigate = useNavigate();
 
- useEffect(() => {
-  if(userData.name){
-    navigate("/")
-  }
- }, [userData]);
+  useEffect(() => {
+    if (userData.name) {
+      navigate("/");
+    }
+  }, [userData]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -33,8 +33,6 @@ const SignUp = (props: Props) => {
       }
     }
   }, [isSuccess, isError, error]);
-
- 
 
   const {
     values,
@@ -168,34 +166,6 @@ const SignUp = (props: Props) => {
                 {errors.confirmPassword && touched.confirmPassword && (
                   <p className="text-red-600">{errors.confirmPassword}</p>
                 )}
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-[#e4d9a6] dark:border-gray-600 dark:focus:ring-[#FFD700] dark:ring-offset-[#FFD700]"
-                      required
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="remember"
-                      className="text-gray-500 dark:text-[#FFd700]"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-                </div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </a>
               </div>
               <button
                 type="submit"
