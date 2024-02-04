@@ -5,12 +5,16 @@ import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useFreezCategoriesMutation } from "../../../../redux/features/admin/category/categoryApi";
+import {
+  useFreezCategoriesMutation,
+  useUnFreezCategoriesMutation,
+} from "../../../../redux/features/admin/category/categoryApi";
 
 const Table = () => {
   const [tableData, setTableData] = useState([]);
   const { categoryData } = useSelector((state: any) => state.category);
   const [freezCategories] = useFreezCategoriesMutation();
+  const [unFreezCategories] = useUnFreezCategoriesMutation();
 
   useEffect(() => {
     setTableData(categoryData);
@@ -62,6 +66,7 @@ const Table = () => {
               <td className="px-6 py-4 flex justify-center items-center">
                 {item.status === "active" ? (
                   <FaRegCircleStop
+                    className="cursor-pointer"
                     size={18}
                     color="white"
                     onClick={() => {
@@ -69,7 +74,14 @@ const Table = () => {
                     }}
                   />
                 ) : (
-                  <FaRegCircleStop size={18} color="red" />
+                  <FaRegCircleStop
+                    size={18}
+                    color="red"
+                    className="cursor-pointer"
+                    onClick={() => {
+                      unFreezCategories(item._id);
+                    }}
+                  />
                 )}
               </td>
             </tr>

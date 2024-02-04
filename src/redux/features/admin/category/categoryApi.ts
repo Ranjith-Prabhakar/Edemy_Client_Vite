@@ -1,6 +1,11 @@
 import toast from "react-hot-toast";
 import { apiSlice } from "../../api/apiSlice";
-import { createCategory, getCategories, freezCategory } from "./categorySlice";
+import {
+  createCategory,
+  getCategories,
+  freezCategory,
+  unfreezCategory,
+} from "./categorySlice";
 
 const categoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -41,11 +46,11 @@ const categoryApi = apiSlice.injectEndpoints({
         }
       },
     }),
-
+    //freez category
     freezCategories: builder.mutation({
-      query: (id) => ({
+      query: (id: string) => ({
         url: `admin/freezCategory/${id}`,
-        method: "patch",
+        method: "post",
         credentials: "include" as const,
       }),
 
@@ -58,8 +63,29 @@ const categoryApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    //unfreez
+    unFreezCategories: builder.mutation({
+      query: (id: string) => ({
+        url: `admin/unFreezCategory/${id}`,
+        method: "post",
+        credentials: "include" as const,
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(unfreezCategory({ categoryName: result.data.data.name }));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useCreateCategoryMutation, useFetchCategoriesQuery,useFreezCategoriesMutation } =
-  categoryApi;
+export const {
+  useCreateCategoryMutation,
+  useFetchCategoriesQuery,
+  useFreezCategoriesMutation,
+  useUnFreezCategoriesMutation,
+} = categoryApi;

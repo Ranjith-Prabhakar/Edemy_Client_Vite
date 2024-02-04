@@ -41,19 +41,19 @@ const categorySlice = createSlice({
       }
     },
 
-    unfreezCategory:(state,action)=>{
-      const index = state.categoryData.findIndex((item)=>(
-        item.name === action.payload.categoryName
-      ))
+    unfreezCategory: (state, action) => {
+      const index = state.categoryData.findIndex(
+        (item) => item.name === action.payload.categoryName
+      );
 
-      if(index !== -1){
-        state.categoryData[index].status="active" 
+      if (index !== -1) {
+        state.categoryData[index].status = "active";
       }
-    }
+    },
   },
 });
 
-export const { getCategories, createCategory, freezCategory } =
+export const { getCategories, createCategory, freezCategory, unfreezCategory } =
   categorySlice.actions;
 
 export default categorySlice.reducer;

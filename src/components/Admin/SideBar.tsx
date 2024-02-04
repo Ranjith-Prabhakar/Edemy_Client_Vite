@@ -8,12 +8,21 @@ import { MdAccountBalance } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { IoIosChatbubbles } from "react-icons/io";
 import { MdOutlineEventNote } from "react-icons/md";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+// import { useLogoutQuery } from "../../redux/features/auth/authApi";
+
+// import { useLogoutQuery as useLogoutQueryType } from "../../redux/features/auth/authApi";
+// import { authApi } from "../../redux/features/auth/authApi";
+// const { useLogoutQuery }: { useLogoutQuery: typeof useLogoutQueryType } =
+//   authApi;
+// const [logout, { data, isSuccess, isError, error }] = useLogoutQuery({});
 
 type Props = {
   setSidebarElement: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SideBar = ({ setSidebarElement }: Props) => {
+  // const [logout] = useLogoutQuery({});
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
     { name: "Users", icon: FaUsers },
@@ -26,6 +35,7 @@ const SideBar = ({ setSidebarElement }: Props) => {
     { name: "Chat", icon: IoIosChatbubbles },
     { name: "Event", icon: MdOutlineEventNote },
   ];
+
   return (
     <div className="flex flex-col   max-w-[15%] w-full h-full rounded-lg text-xl p-[25px] dark:bg-gray-950 text-gray-500 dark:text-gray-400 space-y-3">
       {dashBordItems &&
@@ -41,6 +51,15 @@ const SideBar = ({ setSidebarElement }: Props) => {
             <h1> {item.name}</h1>
           </div>
         ))}
+      <div
+        className="flex justify-start items-center gap-2 cursor-pointer "
+        onClick={() => {
+          // logout();
+        }}
+      >
+        <RiLogoutCircleRLine />
+        <h1> Logout</h1>
+      </div>
     </div>
   );
 };
