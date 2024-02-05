@@ -33,6 +33,7 @@ const userApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          
           dispatch(blockInstructor({ userName: result.data.data.name }));
         } catch (error) {
           console.log(error);
@@ -58,4 +59,8 @@ const userApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetInstructorsQuery,useFreezInstructorMutation,useUnFreezInstructorMutation} = userApi;
+export const {
+  useGetInstructorsQuery,
+  useFreezInstructorMutation,
+  useUnFreezInstructorMutation,
+} = userApi;

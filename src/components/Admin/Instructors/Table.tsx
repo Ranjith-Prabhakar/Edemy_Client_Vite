@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useFreezInstructorMutation,
   useUnFreezInstructorMutation,
-} from "../../../../redux/features/admin/Instructors/instructorsApi";
+} from "../../../redux/features/admin/Instructors/instructorsApi";
 
 import toast from "react-hot-toast";
 

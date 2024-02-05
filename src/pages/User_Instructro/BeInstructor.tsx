@@ -3,11 +3,26 @@ import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import ThemeToggler from "../../components/utils/ThemeToggler";
 import { beInstructorSchema } from "../../schema/beInstructor";
-
-
+import { useToBeInstructorMutation } from "../../redux/features/user/userApi";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BeInstructor = () => {
-
+  const navigate = useNavigate();
+  const [toBeInstructor, { data, isSuccess, isError, error }] =
+    useToBeInstructorMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message);
+      navigate("/profile");
+    } else if (isError) {
+      if (error && error.data && error.data.message) {
+        toast.error(error.data.message);
+        navigate("/profile");
+      }
+    }
+  }, [isSuccess, isError]);
   const {
     values,
     errors,
@@ -22,6 +37,7 @@ const BeInstructor = () => {
     },
     validationSchema: beInstructorSchema,
     onSubmit: async (values, actions) => {
+      await toBeInstructor({ qualification: values.qualification });
       actions.resetForm();
     },
   });
@@ -46,6 +62,20 @@ const BeInstructor = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
+                <textarea
+                  name=""
+                  id=""
+                  className="text-black rounded-sm w-[100%] h-[260px]"
+                  // style={{ width: "100%", height: "300px" }}
+                >
+                  you are responsible to provide quality education, adhere to
+                  the platform's guidelines, maintain professionalism, engage
+                  students effectively, and continuously improve your teaching
+                  methods for an enriching e-learning experience. tutor agrees
+                  to a revenue-sharing model of 30/70, where the tutor receives
+                  70% of the income generated, and the platform retains 30%, as
+                  specified in our terms and conditions
+                </textarea>
                 <label
                   htmlFor="qualification"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-[#FFd700]"
@@ -70,7 +100,7 @@ const BeInstructor = () => {
               <button
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
-                disabled={isSubmitting} 
+                disabled={isSubmitting}
               >
                 Submit
               </button>

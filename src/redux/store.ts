@@ -4,6 +4,7 @@ import categorySlice from "./features/admin/Categories/categorySlice";
 import authSlice from "./features/auth/authSlice";
 import usersSlice from "./features/admin/Users/userSlice";
 import instructorsSlice from "./features/admin/Instructors/instructorsSlice";
+import instructorRequestSlice from "./features/admin/InstructorRequests/instructorRequestSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     user: authSlice,
     users: usersSlice,
     instructors: instructorsSlice,
+    instructorRequests: instructorRequestSlice,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
