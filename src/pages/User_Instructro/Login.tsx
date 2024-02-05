@@ -32,7 +32,7 @@ const Login = (props: Props) => {
       toast.loading;
     } else if (isError) {
       if (error?.data) {
-        toast.error(error.data.message);
+        toast.error(error?.data?.message);
       }
     }
   }, [isSuccess, isLoading, isError]);

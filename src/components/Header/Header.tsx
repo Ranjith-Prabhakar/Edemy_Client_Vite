@@ -44,21 +44,27 @@ const Header = (props: Props) => {
           />
         </div>
         <div className="flex justify-center items-center gap-4">
-          <Link className="text-[#FFD700]" to={"/be_instructor"}>
-            Teach on Edemy
-          </Link>
-          <Link className="text-[#FFD700]" to={"/my_learnings"}>
-            My Learnings
-          </Link>
-          <Link className="text-[#FFD700]" to={"/categories"}>
-            <FaRegHeart size={25} color={"#FFD700"} />
-          </Link>
-          <Link to={"/be_instructor"}>
-            <FaCartPlus size={25} />
-          </Link>
-          <Link to={"/be_instructor"}>
-            <IoIosNotifications size={25} />
-          </Link>
+          {userData.name && userData.role !== "instructor" && (
+            <Link className="text-[#FFD700]" to={"/be_instructor"}>
+              Teach on Edemy
+            </Link>
+          )}
+          {userData.name && (
+            <>
+              <Link className="text-[#FFD700]" to={"/my_learnings"}>
+                My Learnings
+              </Link>
+              <Link className="text-[#FFD700]" to={"/categories"}>
+                <FaRegHeart size={25} color={"#FFD700"} />
+              </Link>
+              <Link to={"/be_instructor"}>
+                <FaCartPlus size={25} />
+              </Link>
+              <Link to={"/be_instructor"}>
+                <IoIosNotifications size={25} />
+              </Link>
+            </>
+          )}
 
           {name !== "" ? (
             <Link to={"/profile"}>

@@ -29,7 +29,7 @@ const SignUp = (props: Props) => {
       navigate("/otp_verification", { state: { fromSignup: true } });
     } else if (isError) {
       if (error?.data) {
-        toast.error(error.data.message);
+        toast.error(error?.data?.message);
       }
     }
   }, [isSuccess, isError, error]);

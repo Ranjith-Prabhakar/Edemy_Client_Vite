@@ -3,6 +3,7 @@ import AdminNavbar from "../../components/Admin/Navbar";
 import Sidebar from "../../components/Admin/SideBar";
 import Categories from "../../components/Admin/Categories/Categories";
 import Users from "../../components/Admin/Users/Users";
+import Instructors from "../../components/Admin/Instructors/Instructors";
 
 const AdminDash = () => {
   const [sidebarElement, setSidebarElement] = useState(1);
@@ -13,6 +14,7 @@ const AdminDash = () => {
         <Sidebar setSidebarElement={setSidebarElement} />
         <div className="flex flex-col gap-2  dark:bg-gray-950 text-[#FFD700] p-3 rounded-md w-full relative h-full overflow-scroll scrollbar-hide  scroll-smooth">
           {sidebarElement === 2 && <Users />}
+          {sidebarElement === 3 && <Instructors />}
           {sidebarElement === 4 && <Categories />}
         </div>
       </div>

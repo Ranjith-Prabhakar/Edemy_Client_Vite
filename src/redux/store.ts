@@ -3,6 +3,7 @@ import { apiSlice } from "./features/api/apiSlice";
 import categorySlice from "./features/admin/Categories/categorySlice";
 import authSlice from "./features/auth/authSlice";
 import usersSlice from "./features/admin/Users/userSlice";
+import instructorsSlice from "./features/admin/Instructors/instructorsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     category: categorySlice,
     user: authSlice,
     users: usersSlice,
+    instructors: instructorsSlice,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

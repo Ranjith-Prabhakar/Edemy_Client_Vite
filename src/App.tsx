@@ -11,6 +11,7 @@ import PageNotFound from "./pages/PageNotFound";
 import ForgotOtpPasswordOtpVerification from "./pages/User_Instructro/forgotPasswordOtpVerification";
 import ResetForgotPassword from "./pages/User_Instructro/ResetForgotPassword";
 import UserDetails from "./pages/Admin/UserDetails";
+import BeInstructor from "./pages/User_Instructro/BeInstructor";
 
 type Props = {};
 
@@ -33,7 +34,8 @@ const App = (props: Props) => {
         />
         <Route path="/admin_dashbord" element={<AdminDash />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route path="/user_details" element={<UserDetails/>} />
+        <Route path="/user_details/:id" element={<UserDetails />} />
+        <Route path="/be_instructor" element={<BeInstructor />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

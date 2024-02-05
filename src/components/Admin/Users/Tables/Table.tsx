@@ -85,7 +85,7 @@ const Table = () => {
               <td
                 className="px-6 py-4 cursor-pointer"
                 onClick={() => {
-                  navigate("/user_details", { state: { id: item._id } });
+                  navigate(`/user_details/${item._id}`);
                 }}
               >
                 {item._id}

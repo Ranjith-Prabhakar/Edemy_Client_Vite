@@ -23,10 +23,11 @@ type Props = {
 
 const SideBar = ({ setSidebarElement }: Props) => {
   // const [logout] = useLogoutQuery({});
+  // const [logout, { data, isSuccess, isError, error }] = useLogoutQuery({});
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
     { name: "Users", icon: FaUsers },
-    { name: "Trainers", icon: GiTeacher },
+    { name: "Instructors", icon: GiTeacher },
     { name: "Categories", icon: TbCategoryPlus },
     { name: "Courses", icon: FaPhotoVideo },
     { name: "Payments", icon: FaMoneyCheckDollar },
