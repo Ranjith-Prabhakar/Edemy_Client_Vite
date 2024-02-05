@@ -1,9 +1,5 @@
 import { AiOutlineLayout } from "react-icons/ai";
-import { FaUsers } from "react-icons/fa";
-import { GiTeacher } from "react-icons/gi";
-import { TbCategoryPlus } from "react-icons/tb";
 import { FaPhotoVideo } from "react-icons/fa";
-import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { MdAccountBalance } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { IoIosChatbubbles } from "react-icons/io";
@@ -11,12 +7,36 @@ import { MdOutlineEventNote } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/features/auth/authSlice";
 import { CgProfile } from "react-icons/cg";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 type props = {
   setSideMenuItem: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SideBar = ({ setSideMenuItem }: props) => {
   const userData = useSelector((state: IUserState) => state.user.userData);
+  const [logout, { data, isError, isSuccess }] = useLogoutMutation({});
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message);
+    } else if (isError) {
+      toast.error("logout failed");
+    }
+  }, [isSuccess, isSuccess]);
+
+  const handleLogout = async () => {
+    try {
+      await logout({});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
     { name: "Courses", icon: FaPhotoVideo },
@@ -46,6 +66,15 @@ const SideBar = ({ setSideMenuItem }: props) => {
               <h1> {item.name}</h1>
             </div>
           ))}
+        <div
+          className="flex justify-start items-center gap-2 cursor-pointer "
+          onClick={() => {
+            handleLogout();
+          }}
+        >
+          <RiLogoutCircleRLine />
+          <h1> Logout</h1>
+        </div>
       </div>
     </div>
   );

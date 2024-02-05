@@ -9,21 +9,35 @@ import { IoIosNotifications } from "react-icons/io";
 import { IoIosChatbubbles } from "react-icons/io";
 import { MdOutlineEventNote } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-// import { useLogoutQuery } from "../../redux/features/auth/authApi";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
-// import { useLogoutQuery as useLogoutQueryType } from "../../redux/features/auth/authApi";
-// import { authApi } from "../../redux/features/auth/authApi";
-// const { useLogoutQuery }: { useLogoutQuery: typeof useLogoutQueryType } =
-//   authApi;
-// const [logout, { data, isSuccess, isError, error }] = useLogoutQuery({});
+
 
 type Props = {
   setSidebarElement: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SideBar = ({ setSidebarElement }: Props) => {
-  // const [logout] = useLogoutQuery({});
-  // const [logout, { data, isSuccess, isError, error }] = useLogoutQuery({});
+const [logout, { data, isError, isSuccess }] = useLogoutMutation({});
+
+useEffect(() => {
+  if(isSuccess){
+    toast.success(data.message)
+  }else if(isError){
+    toast.error("logout failed")
+  }
+}, [isSuccess, isSuccess]);
+
+  const handleLogout = async () => {
+    try {
+      await logout({});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
     { name: "Users", icon: FaUsers },
@@ -55,7 +69,7 @@ const SideBar = ({ setSidebarElement }: Props) => {
       <div
         className="flex justify-start items-center gap-2 cursor-pointer "
         onClick={() => {
-          // logout();
+          handleLogout()
         }}
       >
         <RiLogoutCircleRLine />
