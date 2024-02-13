@@ -28,9 +28,10 @@ const UserProfile = (props: Props) => {
       <div className=" flex w-[95%] m-auto">
         <div className=" h-full  w-full m-auto rounded-lg flex justify-start  p-[25px] gap-2">
           <SideBar setSideMenuItem={setSideMenuItem} />
-
-          {sideMenuItem === 2 && <Courses />}
-          {sideMenuItem !== 2 && <Table />}
+          <div className="flex flex-col gap-2  dark:bg-gray-950 text-[#FFD700] p-3 rounded-md w-full relative">
+            {sideMenuItem === 2 && <Courses />}
+            {sideMenuItem !== 2 && <Table />}
+          </div>
         </div>
       </div>
     </div>

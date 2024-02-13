@@ -8,7 +8,7 @@ type Props = {};
 
 const Table = (props: Props) => {
   return (
-    <div className="flex flex-col gap-2  dark:bg-gray-950 text-[#FFD700] p-3 rounded-md w-full relative">
+    <>
       <div className="flex items-center justify-between">
         <button className="dark:bg-gray-700 dark:text-gray-400  px-3 rounded-sm h-[30px] flex items-center gap-1 font-bold">
           Add new <TbCategoryPlus className="" />
@@ -81,7 +81,7 @@ const Table = (props: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Table;
