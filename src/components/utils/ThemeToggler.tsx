@@ -6,14 +6,14 @@ import { BsSunFill } from "react-icons/bs";
 type Props = {};
 
 const ThemeToggler = (props: Props): ReactNode => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  useEffect(() => {
-    const mode = localStorage.getItem("theme");
-    if (mode === "dark") {
-      setTheme("dark");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const mode = localStorage.getItem("theme");
+  //   if (mode === "dark") {
+  //     setTheme("dark");
+  //   }
+  // }, []);
 
   // checking browser schema and acting with that
   // useEffect(() => {

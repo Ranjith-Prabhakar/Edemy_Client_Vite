@@ -2,6 +2,7 @@ import { apiSlice } from "../api/apiSlice";
 
 export interface AddModuleBody {
   fileName: string;
+  userId:string;
   contentType: string;
 }
 
@@ -30,3 +31,6 @@ export const courseApi = apiSlice.injectEndpoints({
 });
 
 export const { useAddModuleMutation, useAddToBucketMutation } = courseApi;
+
+
+
