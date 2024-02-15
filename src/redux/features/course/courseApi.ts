@@ -5,6 +5,13 @@ import { apiSlice } from "../api/apiSlice";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getCourseInProgress: builder.query<ICourseDataBody,void>({
+      query: () => ({
+        method: "get",
+        url: "course/get_course_in_progress",
+        credentials: "include" as const,
+      }),
+    }),
     addModule: builder.mutation<string, IAddModuleBody>({
       query: (data) => ({
         method: "post",
@@ -14,7 +21,7 @@ export const courseApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    addCourseData: builder.mutation<ICourseResponse,ICourseDataBody>({
+    addCourseData: builder.mutation<ICourseResponse, ICourseDataBody>({
       query: (data) => ({
         method: "post",
         url: "course/addCourseData",
@@ -36,7 +43,22 @@ export const courseApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+
+    updateCourse: builder.mutation<ICourseResponse, { [key: string]: string }>({
+      query: (data) => ({
+        method: "post",
+        url: "course/updateCourse",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
-export const { useAddModuleMutation, useAddCourseDataMutation,useAddToBucketMutation } = courseApi;
+export const {
+  useGetCourseInProgressQuery,
+  useAddModuleMutation,
+  useAddCourseDataMutation,
+  useAddToBucketMutation,
+  useUpdateCourseMutation,
+} = courseApi;

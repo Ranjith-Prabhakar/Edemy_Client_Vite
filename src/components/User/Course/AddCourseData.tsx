@@ -1,14 +1,17 @@
 import { addCourseDataSchema } from "../../../schema/addCourseDataSchema";
 import { useFormik } from "formik";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { FaRegEdit } from "react-icons/fa";
 import {
   useAddModuleMutation,
   useAddCourseDataMutation,
   useAddToBucketMutation,
+  useUpdateCourseMutation,
 } from "../../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { ICourseDataBody } from "../../../redux/features/ResponseInterfaces/Course/addCourseData";
+import toast from "react-hot-toast";
 
 type Props = {
   setStepper: React.Dispatch<React.SetStateAction<number>>;
@@ -28,41 +31,67 @@ type Props = {
       duration: string;
     }>
   >;
+  visible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
+const AddCourseData = ({
+  setStepper,
+  courseData,
+  setCourseData,
+  visible,
+  setVisible,
+}: Props) => {
   const [addModule] = useAddModuleMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addCourseData] = useAddCourseDataMutation();
+  const [updateCourse] = useUpdateCourseMutation();
   const userId = useSelector((state: any) => state.user.userData._id);
   const thumbnailRef = useRef<HTMLInputElement>(null);
 
-  const handleAddImage = async (): Promise<{fileType: string;imgageFileName: string}> => {
+  const handleUpdation = async (data: Record<string, string>) => {
+    try {
+      const result = await updateCourse(data);
+      console.log("update result", result);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleAddImage = async (): Promise<{
+    fileType: string;
+    imgageFileName: string;
+  } | void> => {
     try {
       const fileInput = thumbnailRef.current;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
         const fileType = fileInput.files[0].name.split(".").pop();
 
-        const imgageFileName = "thumbnail";
-        const result = await addModule({
-          fileName: `${imgageFileName}.${fileType}`,
-          userId: userId,
-          contentType: `video/${fileType}`,
-        });
+        if (fileType) {
+          const imgageFileName = "thumbnail";
+          const result = await addModule({
+            fileName: `${imgageFileName}.${fileType}`,
+            userId: userId,
+            contentType: `video/${fileType}`,
+          });
 
-        await addToBucket({
-          url: result?.data,
-          body: fileInput.files[0],
-          contentType: fileType as string,
-        });
+          await addToBucket({
+            url: result?.data,
+            body: fileInput.files[0],
+            contentType: fileType as string,
+          });
 
-        return { fileType, imgageFileName };
+          return { fileType, imgageFileName };
+        } else {
+          console.error("File type not found");
+        }
       } else {
         console.error("No file selected");
       }
     } catch (error: any) {
       console.log(error?.message);
     }
+    return;
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
@@ -88,18 +117,27 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
         }
 
         //
-        const { fileType, imgageFileName } = await handleAddImage();
-        //
+        const imageInfo = await handleAddImage();
 
-        clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
-        console.log("clonedObject", clonedObject);
-        const result = await addCourseData(
-          clonedObject as unknown as ICourseDataBody
-        );
-        console.log("result", result);
-        // localStorage.setItem("courseData", JSON.stringify(clonedObject));
-        setCourseData(clonedObject as typeof courseData);
-        setStepper(2);
+        if (imageInfo) {
+          const { fileType, imgageFileName } = imageInfo;
+          clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
+          console.log("clonedObject", clonedObject);
+          const result = await addCourseData(
+            clonedObject as unknown as ICourseDataBody
+          );
+
+          if (result.data) {
+            setCourseData(result.data.data as typeof courseData);
+          }
+          setVisible(false);
+          setStepper(2);
+          console.log("result", result);
+        } else {
+          console.error("Error handling image");
+          return;
+        }
+        //
       },
     });
   return (
@@ -112,10 +150,17 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           value={values.courseName}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
           required
         />
+        {!visible && (
+          <FaRegEdit
+            className="absolute right-2 top-2 "
+            size={25}
+            onClick={() => handleUpdation({ courseName: values.courseName })}
+          />
+        )}
         {errors.courseName && touched.courseName && (
           <p className="text-red-600">{errors.courseName}</p>
         )}
@@ -134,10 +179,13 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           value={values.discription}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
           required
         />
+        {!visible && (
+          <FaRegEdit className="absolute right-2 top-5 " size={25} />
+        )}
         {errors.discription && touched.discription && (
           <p className="text-red-600">{errors.discription}</p>
         )}
@@ -157,10 +205,13 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           value={values.tags}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
           required
         />
+        {!visible && (
+          <FaRegEdit className="absolute right-2 top-2 " size={25} />
+        )}
         {errors.tags && touched.tags && (
           <p className="text-red-600">{errors.tags}</p>
         )}
@@ -187,10 +238,13 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           // value={values.thumbnail}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
           required
         />
+        {!visible && (
+          <FaRegEdit className="absolute right-2 top-2 " size={25} />
+        )}
         {errors.thumbnail && touched.thumbnail && (
           <p className="text-red-600">{errors.thumbnail}</p>
         )}
@@ -204,10 +258,13 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           value={values.duration}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
           required
         />
+        {!visible && (
+          <FaRegEdit className="absolute right-2 top-2 " size={25} />
+        )}
         {errors.duration && touched.duration && (
           <p className="text-red-600">{errors.duration}</p>
         )}
@@ -218,10 +275,11 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           Duration
         </label>
       </div>
-
-      <button className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center">
-        <FaArrowRightLong />
-      </button>
+      {visible && (
+        <button className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center">
+          <FaArrowRightLong />
+        </button>
+      )}
     </form>
   );
 };
