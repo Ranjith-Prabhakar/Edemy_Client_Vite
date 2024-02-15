@@ -1,6 +1,14 @@
 import { addCourseDataSchema } from "../../../schema/addCourseDataSchema";
 import { useFormik } from "formik";
 import { FaArrowRightLong } from "react-icons/fa6";
+import {
+  useAddModuleMutation,
+  useAddCourseDataMutation,
+  useAddToBucketMutation,
+} from "../../../redux/features/course/courseApi";
+import { useSelector } from "react-redux";
+import { useRef } from "react";
+import { ICourseDataBody } from "../../../redux/features/ResponseInterfaces/Course/addCourseData";
 
 type Props = {
   setStepper: React.Dispatch<React.SetStateAction<number>>;
@@ -23,40 +31,77 @@ type Props = {
 };
 
 const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    // setFieldValue,
-  } = useFormik({
-    initialValues: {
-      courseName: courseData.courseName,
-      discription: courseData.discription,
-      tags: courseData.tags,
-      thumbnail: courseData.thumbnail,
-      duration: courseData.duration,
-    },
-    validationSchema: addCourseDataSchema,
-    onSubmit: (values, actions) => {
-      const clonedObject: { [key: string]: string | undefined } =
-        Object.create(null); // to clone an object without the prototype chaining
+  const [addModule] = useAddModuleMutation();
+  const [addToBucket] = useAddToBucketMutation();
+  const [addCourseData] = useAddCourseDataMutation();
+  const userId = useSelector((state: any) => state.user.userData._id);
+  const thumbnailRef = useRef<HTMLInputElement>(null);
 
-      for (const key in values) {
-        if (Object.prototype.hasOwnProperty.call(values, key)) {
-          clonedObject[key] = values[key as keyof typeof values] as
-            | string
-            | undefined;
-        }
+  const handleAddImage = async (): Promise<{fileType: string;imgageFileName: string}> => {
+    try {
+      const fileInput = thumbnailRef.current;
+      if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        const fileType = fileInput.files[0].name.split(".").pop();
+
+        const imgageFileName = "thumbnail";
+        const result = await addModule({
+          fileName: `${imgageFileName}.${fileType}`,
+          userId: userId,
+          contentType: `video/${fileType}`,
+        });
+
+        await addToBucket({
+          url: result?.data,
+          body: fileInput.files[0],
+          contentType: fileType as string,
+        });
+
+        return { fileType, imgageFileName };
+      } else {
+        console.error("No file selected");
       }
+    } catch (error: any) {
+      console.log(error?.message);
+    }
+  };
 
-      localStorage.setItem("courseData", JSON.stringify(clonedObject));
-      setCourseData(clonedObject as typeof courseData);
-      setStepper(2);
-    },
-  });
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: {
+        courseName: courseData.courseName,
+        discription: courseData.discription,
+        tags: courseData.tags,
+        thumbnail: courseData.thumbnail,
+        duration: courseData.duration,
+      },
+      validationSchema: addCourseDataSchema,
+      onSubmit: async (values, actions) => {
+        const clonedObject: { [key: string]: string | undefined } =
+          Object.create(null); // to clone an object without the prototype chaining
+
+        for (const key in values) {
+          if (Object.prototype.hasOwnProperty.call(values, key)) {
+            clonedObject[key] = values[key as keyof typeof values] as
+              | string
+              | undefined;
+          }
+        }
+
+        //
+        const { fileType, imgageFileName } = await handleAddImage();
+        //
+
+        clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
+        console.log("clonedObject", clonedObject);
+        const result = await addCourseData(
+          clonedObject as unknown as ICourseDataBody
+        );
+        console.log("result", result);
+        // localStorage.setItem("courseData", JSON.stringify(clonedObject));
+        setCourseData(clonedObject as typeof courseData);
+        setStepper(2);
+      },
+    });
   return (
     <form onSubmit={handleSubmit} action="" className="p-8">
       <div className="relative z-0 w-full mb-5 group">
@@ -135,6 +180,7 @@ const AddCourseData = ({ setStepper, courseData, setCourseData }: Props) => {
           Thumbnail
         </label>
         <input
+          ref={thumbnailRef}
           type="file"
           name="thumbnail"
           id="thumbnail"
