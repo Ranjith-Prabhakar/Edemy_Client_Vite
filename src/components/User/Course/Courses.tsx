@@ -8,10 +8,10 @@ import { useGetCourseInProgressQuery } from "../../../redux/features/course/cour
 type Props = {};
 
 const Courses = (props: Props) => {
-  const { data,isSuccess } = useGetCourseInProgressQuery();
+  const { data, isSuccess } = useGetCourseInProgressQuery();
   const [visible, setVisible] = useState(true);
   const [stepper, setStepper] = useState(1);
-  console.log("data", data?.data);
+  console.log("data==55555=>", data?.data);
 
   const [courseData, setCourseData] = useState({
     courseName: "",
@@ -21,21 +21,20 @@ const Courses = (props: Props) => {
     duration: "",
   });
 
-useEffect(() => {
-  console.log("useEffect triggered");
-  if (isSuccess) {
-    console.log("Setting course data:", data.data);
-    setCourseData({
-      courseName: data.data.courseName ?? "",
-      discription: data.data.discription ?? "",
-      tags: data.data.tags ?? "",
-      thumbnail: data.data.thumbnail ?? "",
-      duration: data.data.duration ?? "",
-    });
-  }
-}, [isSuccess]);
-
-
+  useEffect(() => {
+    console.log("useEffect triggered");
+    if (isSuccess) {
+      console.log("Setting course data:", data.data);
+      setCourseData({
+        courseName: data.data.courseName ?? "",
+        discription: data.data.discription ?? "",
+        tags: data.data.tags ?? "",
+        thumbnail: data.data.thumbnail ?? "",
+        duration: data.data.duration ?? "",
+      });
+    }
+   
+  }, [data]);
 
   const [moduleList, setModuleList] = useState<
     Array<{ [key: string]: string | number }>
@@ -75,6 +74,7 @@ useEffect(() => {
           <AddModuleVideos
             moduleList={moduleList}
             setModuleList={setModuleList}
+            courseData={courseData}
           />
         )}
       </div>
@@ -89,3 +89,4 @@ useEffect(() => {
 };
 
 export default Courses;
+

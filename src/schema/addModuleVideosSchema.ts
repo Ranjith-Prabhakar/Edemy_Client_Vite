@@ -8,7 +8,8 @@ export const addModueleVideosSchema = yup.object().shape({
     .string()
     .min(5)
     .required("Please enter valid module tittle"),
-  moduleVideo: yup
+  videoNo: yup.number().required("Please enter valid module number"),
+  videoTittle: yup
     .mixed()
     .test(
       "file-type",

@@ -2,10 +2,11 @@ import { IAddModuleBody } from "../ResponseInterfaces/Course/addModule";
 import { ICourseDataBody } from "../ResponseInterfaces/Course/addCourseData";
 import { ICourseResponse } from "../ResponseInterfaces/Course/addCourseData";
 import { apiSlice } from "../api/apiSlice";
+import { IModuleVideoBody } from "../ResponseInterfaces/Course/addModuleVideos";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCourseInProgress: builder.query<ICourseDataBody,void>({
+    getCourseInProgress: builder.query<ICourseDataBody, void>({
       query: () => ({
         method: "get",
         url: "course/get_course_in_progress",
@@ -52,6 +53,15 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    addModuleVideos: builder.mutation<ICourseResponse, IModuleVideoBody>({
+      query: (data) => ({
+        method: "post",
+        url: "course/add_Module_Videos",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -61,4 +71,5 @@ export const {
   useAddCourseDataMutation,
   useAddToBucketMutation,
   useUpdateCourseMutation,
+  useAddModuleVideosMutation,
 } = courseApi;

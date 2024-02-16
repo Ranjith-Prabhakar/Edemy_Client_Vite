@@ -9,7 +9,7 @@ import {
   useUpdateCourseMutation,
 } from "../../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ICourseDataBody } from "../../../redux/features/ResponseInterfaces/Course/addCourseData";
 import toast from "react-hot-toast";
 
@@ -94,7 +94,7 @@ const AddCourseData = ({
     return;
   };
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit,setValues } =
     useFormik({
       initialValues: {
         courseName: courseData.courseName,
@@ -140,6 +140,18 @@ const AddCourseData = ({
         //
       },
     });
+
+     useEffect(() => {
+       // Update form values when courseData changes
+       setValues({
+         courseName: courseData.courseName,
+         discription: courseData.discription,
+         tags: courseData.tags,
+         thumbnail: courseData.thumbnail,
+         duration: courseData.duration,
+       });
+     }, [courseData]);
+
   return (
     <form onSubmit={handleSubmit} action="" className="p-8">
       <div className="relative z-0 w-full mb-5 group">
@@ -285,3 +297,9 @@ const AddCourseData = ({
 };
 
 export default AddCourseData;
+
+
+
+
+
+

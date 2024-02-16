@@ -50,3 +50,5 @@ export interface ICourseDataBody {
   thumbnail: string;
   duration: string;
 }
+
+
