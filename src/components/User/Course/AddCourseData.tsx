@@ -21,6 +21,10 @@ type Props = {
     tags: string;
     thumbnail: string;
     duration: string;
+    moduleNo: string;
+    moduleTittle: string;
+    videoNo: string;
+    videoTittle: string;
   };
   setCourseData: React.Dispatch<
     React.SetStateAction<{
@@ -29,6 +33,10 @@ type Props = {
       tags: string;
       thumbnail: string;
       duration: string;
+      moduleNo: string;
+      moduleTittle: string;
+      videoNo: string;
+      videoTittle: string;
     }>
   >;
   visible: boolean;
@@ -94,63 +102,71 @@ const AddCourseData = ({
     return;
   };
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit,setValues } =
-    useFormik({
-      initialValues: {
-        courseName: courseData.courseName,
-        discription: courseData.discription,
-        tags: courseData.tags,
-        thumbnail: courseData.thumbnail,
-        duration: courseData.duration,
-      },
-      validationSchema: addCourseDataSchema,
-      onSubmit: async (values, actions) => {
-        const clonedObject: { [key: string]: string | undefined } =
-          Object.create(null); // to clone an object without the prototype chaining
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setValues,
+  } = useFormik({
+    initialValues: {
+      courseName: courseData.courseName,
+      discription: courseData.discription,
+      tags: courseData.tags,
+      thumbnail: courseData.thumbnail,
+      duration: courseData.duration,
+    },
+    validationSchema: addCourseDataSchema,
+    onSubmit: async (values, actions) => {
+      const clonedObject: { [key: string]: string | undefined } =
+        Object.create(null); // to clone an object without the prototype chaining
 
-        for (const key in values) {
-          if (Object.prototype.hasOwnProperty.call(values, key)) {
-            clonedObject[key] = values[key as keyof typeof values] as
-              | string
-              | undefined;
-          }
+      for (const key in values) {
+        if (Object.prototype.hasOwnProperty.call(values, key)) {
+          clonedObject[key] = values[key as keyof typeof values] as
+            | string
+            | undefined;
         }
+      }
 
-        //
-        const imageInfo = await handleAddImage();
+      //
+      const imageInfo = await handleAddImage();
 
-        if (imageInfo) {
-          const { fileType, imgageFileName } = imageInfo;
-          clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
-          console.log("clonedObject", clonedObject);
-          const result = await addCourseData(
-            clonedObject as unknown as ICourseDataBody
-          );
+      if (imageInfo) {
+        const { fileType, imgageFileName } = imageInfo;
+        clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
+        console.log("clonedObject", clonedObject);
+        const result = await addCourseData(
+          clonedObject as unknown as ICourseDataBody
+        );
 
-          if (result.data) {
-            setCourseData(result.data.data as typeof courseData);
-          }
-          setVisible(false);
-          setStepper(2);
-          console.log("result", result);
-        } else {
-          console.error("Error handling image");
-          return;
+        if (result.data) {
+          setCourseData(result.data.data as typeof courseData);
         }
-        //
-      },
+        setVisible(false);
+        setStepper(2);
+        console.log("result", result);
+      } else {
+        console.error("Error handling image");
+        return;
+      }
+      //
+    },
+  });
+
+  useEffect(() => {
+    setValues({
+      courseName: courseData.courseName,
+      discription: courseData.discription,
+      tags: courseData.tags,
+      thumbnail: courseData.thumbnail,
+      duration: courseData.duration,
     });
 
-     useEffect(() => {
-       // Update form values when courseData changes
-       setValues({
-         courseName: courseData.courseName,
-         discription: courseData.discription,
-         tags: courseData.tags,
-         thumbnail: courseData.thumbnail,
-         duration: courseData.duration,
-       });
-     }, [courseData]);
+    console.log("courseData from adModulevi", courseData);
+  }, [courseData]);
 
   return (
     <form onSubmit={handleSubmit} action="" className="p-8">
@@ -297,9 +313,3 @@ const AddCourseData = ({
 };
 
 export default AddCourseData;
-
-
-
-
-
-

@@ -5,9 +5,7 @@ import AddedModuleVideos from "./AddedModuleVideos";
 import Tabs from "./Tabs";
 import { useGetCourseInProgressQuery } from "../../../redux/features/course/courseApi";
 
-type Props = {};
-
-const Courses = (props: Props) => {
+const Courses = () => {
   const { data, isSuccess } = useGetCourseInProgressQuery();
   const [visible, setVisible] = useState(true);
   const [stepper, setStepper] = useState(1);
@@ -19,21 +17,31 @@ const Courses = (props: Props) => {
     tags: "",
     thumbnail: "",
     duration: "",
+    moduleNo: "",
+    moduleTittle: "",
+    videoNo: "",
+    videoTittle: "",
   });
 
   useEffect(() => {
     console.log("useEffect triggered");
     if (isSuccess) {
       console.log("Setting course data:", data.data);
+      const moduleData = data.data.modules[data.data.modules.length - 1];
+      const moduleVideoData = moduleData.videos[moduleData.videos.length - 1];
+      console.log("moduleData======>", moduleData);
       setCourseData({
         courseName: data.data.courseName ?? "",
         discription: data.data.discription ?? "",
         tags: data.data.tags ?? "",
         thumbnail: data.data.thumbnail ?? "",
         duration: data.data.duration ?? "",
+        moduleNo: moduleData.moduleNo ?? "",
+        moduleTittle: moduleData.moduleTittle ?? "",
+        videoNo: moduleVideoData.videoNo ?? "",
+        videoTittle: moduleVideoData.videoTittle ?? "",
       });
     }
-   
   }, [data]);
 
   const [moduleList, setModuleList] = useState<
@@ -75,6 +83,7 @@ const Courses = (props: Props) => {
             moduleList={moduleList}
             setModuleList={setModuleList}
             courseData={courseData}
+            setCourseData={setCourseData}
           />
         )}
       </div>
@@ -89,4 +98,3 @@ const Courses = (props: Props) => {
 };
 
 export default Courses;
-

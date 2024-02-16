@@ -44,6 +44,7 @@ export interface ICourseResponse {
 }
 //request
 export interface ICourseDataBody {
+  [x: string]: any;
   courseName: string;
   discription: string;
   tags: string;

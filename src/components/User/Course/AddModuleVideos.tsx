@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { addModueleVideosSchema } from "../../../schema/addModuleVideosSchema";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   useAddModuleMutation,
   useAddToBucketMutation,
@@ -27,10 +27,33 @@ type Props = {
     tags: string;
     thumbnail: string;
     duration: string;
+    moduleNo: string;
+    moduleTittle: string;
+    videoNo: string;
+    videoTittle: string;
   };
+
+  setCourseData: React.Dispatch<
+    React.SetStateAction<{
+      courseName: string;
+      discription: string;
+      tags: string;
+      thumbnail: string;
+      duration: string;
+      moduleNo: string;
+      moduleTittle: string;
+      videoNo: string;
+      videoTittle: string;
+    }>
+  >;
 };
 
-const AddModuleVideos = ({ moduleList, setModuleList, courseData }: Props) => {
+const AddModuleVideos = ({
+  moduleList,
+  setModuleList,
+  courseData,
+  setCourseData,
+}: Props) => {
   const [addModule] = useAddModuleMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addModuleVideos] = useAddModuleVideosMutation();
@@ -81,6 +104,7 @@ const AddModuleVideos = ({ moduleList, setModuleList, courseData }: Props) => {
     handleBlur,
     handleSubmit,
     resetForm,
+    setValues,
   } = useFormik({
     initialValues: {
       moduleNo: "",
@@ -100,6 +124,14 @@ const AddModuleVideos = ({ moduleList, setModuleList, courseData }: Props) => {
     },
   });
 
+  useEffect(() => {
+    setValues({
+      moduleNo: courseData.moduleNo,
+      moduleTittle: courseData.moduleTittle,
+      videoNo: (parseInt(courseData.videoNo )+ 1).toString(),
+      videoTittle: "",
+    });
+  }, [courseData]);
   return (
     <form action="" onSubmit={handleSubmit}>
       <div className="relative z-0 w-full mb-5 group">
@@ -206,4 +238,3 @@ const AddModuleVideos = ({ moduleList, setModuleList, courseData }: Props) => {
 };
 
 export default AddModuleVideos;
-
