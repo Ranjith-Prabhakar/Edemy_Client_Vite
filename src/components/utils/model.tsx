@@ -1,14 +1,34 @@
 import React from "react";
 import {
-  useGetCourseInProgressQuery,
   useUpdateCourseMutation,
 } from "../../redux/features/course/courseApi";
 import { useNavigate } from "react-router-dom";
 
-type Props = { setOpen: React.Dispatch<React.SetStateAction<boolean>> };
+type Props = {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 
-const Model = ({ setOpen }: Props) => {
+  setCourseData: React.Dispatch<
+    React.SetStateAction<{
+      courseName: string;
+      discription: string;
+      tags: string;
+      thumbnail: string;
+      duration: string;
+      moduleNo: string;
+      moduleTittle: string;
+      videoTittle: string;
+      videoNo: string;
+      videoUrl: string;
+    }>
+  >;
+  setModuleVideos: React.Dispatch<
+    React.SetStateAction<Record<string, string | Record<string, string>[]>[]>
+  >;
+};
+
+const Model = ({ setOpen, setCourseData, setModuleVideos }: Props) => {
   const [updateCourse] = useUpdateCourseMutation();
+  const navigate = useNavigate();
   console.log("inside model");
   return (
     <div>
@@ -41,7 +61,20 @@ const Model = ({ setOpen }: Props) => {
             onClick={async () => {
               await updateCourse({ submissionStatus: "completed" });
               setOpen(false);
-              useNavigate("/profile");
+              setCourseData({
+                courseName: "",
+                discription: "",
+                tags: "",
+                thumbnail: "",
+                duration: "",
+                moduleNo: "",
+                moduleTittle: "",
+                videoTittle: "",
+                videoNo: "",
+                videoUrl: "",
+              });
+              setModuleVideos([]);
+              navigate("/profile");
             }}
           >
             Submit

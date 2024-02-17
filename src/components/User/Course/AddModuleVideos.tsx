@@ -67,26 +67,24 @@ const AddModuleVideos = ({
   const [progressStatus, setProgressStatus] = useState(false);
   const [progressWidth, setProgressWidth] = useState(0);
 
- useEffect(() => {
-   let timeoutId: NodeJS.Timeout;
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
 
-   if (progressStatus) {
-     timeoutId = setTimeout(() => {
-       if (progressWidth > 99) {
-         console.log("inside greater 99");
-         setProgressWidth(0);
-       } else {
-         setProgressWidth((prevProgress) => prevProgress + 1);
-       }
-     }, 100);
-   }
+    if (progressStatus) {
+      timeoutId = setTimeout(() => {
+        if (progressWidth > 99) {
+          console.log("inside greater 99");
+          setProgressWidth(0);
+        } else {
+          setProgressWidth((prevProgress) => prevProgress + 1);
+        }
+      }, 100);
+    }
 
-   return () => {
-     clearTimeout(timeoutId);
-   };
- }, [progressStatus, progressWidth]);
-
-
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [progressStatus, progressWidth]);
 
   const handleAddModule = async (moduleVideoBody: IModuleVideoBody) => {
     try {
@@ -311,13 +309,11 @@ const AddModuleVideos = ({
       </button>
 
       {progressStatus && (
-        <div className="w-full h-[15px] bg-slate-50 rounded-full relative -bottom-4">
+        <div className="w-full h-[5px] bg-slate-50 rounded-full relative -bottom-4">
           <div
             style={{ width: `${progressWidth}%` }}
-            className={`h-[15px] bg-green-500 rounded-full absolute`}
-          >
-            {progressWidth}%
-          </div>
+            className={`h-[5px] bg-green-950  absolute left-0`}
+          ></div>
         </div>
       )}
     </form>

@@ -30,18 +30,18 @@ const Courses = () => {
     if (isSuccess) {
       const regex = /\/(.*?)-/;
       const moduleData = data.data.modules[data.data.modules.length - 1];
-      const moduleVideoData = moduleData.videos[moduleData.videos.length - 1];
+      const moduleVideoData = moduleData?.videos[moduleData.videos.length - 1];
       setCourseData({
         courseName: data.data.courseName ?? "",
         discription: data.data.discription ?? "",
         tags: data.data.tags ?? "",
         thumbnail: data.data.thumbnail ?? "",
         duration: data.data.duration ?? "",
-        moduleNo: moduleData.moduleNo ?? "",
-        moduleTittle: moduleData.moduleTittle ?? "",
-        videoTittle: moduleVideoData.videoTittle.match(regex)[1] ?? "",
-        videoNo: moduleVideoData.videoNo ?? "",
-        videoUrl: moduleVideoData.videoUrl ?? "",
+        moduleNo: moduleData?.moduleNo ?? "",
+        moduleTittle: moduleData?.moduleTittle ?? "",
+        videoTittle: moduleVideoData?.videoTittle.match(regex)[1] ?? "",
+        videoNo: moduleVideoData?.videoNo ?? "",
+        videoUrl: moduleVideoData?.videoUrl ?? "",
       });
       setModuleVideos(data.data.modules);
     }
@@ -79,7 +79,7 @@ const Courses = () => {
       </div>
       <div className="flex-1">
         <div className="flex-col">
-          <Tabs setStepper={setStepper} />
+          <Tabs setStepper={setStepper} setCourseData={setCourseData}  setModuleVideos={setModuleVideos}/>
           <AddedModuleVideos moduleVideos={moduleVideos} />
         </div>
       </div>

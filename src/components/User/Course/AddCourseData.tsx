@@ -57,6 +57,7 @@ const AddCourseData = ({
   const [updateCourse] = useUpdateCourseMutation();
   const userId = useSelector((state: any) => state.user.userData._id);
   const thumbnailRef = useRef<HTMLInputElement>(null);
+  const courseNameRef = useRef<HTMLInputElement>(null);
 
   const handleUpdation = async (data: Record<string, string>) => {
     try {
@@ -81,13 +82,19 @@ const AddCourseData = ({
             fileName: `${imgageFileName}.${fileType}`,
             userId: userId,
             contentType: `video/${fileType}`,
+            courseName: (courseNameRef?.current?.value as string) || "",
           });
 
-          await addToBucket({
-            url: result?.data,
-            body: fileInput.files[0],
-            contentType: fileType as string,
-          });
+          console.log("result from handle image", result);
+          if (result.data === "a course already exist in this name"){
+            toast.error(result.data)
+            return
+          }
+            await addToBucket({
+              url: result?.data,
+              body: fileInput.files[0],
+              contentType: fileType as string,
+            });
 
           return { fileType, imgageFileName };
         } else {
@@ -164,6 +171,8 @@ const AddCourseData = ({
     });
     if (courseData.courseName) {
       setVisible(false);
+    } else {
+      setVisible(true);
     }
   }, [courseData]);
 
@@ -171,6 +180,7 @@ const AddCourseData = ({
     <form onSubmit={handleSubmit} action="" className="p-8">
       <div className="relative z-0 w-full mb-5 group">
         <input
+          ref={courseNameRef}
           type="text"
           name="courseName"
           id="courseName"

@@ -1,9 +1,27 @@
 import { useState } from "react";
 
 import Model from "../../utils/model";
-type Props = { setStepper: React.Dispatch<React.SetStateAction<number>> };
-const Tabs = ({ setStepper }: Props) => {
-  
+type Props = {
+  setStepper: React.Dispatch<React.SetStateAction<number>>;
+  setCourseData: React.Dispatch<
+    React.SetStateAction<{
+      courseName: string;
+      discription: string;
+      tags: string;
+      thumbnail: string;
+      duration: string;
+      moduleNo: string;
+      moduleTittle: string;
+      videoTittle: string;
+      videoNo: string;
+      videoUrl: string;
+    }>
+  >;
+  setModuleVideos: React.Dispatch<
+    React.SetStateAction<Record<string, string | Record<string, string>[]>[]>
+  >;
+};
+const Tabs = ({ setStepper, setCourseData, setModuleVideos }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,7 +52,11 @@ const Tabs = ({ setStepper }: Props) => {
       </button>
       {open && (
         <div className="absolute z-10">
-          <Model setOpen={setOpen} />
+          <Model
+            setOpen={setOpen}
+            setCourseData={setCourseData}
+            setModuleVideos={setModuleVideos}
+          />
         </div>
       )}
     </div>

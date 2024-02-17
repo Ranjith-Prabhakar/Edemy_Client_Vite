@@ -4,6 +4,7 @@ type Props = {
 };
 
 const AddedModuleVideos = ({ moduleVideos }: Props) => {
+  const regex = /\/(.*?)-/;
   return (
     <div className="p-5 flex flex-col gap-3">
       {moduleVideos.length > 0 &&
@@ -27,7 +28,8 @@ const AddedModuleVideos = ({ moduleVideos }: Props) => {
               {Array.isArray(item.videos) &&
                 item.videos.map((video, videoIndex) => (
                   <div key={videoIndex}>
-                    {video.videoNo} - {video.videoTittle}
+                    {video.videoNo} -{" "}
+                    {video.videoTittle.match(regex)?.[1] || "No Match"}
                   </div>
                 ))}
             </>
