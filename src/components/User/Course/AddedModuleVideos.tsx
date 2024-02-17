@@ -1,59 +1,40 @@
+import { IoIosArrowDropdown } from "react-icons/io";
 type Props = {
-  moduleList: {
-    [key: string]: string | number;
-  }[];
+  moduleVideos: Record<string, string | Record<string, string>[]>[];
 };
 
-const AddedModuleVideos = ({ moduleList }: Props) => {
+const AddedModuleVideos = ({ moduleVideos }: Props) => {
   return (
     <div className="p-5 flex flex-col gap-3">
-      {moduleList.length > 0 &&
-        moduleList.map((item, index) => (
-          <li
-            key={index}
-            className="flex gap-2 justify-between items-center cursor-pointer border border-white rounded-sm p-2 text-white"
-          >
-            <div>{item?.moduleNo + "."}</div>
-            <div>{item?.moduleName}</div>
-            <div>
-              <button className="bg-slate-500 px-5 text-black font-bold">
-                Watch
-              </button>
-            </div>
-          </li>
-        ))}
+      {moduleVideos.length > 0 &&
+        moduleVideos.map((item, index) => {
+          console.log("item", item);
+          return (
+            <>
+              <li
+                key={index}
+                className="flex gap-2 justify-between items-center cursor-pointer border border-white rounded-sm p-2 text-white"
+              >
+                <div>{item?.moduleNo + "."}</div>
+                <div>
+                  {item?.moduleTittle as string} ({item?.videos.length})
+                </div>
+
+                <div>
+                  <IoIosArrowDropdown size={25} />
+                </div>
+              </li>
+              {Array.isArray(item.videos) &&
+                item.videos.map((video, videoIndex) => (
+                  <div key={videoIndex}>
+                    {video.videoNo} - {video.videoTittle}
+                  </div>
+                ))}
+            </>
+          );
+        })}
     </div>
   );
 };
 
 export default AddedModuleVideos;
-
-// type Props = {
-//   moduleList: {
-//     [key: string]: string | number;
-//   }[];
-// };
-
-// const AddedModuleVideos = ({ moduleList }: Props) => {
-//   return (
-//     <div className="p-5 flex flex-col gap-3">
-//       {moduleList.length > 0 &&
-//         moduleList.map((item, index) => (
-//           <li
-//             key={index}
-//             className="flex gap-2 justify-between items-center cursor-pointer border border-white rounded-sm p-2 text-white"
-//           >
-//             <div>{item?.moduleNo + "."}</div>
-//             <div>{item?.moduleName}</div>
-//             <div>
-//               <button className="bg-slate-500 px-5 text-black font-bold">
-//                 Watch
-//               </button>
-//             </div>
-//           </li>
-//         ))}
-//     </div>
-//   );
-// };
-
-// export default AddedModuleVideos

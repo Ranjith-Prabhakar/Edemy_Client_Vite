@@ -46,7 +46,7 @@ const Table = (props: Props) => {
           </thead>
           <tbody>
             {Data.map((item, index) => (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
                 <td className="px-6 py-4">{index + 1}</td>
                 <td className="px-6 py-4">{item.Id}</td>
                 <td className="px-6 py-4">{item.Name}</td>

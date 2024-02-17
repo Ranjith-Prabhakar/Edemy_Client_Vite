@@ -9,7 +9,9 @@ const Courses = () => {
   const { data, isSuccess } = useGetCourseInProgressQuery();
   const [visible, setVisible] = useState(true);
   const [stepper, setStepper] = useState(1);
-  console.log("data==55555=>", data?.data);
+  const [moduleVideos, setModuleVideos] = useState<
+    Record<string, string | Record<string, string>[]>[]
+  >([]);
 
   const [courseData, setCourseData] = useState({
     courseName: "",
@@ -19,17 +21,16 @@ const Courses = () => {
     duration: "",
     moduleNo: "",
     moduleTittle: "",
-    videoNo: "",
     videoTittle: "",
+    videoNo: "",
+    videoUrl: "",
   });
 
   useEffect(() => {
-    console.log("useEffect triggered");
     if (isSuccess) {
-      console.log("Setting course data:", data.data);
+      const regex = /\/(.*?)-/;
       const moduleData = data.data.modules[data.data.modules.length - 1];
       const moduleVideoData = moduleData.videos[moduleData.videos.length - 1];
-      console.log("moduleData======>", moduleData);
       setCourseData({
         courseName: data.data.courseName ?? "",
         discription: data.data.discription ?? "",
@@ -38,9 +39,11 @@ const Courses = () => {
         duration: data.data.duration ?? "",
         moduleNo: moduleData.moduleNo ?? "",
         moduleTittle: moduleData.moduleTittle ?? "",
+        videoTittle: moduleVideoData.videoTittle.match(regex)[1] ?? "",
         videoNo: moduleVideoData.videoNo ?? "",
-        videoTittle: moduleVideoData.videoTittle ?? "",
+        videoUrl: moduleVideoData.videoUrl ?? "",
       });
+      setModuleVideos(data.data.modules);
     }
   }, [data]);
 
@@ -49,22 +52,8 @@ const Courses = () => {
   >([]);
 
   useEffect(() => {
-    // if refresh meanwhile adding course but uploaded several modules to bucket
-    let courses = localStorage.getItem("moduleVideos");
-    if (courses) {
-      let parsedCourse = JSON.parse(courses);
-      if (parsedCourse) {
-        let courseList = parsedCourse.map((item: string, index: number) => {
-          console.log("item", item.split("-").shift());
-          return {
-            moduleNo: ++index,
-            moduleName: item.split("-").shift(),
-          };
-        });
-        setModuleList(courseList);
-      }
-    }
-  }, []);
+    console.log("courseData from course", courseData);
+  }, [courseData]);
 
   return (
     <div className="flex ">
@@ -84,13 +73,14 @@ const Courses = () => {
             setModuleList={setModuleList}
             courseData={courseData}
             setCourseData={setCourseData}
+            setModuleVideos={setModuleVideos}
           />
         )}
       </div>
       <div className="flex-1">
         <div className="flex-col">
           <Tabs setStepper={setStepper} />
-          <AddedModuleVideos moduleList={moduleList} />
+          <AddedModuleVideos moduleVideos={moduleVideos} />
         </div>
       </div>
     </div>

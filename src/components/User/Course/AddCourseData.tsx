@@ -1,7 +1,6 @@
 import { addCourseDataSchema } from "../../../schema/addCourseDataSchema";
 import { useFormik } from "formik";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { FaRegEdit } from "react-icons/fa";
 import {
   useAddModuleMutation,
   useAddCourseDataMutation,
@@ -23,8 +22,9 @@ type Props = {
     duration: string;
     moduleNo: string;
     moduleTittle: string;
-    videoNo: string;
     videoTittle: string;
+    videoNo: string;
+    videoUrl: string;
   };
   setCourseData: React.Dispatch<
     React.SetStateAction<{
@@ -35,8 +35,9 @@ type Props = {
       duration: string;
       moduleNo: string;
       moduleTittle: string;
-      videoNo: string;
       videoTittle: string;
+      videoNo: string;
+      videoUrl: string;
     }>
   >;
   visible: boolean;
@@ -60,7 +61,6 @@ const AddCourseData = ({
   const handleUpdation = async (data: Record<string, string>) => {
     try {
       const result = await updateCourse(data);
-      console.log("update result", result);
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -137,7 +137,6 @@ const AddCourseData = ({
       if (imageInfo) {
         const { fileType, imgageFileName } = imageInfo;
         clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
-        console.log("clonedObject", clonedObject);
         const result = await addCourseData(
           clonedObject as unknown as ICourseDataBody
         );
@@ -147,7 +146,6 @@ const AddCourseData = ({
         }
         setVisible(false);
         setStepper(2);
-        console.log("result", result);
       } else {
         console.error("Error handling image");
         return;
@@ -164,8 +162,9 @@ const AddCourseData = ({
       thumbnail: courseData.thumbnail,
       duration: courseData.duration,
     });
-
-    console.log("courseData from adModulevi", courseData);
+    if (courseData.courseName) {
+      setVisible(false);
+    }
   }, [courseData]);
 
   return (
@@ -183,11 +182,13 @@ const AddCourseData = ({
           required
         />
         {!visible && (
-          <FaRegEdit
-            className="absolute right-2 top-2 "
-            size={25}
+          <button
+            type="button"
+            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-1 "
             onClick={() => handleUpdation({ courseName: values.courseName })}
-          />
+          >
+            Update
+          </button>
         )}
         {errors.courseName && touched.courseName && (
           <p className="text-red-600">{errors.courseName}</p>
@@ -212,7 +213,13 @@ const AddCourseData = ({
           required
         />
         {!visible && (
-          <FaRegEdit className="absolute right-2 top-5 " size={25} />
+          <button
+            type="button"
+            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-2"
+            onClick={() => handleUpdation({ discription: values.discription })}
+          >
+            Update
+          </button>
         )}
         {errors.discription && touched.discription && (
           <p className="text-red-600">{errors.discription}</p>
@@ -238,7 +245,13 @@ const AddCourseData = ({
           required
         />
         {!visible && (
-          <FaRegEdit className="absolute right-2 top-2 " size={25} />
+          <button
+            type="button"
+            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-1"
+            onClick={() => handleUpdation({ tags: values.tags })}
+          >
+            Update
+          </button>
         )}
         {errors.tags && touched.tags && (
           <p className="text-red-600">{errors.tags}</p>
@@ -271,7 +284,13 @@ const AddCourseData = ({
           required
         />
         {!visible && (
-          <FaRegEdit className="absolute right-2 top-2 " size={25} />
+          <button
+            type="button"
+            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-2"
+            onClick={() => handleUpdation({ thumbnail: values.thumbnail })}
+          >
+            Update
+          </button>
         )}
         {errors.thumbnail && touched.thumbnail && (
           <p className="text-red-600">{errors.thumbnail}</p>
@@ -280,7 +299,7 @@ const AddCourseData = ({
 
       <div className="relative z-0 w-full mb-5 group">
         <input
-          type="time"
+          type="text"
           name="duration"
           id="duration"
           value={values.duration}
@@ -291,7 +310,13 @@ const AddCourseData = ({
           required
         />
         {!visible && (
-          <FaRegEdit className="absolute right-2 top-2 " size={25} />
+          <button
+            type="button"
+            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-1"
+            onClick={() => handleUpdation({ duration: values.duration })}
+          >
+            Update
+          </button>
         )}
         {errors.duration && touched.duration && (
           <p className="text-red-600">{errors.duration}</p>

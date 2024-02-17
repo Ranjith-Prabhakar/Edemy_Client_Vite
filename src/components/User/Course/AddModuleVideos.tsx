@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { addModueleVideosSchema } from "../../../schema/addModuleVideosSchema";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   useAddModuleMutation,
   useAddToBucketMutation,
@@ -29,8 +29,9 @@ type Props = {
     duration: string;
     moduleNo: string;
     moduleTittle: string;
-    videoNo: string;
     videoTittle: string;
+    videoNo: string;
+    videoUrl: string;
   };
 
   setCourseData: React.Dispatch<
@@ -42,24 +43,50 @@ type Props = {
       duration: string;
       moduleNo: string;
       moduleTittle: string;
-      videoNo: string;
       videoTittle: string;
+      videoNo: string;
+      videoUrl: string;
     }>
+  >;
+  setModuleVideos: React.Dispatch<
+    React.SetStateAction<Record<string, string | Record<string, string>[]>[]>
   >;
 };
 
 const AddModuleVideos = ({
-  moduleList,
-  setModuleList,
   courseData,
   setCourseData,
+  setModuleVideos,
 }: Props) => {
   const [addModule] = useAddModuleMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addModuleVideos] = useAddModuleVideosMutation();
   const userId = useSelector((state: any) => state.user.userData._id);
   const moduleVideoRef = useRef<HTMLInputElement>(null);
-  const moduleNameRef = useRef<HTMLInputElement>(null);
+  const videoNameRef = useRef<HTMLInputElement>(null);
+  const [progressStatus, setProgressStatus] = useState(false);
+  const [progressWidth, setProgressWidth] = useState(0);
+
+ useEffect(() => {
+   let timeoutId: NodeJS.Timeout;
+
+   if (progressStatus) {
+     timeoutId = setTimeout(() => {
+       if (progressWidth > 99) {
+         console.log("inside greater 99");
+         setProgressWidth(0);
+       } else {
+         setProgressWidth((prevProgress) => prevProgress + 1);
+       }
+     }, 100);
+   }
+
+   return () => {
+     clearTimeout(timeoutId);
+   };
+ }, [progressStatus, progressWidth]);
+
+
 
   const handleAddModule = async (moduleVideoBody: IModuleVideoBody) => {
     try {
@@ -68,7 +95,7 @@ const AddModuleVideos = ({
         const fileType = fileInput.files[0].name.split(".").pop();
 
         const moduleFileName =
-          (moduleNameRef.current?.value as string) + "-" + Date.now();
+          (videoNameRef.current?.value as string) + "-" + Date.now();
         const result = await addModule({
           fileName: `${moduleFileName}.${fileType}`,
           userId: userId,
@@ -83,8 +110,34 @@ const AddModuleVideos = ({
 
         if (bucketResult) {
           moduleVideoBody.videoTittle = `${userId}/${moduleFileName}.${fileType}`;
+
           const serverRespons = await addModuleVideos(moduleVideoBody);
-          console.log("result from video upload ", serverRespons);
+          if (serverRespons.data.data) {
+            const regex = /\/(.*?)-/;
+            const moduleData =
+              serverRespons.data.data.modules[
+                serverRespons.data.data.modules.length - 1
+              ];
+            const moduleVideoData =
+              moduleData.videos[moduleData.videos.length - 1];
+            setCourseData({
+              courseName: serverRespons.data.data.courseName ?? "",
+              discription: serverRespons.data.data.discription ?? "",
+              tags: serverRespons.data.data.tags ?? "",
+              thumbnail: serverRespons.data.data.thumbnail ?? "",
+              duration: serverRespons.data.data.duration ?? "",
+              moduleNo: moduleData.moduleNo ?? "",
+              moduleTittle: moduleData.moduleTittle ?? "",
+              videoTittle: moduleVideoData.videoTittle.match(regex)[1] ?? "",
+              videoNo: moduleVideoData.videoNo ?? "",
+              videoUrl: moduleVideoData.videoUrl ?? "",
+            });
+            setProgressStatus(false);
+            setModuleVideos(serverRespons.data.data.modules);
+            toast.success(serverRespons.data.message);
+          } else {
+            toast.error(serverRespons.data.message);
+          }
         } else {
           console.log("adding to bucket faild ");
         }
@@ -103,21 +156,20 @@ const AddModuleVideos = ({
     handleChange,
     handleBlur,
     handleSubmit,
-    resetForm,
     setValues,
   } = useFormik({
     initialValues: {
       moduleNo: "",
       moduleTittle: "",
-      videoNo: "",
       videoTittle: "",
+      videoNo: "",
+      videoUrl: "",
     },
     validationSchema: addModueleVideosSchema,
     onSubmit: async (values) => {
       try {
+        setProgressStatus(true);
         await handleAddModule(values);
-        resetForm();
-        toast.success("Module has been added");
       } catch (error: any) {
         toast.error(error.message);
       }
@@ -128,12 +180,13 @@ const AddModuleVideos = ({
     setValues({
       moduleNo: courseData.moduleNo,
       moduleTittle: courseData.moduleTittle,
-      videoNo: (parseInt(courseData.videoNo )+ 1).toString(),
-      videoTittle: "",
+      videoTittle: courseData.videoTittle,
+      videoNo: courseData.videoNo,
+      videoUrl: "",
     });
   }, [courseData]);
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form className="p-8" onSubmit={handleSubmit}>
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="moduleNo"
@@ -165,7 +218,6 @@ const AddModuleVideos = ({
           Module Tittle
         </label>
         <input
-          ref={moduleNameRef}
           type="text"
           name="moduleTittle"
           id="moduleTittle"
@@ -178,6 +230,30 @@ const AddModuleVideos = ({
         />
         {errors.moduleTittle && touched.moduleTittle && (
           <p className="text-red-600">{errors.moduleTittle}</p>
+        )}
+      </div>
+
+      <div className="relative z-0 w-full mb-5 group">
+        <label
+          htmlFor="videoTittle"
+          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >
+          Video Tittle
+        </label>
+        <input
+          ref={videoNameRef}
+          type="text"
+          name="videoTittle"
+          id="videoTittle"
+          value={values.videoTittle}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required
+        />
+        {errors.videoTittle && touched.videoTittle && (
+          <p className="text-red-600">{errors.videoTittle}</p>
         )}
       </div>
 
@@ -206,7 +282,7 @@ const AddModuleVideos = ({
 
       <div className="relative z-0 w-full mb-5 group">
         <label
-          htmlFor="videoTittle"
+          htmlFor="videoUrl"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Add File
@@ -214,17 +290,17 @@ const AddModuleVideos = ({
         <input
           ref={moduleVideoRef}
           type="file"
-          name="videoTittle"
-          id="videoTittle"
-          value={values.videoTittle}
+          name="videoUrl"
+          id="videoUrl"
+          value={values.videoUrl}
           onChange={handleChange}
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
-        {errors.videoTittle && touched.videoTittle && (
-          <p className="text-red-600">{errors.videoTittle}</p>
+        {errors.videoUrl && touched.videoUrl && (
+          <p className="text-red-600">{errors.videoUrl}</p>
         )}
       </div>
       <button
@@ -233,6 +309,17 @@ const AddModuleVideos = ({
       >
         Add Modules
       </button>
+
+      {progressStatus && (
+        <div className="w-full h-[15px] bg-slate-50 rounded-full relative -bottom-4">
+          <div
+            style={{ width: `${progressWidth}%` }}
+            className={`h-[15px] bg-green-500 rounded-full absolute`}
+          >
+            {progressWidth}%
+          </div>
+        </div>
+      )}
     </form>
   );
 };
