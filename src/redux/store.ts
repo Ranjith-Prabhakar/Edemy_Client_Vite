@@ -5,6 +5,7 @@ import authSlice from "./features/auth/authSlice";
 import usersSlice from "./features/admin/Users/userSlice";
 import instructorsSlice from "./features/admin/Instructors/instructorsSlice";
 import instructorRequestSlice from "./features/admin/InstructorRequests/instructorRequestSlice";
+import courseSlice from "./features/course/courseSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     users: usersSlice,
     instructors: instructorsSlice,
     instructorRequests: instructorRequestSlice,
+    courses: courseSlice,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
@@ -32,3 +34,5 @@ const initializeApp = async () => {
 };
 
 initializeApp();
+
+export type IState = typeof store;

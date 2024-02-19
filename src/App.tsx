@@ -12,10 +12,10 @@ import ForgotOtpPasswordOtpVerification from "./pages/User_Instructro/forgotPass
 import ResetForgotPassword from "./pages/User_Instructro/ResetForgotPassword";
 import UserDetails from "./pages/Admin/UserDetails";
 import BeInstructor from "./pages/User_Instructro/BeInstructor";
+import CoursePreview from "./components/Admin/Courses/Tables/CoursePreview";
+CoursePreview
 
-type Props = {};
-
-const App = (props: Props) => {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -36,6 +36,7 @@ const App = (props: Props) => {
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/user_details/:id" element={<UserDetails />} />
         <Route path="/be_instructor" element={<BeInstructor />} />
+        <Route path="/course_preview" element={<CoursePreview />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

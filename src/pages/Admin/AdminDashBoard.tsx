@@ -4,6 +4,7 @@ import Sidebar from "../../components/Admin/SideBar";
 import Categories from "../../components/Admin/Categories/Categories";
 import Users from "../../components/Admin/Users/Users";
 import Instructors from "../../components/Admin/Instructors/Instructors";
+import Courses from '../../components/Admin/Courses/Courses'
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IUserState } from "../../redux/features/auth/authSlice";
@@ -32,6 +33,7 @@ const AdminDash = () => {
           {sidebarElement === 2 && <Users />}
           {sidebarElement === 3 && <Instructors />}
           {sidebarElement === 4 && <Categories />}
+          {sidebarElement === 5 && <Courses />}
         </div>
       </div>
     </div>

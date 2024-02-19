@@ -1,41 +1,6 @@
-interface Questions {
-  userId: string;
-  question: string;
-  answers: [
-    {
-      userId: string;
-      answer: string;
-      upvote: number;
-    }
-  ];
-}
+import { ICourse } from "./generalInterface";
 
-interface IModule {
-  moduleNo: number;
-  moduleTittle: string;
-  duration: number;
-  questions: Questions;
-}
 
-interface IReviewRating {
-  userId: string;
-  review: string;
-  rating: number;
-}
-export interface ICourse {
-  courseName: string;
-  instructor: string;
-  discription: string;
-  tags: string[];
-  thumbnail: string;
-  uplaoadedDate: Date;
-  status: "approved" | "pending" | "freez";
-  duration: number;
-  modules: Array<IModule>;
-  review: Array<IReviewRating>;
-  rating: number;
-  submissionStatus: "work-in-progress" | "completed";
-}
 // Response
 export interface ICourseResponse {
   status: number;
@@ -44,7 +9,6 @@ export interface ICourseResponse {
 }
 //request
 export interface ICourseDataBody {
-  [x: string]: any;
   courseName: string;
   discription: string;
   tags: string;
