@@ -1,8 +1,8 @@
-import { IAddModuleBody } from "../ResponseInterfaces/Course/addModule";
-import { ICourseDataBody } from "../ResponseInterfaces/Course/addCourseData";
-import { ICourseResponse } from "../ResponseInterfaces/Course/addCourseData";
+import { IAddModuleBody } from "../../ResponseInterfaces/Course/addModule";
+import { ICourseDataBody } from "../../ResponseInterfaces/Course/addCourseData";
+import { ICourseResponse } from "../../ResponseInterfaces/Course/addCourseData";
 import { apiSlice } from "../api/apiSlice";
-import { IModuleVideoBody } from "../ResponseInterfaces/Course/addModuleVideos";
+import { IModuleVideoBody } from "../../ResponseInterfaces/Course/addModuleVideos";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

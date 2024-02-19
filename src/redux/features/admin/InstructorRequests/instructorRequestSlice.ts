@@ -27,7 +27,7 @@ const instructorRequestSlice = createSlice({
       console.log("inside action action.payload.data", action.payload.data);
       state.instructorRequest = action.payload.data;
     },
-    approveRequest: (state, action) => {
+    approveorRejectRequest: (state, action) => {
       state.instructorRequest = state.instructorRequest.filter(
         (item) => item.userId !== action.payload.data
       );
@@ -36,5 +36,5 @@ const instructorRequestSlice = createSlice({
   },
 });
 
-export const { getRequests, approveRequest } = instructorRequestSlice.actions;
+export const { getRequests, approveorRejectRequest } = instructorRequestSlice.actions;
 export default instructorRequestSlice.reducer;

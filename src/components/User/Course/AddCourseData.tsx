@@ -9,7 +9,7 @@ import {
 } from "../../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import { ICourseDataBody } from "../../../redux/features/ResponseInterfaces/Course/addCourseData";
+import { ICourseDataBody } from "../../../redux/ResponseInterfaces/Course/addCourseData";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -86,15 +86,15 @@ const AddCourseData = ({
           });
 
           console.log("result from handle image", result);
-          if (result.data === "a course already exist in this name"){
-            toast.error(result.data)
-            return
+          if (result.data === "a course already exist in this name") {
+            toast.error(result.data);
+            return;
           }
-            await addToBucket({
-              url: result?.data,
-              body: fileInput.files[0],
-              contentType: fileType as string,
-            });
+          await addToBucket({
+            url: result?.data,
+            body: fileInput.files[0],
+            contentType: fileType as string,
+          });
 
           return { fileType, imgageFileName };
         } else {

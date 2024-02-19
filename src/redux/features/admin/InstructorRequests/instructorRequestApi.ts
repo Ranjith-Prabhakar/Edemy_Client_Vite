@@ -1,5 +1,10 @@
 import { apiSlice } from "../../api/apiSlice";
-import { getRequests, approveRequest } from "./instructorRequestSlice";
+import { getRequests, approveorRejectRequest } from "./instructorRequestSlice";
+import { IInstructorAgreement } from "../../../interfaces/Instructor/generalInterfaces";
+import {
+  IapproveorRejectInstructorRequestsRes,
+  IapproveorRejectInstructorRequestsReq,
+} from "../../../interfaces/Instructor/approveorRejectInstructorRequests";
 
 const instructorsRequestApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,7 +18,28 @@ const instructorsRequestApi = apiSlice.injectEndpoints({
         try {
           const result = await queryFulfilled;
           console.log("getInstructorRequests .....", result.data.data);
-          dispatch(getRequests({data:result.data.data}));
+          dispatch(getRequests({ data: result.data.data}));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    approveorRejectInstructorRequests: builder.mutation<
+      IapproveorRejectInstructorRequestsRes,
+      IapproveorRejectInstructorRequestsReq
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "/admin/instructor_approval_or_reject",
+        body: data,
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          const data: IInstructorAgreement = result.data
+            .data as IInstructorAgreement;
+          await dispatch(approveorRejectRequest({ data: data.userId }));
         } catch (error) {
           console.log(error);
         }
@@ -22,4 +48,7 @@ const instructorsRequestApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetInstructorRequestsQuery } = instructorsRequestApi;
+export const {
+  useGetInstructorRequestsQuery,
+  useApproveorRejectInstructorRequestsMutation,
+} = instructorsRequestApi;

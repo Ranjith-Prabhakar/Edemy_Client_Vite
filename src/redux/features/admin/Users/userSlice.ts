@@ -50,8 +50,12 @@ const userSlice = createSlice({
         state.usersData[index].status = "active";
       }
     },
+    removeUser:(state,action)=>{
+      state.usersData = state.usersData.filter((item)=>item._id !== action.payload.data)
+      
+    }
   },
 });
 
-export const { getUsers, blockUser, unBlockUser } = userSlice.actions;
+export const { getUsers, blockUser, unBlockUser, removeUser } = userSlice.actions;
 export default userSlice.reducer;

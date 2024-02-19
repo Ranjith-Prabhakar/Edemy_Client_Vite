@@ -50,9 +50,13 @@ const instructorsSlice = createSlice({
         state.instructorData[index].status = "active";
       }
     },
+    addInstrctor:(state,action)=>{
+      state.instructorData = [...state.instructorData,action.payload.data]
+    }
+   
   },
 });
 
-export const { getInstructor, blockInstructor, unBlockInstructor } =
+export const { getInstructor, blockInstructor, unBlockInstructor, addInstrctor } =
   instructorsSlice.actions;
 export default instructorsSlice.reducer;
