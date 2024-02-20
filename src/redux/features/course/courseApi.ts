@@ -10,6 +10,7 @@ import { IModuleVideoBody } from "../../interfaces/Course/addModuleVideos";
 
 import { apiSlice } from "../api/apiSlice";
 import { getCoursesState, getCourseseInProgressState } from "./courseSlice";
+import { ICloudStorageResponse } from "../../interfaces/CloudStorage/generalInterface";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -112,6 +113,15 @@ export const courseApi = apiSlice.injectEndpoints({
         }
       },
     }),
+
+    getVideo: builder.mutation<ICloudStorageResponse, { videoName: string }>({
+      query: (data) => ({
+        method: "post",
+        url: "course/get_video",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -124,4 +134,5 @@ export const {
   useAddModuleVideosMutation,
   useGetCoursesQuery,
   useGetCoursesInRequestQuery,
+  useGetVideoMutation
 } = courseApi;

@@ -8,8 +8,7 @@ import {
 } from "../../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { IModuleVideoBody } from "../../../redux/ResponseInterfaces/Course/addModuleVideos";
-
+import { IModuleVideoBody } from "../../../redux/interfaces/Course/addModuleVideos";
 type Props = {
   moduleList: {
     [key: string]: string | number;
