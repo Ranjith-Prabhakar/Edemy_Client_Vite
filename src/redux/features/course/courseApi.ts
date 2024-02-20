@@ -1,16 +1,16 @@
-// import { IAddModuleBody } from "../../ResponseInterfaces/Course/addModule";
-// import { ICourseDataBody } from "../../ResponseInterfaces/Course/addCourseData";
-// import { ICourseResponse } from "../../ResponseInterfaces/Course/addCourseData";
-// import { IModuleVideoBody } from "../../ResponseInterfaces/Course/addModuleVideos";
-
 import { IAddModuleBody } from "../../interfaces/Course/addModule";
 import { ICourseDataBody } from "../../interfaces/Course/addCourseData";
 import { ICourseResponse } from "../../interfaces/Course/addCourseData";
 import { IModuleVideoBody } from "../../interfaces/Course/addModuleVideos";
 
 import { apiSlice } from "../api/apiSlice";
-import { getCoursesState, getCourseseInProgressState } from "./courseSlice";
+import {
+  getCoursesState,
+  getCourseseInProgressState,
+  removeCourseAfterApprovalOrReject,
+} from "./courseSlice";
 import { ICloudStorageResponse } from "../../interfaces/CloudStorage/generalInterface";
+import { ICourse } from "../../interfaces/Course/generalInterface";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -122,6 +122,35 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    approveOrRejectCourse: builder.mutation<
+      ICourseResponse,
+      { courseId: string; action: "approved" | "rejected" }
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "course/approve_or_reject_course",
+        body: data,
+        credentials: "include" as const,
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          const data = result?.data?.data as ICourse
+          dispatch(
+            removeCourseAfterApprovalOrReject({
+              data: data?._id as string,
+            })
+          );
+        } catch (error) {
+          console.log(
+            "error message from courseApi -> getCoursesInRequest endPoint : ",
+            error.message
+          );
+        }
+      },
+    }),
   }),
 });
 
@@ -134,5 +163,6 @@ export const {
   useAddModuleVideosMutation,
   useGetCoursesQuery,
   useGetCoursesInRequestQuery,
-  useGetVideoMutation
+  useGetVideoMutation,
+  useApproveOrRejectCourseMutation,
 } = courseApi;

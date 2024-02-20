@@ -23,8 +23,38 @@ const courseSlice = createSlice({
       state.isLoading = false;
       state.coursesInRequest = action.payload.data;
     },
+    removeCourseAfterApprovalOrReject: (state, action) => {
+      console.log(
+        "inside removeCourseAfterApprovalOrReject ",
+        action.payload.data
+      );
+
+      const courseData = state.coursesInRequest.find(
+        (course) => course._id === action.payload.data
+      );
+      if (courseData) {
+        state.coursesData = [...state.coursesData, courseData];
+        state.coursesInRequest = state.coursesInRequest.filter(
+          (course) => course._id !== action.payload.data
+        );
+      } else {
+        console.error(
+          `Course with _id ${action.payload.data} not found in coursesInRequest.`
+        );
+      }
+      // const courseData = state.coursesInRequest.find((course)=> course._id === action.payload.data)
+      // state.coursesData = [...state.coursesData,courseData];
+      // state.coursesInRequest =
+      //   state.coursesInRequest.filter(
+      //     (course) => course._id !== action.payload.data
+      //   );
+    },
   },
 });
 
-export const {getCoursesState,getCourseseInProgressState} = courseSlice.actions
-export default courseSlice.reducer
+export const {
+  getCoursesState,
+  getCourseseInProgressState,
+  removeCourseAfterApprovalOrReject,
+} = courseSlice.actions;
+export default courseSlice.reducer;
