@@ -2,9 +2,8 @@
 import AboutUs from "./AboutUs";
 import OurBestCourses from "./OurBestCourses";
 import WhyUs from "./WhyUs";
-type Props = {};
 
-const Hero = (props: Props) => {
+const Hero = () => {
  
   return (
     <div className="mt-[150px]">

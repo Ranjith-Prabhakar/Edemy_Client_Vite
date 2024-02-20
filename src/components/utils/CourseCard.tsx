@@ -5,23 +5,23 @@ import { FaStar } from "react-icons/fa";
 import { FaStarHalf } from "react-icons/fa";
 import { MdFormatListBulletedAdd } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
+import { ICourse } from "../../redux/interfaces/Course/generalInterface";
+import { useNavigate } from "react-router-dom";
 
-interface Course {
-  name: string;
-  url: string;
-  thumbnail: string;
-  trainer: string;
-  duration: string;
-}
+// interface Course {
+//   name: string;
+//   url: string;
+//   thumbnail: string;
+//   trainer: string;
+//   duration: string;
+// }
 
 type Props = {
-  courseCategory: Array<{
-    name: string;
-    courses: Array<Course>;
-  }>;
+  courseCategory: ICourse[];
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-between gap-3  w-full">
       {courseCategory.map((item, index) => (
@@ -29,10 +29,17 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
           key={index}
           className="flex flex-col w-[300px] rounded-2xl overflow-hidden bg-gray-950  pb-4 space-y-2"
         >
-          <img src={web_development} alt="" className="w-full h-[200px]" />
-          <h4 className="text-[#fffff] mt-2 text-xl ps-4">
-            {item.courses[0].name}
-          </h4>
+          <img
+            src={web_development}
+            alt=""
+            className="w-full h-[200px]"
+            onClick={() => {
+              navigate("/course_single_page", {
+                state: { courseData: item },
+              });
+            }}
+          />
+          <h4 className="text-[#fffff] mt-2 text-xl ps-4">{item.courseName}</h4>
           <div className="space-y-2">
             <div className="flex justify-between px-4">
               <div className="flex ">
@@ -44,7 +51,7 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
               </div>
               <div className="flex items-center ">
                 <FaRupeeSign />
-                <h3>  5000/-</h3>
+                <h3> 5000/-</h3>
               </div>
             </div>
             <div className="flex px-4 justify-between">

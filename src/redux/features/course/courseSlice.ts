@@ -42,12 +42,7 @@ const courseSlice = createSlice({
           `Course with _id ${action.payload.data} not found in coursesInRequest.`
         );
       }
-      // const courseData = state.coursesInRequest.find((course)=> course._id === action.payload.data)
-      // state.coursesData = [...state.coursesData,courseData];
-      // state.coursesInRequest =
-      //   state.coursesInRequest.filter(
-      //     (course) => course._id !== action.payload.data
-      //   );
+     
     },
   },
 });

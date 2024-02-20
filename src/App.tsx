@@ -13,9 +13,10 @@ import ResetForgotPassword from "./pages/User_Instructro/ResetForgotPassword";
 import UserDetails from "./pages/Admin/UserDetails";
 import BeInstructor from "./pages/User_Instructro/BeInstructor";
 import CoursePreview from "./components/Admin/Courses/Tables/CoursePreview";
-CoursePreview
+import CourseSinglePage from "./pages/User_Instructro/CourseSinglePage";
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/user_details/:id" element={<UserDetails />} />
         <Route path="/be_instructor" element={<BeInstructor />} />
         <Route path="/course_preview" element={<CoursePreview />} />
+        <Route path="/course_single_page" element={<CourseSinglePage />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

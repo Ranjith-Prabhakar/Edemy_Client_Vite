@@ -5,9 +5,8 @@ import Hero from "../../components/Hero/Hero";
 import Slider from "../../components/Slider/Slider";
 import Testimonial from "../../components/Testimonial/Testimonial";
 
-type Props = {};
 
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <div className="dark:bg-black dark:text-white">
       <Header />

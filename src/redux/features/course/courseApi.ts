@@ -137,7 +137,7 @@ export const courseApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          const data = result?.data?.data as ICourse
+          const data = result?.data?.data as ICourse;
           dispatch(
             removeCourseAfterApprovalOrReject({
               data: data?._id as string,
@@ -151,6 +151,31 @@ export const courseApi = apiSlice.injectEndpoints({
         }
       },
     }),
+
+    getCoursesForUser: builder.query<ICourseResponse, void>({
+      query: () => ({
+        method: "get",
+        url: "course/get_courses_for_user",
+        credentials: "include" as const,
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log(
+            "result from getCoursesForUser  > getCoursesForUser",
+            result
+          );
+          // dispatch(getCoursesState({ data: result.data.data }));
+        } catch (error) {
+          console.log(
+            "error message from courseApi -> getCourse endPoint : ",
+            error.message
+          );
+        }
+      },
+    }),
+
   }),
 });
 
@@ -165,4 +190,5 @@ export const {
   useGetCoursesInRequestQuery,
   useGetVideoMutation,
   useApproveOrRejectCourseMutation,
+  useGetCoursesForUserQuery
 } = courseApi;

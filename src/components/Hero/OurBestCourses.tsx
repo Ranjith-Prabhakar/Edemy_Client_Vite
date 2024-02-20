@@ -1,9 +1,24 @@
 "use client";
 import CourseCard from "../utils/CourseCard";
-import { courseCategory } from "../static data/courseCategory";
-type Props = {};
+// import { courseCategory } from "../static data/courseCategory";
+import { useGetCoursesForUserQuery } from "../../redux/features/course/courseApi";
+import { ICourse } from "../../redux/interfaces/Course/generalInterface";
+import { useEffect, useState } from "react";
 
-const OurBestCourses = (props: Props) => {
+
+const OurBestCourses = () => {
+  const {data,isSuccess} = useGetCoursesForUserQuery()
+  const [courseCategory,setCourseCategory]  = useState<ICourse[]>([])
+
+  useEffect(()=>{
+    if(isSuccess){
+      
+      const coursesData = data.data as ICourse[]
+      console.log("data", data);
+      console.log("coursesData", coursesData);
+      setCourseCategory(coursesData);
+    }
+  },[isSuccess])
   return (
     <div className="mt-10  max-w-[90%] w-full m-auto rounded-lg flex justify-start  p-[25px]">
       <div className="flex flex-col items-center w-full">

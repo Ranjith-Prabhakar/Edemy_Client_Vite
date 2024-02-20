@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useGetVideoMutation } from "../../../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { useApproveOrRejectCourseMutation } from "../../../../redux/features/course/courseApi";
-import { ICourseResponse } from "../../../../redux/interfaces/Course/addCourseData";
 
 const CoursePreview = () => {
   const navigate = useNavigate();
