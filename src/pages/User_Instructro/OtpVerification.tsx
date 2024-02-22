@@ -4,7 +4,6 @@ import { BsShieldLockFill } from "react-icons/bs";
 import { useCreateUserMutation } from "../../redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
 
 const OtpVerification = (): JSX.Element => {
   const [createUser, { isLoading, isSuccess, isError, data }] =

@@ -12,7 +12,6 @@ const OurBestCourses = () => {
 
   useEffect(()=>{
     if(isSuccess){
-      
       const coursesData = data.data as ICourse[]
       console.log("data", data);
       console.log("coursesData", coursesData);

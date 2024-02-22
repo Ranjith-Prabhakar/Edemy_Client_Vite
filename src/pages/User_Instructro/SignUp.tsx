@@ -7,29 +7,23 @@ import { useRegisterMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../../components/utils/ThemeToggler";
-import { useSelector } from "react-redux";
-import { IUserState } from "../../redux/features/auth/authSlice";
-type Props = {};
+import { RegistrationRes } from "../../redux/interfaces/authApi";
 
-const SignUp = (props: Props) => {
-  const userData = useSelector((state: IUserState) => state.user.userData);
+const SignUp = () => {
 
   const [register, { isSuccess, isError, error }] = useRegisterMutation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userData.name) {
-      navigate("/");
-    }
-  }, [userData]);
-
-  useEffect(() => {
     if (isSuccess) {
       toast.success("otp has been sent to your mail");
       navigate("/otp_verification", { state: { fromSignup: true } });
-    } else if (isError) {
-      if (error?.data) {
-        toast.error(error?.data?.message);
+    } else if (isError && error) {
+      if ("data" in error) {
+        if (error.data) {
+          const dataType = error.data as RegistrationRes;
+          toast.error(dataType.message);
+        }
       }
     }
   }, [isSuccess, isError, error]);
@@ -139,7 +133,6 @@ const SignUp = (props: Props) => {
                   onBlur={handleBlur}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
-                  required
                 />
                 {errors.password && touched.password && (
                   <p className="text-red-600">{errors.password}</p>
@@ -161,7 +154,6 @@ const SignUp = (props: Props) => {
                   onBlur={handleBlur}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] select-none"
-                  required
                 />
                 {errors.confirmPassword && touched.confirmPassword && (
                   <p className="text-red-600">{errors.confirmPassword}</p>

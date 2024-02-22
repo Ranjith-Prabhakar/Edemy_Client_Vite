@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IUser } from "../../redux/features/admin/Users/userSlice";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -10,7 +10,7 @@ const UserDetails = () => {
   const [user, setUser] = useState({} as IUser);
 
   useEffect(() => {
-    let currentUser = usersData.find((user: any) => user._id === id);
+    const currentUser = usersData.find((user: any) => user._id === id);
     setUser(currentUser);
   }, [usersData]);
   console.log("usersData", user);

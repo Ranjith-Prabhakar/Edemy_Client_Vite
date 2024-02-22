@@ -7,9 +7,8 @@ import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
 
-const UserProfile = (props: Props) => {
+const UserProfile = () => {
   const userData = useSelector((state: IUserState) => state.user.userData);
   const [sideMenuItem, setSideMenuItem] = useState(1);
   const navigate = useNavigate();

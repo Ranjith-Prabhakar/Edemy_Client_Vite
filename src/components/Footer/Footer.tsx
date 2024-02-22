@@ -4,9 +4,8 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
-type Props = {};
 
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <div className="flex max-w-[90%] w-full mx-auto justify-between mt-[110px] mx-2 border-t-[1px] border-[#FFD700] py-6">
       <div className="flex flex-col ms-2">

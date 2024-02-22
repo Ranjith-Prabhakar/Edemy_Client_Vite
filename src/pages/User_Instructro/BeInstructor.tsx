@@ -66,7 +66,6 @@ const BeInstructor = () => {
                   name=""
                   id=""
                   className="text-black rounded-sm w-[100%] h-[260px]"
-                  // style={{ width: "100%", height: "300px" }}
                 >
                   you are responsible to provide quality education, adhere to
                   the platform's guidelines, maintain professionalism, engage

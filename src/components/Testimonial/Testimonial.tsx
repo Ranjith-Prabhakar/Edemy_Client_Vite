@@ -1,9 +1,7 @@
-"use client"
 import { useEffect, useState } from "react";
 import StudentVoice from "../../../public/Assets/StudentVoice.png";
-type Props = {};
 
-const Testimonial = (props: Props) => {
+const Testimonial = () => {
   const testimonials = [
     {
       paragraph:
@@ -29,7 +27,7 @@ const Testimonial = (props: Props) => {
 
   const [testimonialData, setTestimonialData] = useState(0);
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (testimonialData === testimonials.length - 1) {
         setTestimonialData(0);
       } else {

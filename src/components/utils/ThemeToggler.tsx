@@ -3,28 +3,9 @@ import { useState, useEffect, ReactNode } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
 
-type Props = {};
-
-const ThemeToggler = (props: Props): ReactNode => {
+const ThemeToggler = (): ReactNode => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  // useEffect(() => {
-  //   const mode = localStorage.getItem("theme");
-  //   if (mode === "dark") {
-  //     setTheme("dark");
-  //   }
-  // }, []);
-
-  // checking browser schema and acting with that
-  // useEffect(() => {
-  //   if(window.matchMedia('(prefers-color-scheme:dark)').matches){
-  //     setTheme("dark")
-  //   }else{
-  //     setTheme("light")
-  //   }
-  // }, []);
-
-  useEffect(() => {
+   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -36,7 +17,6 @@ const ThemeToggler = (props: Props): ReactNode => {
 
   return (
     <div
-      // className="relative w-16 h-8 flex items-center dark:bg-black bg-white rounded-full cursor-pointer p-1"
       onClick={() => {
         if (theme === "light") {
           setTheme("dark");
@@ -50,11 +30,6 @@ const ThemeToggler = (props: Props): ReactNode => {
       ) : (
         <BsSunFill className="text-black" size={20} />
       )}
-
-      {/* <div
-        className="absolute bg-white dark:bg-slate-50 w-6 h-6 rounded-full shadow-md transform transition-transform duration-300"
-        style={darkMode ? { left: "2px" } : { right: "2px" }}
-      ></div> */}
     </div>
   );
 };

@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const PageNotFound = (props: Props) => {
+const PageNotFound = () => {
   return (
     <div>
       <div className="bg-black text-white">

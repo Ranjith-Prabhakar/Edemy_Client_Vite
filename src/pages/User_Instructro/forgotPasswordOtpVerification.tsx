@@ -4,12 +4,11 @@ import { BsShieldLockFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useForgotPasswordOtpVerificationMutation } from "../../redux/features/auth/authApi";
 
-type Props = {};
 
 const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
   const [
     forgotPasswordOtpVerification,
-    { isSuccess, data, isError, error, isLoading },
+    { isSuccess, data, isError, isLoading },
   ] = useForgotPasswordOtpVerificationMutation();
 
   const navigate = useNavigate();

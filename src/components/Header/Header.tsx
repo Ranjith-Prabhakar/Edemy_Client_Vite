@@ -9,9 +9,8 @@ import ThemeToggler from "../utils/ThemeToggler";
 import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
-type Props = {};
 
-const Header = (props: Props) => {
+const Header = () => {
   const userData = useSelector((state: IUserState) => state.user.userData);
   const [name, setName] = useState("");
 

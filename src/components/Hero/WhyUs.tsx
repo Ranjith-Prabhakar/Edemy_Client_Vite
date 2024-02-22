@@ -1,9 +1,8 @@
 import { PiNotePencilBold } from "react-icons/pi";
 import { BiSupport } from "react-icons/bi";
 import { LiaCertificateSolid } from "react-icons/lia";
-type Props = {};
 
-const WhyUs = (props: Props) => {
+const WhyUs = () => {
   return (
     <div className="mt-12  max-w-[90%] w-full m-auto rounded-lg p-[25px] flex flex-col">
       <h1 className="text-5xl font-semibold text-center">

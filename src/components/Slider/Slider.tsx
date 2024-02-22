@@ -1,13 +1,11 @@
-"use client";
-import React, { useState } from "react";
+import  { useState } from "react";
 import slider1 from "../../../public/Assets/slider1.jpg";
 import slider2 from "../../../public/Assets/slider2.jpg";
 import slider3 from "../../../public/Assets/slider3.jpg";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { IoChevronForwardCircleOutline } from "react-icons/io5";
-type Props = {};
 
-const Slider = (props: Props) => {
+const Slider = () => {
   const images = [slider1, slider2, slider3];
   const [count, setCount] = useState(0);
   return (

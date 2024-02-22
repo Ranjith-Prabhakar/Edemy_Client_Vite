@@ -1,7 +1,6 @@
 import Aboutus from "../../../public/Assets/AboutUs.jpg";
-type Props = {};
 
-const AboutUs = (props: Props) => {
+const AboutUs = () => {
   return (
     <div className="mt-7  max-w-[90%] w-full m-auto rounded-lg flex justify-between gap-5  p-[25px]">
       <div className="w-[40%] rounded-xl overflow-hidden">

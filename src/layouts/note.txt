@@ -1,0 +1,4 @@
+add all the layout those are used in varios pages 
+header 
+footer
+sidebar
