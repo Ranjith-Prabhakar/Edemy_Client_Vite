@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; // react specific rtk query
 import { userLoggedIn } from "../auth/authSlice";
+import { catchError } from "../../../utils/catchError";
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -21,7 +22,7 @@ export const apiSlice = createApi({
         method: "GET",
         credentials: "include",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted({ queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(
@@ -29,12 +30,12 @@ export const apiSlice = createApi({
               userData: result.data,
             })
           );
-        } catch (error: any) {
-          console.log(error);
+        } catch (error:unknown) {
+          catchError(error)
         }
       },
     }),
   }),
 });
 
-export const {} = apiSlice;
+// export const {} = apiSlice;

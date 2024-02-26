@@ -9,6 +9,7 @@ import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../../components/utils/ThemeToggler";
+import { ILoginRes } from "../../redux/interfaces/authApi";
 // import { useSelector } from "react-redux";
 // import { IUserState } from "../../redux/features/auth/authSlice";
 
@@ -29,9 +30,18 @@ const Login = () => {
       navigate("/");
     } else if (isLoading) {
       toast.loading;
-    } else if (isError) {
-      if (error?.data) {
-        toast.error(error?.data?.message);
+    } 
+    // else if (isError) {
+    //   if (error?.data) {
+    //     toast.error(error?.data?.message);
+    //   }
+    // }
+     else if (isError && error) {
+      if ("data" in error) {
+        if (error.data) {
+          const dataType = error.data as ILoginRes;
+          toast.error(dataType.message);
+        }
       }
     }
   }, [isSuccess, isLoading, isError]);

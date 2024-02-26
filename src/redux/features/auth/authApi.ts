@@ -1,4 +1,4 @@
-import { RegistrationReq, RegistrationRes,  } from "../../interfaces/authApi";
+import { ILoginReq, ILoginRes, RegistrationReq, RegistrationRes,  } from "../../interfaces/authApi";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut } from "./authSlice";
 
@@ -30,7 +30,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
     // login -----------------------------------------------------------------------------
-    login: builder.mutation({
+    login: builder.mutation<ILoginRes, ILoginReq>({
       query: (data) => ({
         url: "login",
         method: "post",
@@ -38,7 +38,7 @@ export const authApi = apiSlice.injectEndpoints({
         credentials: "include",
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted({ queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(
@@ -46,7 +46,7 @@ export const authApi = apiSlice.injectEndpoints({
               userData: result.data,
             })
           );
-        } catch (error: any) {
+        } catch (error) {
           console.log(error);
         }
       },
@@ -85,16 +85,15 @@ export const authApi = apiSlice.injectEndpoints({
         method: "post",
         credentials: "include",
       }),
-      async onQueryStarted(arg,{queryFulfilled,dispatch}){
+      async onQueryStarted({ queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
-          dispatch(userLoggedOut())
+          dispatch(userLoggedOut());
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
-      }
+      },
     }),
-  
   }),
 });
 

@@ -2,23 +2,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import { signupSchema } from "../../schema/authSchema";
+import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
 
 import { useRegisterMutation } from "../../redux/features/auth/authApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../../components/utils/ThemeToggler";
 import { RegistrationRes } from "../../redux/interfaces/authApi";
+import { catchError } from "../../utils/catchError";
 
 const SignUp = () => {
-
-  const [register, { isSuccess, isError, error }] = useRegisterMutation();
+  const [register, { isSuccess, isError, error, isLoading }] =
+    useRegisterMutation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isLoading) {
+      setLoading(true);
+    } else if (isSuccess) {
+      setLoading(false);
       toast.success("otp has been sent to your mail");
       navigate("/otp_verification", { state: { fromSignup: true } });
     } else if (isError && error) {
+      setLoading(false);
       if ("data" in error) {
         if (error.data) {
           const dataType = error.data as RegistrationRes;
@@ -26,7 +33,7 @@ const SignUp = () => {
         }
       }
     }
-  }, [isSuccess, isError, error]);
+  }, [isSuccess, isError, error, isLoading]);
 
   const {
     values,
@@ -45,13 +52,17 @@ const SignUp = () => {
     },
     validationSchema: signupSchema,
     onSubmit: async (values, actions) => {
-      await register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        confirmPassword: values.confirmPassword,
-      });
-      actions.resetForm(); // after submission to clear the fields
+      try {
+        await register({
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+        });
+        actions.resetForm(); // after submission to clear the fields
+      } catch (error:unknown) {
+        catchError(error)
+      }
     },
   });
 
@@ -159,13 +170,17 @@ const SignUp = () => {
                   <p className="text-red-600">{errors.confirmPassword}</p>
                 )}
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
-                disabled={isSubmitting} //
-              >
-                Sign in
-              </button>
+              {loading ? (
+                <SpinnerButton status="Validating Data" />
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
+                  disabled={isSubmitting} //
+                >
+                  Sign in
+                </button>
+              )}
 
               <p className="text-sm font-light text-gray-500 dark:text-[#FFD700]">
                 Don’t have an account yet?{" "}
