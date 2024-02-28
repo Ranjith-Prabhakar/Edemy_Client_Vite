@@ -18,7 +18,7 @@ const Header = () => {
     }
   }, [userData]);
   return (
-    <div className="sticky top-0 px-10 z-50">
+    <div className="sticky top-0  z-50">
       <div className="flex justify-between items-end">
         <div className="flex items-end  gap-4">
           <Link to={"/"}>
@@ -64,7 +64,7 @@ const Header = () => {
               </div>
             </Link>
           ) : (
-            <Link to={"/login"}>
+            <Link to={"/auth/login"}>
               <CgProfile size={35} />
             </Link>
           )}

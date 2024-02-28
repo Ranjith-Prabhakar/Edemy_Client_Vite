@@ -86,7 +86,7 @@ const SignUp = () => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-1 md:space-y-2">
+            <form onSubmit={handleSubmit} className="space-y-2 md:space-y-2">
               <div>
                 <AuthInputs
                   type="text"
@@ -157,7 +157,7 @@ const SignUp = () => {
               <p className="text-sm font-light">
                 Don’t have an account yet?{" "}
                 <Link
-                  to="/Login"
+                  to="/auth/Login"
                   className="font-bold text-[16px] hover:underline"
                 >
                   Log in

@@ -94,7 +94,7 @@ const ForgotPassword = () => {
               onClick={(e) => {
                 e.preventDefault();
                 console.log("cliced cancel");
-                navigate("/login");
+                navigate("/auth/login");
               }}
             >
               Cancel

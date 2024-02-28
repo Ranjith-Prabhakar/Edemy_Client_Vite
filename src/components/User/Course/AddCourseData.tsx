@@ -339,7 +339,7 @@ const AddCourseData = ({
         </label>
       </div>
       {visible && (
-        <button className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center">
+        <button className="dark:bg-white dark:hover:bg-c_color-colorTwo px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center">
           <FaArrowRightLong />
         </button>
       )}

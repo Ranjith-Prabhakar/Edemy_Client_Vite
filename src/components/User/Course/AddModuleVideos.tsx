@@ -302,7 +302,7 @@ const AddModuleVideos = ({
       </div>
       <button
         type="submit"
-        className="bg-slate-500 px-3 py-1 w-30 rounded-sm text-black"
+        className="dark:bg-white dark:hover:bg-c_color-colorTwo px-3 py-1 w-30 rounded-sm text-black"
       >
         Add Modules
       </button>

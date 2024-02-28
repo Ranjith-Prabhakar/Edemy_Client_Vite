@@ -54,7 +54,7 @@ const Login = () => {
   return (
     <section>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
+        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorOne ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold leading-tight tracking-tight">
@@ -113,7 +113,7 @@ const Login = () => {
                   </div>
                 </div>
                 <Link
-                  to={"/forgot_password"}
+                  to={"/auth/forgot_password"}
                   className="text-sm font-medium  hover:underline  cursor-pointer"
                 >
                   Forgot password?
@@ -135,7 +135,7 @@ const Login = () => {
               <p className="text-sm font-light">
                 Don’t have an account yet?{"    "}
                 <Link
-                  to="/sign-up"
+                  to="/auth/sign-up"
                   className="font-bold text-[16px] hover:underline"
                 >
                   Sign up

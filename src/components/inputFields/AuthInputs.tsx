@@ -14,7 +14,7 @@ const AuthInputs = ({ label, ...props }: InputProps) => {
       <input
         id={props.name}
         placeholder={props.placeholder || "••••••••"}
-        className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400   "
+        className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-c_color-colorTwo focus:border-c_color-colorTwo block w-full p-2.5 dark:bg-c_color-colorThree dark:placeholder-gray-400"
         {...props}
       />
     </>

@@ -10,3 +10,30 @@
   box-sizing: border-box;
   
 }
+
+/* Hide scroll bars by default */
+::-webkit-scrollbar {
+  width: 10px;
+  display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: red; /* Set the track color */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: green; /* Set the thumb color */
+  border-radius: 10px;
+}
+
+/* When hovering over the specific div, make the scroll bars visible */
+/* .custom-scrollBar:hover::-webkit-scrollbar-thumb { */
+  /* background-color: red; Set the thumb color on hover */
+/* } */
+
+/* .custom-scrollBar:hover::-webkit-scrollbar { */
+  /* width: 10px; Set the width on hover */
+  /* display: block; */
+/* } */

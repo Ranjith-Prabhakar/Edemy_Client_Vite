@@ -4,21 +4,19 @@ import { MdAccountBalance } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { IoIosChatbubbles } from "react-icons/io";
 import { MdOutlineEventNote } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { IUserState } from "../../redux/features/auth/authSlice";
-import { CgProfile } from "react-icons/cg";
+// import { CgProfile } from "react-icons/cg";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import useGetUser from "../../hooks/useGetUser";
 
 type props = {
   setSideMenuItem: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SideBar = ({ setSideMenuItem }: props) => {
-  const userData = useSelector((state: IUserState) => state.user.userData);
+  // const userData = useGetUser();
   const [logout, { data, isError, isSuccess }] = useLogoutMutation({});
 
   useEffect(() => {
@@ -46,17 +44,17 @@ const SideBar = ({ setSideMenuItem }: props) => {
     { name: "Event", icon: MdOutlineEventNote },
   ];
   return (
-    <div className="flex flex-col   max-w-[15%] w-full m-auto rounded-lg text-xl p-[25px] dark:bg-gray-950 text-gray-500 dark:text-gray-400 space-y-3">
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-col gap-2 items-center justify-center mb-8">
+    <div className="custom-scrollBar flex flex-col h-full overflow-scroll  max-w-[15%] w-full m-auto rounded-lg text-xl dark:bg-c_color-colorOne shadow-md ring-gray-400 space-y-3">
+      <div className="flex flex-col  w-full">
+        {/* <div className="flex flex-col gap-2 items-center justify-center mt-8 w-full">
           <CgProfile size={60} />
           <h1>{userData.name}</h1>
-        </div>
+        </div> */}
 
         {dashBordItems &&
           dashBordItems.map((item, index) => (
             <div
-              className="flex justify-start items-center gap-2 cursor-pointer "
+              className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorTwo hover:text-black transition-all ease duration-700"
               key={item.name}
               onClick={() => {
                 setSideMenuItem(index + 1);
@@ -67,7 +65,7 @@ const SideBar = ({ setSideMenuItem }: props) => {
             </div>
           ))}
         <div
-          className="flex justify-start items-center gap-2 cursor-pointer "
+          className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorTwo hover:text-black transition-all ease duration-700"
           onClick={() => {
             handleLogout();
           }}

@@ -56,32 +56,40 @@ const Courses = () => {
   }, [courseData]);
 
   return (
-    <div className="flex ">
+    <div className="flex custom-scrollBar">
       <div className="flex-1">
-        {stepper === 1 && (
-          <AddCourseData
-            setStepper={setStepper}
-            courseData={courseData}
-            setCourseData={setCourseData}
-            visible={visible}
-            setVisible={setVisible}
-          />
-        )}
-        {stepper === 2 && (
-          <AddModuleVideos
-            moduleList={moduleList}
-            setModuleList={setModuleList}
-            courseData={courseData}
-            setCourseData={setCourseData}
-            setModuleVideos={setModuleVideos}
-          />
-        )}
-      </div>
-      <div className="flex-1">
-        <div className="flex-col">
-          <Tabs setStepper={setStepper} setCourseData={setCourseData}  setModuleVideos={setModuleVideos}/>
-          <AddedModuleVideos moduleVideos={moduleVideos} />
+        <div className="flex flex-col">
+          <div className="sticky top-0 z-10">
+            <Tabs
+              setStepper={setStepper}
+              stepper={stepper}
+              setCourseData={setCourseData}
+              setModuleVideos={setModuleVideos}
+            />
+          </div>
+          {stepper === 1 && (
+            <AddCourseData
+              setStepper={setStepper}
+              courseData={courseData}
+              setCourseData={setCourseData}
+              visible={visible}
+              setVisible={setVisible}
+            />
+          )}
+          {stepper === 2 && (
+            <AddModuleVideos
+              moduleList={moduleList}
+              setModuleList={setModuleList}
+              courseData={courseData}
+              setCourseData={setCourseData}
+              setModuleVideos={setModuleVideos}
+            />
+          )}
         </div>
+      </div>
+
+      <div className="flex-1">
+        <AddedModuleVideos moduleVideos={moduleVideos} />
       </div>
     </div>
   );

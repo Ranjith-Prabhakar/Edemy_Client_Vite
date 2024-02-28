@@ -6,7 +6,7 @@ type ButtonProp = ComponentPropsWithRef<"button">&{
 const GeneralButton = ({children, ...props }: ButtonProp) => {
   return (
     <button
-      className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "
+      className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-c_color-colorFour dark:hover:bg-c_color-colorFive "
       {...props}
     >
       {children}
