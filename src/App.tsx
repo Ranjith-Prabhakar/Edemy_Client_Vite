@@ -17,6 +17,7 @@ import CourseSinglePage from "./pages/User_Instructro/CourseSinglePage";
 import { IUserState } from "./redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
 
+
 const App = () => {
   const userName = useSelector((state: IUserState) => state.user.userData.name);
 

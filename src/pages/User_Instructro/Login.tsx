@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { IoLogoGithub } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schema/authSchema";
@@ -10,33 +9,19 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../../components/utils/ThemeToggler";
 import { ILoginRes } from "../../redux/interfaces/authApi";
-// import { useSelector } from "react-redux";
-// import { IUserState } from "../../redux/features/auth/authSlice";
-
+import AuthInputs from "../../components/inputFields/AuthInputs";
+import GeneralButton from "../../components/Buttons/GeneralButton";
 
 const Login = () => {
-  // const userData = useSelector((state: IUserState) => state.user.userData);
   const navigate = useNavigate();
   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
-  // useEffect(() => {
-  //   if (userData.name) {
-  //     navigate("/");
-  //   }
-  // }, [userData]);
-
   useEffect(() => {
     if (isSuccess) {
       toast.success("user logged in successfully");
       navigate("/");
     } else if (isLoading) {
       toast.loading;
-    } 
-    // else if (isError) {
-    //   if (error?.data) {
-    //     toast.error(error?.data?.message);
-    //   }
-    // }
-     else if (isError && error) {
+    } else if (isError && error) {
       if ("data" in error) {
         if (error.data) {
           const dataType = error.data as ILoginRes;
@@ -67,18 +52,18 @@ const Login = () => {
   });
 
   return (
-    <section className="dark:bg-black dark:text-white">
+    <section>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-950 ">
+        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between items-center">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-[#FFd700]">
+              <h1 className="text-xl font-bold leading-tight tracking-tight">
                 Sign in to your account
               </h1>
               <div className="flex justify-center items-center gap-3">
                 {" "}
                 <Link to={"/"}>
-                  <IoHome color={"#FFd700"} className="dark:text-[#FFD700]" />
+                  <IoHome />
                 </Link>
                 <ThemeToggler />
               </div>
@@ -86,43 +71,27 @@ const Login = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-[#FFd700]"
-                >
-                  Your email
-                </label>
-                <input
+                <AuthInputs
                   type="email"
                   name="email"
-                  id="email"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur} // to check whether click on the field
-                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
                   placeholder="name@company.com"
+                  label="Your email"
                 />
                 {errors.email && touched.email && (
                   <p className="text-red-600">{errors.email}</p>
                 )}
               </div>
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-[#FFd700]"
-                >
-                  Password
-                </label>
-                <input
+                <AuthInputs
                   type="password"
                   name="password"
-                  id="password"
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
-                  required
+                  label="Password"
                 />
                 {errors.password && touched.password && (
                   <p className="text-red-600">{errors.password}</p>
@@ -135,60 +104,39 @@ const Login = () => {
                       id="remember"
                       aria-describedby="remember"
                       type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-[#e4d9a6] dark:border-gray-600 dark:focus:ring-[#FFD700] dark:ring-offset-[#FFD700]"
-                      required
+                      className="w-4 h-4 dark:bg-[#b7e2e6] rounded focus:outline-none"
                     />
                   </div>
                   <br />
                   <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="remember"
-                      className="text-gray-500 dark:text-[#FFd700]"
-                    >
-                      Remember me
-                    </label>
+                    <label htmlFor="remember">Remember me</label>
                   </div>
                 </div>
                 <Link
                   to={"/forgot_password"}
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer"
+                  className="text-sm font-medium  hover:underline  cursor-pointer"
                 >
                   Forgot password?
                 </Link>
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
-                disabled={isSubmitting} //
-              >
+              <GeneralButton type="submit" disabled={isSubmitting}>
                 Sign in
-              </button>
-
+              </GeneralButton>
               <div className="flex gap-3">
-                <button className="w-full text-gray-800  hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] border border-1 border-gray-600">
+                <GeneralButton>
                   <p className="inline">
                     Login with
                     <span>
                       <FcGoogle className="inline ms-2" size={25} />
                     </span>
                   </p>
-                </button>
-
-                <button className="w-full text-gray-800  hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] border border-1 border-gray-600">
-                  <p className="inline">
-                    Login with
-                    <span>
-                      <IoLogoGithub className="inline ms-2" size={25} />
-                    </span>
-                  </p>
-                </button>
+                </GeneralButton>
               </div>
-
-              <p className="text-sm font-light text-gray-500 dark:text-[#FFD700]">
-                Don’t have an account yet?{" "}
+              <p className="text-sm font-light">
+                Don’t have an account yet?{"    "}
                 <Link
                   to="/sign-up"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="font-bold text-[16px] hover:underline"
                 >
                   Sign up
                 </Link>
@@ -203,3 +151,190 @@ const Login = () => {
 
 export default Login;
 
+// =====================================================
+// import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { FcGoogle } from "react-icons/fc";
+// import { IoHome } from "react-icons/io5";
+// import { useFormik } from "formik";
+// import { loginSchema } from "../../schema/authSchema";
+// import { useLoginMutation } from "../../redux/features/auth/authApi";
+// import { useEffect } from "react";
+// import toast from "react-hot-toast";
+// import ThemeToggler from "../../components/utils/ThemeToggler";
+// import { ILoginRes } from "../../redux/interfaces/authApi";
+// // import { useSelector } from "react-redux";
+// // import { IUserState } from "../../redux/features/auth/authSlice";
+
+// const Login = () => {
+//   // const userData = useSelector((state: IUserState) => state.user.userData);
+//   const navigate = useNavigate();
+//   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
+//   // useEffect(() => {
+//   //   if (userData.name) {
+//   //     navigate("/");
+//   //   }
+//   // }, [userData]);
+
+//   useEffect(() => {
+//     if (isSuccess) {
+//       toast.success("user logged in successfully");
+//       navigate("/");
+//     } else if (isLoading) {
+//       toast.loading;
+//     }
+//     // else if (isError) {
+//     //   if (error?.data) {
+//     //     toast.error(error?.data?.message);
+//     //   }
+//     // }
+//     else if (isError && error) {
+//       if ("data" in error) {
+//         if (error.data) {
+//           const dataType = error.data as ILoginRes;
+//           toast.error(dataType.message);
+//         }
+//       }
+//     }
+//   }, [isSuccess, isLoading, isError]);
+
+//   const {
+//     values,
+//     errors,
+//     touched,
+//     isSubmitting,
+//     handleChange,
+//     handleBlur,
+//     handleSubmit,
+//   } = useFormik({
+//     initialValues: {
+//       email: "",
+//       password: "",
+//     },
+//     validationSchema: loginSchema,
+//     onSubmit: async (values, actions) => {
+//       await login({ email: values.email, password: values.password });
+//       actions.resetForm();
+//     },
+//   });
+
+//   return (
+//     <section>
+//       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+//         <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
+//           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+//             <div className="flex justify-between items-center">
+//               <h1 className="text-xl font-bold leading-tight tracking-tight">
+//                 Sign in to your account
+//               </h1>
+//               <div className="flex justify-center items-center gap-3">
+//                 {" "}
+//                 <Link to={"/"}>
+//                   <IoHome />
+//                 </Link>
+//                 <ThemeToggler />
+//               </div>
+//             </div>
+
+//             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+//               <div>
+//                 <label
+//                   htmlFor="email"
+//                   className="block mb-2 text-sm font-medium"
+//                 >
+//                   Your email
+//                 </label>
+//                 <input
+//                   type="email"
+//                   name="email"
+//                   id="email"
+//                   value={values.email}
+//                   onChange={handleChange}
+//                   onBlur={handleBlur} // to check whether click on the field
+//                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400   "
+//                   placeholder="name@company.com"
+//                 />
+//                 {errors.email && touched.email && (
+//                   <p className="text-red-600">{errors.email}</p>
+//                 )}
+//               </div>
+//               <div>
+//                 <label
+//                   htmlFor="password"
+//                   className="block mb-2 text-sm font-medium "
+//                 >
+//                   Password
+//                 </label>
+//                 <input
+//                   type="password"
+//                   name="password"
+//                   id="password"
+//                   value={values.password}
+//                   onChange={handleChange}
+//                   onBlur={handleBlur}
+//                   placeholder="••••••••"
+//                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400   "
+//                 />
+//                 {errors.password && touched.password && (
+//                   <p className="text-red-600">{errors.password}</p>
+//                 )}
+//               </div>
+//               <div className="flex items-center justify-between">
+//                 <div className="flex items-start">
+//                   <div className="flex items-center h-5">
+//                     <input
+//                       id="remember"
+//                       aria-describedby="remember"
+//                       type="checkbox"
+//                       className="w-4 h-4 dark:bg-[#b7e2e6] rounded focus:outline-none"
+//                     />
+//                   </div>
+//                   <br />
+//                   <div className="ml-3 text-sm">
+//                     <label htmlFor="remember">Remember me</label>
+//                   </div>
+//                 </div>
+//                 <Link
+//                   to={"/forgot_password"}
+//                   className="text-sm font-medium  hover:underline  cursor-pointer"
+//                 >
+//                   Forgot password?
+//                 </Link>
+//               </div>
+//               <button
+//                 type="submit"
+//                 className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "
+//                 disabled={isSubmitting} //
+//               >
+//                 Sign in
+//               </button>
+
+//               <div className="flex gap-3">
+//                 <button className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] ">
+//                   <p className="inline">
+//                     Login with
+//                     <span>
+//                       <FcGoogle className="inline ms-2" size={25} />
+//                     </span>
+//                   </p>
+//                 </button>
+//               </div>
+
+//               <p className="text-sm font-light">
+//                 Don’t have an account yet?{"    "}
+//                 <Link
+//                   to="/sign-up"
+//                   className="font-bold text-[16px] hover:underline"
+//                 >
+//                   Sign up
+//                 </Link>
+//               </p>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Login;

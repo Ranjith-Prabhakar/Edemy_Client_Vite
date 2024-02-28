@@ -5,7 +5,7 @@ import { BsSunFill } from "react-icons/bs";
 
 const ThemeToggler = (): ReactNode => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-   useEffect(() => {
+  useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -26,9 +26,9 @@ const ThemeToggler = (): ReactNode => {
       }}
     >
       {theme === "dark" ? (
-        <FaMoon className="text-[#FFD700]" size={20} color="#FFD700" />
+        <FaMoon size={20} className="cursor-pointer" />
       ) : (
-        <BsSunFill className="text-black" size={20} />
+        <BsSunFill size={20} className="cursor-pointer" />
       )}
     </div>
   );

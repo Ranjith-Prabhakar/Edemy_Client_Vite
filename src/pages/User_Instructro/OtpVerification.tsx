@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { BsShieldLockFill } from "react-icons/bs";
 import { useCreateUserMutation } from "../../redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
-
+import { catchError } from "../../utils/catchError";
 
 const OtpVerification = (): JSX.Element => {
   const [createUser, { isLoading, isSuccess, isError, data }] =
@@ -31,8 +31,12 @@ const OtpVerification = (): JSX.Element => {
     }
   }, [isLoading, isSuccess]);
 
-  const onSubmit = (newOtp: string) => {
-    createUser({ verificationCode: newOtp });
+  const onSubmit = async (newOtp: string) => {
+    try {
+      await createUser({ verificationCode: newOtp });
+    } catch (error: unknown) {
+      catchError(error);
+    }
   };
 
   const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
@@ -76,30 +80,30 @@ const OtpVerification = (): JSX.Element => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen dark:bg-black">
-      <div className="flex  flex-col justify-center items-center bg-white text-black dark:bg-black dark:text-white border p-6 pb-12 rounded-md shadow-sm">
-        <BsShieldLockFill size={60} className="mb-2 dark:text-[#FFD700]" />
-        <h1 className="text-3xl font-bold mb-5 dark:text-[#FFD700]">
-          Verify Otp
-        </h1>
-        <div className="flex gap-2">
-          {otp.map((value, index) => (
-            <input
-              className="text-black w-[75px] h-[75px] rounded-lg focus focus:ring-1 focus:ring-[#FFD700]"
-              key={index}
-              type="text"
-              ref={(input) =>
-                (inputRefs.current[index] = input as HTMLInputElement)
-              }
-              value={value}
-              onChange={(e) => handleChange(index, e)}
-              onClick={() => handleClick(index)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-            />
-          ))}
+    <>
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex  flex-col justify-center items-center  p-6 pb-12 rounded-md shadow-lg dark:bg-[#063134]">
+          <BsShieldLockFill size={60} className="mb-2 " />
+          <h1 className="text-3xl font-bold mb-5 ">Verify Otp</h1>
+          <div className="flex gap-2">
+            {otp.map((value, index) => (
+              <input
+                className="text-black w-[75px] h-[75px] rounded-lg focus focus:ring-1 focus:ring-[#FFD700]"
+                key={index}
+                type="text"
+                ref={(input) =>
+                  (inputRefs.current[index] = input as HTMLInputElement)
+                }
+                value={value}
+                onChange={(e) => handleChange(index, e)}
+                onClick={() => handleClick(index)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

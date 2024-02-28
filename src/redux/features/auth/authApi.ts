@@ -1,12 +1,12 @@
-import { ILoginReq, ILoginRes, RegistrationReq, RegistrationRes,  } from "../../interfaces/authApi";
+import { catchError } from "../../../utils/catchError";
+import {
+  ILoginReq,
+  ILoginRes,
+  RegistrationReq,
+  RegistrationRes,
+} from "../../interfaces/authApi";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut } from "./authSlice";
-
-
-
-
-
-
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -37,19 +37,35 @@ export const authApi = apiSlice.injectEndpoints({
         body: data,
         credentials: "include",
       }),
-
-      async onQueryStarted({ queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          console.log("result.data.user", result.data.user);
           dispatch(
             userLoggedIn({
-              userData: result.data,
+              userData: result.data.user,
             })
           );
-        } catch (error) {
-          console.log(error);
+        } catch (error:unknown) {
+          catchError(error)
         }
       },
+
+      // async onQueryStarted(args,{ queryFulfilled, dispatch }) {
+      //   try {
+      //     const result = await queryFulfilled;
+      //     console.log("result==> from login", result);
+      //     // console.log("result==> from login data", result?.data);
+      //     // console.log("result==> from login data.user", result?.data?.user);
+      //     // dispatch(
+      //     //   userLoggedIn({
+      //     //     userData: result.data,
+      //     //   })
+      //     // );
+      //   } catch (error) {
+      //     console.log("errornrrrrr",error);
+      //   }
+      // },
     }),
     //forgotPassword-------------------------------------------------------------------------------------
     forgotPasswordEmailSubmission: builder.mutation({
@@ -104,5 +120,5 @@ export const {
   useForgotPasswordEmailSubmissionMutation,
   useForgotPasswordOtpVerificationMutation,
   useResetPasswordMutation,
-  useLogoutMutation
+  useLogoutMutation,
 } = authApi;

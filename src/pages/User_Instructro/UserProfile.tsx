@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
-
 const UserProfile = () => {
   const userData = useSelector((state: IUserState) => state.user.userData);
   const [sideMenuItem, setSideMenuItem] = useState(1);
@@ -22,7 +21,7 @@ const UserProfile = () => {
   }, [userData]);
 
   return (
-    <div className="dark:bg-black dark:text-white mih-h-[100vh] h-[100vh]">
+    <div className="h-screen">
       <Header />
       <div className=" flex w-[95%] m-auto">
         <div className=" h-full  w-full m-auto rounded-lg flex justify-start  p-[25px] gap-2">

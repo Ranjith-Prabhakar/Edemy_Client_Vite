@@ -4,7 +4,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import logo from "../../../public/Assets/Logo.png";
 import ThemeToggler from "../utils/ThemeToggler";
 import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/features/auth/authSlice";
@@ -20,41 +19,35 @@ const Header = () => {
     }
   }, [userData]);
   return (
-    <div className="p-5 ">
-      <div className="flex justify-between items-center text-black dark:text-[#FFD700]">
-        <div className="flex items-center  gap-4">
+    <div className="p-5 sticky top-0 px-10">
+      <div className="flex justify-between items-end">
+        <div className="flex items-end  gap-4">
           <Link to={"/"}>
-            <img src={logo} alt="Logo image" className="w-[100px] h-[100px]" />
+            <h1 className=" text-2xl font-bold italic">
+              <span className="text-4xl font-bold">E</span>demy
+            </h1>
           </Link>
-
-          <Link to={"/categories"} className="text-[#FFD700]">
-            Categories
-          </Link>
-
+          <Link to={"/categories"}>Categories</Link>
           <div className="flex flex-1 justify-end ">
             <ThemeToggler />
           </div>
         </div>
         <div>
           <input
-            className="rounded-full w-96 h-[46px] px-7 text-black outline-none placeholder:text-gray-500 dark:bg-gray-800 focus:border-1 darK:focus:border-[#FFD700]"
+            className="rounded-full w-96 h-[30px] px-7 outline-none dark:bg-slate-400 opacity-40 focus:border-1 focus:border-white placeholder:text-white"
             type="search"
             placeholder="search...."
           />
         </div>
         <div className="flex justify-center items-center gap-4">
           {userData.name && userData.role !== "instructor" && (
-            <Link className="text-[#FFD700]" to={"/be_instructor"}>
-              Teach on Edemy
-            </Link>
+            <Link to={"/be_instructor"}>Teach on Edemy</Link>
           )}
           {userData.name && (
             <>
-              <Link className="text-[#FFD700]" to={"/my_learnings"}>
-                My Learnings
-              </Link>
-              <Link className="text-[#FFD700]" to={"/categories"}>
-                <FaRegHeart size={25} color={"#FFD700"} />
+              <Link to={"/my_learnings"}>My Learnings</Link>
+              <Link to={"/categories"}>
+                <FaRegHeart size={25} />
               </Link>
               <Link to={"/be_instructor"}>
                 <FaCartPlus size={25} />
@@ -67,9 +60,9 @@ const Header = () => {
 
           {name !== "" ? (
             <Link to={"/profile"}>
-              <h1 className="border-[2px] border-[#FFD700] rounded-[100%] p-1">
-                {name}
-              </h1>
+              <div className="rounded-full flex justify-center items-center w-[25px] h-[25px] bg-white text-[#09616A]">
+                <h1 className="text-[13px] font-bold">{name}</h1>
+              </div>
             </Link>
           ) : (
             <Link to={"/login"}>
