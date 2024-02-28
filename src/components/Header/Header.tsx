@@ -18,11 +18,11 @@ const Header = () => {
     }
   }, [userData]);
   return (
-    <div className="sticky top-0  z-50">
+    <div className="sticky top-0  z-50 text-xl">
       <div className="flex justify-between items-end">
         <div className="flex items-end  gap-4">
           <Link to={"/"}>
-            <h1 className=" text-2xl font-bold italic">
+            <h1 className=" text-2xl font-bold italic ">
               <span className="text-4xl font-bold">E</span>demy
             </h1>
           </Link>
@@ -59,8 +59,10 @@ const Header = () => {
 
           {name !== "" ? (
             <Link to={"/user/profile"}>
-              <div className="rounded-full flex justify-center items-center w-[25px] h-[25px] bg-white text-[#09616A]">
-                <h1 className="text-[13px] font-bold">{name}</h1>
+              <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
+                <h1 className=" font-bold">{`${name[0].toUpperCase()}${
+                  name[1]
+                }`}</h1>
               </div>
             </Link>
           ) : (

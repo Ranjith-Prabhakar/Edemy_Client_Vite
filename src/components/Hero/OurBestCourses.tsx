@@ -17,7 +17,7 @@ const OurBestCourses = () => {
   }, [isSuccess]);
   return (
     <div className="flex flex-col items-center w-full mt-[8%]">
-      <h1 className="text-5xl font-semibold">
+      <h1 className="text-5xl font-bold italic">
         Find the <span className="text-[#FFD700]"> best course </span>
         for your needs
       </h1>

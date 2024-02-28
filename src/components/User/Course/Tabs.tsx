@@ -31,11 +31,13 @@ const Tabs = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex gap-2 justify-around  p-5 relative">
+    <div className="flex justify-start relative">
       <button
         className={` ${
-          stepper === 1 ? "bg-white" : "bg-gray-500"
-        } dark:hover:bg-c_color-colorTwo rounded-md px-5 text-black font-bold py-1`}
+          stepper === 1
+            ? "bg-c_color-colorSix text-white"
+            : "bg-c_color-colorOne text-slate-300"
+        } dark:hover:text-[18px] rounded-t-md  px-5 text-black font-bold py-1 transition-all ease duration-700`}
         onClick={() => {
           setStepper(1);
         }}
@@ -44,8 +46,10 @@ const Tabs = ({
       </button>
       <button
         className={` ${
-          stepper === 2 ? "bg-white" : "bg-gray-500"
-        } dark:hover:bg-c_color-colorTwo rounded-md px-5 text-black font-bold py-1`}
+          stepper === 2
+            ? "bg-c_color-colorSix text-white"
+            : "bg-c_color-colorOne text-slate-300"
+        } dark:hover:text-[18px] rounded-t-md  px-5 text-black font-bold py-1 transition-all ease duration-700`}
         onClick={() => {
           setStepper(2);
         }}
@@ -53,7 +57,7 @@ const Tabs = ({
         Add Modules
       </button>
       <button
-        className="bg-gray-500 dark:hover:bg-c_color-colorTwo rounded-md px-5 text-black font-bold py-1"
+        className="dark:bg-c_color-colorSeven dark:text-white ms-auto rounded-md mb-1 dark:hover:text-[17px] hover:opacity-80 px-5 text-black font-bold py-1 transition-all ease duration-700"
         onClick={() => {
           setOpen(true);
         }}

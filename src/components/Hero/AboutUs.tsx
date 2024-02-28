@@ -7,10 +7,8 @@ const AboutUs = () => {
         <img src={Aboutus} className="w-full" alt="about us"></img>
       </div>
       <div className="w-[50%]">
-        <h1 className="underline underline-offset-8 text-[#FFD700] font-bold text-4xl">
-          About us
-        </h1>
-        <p className="mt-5 leading-7">
+        <h1 className=" text-[#FFD700] font-bold text-5xl italic">About us</h1>
+        <p className="mt-5 leading-7 text-xl italic opacity-85">
           Welcome to our e-learning platform, where knowledge meets convenience.
           Explore a diverse range of courses tailored to your interests and
           goals. Engage in interactive lessons, connect with expert instructors,

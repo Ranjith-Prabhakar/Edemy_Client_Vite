@@ -54,7 +54,7 @@ const SideBar = ({ setSideMenuItem }: props) => {
         {dashBordItems &&
           dashBordItems.map((item, index) => (
             <div
-              className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorTwo hover:text-black transition-all ease duration-700"
+              className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorSeven hover:text-[21px] hover:rounded-md transition-all ease duration-700"
               key={item.name}
               onClick={() => {
                 setSideMenuItem(index + 1);
@@ -65,7 +65,7 @@ const SideBar = ({ setSideMenuItem }: props) => {
             </div>
           ))}
         <div
-          className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorTwo hover:text-black transition-all ease duration-700"
+          className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3  hover:bg-c_color-colorSeven hover:text-[21px] hover:rounded-md transition-all ease duration-700"
           onClick={() => {
             handleLogout();
           }}

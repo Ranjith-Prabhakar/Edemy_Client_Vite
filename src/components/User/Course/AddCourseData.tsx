@@ -177,7 +177,7 @@ const AddCourseData = ({
   }, [courseData]);
 
   return (
-    <form onSubmit={handleSubmit} action="" className="p-8">
+    <form onSubmit={handleSubmit} action="" className="p-8 ">
       <div className="relative z-0 w-full mb-5 group">
         <input
           ref={courseNameRef}
@@ -194,7 +194,7 @@ const AddCourseData = ({
         {!visible && (
           <button
             type="button"
-            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-1 "
+            className="dark:bg-c_color-colorSeven px-3 py-1 w-20 rounded-sm dark:text-white font-bold flex justify-center items-center absolute right-2 top-1 hover:text-[18px] transition-all ease duration-700"
             onClick={() => handleUpdation({ courseName: values.courseName })}
           >
             Update
@@ -225,7 +225,7 @@ const AddCourseData = ({
         {!visible && (
           <button
             type="button"
-            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-2"
+            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-2"
             onClick={() => handleUpdation({ discription: values.discription })}
           >
             Update
@@ -257,7 +257,7 @@ const AddCourseData = ({
         {!visible && (
           <button
             type="button"
-            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-1"
+            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
             onClick={() => handleUpdation({ tags: values.tags })}
           >
             Update
@@ -296,7 +296,7 @@ const AddCourseData = ({
         {!visible && (
           <button
             type="button"
-            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-2"
+            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-2"
             onClick={() => handleUpdation({ thumbnail: values.thumbnail })}
           >
             Update
@@ -322,7 +322,7 @@ const AddCourseData = ({
         {!visible && (
           <button
             type="button"
-            className="bg-slate-500 px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center absolute right-2 top-1"
+            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
             onClick={() => handleUpdation({ duration: values.duration })}
           >
             Update

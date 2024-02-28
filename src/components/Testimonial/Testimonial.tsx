@@ -41,28 +41,26 @@ const Testimonial = () => {
   }, [testimonialData]);
 
   return (
- 
-      <div className="flex flex-col h-6/3 overflow-hidden mt-[8%]">
-        <h1 className="text-5xl font-semibold text-center mt-7">
-          <span className="text-[#FFD700]"> Our </span>
-          Students Voice
-        </h1>
-        <div className="flex mt-5 h-full">
-          <div className="w-1/2">
-            <img
-              src={StudentVoice}
-              alt="student"
-              className="w-[80%] h-full"
-            ></img>
-          </div>
-          <div className="flex flex-col justify-center w-1/2">
-            <p>{testimonials[testimonialData].paragraph}</p>
-            <br />
-            <h4>Name : {testimonials[testimonialData].name}</h4>
-          </div>
+    <div className="flex flex-col h-6/3 overflow-hidden mt-[8%]">
+      <h1 className="text-5xl font-bold italic text-center mt-7">
+        <span className="text-[#FFD700]"> Our </span>
+        Students Voice
+      </h1>
+      <div className="flex mt-5 h-full">
+        <div className="w-1/2">
+          <img
+            src={StudentVoice}
+            alt="student"
+            className="w-[80%] h-full"
+          ></img>
+        </div>
+        <div className="flex flex-col justify-center w-1/2 text-xl italic opacity-85">
+          <p>{testimonials[testimonialData].paragraph}</p>
+          <br />
+          <h4>Name : {testimonials[testimonialData].name}</h4>
         </div>
       </div>
-   
+    </div>
   );
 };
 

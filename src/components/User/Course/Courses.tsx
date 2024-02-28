@@ -56,10 +56,10 @@ const Courses = () => {
   }, [courseData]);
 
   return (
-    <div className="flex custom-scrollBar">
+    <div className="flex custom-scrollBar ">
       <div className="flex-1">
-        <div className="flex flex-col">
-          <div className="sticky top-0 z-10">
+        <div className="flex flex-col dark:bg-c_color-colorSix">
+          <div className="sticky top-0 z-10 dark:bg-c_color-colorOne">
             <Tabs
               setStepper={setStepper}
               stepper={stepper}
