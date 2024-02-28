@@ -5,12 +5,14 @@ import { FaCartPlus } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import ThemeToggler from "../utils/ThemeToggler";
-import { useSelector } from "react-redux";
-import { IUserState } from "../../redux/features/auth/authSlice";
+// import { useSelector } from "react-redux";
+// import { IUserState } from "../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
+import useGetUser from "../../hooks/useGetUser";
 
 const Header = () => {
-  const userData = useSelector((state: IUserState) => state.user.userData);
+  // const userData = useSelector((state: IUserState) => state.user.userData);
+  const userData = useGetUser();
   const [name, setName] = useState("");
 
   useEffect(() => {

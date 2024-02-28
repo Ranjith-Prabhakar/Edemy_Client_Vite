@@ -9,7 +9,7 @@ import {
   getCourseseInProgressState,
   removeCourseAfterApprovalOrReject,
 } from "./courseSlice";
-import { ICloudStorageResponse } from "../../interfaces/CloudStorage/generalInterface";
+import { ICloudStorageResponse } from "../../../@types/cloudStorage";
 import { ICourse } from "../../interfaces/Course/generalInterface";
 
 export const courseApi = apiSlice.injectEndpoints({

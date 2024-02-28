@@ -14,17 +14,19 @@ import UserDetails from "./pages/Admin/UserDetails";
 import BeInstructor from "./pages/User_Instructro/BeInstructor";
 import CoursePreview from "./components/Admin/Courses/Tables/CoursePreview";
 import CourseSinglePage from "./pages/User_Instructro/CourseSinglePage";
-import { IUserState } from "./redux/features/auth/authSlice";
-import { useSelector } from "react-redux";
+// import { IUserState } from "./redux/features/auth/authSlice";
+// import { useSelector } from "react-redux";
+import User from "./Routes/User";
+import useGetUser from "./hooks/useGetUser";
 
 
 const App = () => {
-  const userName = useSelector((state: IUserState) => state.user.userData.name);
+  const userName = useGetUser().name;
+  // const userName = useSelector((state: IUserState) => state.user.userData.name);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route
           path="/login"
           element={userName ? <Navigate to={"/"} /> : <Login />}
@@ -55,6 +57,10 @@ const App = () => {
           path="/reset_forgot_password"
           element={userName ? <Navigate to={"/"} /> : <ResetForgotPassword />}
         />
+
+        <Route path="/" element={<Home />} />
+        <Route path="/user/*" element={<User />} />
+
         <Route path="/admin_dashbord" element={<AdminDash />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/user_details/:id" element={<UserDetails />} />

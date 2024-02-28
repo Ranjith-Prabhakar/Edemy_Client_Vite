@@ -10,8 +10,8 @@ import courseSlice from "./features/course/courseSlice";
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer, // instead of exporting slice.reducer from api slice , it does here
-    category: categorySlice,
     user: authSlice,
+    category: categorySlice,
     users: usersSlice,
     instructors: instructorsSlice,
     instructorRequests: instructorRequestSlice,

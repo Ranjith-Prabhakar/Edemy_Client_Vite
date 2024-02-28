@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../../interfaces/authApi";
 
-type userDataType = { [key: string]: string | number };
 
 export interface IUserState {
-  // i should use it here also change it instead of below aproch
   isLoading: boolean;
-  userData: userDataType;
-  user?: any;
+  userData: IUser;
 }
 
-const initialState = {
+const initialState: IUserState = {
   isLoading: true,
-  userData: {} as userDataType,
+  userData: {} as IUser,
 };
 
 const authSlice = createSlice({
@@ -23,10 +21,11 @@ const authSlice = createSlice({
       state.isLoading = false;
     },
     userLoggedOut: (state) => {
-      state.userData = {};
+      state.userData = {} as IUser;
     },
   },
 });
 
 export const { userLoggedIn, userLoggedOut } = authSlice.actions;
 export default authSlice.reducer;
+
