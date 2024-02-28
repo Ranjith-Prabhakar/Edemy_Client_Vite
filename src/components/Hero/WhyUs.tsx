@@ -4,7 +4,7 @@ import { LiaCertificateSolid } from "react-icons/lia";
 
 const WhyUs = () => {
   return (
-    <div className="mt-12  max-w-[90%] w-full m-auto rounded-lg p-[25px] flex flex-col">
+    <div className="flex flex-col mt-[8%]">
       <h1 className="text-5xl font-semibold text-center">
         Why Choose <span className="text-[#FFD700]"> Us </span>
       </h1>

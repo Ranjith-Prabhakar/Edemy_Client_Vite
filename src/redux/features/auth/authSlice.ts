@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../interfaces/authApi";
+import { IUser, IUserState } from "../../interfaces/authApi";
 
 
-export interface IUserState {
-  isLoading: boolean;
-  userData: IUser;
-}
+
 
 const initialState: IUserState = {
   isLoading: true,

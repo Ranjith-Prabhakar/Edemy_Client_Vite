@@ -14,6 +14,11 @@ export interface IUser {
   enrolledCourses?: Array<{ courseId: string }>;
 }
 
+export interface IUserState {
+  isLoading: boolean;
+  userData: IUser;
+}
+
 export type RegistrationRes = {
   //register
   success:boolean;

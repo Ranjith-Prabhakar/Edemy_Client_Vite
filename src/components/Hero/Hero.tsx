@@ -4,9 +4,8 @@ import OurBestCourses from "./OurBestCourses";
 import WhyUs from "./WhyUs";
 
 const Hero = () => {
- 
   return (
-    <div className="mt-[150px]">
+    <div className="mt-[8%]">
       <AboutUs />
       <OurBestCourses />
       <WhyUs />

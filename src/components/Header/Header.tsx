@@ -5,13 +5,10 @@ import { FaCartPlus } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import ThemeToggler from "../utils/ThemeToggler";
-// import { useSelector } from "react-redux";
-// import { IUserState } from "../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import useGetUser from "../../hooks/useGetUser";
 
 const Header = () => {
-  // const userData = useSelector((state: IUserState) => state.user.userData);
   const userData = useGetUser();
   const [name, setName] = useState("");
 
@@ -21,7 +18,7 @@ const Header = () => {
     }
   }, [userData]);
   return (
-    <div className="p-5 sticky top-0 px-10">
+    <div className="sticky top-0 px-10 z-50">
       <div className="flex justify-between items-end">
         <div className="flex items-end  gap-4">
           <Link to={"/"}>
@@ -61,7 +58,7 @@ const Header = () => {
           )}
 
           {name !== "" ? (
-            <Link to={"/profile"}>
+            <Link to={"/user/profile"}>
               <div className="rounded-full flex justify-center items-center w-[25px] h-[25px] bg-white text-[#09616A]">
                 <h1 className="text-[13px] font-bold">{name}</h1>
               </div>

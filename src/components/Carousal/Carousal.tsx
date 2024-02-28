@@ -1,10 +1,9 @@
 import carousal from "../../../public/Assets/carousal.png";
 
-
 const Carousal = () => {
   return (
-    <div className="mt-7 h-[70vh] w-full 1000px:max-w-[90%]  1000px:m-auto rounded-lg flex  justify-between  p-[25px]">
-      <div className="w-2/5 hidden 400px:block">
+    <div className="flex items-center justify-between">
+      <div className="mt-[8%] w-2/5 hidden 400px:block">
         <img
           src={carousal}
           className="1000px:ms-[80px] w-full h-[80vh] "

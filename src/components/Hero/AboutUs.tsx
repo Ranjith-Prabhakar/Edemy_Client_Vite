@@ -2,7 +2,7 @@ import Aboutus from "../../../public/Assets/AboutUs.jpg";
 
 const AboutUs = () => {
   return (
-    <div className="mt-7  max-w-[90%] w-full m-auto rounded-lg flex justify-between gap-5  p-[25px]">
+    <div className="flex justify-between items-start">
       <div className="w-[40%] rounded-xl overflow-hidden">
         <img src={Aboutus} className="w-full" alt="about us"></img>
       </div>
