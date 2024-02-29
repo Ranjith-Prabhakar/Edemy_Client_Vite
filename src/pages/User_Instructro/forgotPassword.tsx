@@ -4,23 +4,33 @@ import { useFormik } from "formik";
 import ThemeToggler from "../../components/utils/ThemeToggler";
 import { forgotPasswordEmailSchema } from "../../schema/forgotPasswordSchema";
 import { useForgotPasswordEmailSubmissionMutation } from "../../redux/features/auth/authApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import responseErrorCatch from "../../utils/responseErrorToast";
+import toast from "react-hot-toast";
+import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
+import GeneralButton from "../../components/Buttons/GeneralButton";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const [forgotPasswordEmailSubmission, { isSuccess, data, isError, error }] =
+  const [forgotPasswordEmailSubmission, { isSuccess, data, isError, error,isLoading }] =
     useForgotPasswordEmailSubmissionMutation();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isSuccess) {
+      setLoading(false);
       console.log("success", data);
-      toast.success(data?.message);
-      navigate("/auth/forgot_password_otp_verification");
+      if (data && "message" in data) {
+        toast.success(data.message as string);
+        navigate("/auth/forgot_password_otp_verification");
+      }
+    } else if (isLoading) {
+      setLoading(true);
     } else if (isError) {
+      setLoading(false);
       responseErrorCatch(error);
     }
-  }, [isSuccess, isError, data, navigate, error]);
+  }, [isSuccess, isError, data, navigate, error, isLoading]);
   const {
     values,
     errors,
@@ -81,13 +91,17 @@ const ForgotPassword = () => {
                   <p className="text-red-600">{errors.email}</p>
                 )}
               </div>
-              <button
-                type="submit"
-                className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "
-                disabled={isSubmitting} //
-              >
-                Submit
-              </button>
+              {loading ? (
+                <SpinnerButton status="Validating Data" />
+              ) : (
+                <GeneralButton
+                  type="submit"
+                  disabled={isSubmitting} //
+                >
+                  Submit
+                </GeneralButton>
+              )}
+              
             </form>
             <button
               className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "

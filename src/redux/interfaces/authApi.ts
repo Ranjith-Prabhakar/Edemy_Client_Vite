@@ -49,8 +49,9 @@ export interface IForgotPasswordEmailSubmissionReq {
 
 export interface IForgotPasswordEmailSubmissionRes {
   status: boolean;
-  data:{
+  data?:{
     status:boolean,
     message:string
-  }
+  };
+  message?:string
 }
