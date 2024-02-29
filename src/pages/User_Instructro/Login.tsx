@@ -5,23 +5,29 @@ import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schema/authSchema";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../../components/utils/ThemeToggler";
 import { ILoginRes } from "../../redux/interfaces/authApi";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
+import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
 
 const Login = () => {
   const navigate = useNavigate();
   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (isSuccess) {
+      setLoading(false);
       toast.success("user logged in successfully");
       navigate("/");
     } else if (isLoading) {
+      setLoading(true);
       toast.loading;
     } else if (isError && error) {
+      setLoading(false);
       if ("data" in error) {
         if (error.data) {
           const dataType = error.data as ILoginRes;
@@ -29,7 +35,7 @@ const Login = () => {
         }
       }
     }
-  }, [isSuccess, isLoading, isError]);
+  }, [isSuccess, isLoading, isError, error, navigate]);
 
   const {
     values,
@@ -119,9 +125,16 @@ const Login = () => {
                   Forgot password?
                 </Link>
               </div>
-              <GeneralButton type="submit" disabled={isSubmitting}>
-                Sign in
-              </GeneralButton>
+              {loading ? (
+                <SpinnerButton status="Validating Data" />
+              ) : (
+                <GeneralButton
+                  type="submit"
+                  disabled={isSubmitting} //
+                >
+                  Sign in
+                </GeneralButton>
+              )}
               <div className="flex gap-3">
                 <GeneralButton>
                   <p className="inline">

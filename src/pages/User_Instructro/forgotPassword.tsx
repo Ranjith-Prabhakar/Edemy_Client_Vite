@@ -5,8 +5,7 @@ import ThemeToggler from "../../components/utils/ThemeToggler";
 import { forgotPasswordEmailSchema } from "../../schema/forgotPasswordSchema";
 import { useForgotPasswordEmailSubmissionMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { IForgotPasswordEmailSubmissionRes } from "../../redux/interfaces/authApi";
+import responseErrorCatch from "../../utils/responseErrorToast";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -16,15 +15,10 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (isSuccess) {
       console.log("success", data);
-      // toast.success(data.message);
+      toast.success(data?.message);
       navigate("/auth/forgot_password_otp_verification");
     } else if (isError) {
-      if (error) {
-        const newError = error as IForgotPasswordEmailSubmissionRes;
-        toast.error(newError.data.message);
-      }
-
-      
+      responseErrorCatch(error);
     }
   }, [isSuccess, isError, data, navigate, error]);
   const {

@@ -3,12 +3,12 @@ import toast from "react-hot-toast";
 import { BsShieldLockFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useForgotPasswordOtpVerificationMutation } from "../../redux/features/auth/authApi";
-
+import responseErrorCatch from "../../utils/responseErrorToast";
 
 const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
   const [
     forgotPasswordOtpVerification,
-    { isSuccess, data, isError, isLoading },
+    { isSuccess, data, isError, isLoading, error },
   ] = useForgotPasswordOtpVerificationMutation();
 
   const navigate = useNavigate();
@@ -31,9 +31,10 @@ const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
       toast.success("enter the new password");
       navigate("/auth/reset_forgot_password");
     } else if (isError) {
-      toast.error(data.message);
+      console.log("error-->", error);
+      responseErrorCatch(error);
     }
-  }, [isLoading, isSuccess]);
+  }, [data, isError, isLoading, isSuccess, navigate, error]);
 
   const onSubmit = async (newOtp: string) => {
     await forgotPasswordOtpVerification({ verificationCode: newOtp });
@@ -83,9 +84,7 @@ const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
     <div className="flex justify-center items-center h-screen">
       <div className="flex  flex-col justify-center items-center bg-white text-black dark:bg-c_color-colorOne dark:text-white border p-6 pb-12 rounded-md shadow-sm">
         <BsShieldLockFill size={60} className="mb-2 " />
-        <h1 className="text-3xl font-bold mb-5 ">
-          Verify Otp
-        </h1>
+        <h1 className="text-3xl font-bold mb-5 ">Verify Otp</h1>
         <div className="flex gap-2">
           {otp.map((value, index) => (
             <input

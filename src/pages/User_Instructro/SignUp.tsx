@@ -8,10 +8,10 @@ import { useRegisterMutation } from "../../redux/features/auth/authApi";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ThemeToggler from "../../components/utils/ThemeToggler";
-import { RegistrationRes } from "../../redux/interfaces/authApi";
 import { catchError } from "../../utils/catchError";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
+import responseErrorCatch from "../../utils/responseErrorToast";
 
 const SignUp = () => {
   const [register, { isSuccess, isError, error, isLoading }] =
@@ -26,14 +26,9 @@ const SignUp = () => {
       setLoading(false);
       toast.success("otp has been sent to your mail");
       navigate("/auth/otp_verification", { state: { fromSignup: true } });
-    } else if (isError && error) {
+    } else if (isError) {
       setLoading(false);
-      if ("data" in error) {
-        if (error.data) {
-          const dataType = error.data as RegistrationRes;
-          toast.error(dataType.message);
-        }
-      }
+      responseErrorCatch(error);
     }
   }, [isSuccess, isError, error, isLoading, navigate]);
 
