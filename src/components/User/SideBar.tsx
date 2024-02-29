@@ -9,6 +9,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import useGetUser from "../../hooks/useGetUser";
 
 type props = {
@@ -18,6 +19,7 @@ type props = {
 const SideBar = ({ setSideMenuItem }: props) => {
   // const userData = useGetUser();
   const [logout, { data, isError, isSuccess }] = useLogoutMutation({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
@@ -52,12 +54,13 @@ const SideBar = ({ setSideMenuItem }: props) => {
         </div> */}
 
         {dashBordItems &&
-          dashBordItems.map((item, index) => (
+          dashBordItems.map((item) => (
             <div
               className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorSeven hover:text-[21px] hover:rounded-md transition-all ease duration-700"
               key={item.name}
               onClick={() => {
-                setSideMenuItem(index + 1);
+                navigate(`/user/profile/${(item.name).toLowerCase()}`);
+                // setSideMenuItem(index + 1);
               }}
             >
               <item.icon />

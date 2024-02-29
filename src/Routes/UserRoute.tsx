@@ -10,7 +10,7 @@ const UserRoute = () => {
     <div>
       {user.role === "instructor" && (
         <Routes>
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/profile/*" element={<UserProfile />} />
           <Route path="/be_instructor" element={<BeInstructor />} />
         </Routes>
       )}
