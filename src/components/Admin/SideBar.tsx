@@ -12,31 +12,36 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import responseErrorCatch from "../../utils/responseErrorToast";
 
 
 
-type Props = {
-  setSidebarElement: React.Dispatch<React.SetStateAction<number>>;
-};
 
-const SideBar = ({ setSidebarElement }: Props) => {
-const [logout, { data, isError, isSuccess }] = useLogoutMutation({});
+const SideBar = () => {
+  const [logout, { data, isError, isSuccess, error }] = useLogoutMutation();
+  const navigate = useNavigate();
 
 useEffect(() => {
-  if(isSuccess){
-    toast.success(data.message)
-  }else if(isError){
-    toast.error("logout failed")
-  }
-}, [isSuccess, isSuccess]);
-
-  const handleLogout = async () => {
-    try {
-      await logout({});
-    } catch (error) {
-      console.log(error);
+  if (isSuccess) {
+    console.log("outer");
+    if (data && data.message) {
+      console.log("data.message", data.message);
+      toast.success(data.message);
+      navigate("/auth/login");
     }
-  };
+  } else if (isError) {
+    responseErrorCatch(error);
+  }
+}, [data, error, isError, isSuccess, navigate]);
+
+ const handleLogout = async () => {
+   try {
+     await logout();
+   } catch (error) {
+     console.log(error);
+   }
+ };
 
   const dashBordItems = [
     { name: "Dashboard", icon: AiOutlineLayout },
@@ -52,28 +57,30 @@ useEffect(() => {
   ];
 
   return (
-    <div className="flex flex-col   max-w-[15%] w-full h-full rounded-lg text-xl p-[25px] dark:bg-gray-950 text-gray-500 dark:text-gray-400 space-y-3">
-      {dashBordItems &&
-        dashBordItems.map((item, index) => (
-          <div
-            className="flex justify-start items-center gap-2 cursor-pointer "
-            onClick={() => {
-              setSidebarElement(index + 1);
-            }}
-            key={item.name}
-          >
-            <item.icon />
-            <h1> {item.name}</h1>
-          </div>
-        ))}
-      <div
-        className="flex justify-start items-center gap-2 cursor-pointer "
-        onClick={() => {
-          handleLogout()
-        }}
-      >
-        <RiLogoutCircleRLine />
-        <h1> Logout</h1>
+    <div className="custom-scrollBar flex flex-col h-full overflow-scroll  max-w-[15%] w-full m-auto rounded-lg text-xl dark:bg-c_color-colorOne shadow-md ring-gray-400 space-y-3">
+      <div className="flex flex-col  w-full">
+        {dashBordItems &&
+          dashBordItems.map((item) => (
+            <div
+              className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 hover:bg-c_color-colorSeven hover:text-[21px] hover:rounded-md transition-all ease duration-700"
+              key={item.name}
+              onClick={() => {
+                navigate(`/admin/dash_bord/${item.name.toLowerCase()}`);
+              }}
+            >
+              <item.icon />
+              <h1> {item.name}</h1>
+            </div>
+          ))}
+        <div
+          className="flex justify-start items-center gap-2 cursor-pointer ps-5 py-3  hover:bg-c_color-colorSeven hover:text-[21px] hover:rounded-md transition-all ease duration-700"
+          onClick={() => {
+            handleLogout();
+          }}
+        >
+          <RiLogoutCircleRLine />
+          <h1> Logout</h1>
+        </div>
       </div>
     </div>
   );

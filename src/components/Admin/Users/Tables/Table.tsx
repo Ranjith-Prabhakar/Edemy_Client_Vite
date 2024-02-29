@@ -11,14 +11,17 @@ import {
   useUnFreezUserMutation,
 } from "../../../../redux/features/admin/Users/userApi";
 import toast from "react-hot-toast";
+import TableBodyTr from "../../../Table/TableBodyTr";
+import Th from "../../../Table/Th";
+import Thead from "../../../Table/Thead";
+import Td from "../../../Table/Td";
 
 const Table = () => {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const { usersData } = useSelector((state: any) => state.users);
 
-  const [freezUser, { data, isSuccess, isError }] =
-    useFreezUserMutation();
+  const [freezUser, { data, isSuccess, isError }] = useFreezUserMutation();
   const [
     unFreezUser,
     {
@@ -31,11 +34,11 @@ const Table = () => {
   useEffect(() => {
     setTableData(usersData);
     console.log("table data", tableData);
-  }, [usersData]);
+  }, [tableData, usersData]);
 
   useEffect(() => {
     if (isSuccess) toast.success(data.message);
-    else if (isError)toast.error("exicution failed");
+    else if (isError) toast.error("exicution failed");
   }, [isSuccess, isError]);
 
   useEffect(() => {
@@ -43,98 +46,86 @@ const Table = () => {
     else if (unFreezUserIsError) toast.error("exicution failed");
   }, [unFreezUserIsSuccess, unFreezUserIsError]);
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Sl No
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Id
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Name
-            </th>
-
-            <th scope="col" className="px-6 py-3">
-              Enrolled course
-            </th>
-            <th scope="col" className="px-6 py-3">
-              courses
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-
-            <th
-              scope="col"
-              className="px-6 py-3 flex justify-center items-center"
-            >
-              Freez
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((item: any, index: any) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              key={index}
-            >
-              <td className="px-6 py-4">{index + 1}</td>
-              <td
-                className="px-6 py-4 cursor-pointer"
-                onClick={() => {
-                  navigate(`/user_details/${item._id}`);
-                }}
-              >
-                {item._id}
-              </td>
-              <td className="px-6 py-4">{item.name}</td>
-              <td className="px-6 py-4">{item.enrolledCourses.length}</td>
-              <td className="px-6 py-4">{item.courses.length}</td>
-              <td className="px-6 py-4">{item.status}</td>
-              <td className="px-6 py-4">
-                {item.status === "active" ? (
-                  <FaRegCircleStop
-                    onClick={async () => await freezUser(item._id)}
-                  />
-                ) : (
-                  <FaRegCircleStop
-                    color="red"
-                    onClick={() => unFreezUser(item._id)}
-                  />
-                )}
-              </td>
+    <>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+          <Thead>
+            <tr>
+              <Th>Sl No</Th>
+              <Th>Id</Th>
+              <Th>Name</Th>
+              <Th>Enrolled course</Th>
+              <Th>courses</Th>
+              <Th>Status</Th>
+              <Th>Freez</Th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className=" dark:bg-gray-700 dark:text-gray-400 p-3 flex justify-end gap-1">
-        <h4 className="me-2">4 of 5</h4>
-        <input
-          type="text"
-          className="w-[30px] h-[25px] text-black p-0 text-center rounded-md"
-        />
-        <select
-          name=""
-          id=""
-          className="w-[120px] h-[25px] text-black p-0 ps-2 text-center rounded-md"
-        >
-          <option value="">5 pages</option>
-          <option value="">10 pages</option>
-          <option value="">25 pages</option>
-          <option value="">50 pages</option>
-          <option value="">100 pages</option>
-        </select>
-        <div className="flex gap-2 mx-2 items-center">
-          <FaBackward />
-          <IoCaretBack />
-          <IoCaretForwardOutline />
-          <FaForward />
+          </Thead>
+          <tbody>
+            {tableData.map((item: any, index: any) => (
+              <TableBodyTr
+                lastIndex={tableData.length !== index + 1}
+                index={index}
+              >
+                <Td>{index + 1}</Td>
+                <Td>{item._id}</Td>
+                <td
+                  className="px-6 py-4"
+                  onClick={() => {
+                    navigate(`user_details/${item._id}`);
+                  }}
+                >
+                  {item.name}
+                </td>
+                <Td>{item.enrolledCourses.length}</Td>
+                <Td>{item.courses.length}</Td>
+                <Td>{item.status}</Td>
+                <Td>
+                  {item.status === "active" ? (
+                    <button
+                      className="border rounded-full px-5 hover:text-red-600 hover:scale-105"
+                      onClick={async () => await freezUser(item._id)}
+                    >
+                      Freez
+                    </button>
+                  ) : (
+                    <button
+                      className="border rounded-full px-5 hover:text-yellow-300 hover:scale-105"
+                      onClick={() => unFreezUser(item._id)}
+                    >
+                      Un Freez
+                    </button>
+                  )}
+                </Td>
+              </TableBodyTr>
+            ))}
+          </tbody>
+        </table>
+        <div className=" dark:bg-gray-700 dark:text-gray-400 p-3 flex justify-end gap-1">
+          <h4 className="me-2">4 of 5</h4>
+          <input
+            type="text"
+            className="w-[30px] h-[25px] text-black p-0 text-center rounded-md"
+          />
+          <select
+            name=""
+            id=""
+            className="w-[120px] h-[25px] text-black p-0 ps-2 text-center rounded-md"
+          >
+            <option value="">5 pages</option>
+            <option value="">10 pages</option>
+            <option value="">25 pages</option>
+            <option value="">50 pages</option>
+            <option value="">100 pages</option>
+          </select>
+          <div className="flex gap-2 mx-2 items-center">
+            <FaBackward />
+            <IoCaretBack />
+            <IoCaretForwardOutline />
+            <FaForward />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

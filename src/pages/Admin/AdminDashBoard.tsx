@@ -1,42 +1,33 @@
-import { useEffect, useState } from "react";
 import AdminNavbar from "../../components/Admin/Navbar";
 import Sidebar from "../../components/Admin/SideBar";
 import Categories from "../../components/Admin/Categories/Categories";
 import Users from "../../components/Admin/Users/Users";
 import Instructors from "../../components/Admin/Instructors/Instructors";
-import Courses from '../../components/Admin/Courses/Courses'
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { IUserState } from "../../redux/features/auth/authSlice";
+import Courses from "../../components/Admin/Courses/Courses";
+import ContainerLayout from "../../layouts/containerLayout";
+import { Route, Routes } from "react-router-dom";
+import UserDetails from "./UserDetails";
+import CoursePreview from "../../components/Admin/Courses/Tables/CoursePreview";
+import CourseSinglePage from "../User_Instructro/CourseSinglePage";
 const AdminDash = () => {
-  const userData = useSelector((state: IUserState) => state.user.userData);
-  const [sidebarElement, setSidebarElement] = useState(1);
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!userData.name) {
-  //     navigate("/login");
-  //   }
-  //   if (userData.role === "admin") {
-  //     navigate("/admin_dashbord");
-  //   }
-  // }, [userData]);
-
-
-
   return (
-    <div className="dark:bg-black dark:text-white mih-h-[100vh] h-[100vh] w-screen overflow-scroll">
+    <ContainerLayout>
       <AdminNavbar />
-      <div className=" flex w-[95%] m-auto items-start justify-start  p-[25px] gap-2 h-full  ">
-        <Sidebar setSidebarElement={setSidebarElement} />
-        <div className="flex flex-col gap-2  dark:bg-gray-950 text-[#FFD700] p-3 rounded-md w-full relative h-full overflow-scroll scrollbar-hide  scroll-smooth">
-          {sidebarElement === 2 && <Users />}
-          {sidebarElement === 3 && <Instructors />}
-          {sidebarElement === 4 && <Categories />}
-          {sidebarElement === 5 && <Courses />}
+      <div className="h-[80vh] flex justify-start gap-2 mt-[2%]">
+        <Sidebar />
+        <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
+          <Routes>
+            <Route path="/users" element={<Users />} />
+            <Route path="/instructors" element={<Instructors />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/users/user_details/:id" element={<UserDetails />} />
+            <Route path="/course_preview" element={<CoursePreview />} />
+            <Route path="/course_single_page" element={<CourseSinglePage />} />
+          </Routes>
         </div>
       </div>
-    </div>
+    </ContainerLayout>
   );
 };
 
