@@ -12,9 +12,13 @@ const Header = () => {
   const userData = useGetUser();
   const [name, setName] = useState("");
 
+  console.log("userData.role", userData.role);
   useEffect(() => {
     if (userData.name) {
-      setName(userData.name.substring(0, 2));
+      setName(
+        userData.name.substring(0, 1)[0].toUpperCase() +
+          userData.name.substring(1, 2)
+      );
     }
   }, [userData]);
   return (
@@ -57,8 +61,37 @@ const Header = () => {
             </>
           )}
 
-          {name !== "" ? (
-            <Link to={"/user/profile"}>
+          {userData.role === "admin" && (
+            <Link to={`/admin/dash_bord`}>
+              <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
+                <h1 className=" font-bold">{name}</h1>
+              </div>
+            </Link>
+          )}
+
+          {userData.role === "instructor" && (
+            <Link to={`/instructor/profile`}>
+              <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
+                <h1 className=" font-bold">{name}</h1>
+              </div>
+            </Link>
+          )}
+
+          {userData.role === "user" && (
+            <Link to={`/user/profile`}>
+              <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
+                <h1 className=" font-bold">{name}</h1>
+              </div>
+            </Link>
+          )}
+
+          {!userData.role && (
+            <Link to={"/auth/login"}>
+              <CgProfile size={35} />
+            </Link>
+          )}
+          {/* {name !== "" ? (
+            <Link to={`/${userData.role}/profile`}>
               <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
                 <h1 className=" font-bold">{`${name[0].toUpperCase()}${
                   name[1]
@@ -69,7 +102,7 @@ const Header = () => {
             <Link to={"/auth/login"}>
               <CgProfile size={35} />
             </Link>
-          )}
+          )} */}
         </div>
       </div>
     </div>

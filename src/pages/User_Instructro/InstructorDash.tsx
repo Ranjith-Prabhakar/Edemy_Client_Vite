@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";
 
-const UserProfile = () => {
+const InstructorDash = () => {
   return (
     <ContainerLayout>
       <Header />
@@ -22,4 +22,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default InstructorDash;

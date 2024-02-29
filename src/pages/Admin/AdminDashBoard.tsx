@@ -13,14 +13,14 @@ const AdminDash = () => {
   const [sidebarElement, setSidebarElement] = useState(1);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!userData.name) {
-      navigate("/login");
-    }
-    if (userData.role === "admin") {
-      navigate("/admin_dashbord");
-    }
-  }, [userData]);
+  // useEffect(() => {
+  //   if (!userData.name) {
+  //     navigate("/login");
+  //   }
+  //   if (userData.role === "admin") {
+  //     navigate("/admin_dashbord");
+  //   }
+  // }, [userData]);
 
 
 
