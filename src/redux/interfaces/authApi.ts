@@ -55,3 +55,6 @@ export interface IForgotPasswordEmailSubmissionRes {
   };
   message?:string
 }
+
+
+export interface ILogout extends IForgotPasswordEmailSubmissionRes {}

@@ -4,6 +4,7 @@ import {
   IForgotPasswordEmailSubmissionRes,
   ILoginReq,
   ILoginRes,
+  ILogout,
   RegistrationReq,
   RegistrationRes,
 } from "../../interfaces/authApi";
@@ -84,16 +85,17 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
     //user log out-------------------------------------------------------------------------------------
-    logout: builder.mutation({
+    logout: builder.mutation<ILogout, void>({
       query: () => ({
         url: "logout",
         method: "post",
         credentials: "include",
       }),
-      async onQueryStarted({ queryFulfilled, dispatch }) {
+      async onQueryStarted(arg,{ queryFulfilled, dispatch }) {
         try {
-          await queryFulfilled;
-          dispatch(userLoggedOut());
+          const result = await queryFulfilled;
+          console.log("result", result);
+          dispatch(userLoggedOut({ data: {} }));
         } catch (error) {
           console.log(error);
         }
