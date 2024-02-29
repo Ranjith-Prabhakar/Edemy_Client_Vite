@@ -54,10 +54,23 @@ const AddCourseData = ({
   const [addModule] = useAddModuleMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addCourseData] = useAddCourseDataMutation();
-  const [updateCourse] = useUpdateCourseMutation();
+  const [updateCourse, { data, isSuccess, error, isError }] =
+    useUpdateCourseMutation();
   const userId = useSelector((state: any) => state.user.userData._id);
   const thumbnailRef = useRef<HTMLInputElement>(null);
   const courseNameRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isSuccess) {
+      if (data) {
+        toast.success(data.message);
+      }
+    }else if(isError){
+      if(error){
+        toast.error(error.message)
+      }
+    }
+  }, [data, error, isError, isSuccess]);
 
   const handleUpdation = async (data: Record<string, string>) => {
     try {
@@ -189,7 +202,6 @@ const AddCourseData = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
-          required
         />
         {!visible && (
           <button
@@ -220,7 +232,6 @@ const AddCourseData = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
-          required
         />
         {!visible && (
           <button
@@ -252,7 +263,6 @@ const AddCourseData = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
-          required
         />
         {!visible && (
           <button
@@ -291,7 +301,6 @@ const AddCourseData = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
-          required
         />
         {!visible && (
           <button
@@ -309,7 +318,7 @@ const AddCourseData = ({
 
       <div className="relative z-0 w-full mb-5 group">
         <input
-          type="text"
+          type="number"
           name="duration"
           id="duration"
           value={values.duration}
@@ -317,7 +326,6 @@ const AddCourseData = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
-          required
         />
         {!visible && (
           <button
@@ -339,7 +347,11 @@ const AddCourseData = ({
         </label>
       </div>
       {visible && (
-        <button className="dark:bg-white dark:hover:bg-c_color-colorTwo px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center">
+        <button
+          type="submit"
+          // className="  px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
+          className="dark:bg-c_color-colorSeven dark:text-white hover:text-[18px] transition-all ease duration-700 font-bold  px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center"
+        >
           <FaArrowRightLong />
         </button>
       )}

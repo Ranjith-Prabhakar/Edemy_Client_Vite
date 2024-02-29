@@ -74,7 +74,7 @@ const Model = ({ setOpen, setCourseData, setModuleVideos }: Props) => {
                 videoUrl: "",
               });
               setModuleVideos([]);
-              navigate("/profile");
+              navigate("/user/profile");
             }}
           >
             Submit
