@@ -21,7 +21,7 @@ export interface IUserState {
 
 export type RegistrationRes = {
   //register
-  success:boolean;
+  success: boolean;
   message: string;
 };
 
@@ -40,5 +40,17 @@ export interface ILoginReq {
 
 export interface ILoginRes {
   user: IUser;
-  message:string
+  message: string;
+}
+
+export interface IForgotPasswordEmailSubmissionReq {
+  email: string;
+}
+
+export interface IForgotPasswordEmailSubmissionRes {
+  status: boolean;
+  data:{
+    status:boolean,
+    message:string
+  }
 }

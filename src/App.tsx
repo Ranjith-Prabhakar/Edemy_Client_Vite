@@ -12,11 +12,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route
           path="/auth/*"
           element={userName ? <Navigate to={"/"} /> : <AuthRoute />}
         />
-        <Route path="/" element={<Home />} />
         <Route path="/user/*" element={<UserRoute />} />
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/*" element={<PageNotFound />} />

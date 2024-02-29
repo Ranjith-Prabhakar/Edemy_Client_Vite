@@ -1,5 +1,7 @@
 import { catchError } from "../../../utils/catchError";
 import {
+  IForgotPasswordEmailSubmissionReq,
+  IForgotPasswordEmailSubmissionRes,
   ILoginReq,
   ILoginRes,
   RegistrationReq,
@@ -46,29 +48,16 @@ export const authApi = apiSlice.injectEndpoints({
               userData: result.data.user,
             })
           );
-        } catch (error:unknown) {
-          catchError(error)
+        } catch (error: unknown) {
+          catchError(error);
         }
       },
-
-      // async onQueryStarted(args,{ queryFulfilled, dispatch }) {
-      //   try {
-      //     const result = await queryFulfilled;
-      //     console.log("result==> from login", result);
-      //     // console.log("result==> from login data", result?.data);
-      //     // console.log("result==> from login data.user", result?.data?.user);
-      //     // dispatch(
-      //     //   userLoggedIn({
-      //     //     userData: result.data,
-      //     //   })
-      //     // );
-      //   } catch (error) {
-      //     console.log("errornrrrrr",error);
-      //   }
-      // },
     }),
     //forgotPassword-------------------------------------------------------------------------------------
-    forgotPasswordEmailSubmission: builder.mutation({
+    forgotPasswordEmailSubmission: builder.mutation<
+      IForgotPasswordEmailSubmissionRes,
+      IForgotPasswordEmailSubmissionReq
+    >({
       query: (data) => ({
         url: "forgot_password_email_submission",
         method: "post",

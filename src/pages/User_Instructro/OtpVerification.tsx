@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { catchError } from "../../utils/catchError";
 
 const OtpVerification = (): JSX.Element => {
-  const [createUser, { isLoading, isSuccess, isError, data }] =
+  const [createUser, { isLoading, isSuccess, isError, error }] =
     useCreateUserMutation();
   const navigate = useNavigate();
   const length = 4;
@@ -24,12 +24,13 @@ const OtpVerification = (): JSX.Element => {
     if (isLoading) {
       <div>Loading...</div>;
     } else if (isSuccess) {
-      navigate("/Login");
+      navigate("/auth/Login");
       toast.success("user has been created successfully , please login");
     } else if (isError) {
-      toast.error(data.message);
+      console.log("error", error);
+      // toast.error(error.message);
     }
-  }, [isLoading, isSuccess]);
+  }, [isError, isLoading, isSuccess, navigate, error]);
 
   const onSubmit = async (newOtp: string) => {
     try {

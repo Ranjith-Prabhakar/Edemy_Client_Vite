@@ -25,7 +25,7 @@ const SignUp = () => {
     } else if (isSuccess) {
       setLoading(false);
       toast.success("otp has been sent to your mail");
-      navigate("/otp_verification", { state: { fromSignup: true } });
+      navigate("/auth/otp_verification", { state: { fromSignup: true } });
     } else if (isError && error) {
       setLoading(false);
       if ("data" in error) {
@@ -35,7 +35,7 @@ const SignUp = () => {
         }
       }
     }
-  }, [isSuccess, isError, error, isLoading]);
+  }, [isSuccess, isError, error, isLoading, navigate]);
 
   const {
     values,
@@ -143,6 +143,7 @@ const SignUp = () => {
                   <p className="text-red-600">{errors.confirmPassword}</p>
                 )}
               </div>
+              <br />
               {loading ? (
                 <SpinnerButton status="Validating Data" />
               ) : (
