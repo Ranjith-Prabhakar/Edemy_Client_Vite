@@ -4,13 +4,18 @@ import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { useGetCoursesInRequestQuery } from "../../../../redux/features/course/courseApi";
 import { ICourseInitialState } from "../../../../redux/features/course/courseSlice";
 import { ICourse } from "../../../../redux/interfaces/Course/generalInterface";
+import Thead from "../../../Table/Thead";
+import Th from "../../../Table/Th";
+import TableBodyTr from "../../../Table/TableBodyTr";
+import Td from "../../../Table/Td";
+import SearchButton from "../../../Buttons/searchButton";
 
 const CourseRequestTable = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useGetCoursesInRequestQuery();
   const [tableData, setTableData] = useState<ICourse[]>([]);
   const coursesInRequest = useSelector(
@@ -24,7 +29,17 @@ const CourseRequestTable = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <Thead>
+          <tr>
+            <Th>Sl No</Th>
+            <Th>Course</Th>
+            <Th>Instructor</Th>
+            <Th>Status</Th>
+            <Th>Action</Th>
+          </tr>
+        </Thead>
+
+        {/* <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               Sl No
@@ -50,33 +65,68 @@ const CourseRequestTable = () => {
               Action
             </th>
           </tr>
-        </thead>
+        </thead> */}
         <tbody>
           {tableData.map((item: ICourse, index: number) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              key={index}
+            <TableBodyTr
+              lastIndex={tableData.length !== index + 1}
+              index={index}
             >
-              <td className="px-6 py-4 cursor-pointer">{index + 1}</td>
-              <td className="px-6 py-4 cursor-pointer" onClick={()=>{navigate("/course_preview", { state: { courseData: item } });}}>{item.courseName}</td>
-              <td className="px-6 py-4 cursor-pointer">{item.instructor}</td>
-              <td className="px-6 py-4 cursor-pointer">{item.noOfPurchase}</td>
-              <td className="px-6 py-4 cursor-pointer">{item.status}</td>
-              <td className="px-6 py-4 cursor-pointer">
+              <Td>{index + 1}</Td>
+              <td
+                className="px-6 py-4"
+                onClick={() => {
+                  navigate("/admin/dash_bord/course_preview", {
+                    state: { courseData: item },
+                  });
+                }}
+              >
+                {item.courseName.toUpperCase()}
+              </td>
+              <Td>{item.instructor}</Td>
+              <Td>{item.status}</Td>
+              <Td>
                 <div className="flex justify-start gap-3 ">
-                  <button className="bg-gray-50 dark:bg-gray-700 py-1 px-2 rounded-md">
+                  <button className="dark:bg-cyan-500 py-1 px-4 rounded-full">
                     Approve
                   </button>
-                  <button className="bg-gray-50 dark:bg-gray-700 py-1 px-2 rounded-md">
+                  <button className="dark:bg-red-700 py-1 px-4 rounded-full">
                     Reject
                   </button>
                 </div>
-              </td>
-            </tr>
+              </Td>
+            </TableBodyTr>
+
+            // <tr
+            //   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            //   key={index}
+            // >
+            //   <td className="px-6 py-4 cursor-pointer">{index + 1}</td>
+            //   <td
+            //     className="px-6 py-4 cursor-pointer"
+            //     onClick={() => {
+            //       navigate("/course_preview", { state: { courseData: item } });
+            //     }}
+            //   >
+            //     {item.courseName}
+            //   </td>
+            //   <td className="px-6 py-4 cursor-pointer">{item.instructor}</td>
+            //   <td className="px-6 py-4 cursor-pointer">{item.status}</td>
+            //   <td className="px-6 py-4 cursor-pointer">
+            //     <div className="flex justify-start gap-3 ">
+            //       <button className="bg-gray-50 dark:bg-gray-700 py-1 px-2 rounded-md">
+            //         Approve
+            //       </button>
+            //       <button className="bg-gray-50 dark:bg-gray-700 py-1 px-2 rounded-md">
+            //         Reject
+            //       </button>
+            //     </div>
+            //   </td>
+            // </tr>
           ))}
         </tbody>
       </table>
-      <div className=" dark:bg-gray-700 dark:text-gray-400 p-3 flex justify-end gap-1">
+      <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
         <h4 className="me-2">4 of 5</h4>
         <input
           type="text"

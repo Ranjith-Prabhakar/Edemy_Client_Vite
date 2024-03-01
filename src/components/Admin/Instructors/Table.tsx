@@ -12,6 +12,10 @@ import {
 } from "../../../redux/features/admin/Instructors/instructorsApi";
 
 import toast from "react-hot-toast";
+import Thead from "../../Table/Thead";
+import Th from "../../Table/Th";
+import TableBodyTr from "../../Table/TableBodyTr";
+import Td from "../../Table/Td";
 
 const Table = () => {
   const navigate = useNavigate();
@@ -46,72 +50,56 @@ const Table = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <Thead>
           <tr>
-            <th scope="col" className="px-6 py-3">
-              Sl No
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Id
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Name
-            </th>
-
-            <th scope="col" className="px-6 py-3">
-              Enrolled course
-            </th>
-            <th scope="col" className="px-6 py-3">
-              courses
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-
-            <th
-              scope="col"
-              className="px-6 py-3 flex justify-center items-center"
-            >
-              Freez
-            </th>
+            <Th>Sl No</Th>
+            <Th>Name</Th>
+            <Th>Enrolled course</Th>
+            <Th>courses</Th>
+            <Th>Status</Th>
+            <Th>Freez</Th>
           </tr>
-        </thead>
+        </Thead>
         <tbody>
           {tableData.map((item: any, index: any) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              key={index}
+            <TableBodyTr
+              lastIndex={tableData.length !== index + 1}
+              index={index}
             >
-              <td className="px-6 py-4">{index + 1}</td>
+              <Td>{index + 1}</Td>
               <td
-                className="px-6 py-4 cursor-pointer"
+                className="px-6 py-4"
                 onClick={() => {
-                  navigate(`/user_details/${item._id}`);
+                  navigate(`user_details/${item._id}`);
                 }}
               >
-                {item._id}
+                {item.name.toUpperCase()}
               </td>
-              <td className="px-6 py-4">{item.name}</td>
-              <td className="px-6 py-4">{item.enrolledCourses.length}</td>
-              <td className="px-6 py-4">{item.courses.length}</td>
-              <td className="px-6 py-4">{item.status}</td>
-              <td className="px-6 py-4">
+              <Td>{item.enrolledCourses.length}</Td>
+              <Td>{item.courses.length}</Td>
+              <Td>{item.status}</Td>
+              <Td>
                 {item.status === "active" ? (
-                  <FaRegCircleStop
+                  <button
+                    className="border rounded-full px-5 hover:text-red-600 hover:scale-105"
                     onClick={async () => await freezInstructor(item._id)}
-                  />
+                  >
+                    Freez
+                  </button>
                 ) : (
-                  <FaRegCircleStop
-                    color="red"
+                  <button
+                    className="border rounded-full px-5 hover:text-yellow-300 hover:scale-105"
                     onClick={() => unFreezInstructor(item._id)}
-                  />
+                  >
+                    Un Freez
+                  </button>
                 )}
-              </td>
-            </tr>
+              </Td>
+            </TableBodyTr>
           ))}
         </tbody>
       </table>
-      <div className=" dark:bg-gray-700 dark:text-gray-400 p-3 flex justify-end gap-1">
+      <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
         <h4 className="me-2">4 of 5</h4>
         <input
           type="text"

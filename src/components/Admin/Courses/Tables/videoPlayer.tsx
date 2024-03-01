@@ -6,7 +6,7 @@ const VideoPlayer = ({ videoUrl = "" }: Props) => {
   return (
     <div>
       {videoUrl !== "" && (
-        <ReactPlayer url={videoUrl} width="740px" height="360px" controls />
+        <ReactPlayer url={videoUrl} width="550px" height="260px" controls />
       )}
     </div>
   );

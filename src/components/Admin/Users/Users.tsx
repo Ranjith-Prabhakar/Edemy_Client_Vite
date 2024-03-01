@@ -1,5 +1,7 @@
 import Table from "./Tables/Table";
 import { useGetUsersQuery } from "../../../redux/features/admin/Users/userApi";
+import SearchButton from "../../Buttons/searchButton";
+import DashBordSearch from "../../inputFields/DashBordSearch";
 const Users = () => {
   const { data, isError, isSuccess, error } = useGetUsersQuery();
 
@@ -11,15 +13,11 @@ const Users = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="flex items-center justify-between">
-        <h2 className="font-bold tracking-[2px] text-[25px] text-gray-500 dark:text-gray-400">
-          Users
-        </h2>
-        <div className="flex gap-2">
-          <input type="text" className="bg-gray-800 rounded-md h-[30px]" />
-          <button className=" px-3 rounded-sm h-[30px] font-bold dark:bg-gray-700 dark:text-gray-400">
-            Search
-          </button>
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="font-bold tracking-[2px] text-[25px] ms-10">Users</h2>
+        <div className="flex  items-end justify-center gap-2">
+          <DashBordSearch />
+          <SearchButton />
         </div>
       </div>
       <Table />

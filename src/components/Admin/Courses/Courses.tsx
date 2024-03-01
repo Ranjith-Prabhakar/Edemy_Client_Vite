@@ -1,15 +1,21 @@
 import { useState } from "react";
 import CourseTable from "./Tables/CourseTable";
 import CourseRequestTable from "./Tables/CourseRequestTable";
+import SearchButton from "../../Buttons/searchButton";
+import DashBordSearch from "../../inputFields/DashBordSearch";
 
 const Courses = () => {
   const [toggler, setToggler] = useState(1);
   return (
     <div className="h-full w-full">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-3">
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex gap-3 ms-3">
           <h2
-            className="font-bold tracking-[2px] text-[25px] text-gray-500 dark:text-gray-400 cursor-pointer"
+            className={`${
+              toggler === 1
+                ? "bg-c_color-colorSeven shadow-md shadow-cyan-600 "
+                : ""
+            } font-bold tracking-[2px] text-[25px] cursor-pointer px-5 rounded-t-lg`}
             onClick={() => {
               setToggler(1);
             }}
@@ -18,7 +24,11 @@ const Courses = () => {
           </h2>
 
           <h2
-            className="font-bold tracking-[2px] text-[25px] text-gray-500 dark:text-gray-400 cursor-pointer"
+            className={`${
+              toggler === 2
+                ? "bg-c_color-colorSeven shadow-md shadow-cyan-600 "
+                : ""
+            } font-bold tracking-[2px] text-[25px] cursor-pointer px-5 rounded-t-lg`}
             onClick={() => {
               setToggler(2);
             }}
@@ -28,10 +38,8 @@ const Courses = () => {
         </div>
 
         <div className="flex gap-2">
-          <input type="text" className="bg-gray-800 rounded-md h-[30px]" />
-          <button className=" px-3 rounded-sm h-[30px] font-bold dark:bg-gray-700 dark:text-gray-400">
-            Search
-          </button>
+          <DashBordSearch/>
+          <SearchButton/>
         </div>
       </div>
       {toggler === 1 && <CourseTable />}

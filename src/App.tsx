@@ -7,6 +7,7 @@ import useGetUser from "./hooks/useGetUser";
 import AuthRoute from "./Routes/AuthRoute";
 import AdminRoute from "./Routes/AdminRoute";
 import InstructorRoute from "./Routes/InstructorRoute";
+import CourseSinglePage from "./pages/User_Instructro/CourseSinglePage";
 
 const App = () => {
   const userName = useGetUser().name;
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/user/*" element={<UserRoute />} />
         <Route path="/instructor/*" element={<InstructorRoute />} />
         <Route path="/admin/*" element={<AdminRoute />} />
+        <Route path="/course_single_page" element={<CourseSinglePage />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

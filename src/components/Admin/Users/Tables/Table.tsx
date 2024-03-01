@@ -1,4 +1,3 @@
-import { FaRegCircleStop } from "react-icons/fa6";
 import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 import { IoCaretBack } from "react-icons/io5";
@@ -100,7 +99,8 @@ const Table = () => {
             ))}
           </tbody>
         </table>
-        <div className=" dark:bg-gray-700 dark:text-gray-400 p-3 flex justify-end gap-1">
+        
+        <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
           <h4 className="me-2">4 of 5</h4>
           <input
             type="text"

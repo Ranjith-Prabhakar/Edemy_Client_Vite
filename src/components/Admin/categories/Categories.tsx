@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import AddCategory from "./AddCategoryForm";
 import { useFetchCategoriesQuery } from "../../../redux/features/admin/Categories/categoryApi";
 import Table from "./Tables/Table";
-type Props = {};
+import SearchButton from "../../Buttons/searchButton";
+import DashBordSearch from "../../inputFields/DashBordSearch";
 
-const Categories = (props: Props) => {
+const Categories = () => {
   const [addCategory, setAddCategory] = useState(false);
   const { data } = useFetchCategoriesQuery([]);
 
@@ -15,23 +16,21 @@ const Categories = (props: Props) => {
 
   return (
     <div className="h-full w-full">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-1">
         <button
-          className="dark:bg-gray-700 dark:text-gray-400  px-3 rounded-sm h-[30px] flex items-center gap-1 font-bold"
+          className="dark:bg-c_color-colorSeven  px-3 rounded-sm h-[30px] flex items-center gap-1 font-bold"
           onClick={() => {
             setAddCategory(!addCategory);
           }}
         >
-          Add new <TbCategoryPlus className="" />
+          Add new <TbCategoryPlus/>
         </button>
-        <h2 className="font-bold tracking-[2px] text-[25px] text-gray-500 dark:text-gray-400">
+        <h2 className="font-bold tracking-[2px] text-[25px]">
           Categories
         </h2>
         <div className="flex gap-2">
-          <input type="text" className="bg-gray-800 rounded-md h-[30px]" />
-          <button className=" px-3 rounded-sm h-[30px] font-bold dark:bg-gray-700 dark:text-gray-400">
-            Search
-          </button>
+          <DashBordSearch/>
+          <SearchButton/>
         </div>
       </div>
       {addCategory && (

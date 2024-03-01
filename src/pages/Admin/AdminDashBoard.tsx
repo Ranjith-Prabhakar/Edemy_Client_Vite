@@ -8,7 +8,6 @@ import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";
 import UserDetails from "./UserDetails";
 import CoursePreview from "../../components/Admin/Courses/Tables/CoursePreview";
-import CourseSinglePage from "../User_Instructro/CourseSinglePage";
 const AdminDash = () => {
   return (
     <ContainerLayout>
@@ -23,7 +22,6 @@ const AdminDash = () => {
             <Route path="/courses" element={<Courses />} />
             <Route path="/users/user_details/:id" element={<UserDetails />} />
             <Route path="/course_preview" element={<CoursePreview />} />
-            <Route path="/course_single_page" element={<CourseSinglePage />} />
           </Routes>
         </div>
       </div>

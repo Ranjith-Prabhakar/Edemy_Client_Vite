@@ -33,11 +33,11 @@ const AddCategory = ({ setAddCategory, addCategory }: Props) => {
     },
   });
   return (
-    <div className=" bg-black opacity-[0.8] absolute z-10 left-[20%] top-[20%] flex items-start justify-center w-[400px] h-[200px] rounded-lg ">
+    <div className="dark:bg-c_color-colorSeven  shadow-2xl shadow-cyan-500 absolute z-10 left-[20%] top-[20%] flex items-start justify-center w-[400px] h-[200px] rounded-lg ">
       <form className="max-w-md mx-auto my-auto" onSubmit={handleSubmit}>
         <IoIosCloseCircleOutline
           size={25}
-          className="absolute top-2 right-4"
+          className="absolute top-2 right-4 dark:text-white"
           onClick={() => {
             setAddCategory(!addCategory);
           }}
@@ -64,7 +64,7 @@ const AddCategory = ({ setAddCategory, addCategory }: Props) => {
         </div>
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="dark:text-black dark:bg-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-10  py-1 text-center dark:hover:bg-cyan-700 hover:dark:text-white dark:focus:ring-blue-800"
           disabled={isSubmitting}
         >
           Submit

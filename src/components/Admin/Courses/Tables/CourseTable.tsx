@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 import { useGetCoursesQuery } from "../../../../redux/features/course/courseApi";
 import { ICourseInitialState } from "../../../../redux/features/course/courseSlice";
 import { ICourse } from "../../../../redux/interfaces/Course/generalInterface";
+import Thead from "../../../Table/Thead";
+import Th from "../../../Table/Th";
+import TableBodyTr from "../../../Table/TableBodyTr";
+import Td from "../../../Table/Td";
 
 const CourseTable = () => {
   useGetCoursesQuery();
@@ -26,7 +30,18 @@ const CourseTable = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <Thead>
+          <tr>
+            <Th>Sl No</Th>
+            <Th>Course</Th>
+            <Th>Instructor</Th>
+            <Th>No Purchase</Th>
+            <Th>Status</Th>
+            <Th>Freez</Th>
+          </tr>
+        </Thead>
+
+        {/* <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               Sl No
@@ -55,38 +70,66 @@ const CourseTable = () => {
               Freez
             </th>
           </tr>
-        </thead>
+        </thead> */}
         <tbody>
           {tableData.map((item: ICourse, index: number) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              key={index}
+            <TableBodyTr
+              lastIndex={tableData.length !== index + 1}
+              index={index}
             >
-              <td className="px-6 py-4">{index + 1}</td>
+              <Td>{index + 1}</Td>
               <td
-                className="px-6 py-4 cursor-pointer"
+                className="px-6 py-4"
                 onClick={() => {
-                  navigate(`/user_details/${item._id}`);
+                  navigate(`user_details/${item._id}`);
                 }}
               >
-                {item._id}
+                {item.courseName.toUpperCase()}
               </td>
-              <td className="px-6 py-4">{item.courseName}</td>
-              <td className="px-6 py-4">{item.instructor}</td>
-              <td className="px-6 py-4">{item.noOfPurchase}</td>
-              <td className="px-6 py-4">{item.status}</td>
-              <td className="px-6 py-4">
+              <Td>{item.instructor}</Td>
+              <Td>{item.noOfPurchase}</Td>
+              <Td>{item.status}</Td>
+              <Td>
                 {item.status === "approved" ? (
-                  <FaRegCircleStop />
+                  <button className="border rounded-full px-5 hover:text-red-600 hover:scale-105">
+                    Freez
+                  </button>
                 ) : (
-                  <FaRegCircleStop color="red" />
+                  <button className="border rounded-full px-5 hover:text-yellow-300 hover:scale-105">
+                    Un Freez
+                  </button>
                 )}
-              </td>
-            </tr>
+              </Td>
+            </TableBodyTr>
+            // <tr
+            //   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            //   key={index}
+            // >
+            //   <td className="px-6 py-4">{index + 1}</td>
+            //   <td
+            //     className="px-6 py-4 cursor-pointer"
+            //     onClick={() => {
+            //       navigate(`/user_details/${item._id}`);
+            //     }}
+            //   >
+            //     {item._id}
+            //   </td>
+            //   <td className="px-6 py-4">{item.courseName}</td>
+            //   <td className="px-6 py-4">{item.instructor}</td>
+            //   <td className="px-6 py-4">{item.noOfPurchase}</td>
+            //   <td className="px-6 py-4">{item.status}</td>
+            //   <td className="px-6 py-4">
+            //     {item.status === "approved" ? (
+            //       <FaRegCircleStop />
+            //     ) : (
+            //       <FaRegCircleStop color="red" />
+            //     )}
+            //   </td>
+            // </tr>
           ))}
         </tbody>
       </table>
-      <div className=" dark:bg-gray-700 dark:text-gray-400 p-3 flex justify-end gap-1">
+      <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
         <h4 className="me-2">4 of 5</h4>
         <input
           type="text"
