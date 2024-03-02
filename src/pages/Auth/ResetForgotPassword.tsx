@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
+import responseErrorCatch from "../../utils/responseErrorToast";
 
 const ResetForgotPassword = () => {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ const ResetForgotPassword = () => {
       toast.success(data.message);
       navigate("/auth/login");
     } else if (isError) {
-      toast.error(error?.data?.message);
+      responseErrorCatch(error)
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data, navigate, error]);
   const {
     values,
     errors,

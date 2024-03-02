@@ -1,5 +1,6 @@
-import AdminNavbar from "../../components/Admin/Navbar";
-import Sidebar from "../../components/Admin/SideBar";
+import AdminNavbar from "../../layouts/Navbar";
+import SideBar from "../../layouts/SideBar";
+import { adminDashBord } from "../../data/AdminSideBar";
 import Categories from "../../components/Admin/Categories/Categories";
 import Users from "../../components/Admin/Users/Users";
 import Instructors from "../../components/Admin/Instructors/Instructors";
@@ -13,7 +14,7 @@ const AdminDash = () => {
     <ContainerLayout>
       <AdminNavbar />
       <div className="h-[80vh] flex justify-start gap-2 mt-[2%]">
-        <Sidebar />
+        <SideBar sideBarData={adminDashBord} />
         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
           <Routes>
             <Route path="/users" element={<Users />} />

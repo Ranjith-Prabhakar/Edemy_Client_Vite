@@ -1,7 +1,8 @@
-import SideBar from "../../components/User/SideBar";
+import SideBar from "../../layouts/SideBar";
+import { instructorSideBar } from "../../data/InstructorSideBar";
 import Table from "../../components/User/Tables/Table";
 import Courses from "../../components/User/Course/Courses";
-import Header from "../../components/Header/Header";
+import Header from "../../layouts/Header";
 import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";
 
@@ -10,7 +11,7 @@ const InstructorDash = () => {
     <ContainerLayout>
       <Header />
       <div className="h-[77vh] flex justify-start gap-2 mt-[4%]">
-        <SideBar />
+        <SideBar sideBarData={instructorSideBar} />
         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
           <Routes>
             <Route path="dashboard" element={<Table />} />

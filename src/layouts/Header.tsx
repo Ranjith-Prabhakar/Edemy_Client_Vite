@@ -4,9 +4,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import ThemeToggler from "../utils/ThemeToggler";
+import ThemeToggler from "../components/utils/ThemeToggler";
 import { useEffect, useState } from "react";
-import useGetUser from "../../hooks/useGetUser";
+import useGetUser from "../hooks/useGetUser";
 
 const Header = () => {
   const userData = useGetUser();
@@ -22,7 +22,7 @@ const Header = () => {
     }
   }, [userData]);
   return (
-    <div className="sticky top-0  z-50 text-xl">
+    <div className="sticky top-0  z-50 text-xl ">
       <div className="flex justify-between items-end">
         <div className="flex items-end  gap-4">
           <Link to={"/"}>
@@ -37,7 +37,7 @@ const Header = () => {
         </div>
         <div>
           <input
-            className="rounded-full w-96 h-[30px] px-7 outline-none dark:bg-slate-400 opacity-40 focus:border-1 focus:border-white placeholder:text-white"
+            className="rounded-full w-96 h-[35px] px-7 outline-none dark:bg-slate-400 opacity-40 focus:border-1 focus:border-white placeholder:text-white"
             type="search"
             placeholder="search...."
           />

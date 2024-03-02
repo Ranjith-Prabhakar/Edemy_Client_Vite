@@ -1,13 +1,13 @@
 import "./assets/App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Home from "./pages/User_Instructro/Home";
+import Home from "./pages/General/Home";
 import PageNotFound from "./pages/PageNotFound";
-import UserRoute from "./Routes/InstructorRoute";
 import useGetUser from "./hooks/useGetUser";
 import AuthRoute from "./Routes/AuthRoute";
 import AdminRoute from "./Routes/AdminRoute";
 import InstructorRoute from "./Routes/InstructorRoute";
-import CourseSinglePage from "./pages/User_Instructro/CourseSinglePage";
+import UserRoute from "./Routes/UserRoute";
+import CourseSinglePage from "./pages/General/CourseSinglePage";
 
 const App = () => {
   const userName = useGetUser().name;

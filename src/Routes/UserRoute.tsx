@@ -1,8 +1,9 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import useGetUser from "../hooks/useGetUser";
-import InstructorDash from "../pages/Instructor/InstructorDash";
+import UserDash from "../pages/User/UserDash";
+import BeInstructor from "../pages/User/BeInstructor";
 
-const InstructorRoute = () => {
+const UserRoute = () => {
   const user = useGetUser();
   const navigate = useNavigate();
   if (!user.name) {
@@ -12,13 +13,14 @@ const InstructorRoute = () => {
   console.log("user in User", user);
   return (
     <div>
-      {user.role === "instructor" && (
+      {user.role === "user" && (
         <Routes>
-          <Route path="/profile/*" element={<InstructorDash />} />
+          <Route path="/profile/*" element={<UserDash />} />
+          <Route path="/be_instructor" element={<BeInstructor />} />
         </Routes>
       )}
     </div>
   );
 };
 
-export default InstructorRoute;
+export default UserRoute;

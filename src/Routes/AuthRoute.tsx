@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../pages/User_Instructro/Login";
-import SignUp from "../pages/User_Instructro/SignUp";
-import OtpVerification from "../pages/User_Instructro/OtpVerification";
-import ForgotPassword from "../pages/User_Instructro/forgotPassword";
-import ForgotOtpPasswordOtpVerification from "../pages/User_Instructro/forgotPasswordOtpVerification";
-import ResetForgotPassword from "../pages/User_Instructro/ResetForgotPassword";
+import Login from "../pages/Auth/Login";
+import SignUp from "../pages/Auth/SignUp";
+import OtpVerification from "../pages/Auth/OtpVerification";
+import ForgotPassword from "../pages/Auth/forgotPassword";
+import ForgotOtpPasswordOtpVerification from "../pages/Auth/forgotPasswordOtpVerification";
+import ResetForgotPassword from "../pages/Auth/ResetForgotPassword";
 
 const AuthRoute = () => {
   return (
