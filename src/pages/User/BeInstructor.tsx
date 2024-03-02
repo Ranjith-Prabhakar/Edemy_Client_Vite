@@ -7,6 +7,9 @@ import { useToBeInstructorMutation } from "../../redux/features/user/userApi";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import responseErrorCatch from "../../utils/responseErrorToast";
+import AuthInputs from "../../components/inputFields/AuthInputs";
+import GeneralButton from "../../components/Buttons/GeneralButton";
 
 const BeInstructor = () => {
   const navigate = useNavigate();
@@ -15,19 +18,17 @@ const BeInstructor = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success(data.message);
-      navigate("/profile");
+      navigate("/user/profile");
     } else if (isError) {
-      if (error && error.data && error.data.message) {
-        toast.error(error.data.message);
-        navigate("/profile");
-      }
+      responseErrorCatch(error);
+      navigate("/user/profile");
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data, navigate, error]);
   const {
     values,
     errors,
     touched,
-    isSubmitting,
+
     handleChange,
     handleBlur,
     handleSubmit,
@@ -43,18 +44,18 @@ const BeInstructor = () => {
   });
 
   return (
-    <section className="dark:bg-black dark:text-white">
+    <section>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-950 ">
+        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between items-center">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-[#FFd700]">
+              <h1 className="text-xl font-bold leading-tight tracking-tightmd:text-2xl ">
                 Be a instructor
               </h1>
               <div className="flex justify-center items-center gap-3">
                 {" "}
                 <Link to={"/"}>
-                  <IoHome color={"#FFd700"} className="dark:text-[#FFD700]" />
+                  <IoHome />
                 </Link>
                 <ThemeToggler />
               </div>
@@ -65,7 +66,8 @@ const BeInstructor = () => {
                 <textarea
                   name=""
                   id=""
-                  className="text-black rounded-sm w-[100%] h-[260px]"
+                  rounded-lg
+                  className=" mb-3 w-[100%] h-[260px] bg-gray-50 border border-gray-300 dark:text-slate-800 sm:text-sm rounded-lg focus:ring-c_color-colorTwo focus:border-c_color-colorTwo block  p-2.5 dark:bg-c_color-colorThree dark:placeholder-gray-400"
                 >
                   you are responsible to provide quality education, adhere to
                   the platform's guidelines, maintain professionalism, engage
@@ -75,34 +77,21 @@ const BeInstructor = () => {
                   70% of the income generated, and the platform retains 30%, as
                   specified in our terms and conditions
                 </textarea>
-                <label
-                  htmlFor="qualification"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-[#FFd700]"
-                >
-                  Qualification
-                </label>
-                <input
+                <AuthInputs
                   type="text"
                   name="qualification"
-                  id="qualification"
                   value={values.qualification}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#e4d9a6]  dark:placeholder-gray-400  dark:focus:ring-[#FFD700] dark:focus:border-[#FFD700] "
-                  required
+                  placeholder="Add Qualification"
+                  label="Add Qualification"
                 />
+
                 {errors.qualification && touched.qualification && (
                   <p className="text-red-600">{errors.qualification}</p>
                 )}
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
-                disabled={isSubmitting}
-              >
-                Submit
-              </button>
+              <GeneralButton>Submit</GeneralButton>
             </form>
           </div>
         </div>

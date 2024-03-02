@@ -44,7 +44,7 @@ const Header = () => {
         </div>
         <div className="flex justify-center items-center gap-4">
           {userData.name && userData.role !== "instructor" && (
-            <Link to={"/be_instructor"}>Teach on Edemy</Link>
+            <Link to={"/user/be_instructor"}>Teach on Edemy</Link>
           )}
           {userData.name && (
             <>
