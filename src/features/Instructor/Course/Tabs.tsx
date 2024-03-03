@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Model from "../../utils/model";
+import Model from "../../../components/Modal/model";
 type Props = {
   setStepper: React.Dispatch<React.SetStateAction<number>>;
   stepper: number;
@@ -78,9 +78,3 @@ const Tabs = ({
 };
 
 export default Tabs;
-
-
-
-
-
-

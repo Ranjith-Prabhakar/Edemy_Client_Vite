@@ -1,8 +1,8 @@
 import { useState } from "react";
 import CourseTable from "./Tables/CourseTable";
 import CourseRequestTable from "./Tables/CourseRequestTable";
-import SearchButton from "../../Buttons/searchButton";
-import DashBordSearch from "../../inputFields/DashBordSearch";
+import SearchButton from "../../../components/Buttons/SearchButton";
+import DashBordSearch from "../../../components/inputFields/DashBordSearch";
 
 const Courses = () => {
   const [toggler, setToggler] = useState(1);

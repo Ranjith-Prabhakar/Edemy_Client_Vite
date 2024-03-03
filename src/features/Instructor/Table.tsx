@@ -1,4 +1,3 @@
-import { Data } from "./Data";
 import { TbCategoryPlus } from "react-icons/tb";
 import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
@@ -6,6 +5,13 @@ import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 
 const Table = () => {
+  const Data = [
+    {
+      Id :1,
+      Name: "test",
+      No_Of_Courses: "tset",
+    },
+  ];
   return (
     <>
       <div className="flex items-center justify-between">

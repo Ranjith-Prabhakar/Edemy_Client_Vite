@@ -8,17 +8,23 @@ import { useNavigate } from "react-router-dom";
 import {
   useFreezUserMutation,
   useUnFreezUserMutation,
-} from "../../../../redux/features/admin/Users/userApi";
+} from "../../../redux/features/admin/Users/userApi";
 import toast from "react-hot-toast";
-import TableBodyTr from "../../../Table/TableBodyTr";
-import Th from "../../../Table/Th";
-import Thead from "../../../Table/Thead";
-import Td from "../../../Table/Td";
+import TableBodyTr from "../../../components/Table/TableBodyTr";
+import Th from "../../../components/Table/Th";
+import Thead from "../../../components/Table/Thead";
+import Td from "../../../components/Table/Td";
+import {
+  IUserState,
+  IUser,
+} from "../../../redux/features/admin/Users/userSlice";
 
 const Table = () => {
   const navigate = useNavigate();
-  const [tableData, setTableData] = useState([]);
-  const { usersData } = useSelector((state: any) => state.users);
+  const [tableData, setTableData] = useState<IUser[]>([]);
+  const usersData = useSelector(
+    (state: { users: IUserState }) => state.users.usersData
+  );
 
   const [freezUser, { data, isSuccess, isError }] = useFreezUserMutation();
   const [
@@ -38,12 +44,12 @@ const Table = () => {
   useEffect(() => {
     if (isSuccess) toast.success(data.message);
     else if (isError) toast.error("exicution failed");
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data]);
 
   useEffect(() => {
     if (unFreezUserIsSuccess) toast.success(unFreezUserData.message);
     else if (unFreezUserIsError) toast.error("exicution failed");
-  }, [unFreezUserIsSuccess, unFreezUserIsError]);
+  }, [unFreezUserIsSuccess, unFreezUserIsError, unFreezUserData]);
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -51,7 +57,7 @@ const Table = () => {
           <Thead>
             <tr>
               <Th>Sl No</Th>
-              <Th>Id</Th>
+
               <Th>Name</Th>
               <Th>Enrolled course</Th>
               <Th>courses</Th>
@@ -60,36 +66,36 @@ const Table = () => {
             </tr>
           </Thead>
           <tbody>
-            {tableData.map((item: any, index: any) => (
+            {tableData.map((item, index) => (
               <TableBodyTr
                 lastIndex={tableData.length !== index + 1}
                 index={index}
               >
                 <Td>{index + 1}</Td>
-                <Td>{item._id}</Td>
+
                 <td
                   className="px-6 py-4"
                   onClick={() => {
                     navigate(`user_details/${item._id}`);
                   }}
                 >
-                  {item.name}
+                  {item.name.toUpperCase()}
                 </td>
-                <Td>{item.enrolledCourses.length}</Td>
-                <Td>{item.courses.length}</Td>
+                <Td>{item.enrolledCourses?.length}</Td>
+                <Td>{item.courses?.length}</Td>
                 <Td>{item.status}</Td>
                 <Td>
                   {item.status === "active" ? (
                     <button
                       className="border rounded-full px-5 hover:text-red-600 hover:scale-105"
-                      onClick={async () => await freezUser(item._id)}
+                      onClick={async () => await freezUser(item._id as string)}
                     >
                       Freez
                     </button>
                   ) : (
                     <button
                       className="border rounded-full px-5 hover:text-yellow-300 hover:scale-105"
-                      onClick={() => unFreezUser(item._id)}
+                      onClick={() => unFreezUser(item._id as string)}
                     >
                       Un Freez
                     </button>
@@ -99,7 +105,7 @@ const Table = () => {
             ))}
           </tbody>
         </table>
-        
+
         <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
           <h4 className="me-2">4 of 5</h4>
           <input

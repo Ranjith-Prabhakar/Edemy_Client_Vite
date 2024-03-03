@@ -2,9 +2,9 @@ import { TbCategoryPlus } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import AddCategory from "./AddCategoryForm";
 import { useFetchCategoriesQuery } from "../../../redux/features/admin/Categories/categoryApi";
-import Table from "./Tables/Table";
-import SearchButton from "../../Buttons/searchButton";
-import DashBordSearch from "../../inputFields/DashBordSearch";
+import Table from "./Table";
+import SearchButton from "../../../components/Buttons/SearchButton";
+import DashBordSearch from "../../../components/inputFields/DashBordSearch";
 
 const Categories = () => {
   const [addCategory, setAddCategory] = useState(false);
@@ -23,14 +23,12 @@ const Categories = () => {
             setAddCategory(!addCategory);
           }}
         >
-          Add new <TbCategoryPlus/>
+          Add new <TbCategoryPlus />
         </button>
-        <h2 className="font-bold tracking-[2px] text-[25px]">
-          Categories
-        </h2>
+        <h2 className="font-bold tracking-[2px] text-[25px]">Categories</h2>
         <div className="flex gap-2">
-          <DashBordSearch/>
-          <SearchButton/>
+          <DashBordSearch />
+          <SearchButton />
         </div>
       </div>
       {addCategory && (

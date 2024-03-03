@@ -1,4 +1,4 @@
-import CourseCard from "../utils/CourseCard";
+import CourseCard from "../Card/CourseCard";
 import { useGetCoursesForUserQuery } from "../../redux/features/course/courseApi";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import { useEffect, useState } from "react";

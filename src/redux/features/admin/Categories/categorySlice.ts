@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface ICategory {
+export interface ICategory {
+  _id:string;
   name: string;
   noOfCourses?: number;
   status: "active" | "frozen";
 }
 
-interface ICategoryState {
+export interface ICategoryState {
   isLoading: boolean;
   categoryData: ICategory[];
 }

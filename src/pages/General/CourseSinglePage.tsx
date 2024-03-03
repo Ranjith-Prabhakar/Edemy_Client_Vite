@@ -1,5 +1,5 @@
 import { useLocation,  } from "react-router-dom";
-import VideoPlayer from "../../components/Admin/Courses/Tables/videoPlayer";
+import VideoPlayer from "../../features/Admin/Courses/Tables/videoPlayer";
 import { useEffect, useState } from "react";
 import { useGetVideoMutation } from "../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";

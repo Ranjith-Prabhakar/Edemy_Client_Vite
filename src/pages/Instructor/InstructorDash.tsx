@@ -1,7 +1,7 @@
 import SideBar from "../../layouts/SideBar";
 import { instructorSideBar } from "../../data/InstructorSideBar";
-import Table from "../../components/User/Tables/Table";
-import Courses from "../../components/User/Course/Courses";
+import Table from "../../features/Instructor/Table";
+import Courses from "../../features/Instructor/Course/Courses";
 import Header from "../../layouts/Header";
 import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";

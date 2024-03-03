@@ -1,1 +1,0 @@
-add very simple and pure functions here

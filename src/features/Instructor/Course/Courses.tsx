@@ -29,7 +29,6 @@ const Courses = () => {
   useEffect(() => {
     if (isSuccess) {
       const regex = /\/(.*?)-/;
-      console.log("result^^^^^^^^", data);
       const moduleData = data.data.modules[data.data.modules.length - 1];
       const moduleVideoData = moduleData?.videos[moduleData.videos.length - 1];
       setCourseData({

@@ -2,6 +2,8 @@ import { useCreateCategoryMutation } from "../../../redux/features/admin/Categor
 import { useFormik } from "formik";
 import { addCategoryValidation } from "../../../schema/addCategorySchema";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 type Props = {
   setAddCategory: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,7 +11,7 @@ type Props = {
 };
 
 const AddCategory = ({ setAddCategory, addCategory }: Props) => {
-  const [createCategory] = useCreateCategoryMutation();
+  const [createCategory, { isSuccess }] = useCreateCategoryMutation();
   const {
     values,
     errors,
@@ -32,6 +34,10 @@ const AddCategory = ({ setAddCategory, addCategory }: Props) => {
       }
     },
   });
+
+  useEffect(() => {
+    if (isSuccess) toast.success("category added");
+  }, [isSuccess]);
   return (
     <div className="dark:bg-c_color-colorSeven  shadow-2xl shadow-cyan-500 absolute z-10 left-[20%] top-[20%] flex items-start justify-center w-[400px] h-[200px] rounded-lg ">
       <form className="max-w-md mx-auto my-auto" onSubmit={handleSubmit}>

@@ -11,10 +11,10 @@ import {
 } from "../../../redux/features/admin/Instructors/instructorsApi";
 
 import toast from "react-hot-toast";
-import Thead from "../../Table/Thead";
-import Th from "../../Table/Th";
-import TableBodyTr from "../../Table/TableBodyTr";
-import Td from "../../Table/Td";
+import Thead from "../../../components/Table/Thead";
+import Th from "../../../components/Table/Th";
+import TableBodyTr from "../../../components/Table/TableBodyTr";
+import Td from "../../../components/Table/Td";
 import { IInstructor, IInstructorState } from "../../../redux/features/admin/Instructors/instructorsSlice";
 
 const Table = () => {

@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useGetCoursesInRequestQuery } from "../../../../redux/features/course/courseApi";
 import { ICourseInitialState } from "../../../../redux/features/course/courseSlice";
 import { ICourse } from "../../../../redux/interfaces/Course/generalInterface";
-import Thead from "../../../Table/Thead";
-import Th from "../../../Table/Th";
-import TableBodyTr from "../../../Table/TableBodyTr";
-import Td from "../../../Table/Td";
-import SearchButton from "../../../Buttons/searchButton";
+import Thead from "../../../../components/Table/Thead";
+import Th from "../../../../components/Table/Th";
+import TableBodyTr from "../../../../components/Table/TableBodyTr";
+import Td from "../../../../components/Table/Td";
 
 const CourseRequestTable = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
-import Table from "./Tables/Table";
+import Table from "./Table";
 import { useGetUsersQuery } from "../../../redux/features/admin/Users/userApi";
-import SearchButton from "../../Buttons/searchButton";
-import DashBordSearch from "../../inputFields/DashBordSearch";
+import SearchButton from "../../../components/Buttons/SearchButton";
+import DashBordSearch from "../../../components/inputFields/DashBordSearch";
 const Users = () => {
   const { data, isError, isSuccess, error } = useGetUsersQuery();
 

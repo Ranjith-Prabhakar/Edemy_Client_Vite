@@ -1,4 +1,3 @@
-import { FaRegCircleStop } from "react-icons/fa6";
 import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 import { IoCaretBack } from "react-icons/io5";
@@ -10,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useGetCoursesQuery } from "../../../../redux/features/course/courseApi";
 import { ICourseInitialState } from "../../../../redux/features/course/courseSlice";
 import { ICourse } from "../../../../redux/interfaces/Course/generalInterface";
-import Thead from "../../../Table/Thead";
-import Th from "../../../Table/Th";
-import TableBodyTr from "../../../Table/TableBodyTr";
-import Td from "../../../Table/Td";
+import Thead from "../../../../components/Table/Thead";
+import Th from "../../../../components/Table/Th";
+import TableBodyTr from "../../../../components/Table/TableBodyTr";
+import Td from "../../../../components/Table/Td";
 
 const CourseTable = () => {
   useGetCoursesQuery();

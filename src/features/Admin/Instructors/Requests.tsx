@@ -12,10 +12,10 @@ import {
   IInstructorRequest,
   IInstructorState,
 } from "../../../redux/interfaces/Admin/InstructorRequest";
-import Thead from "../../Table/Thead";
-import Th from "../../Table/Th";
-import TableBodyTr from "../../Table/TableBodyTr";
-import Td from "../../Table/Td";
+import Thead from "../../../components/Table/Thead";
+import Th from "../../../components/Table/Th";
+import TableBodyTr from "../../../components/Table/TableBodyTr";
+import Td from "../../../components/Table/Td";
 import { FaBackward, FaForward } from "react-icons/fa";
 import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
 
@@ -42,7 +42,7 @@ const Requests = () => {
       const user = data as IapproveorRejectInstructorRequestsRes;
       const userInfo = user.data as IInstructorRequest;
       const userId = userInfo.userId;
-      const fetchedUser = userData.find((item) => item._id === userId);
+      const fetchedUser = userData.find((item) => item._id === userId) ;
       const newUser = { ...fetchedUser, role: "instructor" };
       console.log("fetchedAUser", fetchedUser);
       dispatch(removeUser({ data: userId }));

@@ -1,23 +1,29 @@
-import { FaRegCircleStop } from "react-icons/fa6";
 import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForwardOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
 import {
   useFreezCategoriesMutation,
   useUnFreezCategoriesMutation,
-} from "../../../../redux/features/admin/Categories/categoryApi";
+} from "../../../redux/features/admin/Categories/categoryApi";
 import toast from "react-hot-toast";
-import Thead from "../../../Table/Thead";
-import Th from "../../../Table/Th";
-import TableBodyTr from "../../../Table/TableBodyTr";
-import Td from "../../../Table/Td";
+import Thead from "../../../components/Table/Thead";
+import Th from "../../../components/Table/Th";
+import TableBodyTr from "../../../components/Table/TableBodyTr";
+import Td from "../../../components/Table/Td";
+import {
+  ICategory,
+  ICategoryState,
+} from "../../../redux/features/admin/Categories/categorySlice";
 
 const Table = () => {
-  const [tableData, setTableData] = useState([]);
-  const { categoryData } = useSelector((state: any) => state.category);
+  const [tableData, setTableData] = useState<ICategory[]>([]);
+  const categoryData = useSelector(
+    (state: { category: ICategoryState }) => state.category.categoryData
+  );
   const [freezCategories, { data, isSuccess, isError }] =
     useFreezCategoriesMutation();
   const [
@@ -32,12 +38,12 @@ const Table = () => {
   useEffect(() => {
     if (isSuccess) toast.success(data.message);
     else if (isError) toast.error("exicution failed");
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data]);
 
   useEffect(() => {
-    if (isSuccess) toast.success(unFreezData.message);
-    else if (isError) toast.error("exicution failed");
-  }, [unFreezIsSuccess, unFreezIsError]);
+    if (unFreezIsSuccess) toast.success(unFreezData.message);
+    else if (unFreezIsError) toast.error("exicution failed");
+  }, [unFreezIsSuccess, unFreezIsError, unFreezData, isError]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -77,14 +83,14 @@ const Table = () => {
             </th>
           </tr> */}
         <tbody>
-          {tableData?.map((item: any, index: any) => (
+          {tableData?.map((item, index) => (
             <TableBodyTr
               lastIndex={tableData.length !== index + 1}
               index={index}
             >
               <Td>{index + 1}</Td>
-              <td className="px-6 py-4">{item.name}</td>
-              <Td>{item.No_Of_Courses ? item.No_Of_Courses : 0}</Td>
+              <td className="px-6 py-4">{item.name.toUpperCase()}</td>
+              <Td>{item.noOfCourses ? item.noOfCourses : 0}</Td>
               <Td>{item.status}</Td>
               <Td>
                 {item.status === "active" ? (

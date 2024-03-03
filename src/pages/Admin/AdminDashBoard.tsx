@@ -1,14 +1,14 @@
-import AdminNavbar from "../../layouts/Navbar";
+import AdminNavbar from "../../layouts/AdminNavbar";
 import SideBar from "../../layouts/SideBar";
 import { adminDashBord } from "../../data/AdminSideBar";
-import Categories from "../../components/Admin/Categories/Categories";
-import Users from "../../components/Admin/Users/Users";
-import Instructors from "../../components/Admin/Instructors/Instructors";
-import Courses from "../../components/Admin/Courses/Courses";
+import Categories from "../../features/Admin/Categories/Categories";
+import Users from "../../features/Admin/Users/Users";
+import Instructors from "../../features/Admin/Instructors/Instructors";
+import Courses from "../../features/Admin/Courses/Courses";
 import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";
 import UserDetails from "./UserDetails";
-import CoursePreview from "../../components/Admin/Courses/Tables/CoursePreview";
+import CoursePreview from "../../features/Admin/Courses/Tables/CoursePreview";
 const AdminDash = () => {
   return (
     <ContainerLayout>

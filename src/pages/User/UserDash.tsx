@@ -1,6 +1,6 @@
 import SideBar from "../../layouts/SideBar";
-import {userSideBar} from "../../data/UserSideBar"
-import Table from "../../components/User/Tables/Table";
+import { userSideBar } from "../../data/UserSideBar";
+import Table from "../../features/Instructor/Table";
 import Header from "../../layouts/Header";
 import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";
