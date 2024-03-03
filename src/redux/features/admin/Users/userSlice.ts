@@ -16,7 +16,7 @@ export interface IUser {
   enrolledCourses?: Array<{ courseId: string }>;
 }
 
-interface IUserState {
+export interface IUserState {
   isLoading: boolean;
   usersData: IUser[];
 }

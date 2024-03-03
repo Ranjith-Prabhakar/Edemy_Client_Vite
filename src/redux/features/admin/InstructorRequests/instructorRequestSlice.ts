@@ -1,17 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IInstructorState } from "../../../interfaces/Admin/InstructorRequest";
 
-export interface IInstructorRequest {
-  userId: string;
-  status: "approved" | "pending" | "rejected";
-  qualification: string;
-  consent: boolean;
-  contract: string;
-}
 
-interface IInstructorState {
-  isLoading: boolean;
-  instructorRequest: IInstructorRequest[];
-}
 
 const initialState: IInstructorState = {
   isLoading: true,

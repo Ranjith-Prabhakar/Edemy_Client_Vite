@@ -1,4 +1,3 @@
-import { FaRegCircleStop } from "react-icons/fa6";
 import { FaBackward } from "react-icons/fa";
 import { FaForward } from "react-icons/fa";
 import { IoCaretBack } from "react-icons/io5";
@@ -16,11 +15,15 @@ import Thead from "../../Table/Thead";
 import Th from "../../Table/Th";
 import TableBodyTr from "../../Table/TableBodyTr";
 import Td from "../../Table/Td";
+import { IInstructor, IInstructorState } from "../../../redux/features/admin/Instructors/instructorsSlice";
 
 const Table = () => {
   const navigate = useNavigate();
-  const [tableData, setTableData] = useState([]);
-  const { instructorData } = useSelector((state: any) => state.instructors);
+  const [tableData, setTableData] = useState<IInstructor[]>([]);
+  const instructorData = useSelector(
+    (state: { instructors: IInstructorState }) =>
+      state.instructors.instructorData
+  );
 
   const [freezInstructor, { data, isSuccess, isError }] =
     useFreezInstructorMutation();
@@ -36,17 +39,17 @@ const Table = () => {
   useEffect(() => {
     setTableData(instructorData);
     console.log("table data", tableData);
-  }, [instructorData]);
+  }, [instructorData, tableData]);
 
   useEffect(() => {
     if (isSuccess) toast.success(data.message);
     else if (isError) toast.error("exicution failed");
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data]);
 
   useEffect(() => {
     if (unFreezUserIsSuccess) toast.success(unFreezUserData.message);
     else if (unFreezUserIsError) toast.error("exicution failed");
-  }, [unFreezUserIsSuccess, unFreezUserIsError]);
+  }, [unFreezUserIsSuccess, unFreezUserIsError, unFreezUserData]);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
@@ -61,7 +64,7 @@ const Table = () => {
           </tr>
         </Thead>
         <tbody>
-          {tableData.map((item: any, index: any) => (
+          {tableData.map((item, index) => (
             <TableBodyTr
               lastIndex={tableData.length !== index + 1}
               index={index}
@@ -75,21 +78,21 @@ const Table = () => {
               >
                 {item.name.toUpperCase()}
               </td>
-              <Td>{item.enrolledCourses.length}</Td>
-              <Td>{item.courses.length}</Td>
+              <Td>{item?.enrolledCourses?.length}</Td>
+              <Td>{item?.courses?.length}</Td>
               <Td>{item.status}</Td>
               <Td>
                 {item.status === "active" ? (
                   <button
                     className="border rounded-full px-5 hover:text-red-600 hover:scale-105"
-                    onClick={async () => await freezInstructor(item._id)}
+                    onClick={async () => await freezInstructor(item._id as string)}
                   >
                     Freez
                   </button>
                 ) : (
                   <button
                     className="border rounded-full px-5 hover:text-yellow-300 hover:scale-105"
-                    onClick={() => unFreezInstructor(item._id)}
+                    onClick={() => unFreezInstructor(item._id as string)}
                   >
                     Un Freez
                   </button>

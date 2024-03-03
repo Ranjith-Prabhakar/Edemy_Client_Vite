@@ -16,7 +16,7 @@ export interface IInstructor {
   enrolledCourses?: Array<{ courseId: string }>;
 }
 
-interface IInstructorState {
+export interface IInstructorState {
   isLoading: boolean;
   instructorData: IInstructor[];
 }

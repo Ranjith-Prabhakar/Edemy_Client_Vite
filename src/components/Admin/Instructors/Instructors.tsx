@@ -1,19 +1,29 @@
 import Table from "./Table";
 import Requests from "./Requests";
 import { useGetInstructorsQuery } from "../../../redux/features/admin/Instructors/instructorsApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchButton from "../../Buttons/searchButton";
 import DashBordSearch from "../../inputFields/DashBordSearch";
+import { useSelector } from "react-redux";
+import { IInstructorState } from "../../../redux/interfaces/Admin/InstructorRequest";
+import { useGetInstructorRequestsQuery } from "../../../redux/features/admin/InstructorRequests/instructorRequestApi";
 const Instructors = () => {
   const [switcher, setSwitcher] = useState(1);
-  const { data, isError, isSuccess, error } = useGetInstructorsQuery();
+  const [notification,setNotification] = useState(0)
+  useGetInstructorRequestsQuery({});
+   useGetInstructorsQuery();
 
-  if (isSuccess) {
-    console.log(data);
-  } else if (isError) {
-    console.log(error);
-  }
+   const InstructorRequests = useSelector(
+     (state: { instructorRequests: IInstructorState }) =>
+       state.instructorRequests.instructorRequest
+   );
 
+   useEffect(() => {
+    setNotification(InstructorRequests.length);
+   }, [InstructorRequests]);
+
+
+ 
   return (
     <div className="h-full w-full">
       <div className="flex items-center justify-between mb-1">
@@ -29,7 +39,7 @@ const Instructors = () => {
               Instructors
             </h2>
           </div>
-          <div onClick={() => setSwitcher(2)}>
+          <div onClick={() => setSwitcher(2)} className="relative">
             <h2
               className={`${
                 switcher === 2
@@ -39,6 +49,9 @@ const Instructors = () => {
             >
               Requests
             </h2>
+            <div className="absolute -right-1 -top-2 bg-cyan-500 rounded-full w-5 h-5 flex items-center justify-center">
+              <p className="text-[10px]">{notification}</p>
+            </div>
           </div>
         </div>
         <div className="flex gap-2">
