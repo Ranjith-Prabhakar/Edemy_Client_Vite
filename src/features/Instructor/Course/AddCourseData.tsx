@@ -8,11 +8,13 @@ import {
   useUpdateCourseMutation,
 } from "../../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IUserState } from "../../../redux/interfaces/authApi";
 import responseErrorCatch from "../../../utils/responseErrorToast";
-import {  ICourseDataBodyReq } from "../../../redux/interfaces/Course/addCourseData";
+import { ICourseDataBodyReq } from "../../../redux/interfaces/Course/addCourseData";
+import { useGetCategoryQuery } from "../../../redux/features/course/courseApi";
+import { ICategory } from "../../../redux/interfaces/Course/getCategories";
 
 type Props = {
   setStepper: React.Dispatch<React.SetStateAction<number>>;
@@ -53,6 +55,11 @@ const AddCourseData = ({
   visible,
   setVisible,
 }: Props) => {
+  const { data: categoryData, isSuccess: categorySuccess } =
+    useGetCategoryQuery();
+  const [categoryList, addCategoryList] = useState<ICategory[]>([]);
+  const [categoryError, setCategoryError] = useState(false);
+
   const [addModule] = useAddModuleMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addCourseData] = useAddCourseDataMutation();
@@ -63,7 +70,7 @@ const AddCourseData = ({
   );
   const thumbnailRef = useRef<HTMLInputElement>(null);
   const courseNameRef = useRef<HTMLInputElement>(null);
-
+  const categoryRef = useRef<HTMLSelectElement>(null);
   useEffect(() => {
     if (isSuccess) {
       if (data) {
@@ -73,6 +80,13 @@ const AddCourseData = ({
       responseErrorCatch(error);
     }
   }, [data, error, isError, isSuccess]);
+
+  useEffect(() => {
+    if (categorySuccess) {
+      addCategoryList(categoryData.data as ICategory[]);
+      console.log("categoryList ===>", categoryList);
+    }
+  }, [categoryData, categoryList, categorySuccess]);
 
   const handleUpdation = async (data: Record<string, string>) => {
     try {
@@ -144,64 +158,70 @@ const AddCourseData = ({
     },
     validationSchema: addCourseDataSchema,
     onSubmit: async (values) => {
-      const clonedObject: { [key: string]: string | undefined } =
-        Object.create(null); // to clone an object without the prototype chaining
+      if (categoryRef.current?.value === "choose one category") {
+        setCategoryError(true);
+      } else {
+        const clonedObject: { [key: string]: string | undefined } =
+          Object.create(null); // to clone an object without the prototype chaining
 
-      for (const key in values) {
-        if (Object.prototype.hasOwnProperty.call(values, key)) {
-          clonedObject[key] = values[key as keyof typeof values] as
-            | string
-            | undefined;
-        }
-      }
-
-      //
-      const imageInfo = await handleAddImage();
-
-      if (imageInfo) {
-        const { fileType, imgageFileName } = imageInfo;
-        clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
-        const result = await addCourseData(
-          clonedObject as unknown as ICourseDataBodyReq
-        );
-
-        console.log("second result imageInfo ===>", result);
-        if ("data" in result) {
-          if (result.data) {
-            if ("data" in result.data) {
-              if (result.data) {
-                 const regex = /\/(.*?)-/;
-                 const moduleData =
-                   result.data.data.modules[result.data.data.modules.length - 1];
-                 const moduleVideoData =
-                   moduleData?.videos[moduleData.videos.length - 1];
-                 setCourseData({
-                   courseName: result.data.data.courseName ?? "",
-                   discription: result.data.data.discription ?? "",
-                   tags: result.data.data.tags ?? "",
-                   thumbnail: result.data.data.thumbnail ?? "",
-                   duration: result.data.data.duration ?? "",
-                   moduleNo: moduleData?.moduleNo ?? "",
-                   moduleTittle: moduleData?.moduleTittle ?? "",
-                   videoTittle:
-                     moduleVideoData?.videoTittle?.match(regex)?.[1] ?? "",
-                   videoNo: moduleVideoData?.videoNo ?? "",
-                   videoUrl: moduleVideoData?.videoUrl ?? "",
-                 });
-
-
-
-                // setCourseData(result.data.data);
-              }
-              setVisible(false);
-              setStepper(2);
-            }
+        for (const key in values) {
+          if (Object.prototype.hasOwnProperty.call(values, key)) {
+            clonedObject[key] = values[key as keyof typeof values] as
+              | string
+              | undefined;
           }
         }
-      } else {
-        console.error("Error handling image");
-        return;
+        clonedObject.category = categoryRef.current?.value;
+
+        //
+        const imageInfo = await handleAddImage();
+
+        if (imageInfo) {
+          const { fileType, imgageFileName } = imageInfo;
+          clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
+          const result = await addCourseData(
+            clonedObject as unknown as ICourseDataBodyReq
+          );
+
+          console.log("second result imageInfo ===>", result);
+          if ("data" in result) {
+            if (result.data) {
+              if ("data" in result.data) {
+                if (result.data) {
+                  const regex = /\/(.*?)-/;
+                  const moduleData =
+                    result.data.data.modules[
+                      result.data.data.modules.length - 1
+                    ];
+                  const moduleVideoData =
+                    moduleData?.videos[moduleData.videos.length - 1];
+                  setCourseData({
+                    courseName: result.data.data.courseName ?? "",
+                    discription: result.data.data.discription ?? "",
+                    tags: result.data.data.tags ?? "",
+                    thumbnail: result.data.data.thumbnail ?? "",
+                    duration: result.data.data.duration ?? "",
+                    moduleNo: moduleData?.moduleNo ?? "",
+                    moduleTittle: moduleData?.moduleTittle ?? "",
+                    videoTittle:
+                      moduleVideoData?.videoTittle?.match(regex)?.[1] ?? "",
+                    videoNo: moduleVideoData?.videoNo ?? "",
+                    videoUrl: moduleVideoData?.videoUrl ?? "",
+                  });
+
+                  // setCourseData(result.data.data);
+                }
+                setVisible(false);
+                setStepper(2);
+              }
+            }
+          }
+        } else {
+          console.error("Error handling image");
+          return;
+        }
       }
+
       //
     },
   });
@@ -225,20 +245,29 @@ const AddCourseData = ({
     <form onSubmit={handleSubmit} action="" className="p-8 ">
       <div className="relative z-0 w-full mb-5 group">
         <select
+          ref={categoryRef}
           name="category"
           id="category"
-          value={values.courseName}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
         >
-          <option value="testOne">testOne</option>
-          <option value="testTwo">testTwo</option>
-          <option value="testThree">testThree</option>
+          <option
+            value="choose one category"
+            className="italic font-bold dark:bg-c_color-colorSeven dark:hover:bg-c_color"
+          >
+            choose one category
+          </option>
+          {categoryList.map((option) => (
+            <option
+              value={option.name}
+              className="italic font-bold dark:bg-c_color-colorSeven"
+            >
+              {option.name}
+            </option>
+          ))}
         </select>
 
-        {errors.courseName && touched.courseName && (
-          <p className="text-red-600">{errors.courseName}</p>
+        {categoryError && (
+          <p className="text-red-600">please select a category</p>
         )}
         <label
           htmlFor="courseName"

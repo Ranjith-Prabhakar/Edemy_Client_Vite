@@ -12,6 +12,7 @@ import {
   removeCourseAfterApprovalOrReject,
 } from "./courseSlice";
 import { ICourse } from "../../interfaces/Course/generalInterface";
+import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -176,6 +177,14 @@ export const courseApi = apiSlice.injectEndpoints({
         }
       },
     }),
+
+    getCategory: builder.query<IAddCategoriesRes ,void>({
+      query: () => ({
+        method: "get",
+        url: "course/get_categories",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -191,6 +200,7 @@ export const {
   useGetVideoMutation,
   useApproveOrRejectCourseMutation,
   useGetCoursesForUserQuery,
+  useGetCategoryQuery,
 } = courseApi;
 
 // ===========================================================

@@ -1,6 +1,10 @@
 import * as yup from "yup";
 // const stringRegex = /^[a-zA-Z\s]+$/;
 
+
+
+
+
 export const addCourseDataSchema = yup.object().shape({
   courseName: yup
     .string()
@@ -24,11 +28,12 @@ export const addCourseDataSchema = yup.object().shape({
     .string()
     .required("Please enter valid Tags")
     .matches(
-      /^(?! )[a-zA-Z0-9_,-]+(?<! )$/,
-      "Only commas (,) and alphanumeric characters are allowed, and space at the beginning is not allowed"
+      /^(?! )[a-zA-Z0-9_, -]+(?<! )$/,
+      "Only commas (,), underscores (_), hyphens (-), alphanumeric characters, and spaces between words are allowed, and space at the beginning is not allowed"
     )
     .transform((value) => value.trim()) // Remove spaces
     .min(3),
+
   thumbnail: yup
     .string()
     .required("Please enter valid thumbnail")
