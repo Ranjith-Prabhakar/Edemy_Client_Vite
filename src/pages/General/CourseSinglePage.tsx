@@ -1,5 +1,5 @@
-import { useLocation,  } from "react-router-dom";
-import VideoPlayer from "../../features/Admin/Courses/Tables/videoPlayer";
+import { useLocation } from "react-router-dom";
+import VideoPlayer from "../../components/VideoPlayer/videoPlayer";
 import { useEffect, useState } from "react";
 import { useGetVideoMutation } from "../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";
@@ -7,7 +7,7 @@ import { IoIosArrowDropdown } from "react-icons/io";
 const CourseSinglePage = () => {
   const [videoUrl, setVideoUrl] = useState("");
   const [getVideo, { data }] = useGetVideoMutation();
-  
+
   const location = useLocation();
   const courseData = location.state.courseData;
   const regex = /\/(.*?)-/;
@@ -19,7 +19,6 @@ const CourseSinglePage = () => {
     }
   }, [data]);
 
- 
   return (
     <>
       {courseData ? (
@@ -35,8 +34,6 @@ const CourseSinglePage = () => {
                 <li>Duration : {courseData.duration}</li>
                 <li>Instructor : {courseData.instructor}</li>
               </ul>
-
-              
             </div>
           </div>
 
@@ -69,7 +66,6 @@ const CourseSinglePage = () => {
                       </button>
                     </div>
                   ))}
-               
               </div>
             ))}
           </div>

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import VideoPlayer from "./videoPlayer";
+import VideoPlayer from "../../../../components/VideoPlayer/videoPlayer";
 import { useEffect, useState } from "react";
 import { useGetVideoMutation } from "../../../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";
@@ -25,7 +25,7 @@ const CoursePreview = () => {
 
   useEffect(() => {
     if (ApproveOrRejectData?.status === 200) navigate(-2);
-  }, [isSuccess]);
+  }, [ApproveOrRejectData?.status, isSuccess, navigate]);
 
   return (
     <>

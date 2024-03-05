@@ -23,9 +23,7 @@ const Carousal = () => {
           flexible approach. Stay ahead with up-to-date content
         </p>
         <div className="mt-4">
-          {/* <button className="bg-[#FFD700] px-2 py-1 rounded text-black  font-bold">
-            Get started
-          </button> */}
+         
 
           <div className="flex gap-10 mt-7">
             <div className="flex flex-col">

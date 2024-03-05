@@ -38,7 +38,7 @@ const Testimonial = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [testimonialData]);
+  }, [testimonialData, testimonials.length]);
 
   return (
     <div className="flex flex-col h-6/3 overflow-hidden mt-[8%]">

@@ -14,7 +14,7 @@ const OurBestCourses = () => {
       console.log("coursesData", coursesData);
       setCourseCategory(coursesData);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess]);
   return (
     <div className="flex flex-col items-center w-full mt-[8%]">
       <h1 className="text-5xl font-bold italic">

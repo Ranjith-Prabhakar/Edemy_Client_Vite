@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode } from "react";
+import  { ReactNode } from "react";
 import web_development from "../../../public/Assets/web_development.avif";
 import { FaStar } from "react-icons/fa";
 import { FaStarHalf } from "react-icons/fa";
@@ -8,13 +8,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import { useNavigate } from "react-router-dom";
 
-// interface Course {
-//   name: string;
-//   url: string;
-//   thumbnail: string;
-//   trainer: string;
-//   duration: string;
-// }
+
 
 type Props = {
   courseCategory: ICourse[];
