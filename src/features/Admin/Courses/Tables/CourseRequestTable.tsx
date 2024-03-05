@@ -5,7 +5,10 @@ import { IoCaretForwardOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useGetCoursesInRequestQuery } from "../../../../redux/features/course/courseApi";
+import {
+  useApproveOrRejectCourseMutation,
+  useGetCoursesInRequestQuery,
+} from "../../../../redux/features/course/courseApi";
 import { ICourseInitialState } from "../../../../redux/features/course/courseSlice";
 import { ICourse } from "../../../../redux/interfaces/Course/generalInterface";
 import Thead from "../../../../components/Table/Thead";
@@ -20,10 +23,12 @@ const CourseRequestTable = () => {
   const coursesInRequest = useSelector(
     (state: { courses: ICourseInitialState }) => state.courses.coursesInRequest
   );
+  const [approveOrRejectCourse] = useApproveOrRejectCourseMutation();
 
   useEffect(() => {
     setTableData(coursesInRequest);
-  }, [coursesInRequest]);
+    console.log("table data ",tableData)
+  }, [coursesInRequest, tableData]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -86,10 +91,26 @@ const CourseRequestTable = () => {
               <Td>{item.status}</Td>
               <Td>
                 <div className="flex justify-start gap-3 ">
-                  <button className="dark:bg-cyan-500 py-1 px-4 rounded-full">
+                  <button
+                    className="dark:bg-cyan-500 py-1 px-4 rounded-full"
+                    onClick={() => {
+                      approveOrRejectCourse({
+                        courseId: item._id,
+                        action: "approved",
+                      });
+                    }}
+                  >
                     Approve
                   </button>
-                  <button className="dark:bg-red-700 py-1 px-4 rounded-full">
+                  <button
+                    className="dark:bg-red-700 py-1 px-4 rounded-full"
+                    onClick={() => {
+                      approveOrRejectCourse({
+                        courseId: item._id,
+                        action: "rejected",
+                      });
+                    }}
+                  >
                     Reject
                   </button>
                 </div>

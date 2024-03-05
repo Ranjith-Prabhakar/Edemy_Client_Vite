@@ -5,6 +5,29 @@ import { useGetVideoMutation } from "../../../../redux/features/course/courseApi
 import { IoIosArrowDropdown } from "react-icons/io";
 import { useApproveOrRejectCourseMutation } from "../../../../redux/features/course/courseApi";
 
+type TCourseData = {
+  _id:string;
+  category: string;
+  courseName: string;
+  discription: string;
+  instructor:string;
+  tags: string;
+  thumbnail: string;
+  duration: string;
+  modules: [
+    {
+      moduleNo: string;
+      moduleTittle: string;
+      videos: [
+        {
+          videoTittle: string;
+          videoNo: string;
+          videoUrl: string;
+        }
+      ];
+    }
+  ];
+}; 
 const CoursePreview = () => {
   const [showModuleVideos, setShowModuleVideos] = useState(0);
   const navigate = useNavigate();
@@ -13,7 +36,8 @@ const CoursePreview = () => {
   const [approveOrRejectCourse, { data: ApproveOrRejectData, isSuccess }] =
     useApproveOrRejectCourseMutation();
   const location = useLocation();
-  const courseData = location.state.courseData;
+  const courseData = location.state.courseData as TCourseData; 
+  console.log("courseData ====>>>>>", courseData);
   const regex = /\/(.*?)-/;
   useEffect(() => {
     if (data) {
