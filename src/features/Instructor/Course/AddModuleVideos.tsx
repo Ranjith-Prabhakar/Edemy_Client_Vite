@@ -68,6 +68,8 @@ const AddModuleVideos = ({
   );
   const moduleVideoRef = useRef<HTMLInputElement>(null);
   const videoNameRef = useRef<HTMLInputElement>(null);
+  const previewRef = useRef<HTMLSelectElement>(null);
+  const [previewError, setPreviewError] = useState(false);
   const [progressStatus, setProgressStatus] = useState(false);
   const [progressWidth, setProgressWidth] = useState(0);
 
@@ -112,6 +114,12 @@ const AddModuleVideos = ({
           });
           if (bucketResult) {
             moduleVideoBody.videoTittle = `${userId}/${moduleFileName}.${fileType}`;
+            if (previewRef.current?.value === "true") {
+              ///////
+              moduleVideoBody.preview = true;
+            } else {
+              moduleVideoBody.preview = false;
+            }
 
             const serverRespons = await addModuleVideos(moduleVideoBody);
             console.log(
@@ -119,21 +127,21 @@ const AddModuleVideos = ({
               serverRespons
             );
             if ("data" in serverRespons) {
-              console.log("inside first if=======>>")
+              console.log("inside first if=======>>");
               if (serverRespons.data) {
-              console.log("inside second if=======>>");
+                console.log("inside second if=======>>");
 
                 if ("data" in serverRespons.data) {
-              console.log("inside third if=======>>");
+                  console.log("inside third if=======>>");
 
                   const newServerResponse =
                     serverRespons.data as unknown as ICourseDataBody;
 
                   if (serverRespons.data.data) {
-              console.log(
-                "inside fourth if and newServerResponse=======>>",
-                newServerResponse
-              );
+                    console.log(
+                      "inside fourth if and newServerResponse=======>>",
+                      newServerResponse
+                    );
 
                     const regex = /\/(.*?)-/;
 
@@ -141,10 +149,10 @@ const AddModuleVideos = ({
                       newServerResponse.data.modules[
                         newServerResponse.data.modules.length - 1
                       ];
-                      console.log(
-                        "inside fourth if but second=======>>",
-                        moduleData
-                      );
+                    console.log(
+                      "inside fourth if but second=======>>",
+                      moduleData
+                    );
 
                     const moduleVideoData =
                       moduleData.videos[moduleData.videos.length - 1];
@@ -161,7 +169,7 @@ const AddModuleVideos = ({
                       videoNo: moduleVideoData.videoNo ?? "",
                       videoUrl: moduleVideoData.videoUrl ?? "",
                     });
-                    console.log("courseData after update=====>",courseData)
+                    console.log("courseData after update=====>", courseData);
                     setProgressStatus(false);
                     setModuleVideos(newServerResponse.data.modules);
                     toast.success(newServerResponse.message);
@@ -202,8 +210,12 @@ const AddModuleVideos = ({
     validationSchema: addModueleVideosSchema,
     onSubmit: async (values) => {
       try {
-        setProgressStatus(true);
-        await handleAddModule(values);
+        if (previewRef.current?.value === "choose one  preview option") {
+          setPreviewError(true);
+        } else {
+          setProgressStatus(true);
+          await handleAddModule(values);
+        }
       } catch (error) {
         responseErrorCatch(error);
       }
@@ -314,6 +326,36 @@ const AddModuleVideos = ({
         )}
       </div>
 
+      <select
+        ref={previewRef}
+        name="preview"
+        id="preview"
+        className="block py-2.5 px-0 w-full mb-8 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+      >
+        <option
+          value="choose one option"
+          className="italic font-bold dark:bg-c_color-colorSeven dark:hover:bg-c_color"
+        >
+          choose one preview option
+        </option>
+
+        <option
+          value="true"
+          className="italic font-bold dark:bg-c_color-colorSeven"
+        >
+          true
+        </option>
+
+        <option
+          value="false"
+          className="italic font-bold dark:bg-c_color-colorSeven"
+        >
+          false
+        </option>
+      </select>
+      {previewError && (
+        <p className="text-red-600">please choose an option for preview</p>
+      )}
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="videoUrl"

@@ -3,5 +3,6 @@ export interface IModuleVideoBody {
   moduleTittle: string;
   videoTittle: string;
   videoNo: string;
-  videoUrl:string
+  videoUrl:string,
+  preview?:boolean
 }
