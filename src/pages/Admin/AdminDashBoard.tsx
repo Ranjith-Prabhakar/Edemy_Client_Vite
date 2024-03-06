@@ -8,7 +8,7 @@ import Courses from "../../features/Admin/Courses/Courses";
 import ContainerLayout from "../../layouts/containerLayout";
 import { Route, Routes } from "react-router-dom";
 import UserDetails from "./UserDetails";
-import CoursePreview from "../../features/Admin/Courses/Tables/CoursePreview";
+import CoursePreview from "../../features/Admin/Courses/CoursePreview";
 const AdminDash = () => {
   return (
     <ContainerLayout>

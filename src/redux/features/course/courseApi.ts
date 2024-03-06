@@ -13,6 +13,8 @@ import {
 } from "./courseSlice";
 import { ICourse } from "../../interfaces/Course/generalInterface";
 import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
+import responseErrorCatch from "../../../utils/responseErrorToast";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -85,10 +87,7 @@ export const courseApi = apiSlice.injectEndpoints({
           console.log("result from courseApi  > getCourses", result);
           dispatch(getCoursesState({ data: result.data.data }));
         } catch (error) {
-          console.log(
-            "error message from courseApi -> getCourse endPoint : ",
-            error.message
-          );
+          responseErrorCatch(error)
         }
       },
     }),
@@ -108,10 +107,7 @@ export const courseApi = apiSlice.injectEndpoints({
           );
           dispatch(getCourseseInProgressState({ data: result.data.data }));
         } catch (error) {
-          console.log(
-            "error message from courseApi -> getCoursesInRequest endPoint : ",
-            error.message
-          );
+          responseErrorCatch(RiErrorWarningFill);
         }
       },
     }),
@@ -146,10 +142,7 @@ export const courseApi = apiSlice.injectEndpoints({
             })
           );
         } catch (error) {
-          console.log(
-            "error message from courseApi -> getCoursesInRequest endPoint : ",
-            error.message
-          );
+         responseErrorCatch(RiErrorWarningFill)
         }
       },
     }),
@@ -161,7 +154,7 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const result = await queryFulfilled;
           console.log(
@@ -170,10 +163,7 @@ export const courseApi = apiSlice.injectEndpoints({
           );
           // dispatch(getCoursesState({ data: result.data.data }));
         } catch (error) {
-          console.log(
-            "error message from courseApi -> getCourse endPoint : ",
-            error.message
-          );
+          responseErrorCatch(RiErrorWarningFill);
         }
       },
     }),

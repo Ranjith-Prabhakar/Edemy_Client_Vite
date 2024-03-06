@@ -1,16 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import VideoPlayer from "../../../../components/VideoPlayer/videoPlayer";
+import VideoPlayer from "../../../components/VideoPlayer/videoPlayer";
 import { useEffect, useState } from "react";
-import { useGetVideoMutation } from "../../../../redux/features/course/courseApi";
+import { useGetVideoMutation } from "../../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";
-import { useApproveOrRejectCourseMutation } from "../../../../redux/features/course/courseApi";
+import { useApproveOrRejectCourseMutation } from "../../../redux/features/course/courseApi";
 
 type TCourseData = {
-  _id:string;
+  _id: string;
   category: string;
   courseName: string;
   discription: string;
-  instructor:string;
+  instructor: string;
   tags: string;
   thumbnail: string;
   duration: string;
@@ -27,16 +27,21 @@ type TCourseData = {
       ];
     }
   ];
-}; 
+};
 const CoursePreview = () => {
   const [showModuleVideos, setShowModuleVideos] = useState(0);
   const navigate = useNavigate();
-  const [videoUrl, setVideoUrl] = useState("");
+  // const [videoUrl, setVideoUrl] = useState("");
   const [getVideo, { data }] = useGetVideoMutation();
   const [approveOrRejectCourse, { data: ApproveOrRejectData, isSuccess }] =
     useApproveOrRejectCourseMutation();
   const location = useLocation();
-  const courseData = location.state.courseData as TCourseData; 
+  const courseData = location.state.courseData as TCourseData;
+
+   const [videoUrl, setVideoUrl] = useState(
+     courseData.modules[0].videos[0].videoTittle
+   );
+   
   console.log("courseData ====>>>>>", courseData);
   const regex = /\/(.*?)-/;
   useEffect(() => {
@@ -135,20 +140,6 @@ const CoursePreview = () => {
                       )}
                     </>
                   ))}
-                {/* {item.videos.map((videos) => (
-                  <div className="flex gap-2">
-                    <h1>{videos.videoNo}</h1>
-                    <h1>{videos.videoTittle}</h1>
-                    <h1
-                      className="cursor-pointer"
-                      onClick={() => {
-                        getVideo({ videoName: videos.videoTittle });
-                      }}
-                    >
-                      play
-                    </h1>
-                  </div>
-                ))} */}
               </div>
             ))}
           </div>
