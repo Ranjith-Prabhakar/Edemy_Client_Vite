@@ -249,7 +249,7 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required
+         
         />
         {errors.moduleNo && touched.moduleNo && (
           <p className="text-red-600">{errors.moduleNo}</p>
@@ -272,7 +272,7 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required
+       
         />
         {errors.moduleTittle && touched.moduleTittle && (
           <p className="text-red-600">{errors.moduleTittle}</p>
@@ -296,7 +296,7 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required
+          
         />
         {errors.videoTittle && touched.videoTittle && (
           <p className="text-red-600">{errors.videoTittle}</p>
@@ -319,7 +319,7 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required
+          
         />
         {errors.videoNo && touched.videoNo && (
           <p className="text-red-600">{errors.videoNo}</p>
@@ -373,7 +373,7 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          required
+         
         />
         {errors.videoUrl && touched.videoUrl && (
           <p className="text-red-600">{errors.videoUrl}</p>

@@ -9,7 +9,7 @@ const Slider = () => {
   const images = [slider1, slider2, slider3];
   const [count, setCount] = useState(0);
   return (
-    <div className="relative rounded-md h-1/6 overflow-hidden mt-[8%]">
+    <div className="relative rounded-md h-[500px] overflow-hidden mt-[8%]">
       <div className="w-full h-full">
         <img
           src={images[count]}

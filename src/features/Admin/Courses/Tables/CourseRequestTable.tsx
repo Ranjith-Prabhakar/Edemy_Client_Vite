@@ -43,33 +43,7 @@ const CourseRequestTable = () => {
           </tr>
         </Thead>
 
-        {/* <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Sl No
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Course
-            </th>
-
-            <th scope="col" className="px-6 py-3">
-              Instructor
-            </th>
-            <th scope="col" className="px-6 py-3">
-              No Purchase
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-
-            <th
-              scope="col"
-              className="px-6 py-3 flex justify-center items-center"
-            >
-              Action
-            </th>
-          </tr>
-        </thead> */}
+      
         <tbody>
           {tableData.map((item: ICourse, index: number) => (
             <TableBodyTr

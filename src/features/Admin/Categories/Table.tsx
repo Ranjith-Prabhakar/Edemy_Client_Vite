@@ -58,31 +58,7 @@ const Table = () => {
           </tr>
         </Thead>
 
-        {/* <tr>
-            <th scope="col" className="px-6 py-3">
-              Sl No
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Id
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Name
-            </th>
-            <th scope="col" className="px-6 py-3">
-              No Of Courses
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-
-            <th
-              scope="col"
-              className="px-6 py-3 flex justify-center items-center"
-            >
-              Freez
-            </th>
-          </tr> */}
-        <tbody>
+              <tbody>
           {tableData?.map((item, index) => (
             <TableBodyTr
               lastIndex={tableData.length !== index + 1}
@@ -115,40 +91,7 @@ const Table = () => {
               </Td>
             </TableBodyTr>
 
-            // <tr
-            //   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-            //   key={index}
-            // >
-            //   <td className="px-6 py-4">{index + 1}</td>
-            //   <td className="px-6 py-4">{item._id}</td>
-            //   <td className="px-6 py-4">{item.name}</td>
-            //   <td className="px-6 py-4">
-            //     {item.No_Of_Courses ? item.No_Of_Courses : 0}
-            //   </td>
-            //   <td className="px-6 py-4">{item.status}</td>
-
-            //   <td className="px-6 py-4 flex justify-center items-center">
-            //     {item.status === "active" ? (
-            //       <FaRegCircleStop
-            //         className="cursor-pointer"
-            //         size={18}
-            //         color="white"
-            //         onClick={() => {
-            //           freezCategories(item._id);
-            //         }}
-            //       />
-            //     ) : (
-            //       <FaRegCircleStop
-            //         size={18}
-            //         color="red"
-            //         className="cursor-pointer"
-            //         onClick={() => {
-            //           unFreezCategories(item._id);
-            //         }}
-            //       />
-            //     )}
-            //   </td>
-            // </tr>
+           
           ))}
         </tbody>
       </table>
