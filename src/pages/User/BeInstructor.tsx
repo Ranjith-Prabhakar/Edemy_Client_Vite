@@ -5,17 +5,27 @@ import ThemeToggler from "../../components/utils/ThemeToggler";
 import { beInstructorSchema } from "../../schema/beInstructor";
 import { useToBeInstructorMutation } from "../../redux/features/user/userApi";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import responseErrorCatch from "../../utils/responseErrorToast";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
-import { FileInput } from "flowbite-react";
+import FileInput from "../../components/inputFields/FileInput";
+import { useAddFileToCloudMutation, useAddToBucketMutation } from "../../redux/features/course/courseApi";
+import { useSelector } from "react-redux";
+import { IUserState } from "../../redux/interfaces/authApi";
 
 const BeInstructor = () => {
+  const [invalidFileType, setInvalidFileType] = useState(false);
+  const userId = useSelector(
+    (state: { user: IUserState }) => state.user.userData._id as string
+  );
+  const [addFileToCloud] = useAddFileToCloudMutation();
+  const certificateRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [toBeInstructor, { data, isSuccess, isError, error }] =
     useToBeInstructorMutation();
+    const [addToBucket] = useAddToBucketMutation();
   useEffect(() => {
     if (isSuccess) {
       toast.success(data.message);
@@ -29,11 +39,56 @@ const BeInstructor = () => {
     useFormik({
       initialValues: {
         qualification: "",
+        certificate: "",
       },
       validationSchema: beInstructorSchema,
       onSubmit: async (values, actions) => {
-        await toBeInstructor({ qualification: values.qualification });
-        actions.resetForm();
+        console.log("values===>>>", values);
+        const fileInput = certificateRef.current?.files?.[0] as File;
+        const certificateFileType = certificateRef.current?.files?.[0].name
+          .split(".")
+          .pop() as string;
+
+        if (
+          !["png", "jpeg", "pdf"].includes(
+            certificateFileType?.trim() 
+          )
+        ) {
+          setInvalidFileType(true);
+        } else {
+          setInvalidFileType(false);
+          console.log("certificate", certificateFileType);
+          try {
+           const result = await addFileToCloud({
+             fileName: `certificate.${certificateFileType}`,
+             userId: userId,
+             contentType: `${
+               certificateFileType === ("png" || "jpeg")
+                 ? "image"
+                 : "application"
+             }/${certificateFileType}`,
+             folderName: "certificate",
+           });
+
+           if("data" in result){
+             await addToBucket({
+               url: result?.data,
+               body: fileInput,
+               contentType: certificateFileType,
+             });
+             await toBeInstructor({
+               qualification: values.qualification,
+               certificate: `${userId}/${"certificate"}/${"certificate"}.${certificateFileType}`,
+             });
+             actions.resetForm();
+           }
+           
+          } catch (error) {
+            responseErrorCatch(error)
+          }
+         
+        }
+       
       },
     });
 
@@ -43,7 +98,7 @@ const BeInstructor = () => {
         <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between items-center">
-              <h1 className="text-xl font-bold leading-tight tracking-tightmd:text-2xl ">
+              <h1 className="text-xl font-bold capitalize leading-tight tracking-tightmd:text-2xl ">
                 Be a instructor
               </h1>
               <div className="flex justify-center items-center gap-3">
@@ -57,20 +112,15 @@ const BeInstructor = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
-                <textarea
-                  name=""
-                  id=""
-                  rounded-lg
-                  className=" mb-3 w-[100%] h-[260px] bg-gray-50 border border-gray-300 dark:text-slate-800 sm:text-sm rounded-lg focus:ring-c_color-colorTwo focus:border-c_color-colorTwo block  p-2.5 dark:bg-c_color-colorThree dark:placeholder-gray-400"
-                >
-                  you are responsible to provide quality education, adhere to
+                <h3 className="mb-2  border border-gray text-md rounded-lg  block  p-2.5">
+                  You are responsible to provide quality education, adhere to
                   the platform's guidelines, maintain professionalism, engage
                   students effectively, and continuously improve your teaching
                   methods for an enriching e-learning experience. tutor agrees
                   to a revenue-sharing model of 30/70, where the tutor receives
                   70% of the income generated, and the platform retains 30%, as
                   specified in our terms and conditions
-                </textarea>
+                </h3>
                 <AuthInputs
                   type="text"
                   name="qualification"
@@ -85,10 +135,25 @@ const BeInstructor = () => {
                 )}
               </div>
               <div>
-                <h1 className=" mb-1 font-bold text-sm">Add Certificate</h1>
-                <FileInput />
+                <FileInput
+                  ref={certificateRef}
+                  id="certificate"
+                  value={values.certificate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Add Certificate"
+                />
+
+                {errors.certificate && touched.certificate && (
+                  <p className="text-red-600">{errors.certificate}</p>
+                )}
+                {invalidFileType && (
+                  <p className="text-red-600">
+                    invalid file type (accepts only jpeg,png and pdf)
+                  </p>
+                )}
               </div>
-              <GeneralButton>Submit</GeneralButton>
+              <GeneralButton type="submit">Submit</GeneralButton>
             </form>
           </div>
         </div>

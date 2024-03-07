@@ -99,6 +99,7 @@ const AddCourseData = ({
   };
 
   const handleAddImage = async (): Promise<{
+    folderName:string;
     fileType: string;
     imgageFileName: string;
   } | void> => {
@@ -109,11 +110,12 @@ const AddCourseData = ({
 
         if (fileType) {
           const imgageFileName = "thumbnail";
+          const folderName = (courseNameRef?.current?.value as string) || "";
           const result = await addFileToCloud({
             fileName: `${imgageFileName}.${fileType}`,
             userId: userId,
             contentType: `video/${fileType}`,
-            folderName: (courseNameRef?.current?.value as string) || "",
+            folderName: folderName,
           });
 
           console.log("result from handle image ====>>>", result);
@@ -128,7 +130,7 @@ const AddCourseData = ({
               contentType: fileType as string,
             });
 
-            return { fileType, imgageFileName };
+            return { folderName, fileType, imgageFileName };
           }
         } else {
           console.error("File type not found");
@@ -180,8 +182,8 @@ const AddCourseData = ({
         const imageInfo = await handleAddImage();
 
         if (imageInfo) {
-          const { fileType, imgageFileName } = imageInfo;
-          clonedObject.thumbnail = `${userId}/${imgageFileName}.${fileType}`;
+          const {folderName, fileType, imgageFileName } = imageInfo;
+          clonedObject.thumbnail = `${userId}/${folderName}/${imgageFileName}.${fileType}`;
           const result = await addCourseData(
             clonedObject as unknown as ICourseDataBodyReq
           );
