@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import responseErrorCatch from "../../utils/responseErrorToast";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
+import { FileInput } from "flowbite-react";
 
 const BeInstructor = () => {
   const navigate = useNavigate();
@@ -24,24 +25,17 @@ const BeInstructor = () => {
       navigate("/user/profile");
     }
   }, [isSuccess, isError, data, navigate, error]);
-  const {
-    values,
-    errors,
-    touched,
-
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = useFormik({
-    initialValues: {
-      qualification: "",
-    },
-    validationSchema: beInstructorSchema,
-    onSubmit: async (values, actions) => {
-      await toBeInstructor({ qualification: values.qualification });
-      actions.resetForm();
-    },
-  });
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: {
+        qualification: "",
+      },
+      validationSchema: beInstructorSchema,
+      onSubmit: async (values, actions) => {
+        await toBeInstructor({ qualification: values.qualification });
+        actions.resetForm();
+      },
+    });
 
   return (
     <section>
@@ -86,10 +80,13 @@ const BeInstructor = () => {
                   placeholder="Add Qualification"
                   label="Add Qualification"
                 />
-
                 {errors.qualification && touched.qualification && (
                   <p className="text-red-600">{errors.qualification}</p>
                 )}
+              </div>
+              <div>
+                <h1 className=" mb-1 font-bold text-sm">Add Certificate</h1>
+                <FileInput />
               </div>
               <GeneralButton>Submit</GeneralButton>
             </form>
