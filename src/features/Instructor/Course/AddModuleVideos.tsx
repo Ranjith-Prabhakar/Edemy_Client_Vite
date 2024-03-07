@@ -39,6 +39,7 @@ type Props = {
   setCourseData: React.Dispatch<
     React.SetStateAction<{
       courseName: string;
+      price: string;
       discription: string;
       tags: string;
       thumbnail: string;
@@ -162,6 +163,7 @@ const AddModuleVideos = ({
                       moduleData.videos[moduleData.videos.length - 1];
                     setCourseData({
                       courseName: newServerResponse.data.courseName ?? "",
+                      price: newServerResponse.data.price ?? "",
                       discription: newServerResponse.data.discription ?? "",
                       tags: newServerResponse.data.tags ?? "",
                       thumbnail: newServerResponse.data.thumbnail ?? "",

@@ -23,6 +23,7 @@ const Courses = () => {
 
   const [courseData, setCourseData] = useState({
     courseName: "",
+    price:"",
     discription: "",
     tags: "",
     thumbnail: "",
@@ -42,6 +43,7 @@ const Courses = () => {
       const moduleVideoData = moduleData?.videos[moduleData.videos.length - 1];
       setCourseData({
         courseName: data.data.courseName ?? "",
+        price: data.data.price ?? "",
         discription: data.data.discription ?? "",
         tags: data.data.tags ?? "",
         thumbnail: data.data.thumbnail ?? "",

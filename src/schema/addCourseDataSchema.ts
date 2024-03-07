@@ -2,6 +2,8 @@ import * as yup from "yup";
 // const stringRegex = /^[a-zA-Z\s]+$/;
 
 export const addCourseDataSchema = yup.object().shape({
+  price:yup.string().required("Please enter valid price").transform((value) => value.trim()) // Remove spaces
+    .min(3),
   courseName: yup
     .string()
     .required("Course name is required")

@@ -7,6 +7,7 @@ type Props = {
   setCourseData: React.Dispatch<
     React.SetStateAction<{
       courseName: string;
+      price: string;
       discription: string;
       tags: string;
       thumbnail: string;

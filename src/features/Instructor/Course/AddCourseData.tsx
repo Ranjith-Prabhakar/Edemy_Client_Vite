@@ -20,6 +20,7 @@ type Props = {
   setStepper: React.Dispatch<React.SetStateAction<number>>;
   courseData: {
     courseName: string;
+    price: string;
     discription: string;
     tags: string;
     thumbnail: string;
@@ -33,6 +34,7 @@ type Props = {
   setCourseData: React.Dispatch<
     React.SetStateAction<{
       courseName: string;
+      price: string;
       discription: string;
       tags: string;
       thumbnail: string;
@@ -151,6 +153,7 @@ const AddCourseData = ({
   } = useFormik({
     initialValues: {
       courseName: courseData.courseName,
+      price: courseData.price,
       discription: courseData.discription,
       tags: courseData.tags,
       thumbnail: courseData.thumbnail,
@@ -197,6 +200,7 @@ const AddCourseData = ({
                     moduleData?.videos[moduleData.videos.length - 1];
                   setCourseData({
                     courseName: result.data.data.courseName ?? "",
+                    price: result.data.data.price ?? "",
                     discription: result.data.data.discription ?? "",
                     tags: result.data.data.tags ?? "",
                     thumbnail: result.data.data.thumbnail ?? "",
@@ -229,6 +233,7 @@ const AddCourseData = ({
   useEffect(() => {
     setValues({
       courseName: courseData.courseName,
+      price: courseData.price,
       discription: courseData.discription,
       tags: courseData.tags,
       thumbnail: courseData.thumbnail,
@@ -270,13 +275,45 @@ const AddCourseData = ({
           <p className="text-red-600">please select a category</p>
         )}
 
+        {/* ============================================================================= */}
+        {/* <label
+          htmlFor="price"
+          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >
+          Choose the category
+        </label> */}
+      </div>
 
-        
+      <div className="relative z-0 w-full mb-5 group">
+        <input
+          type="number"
+          name="price"
+          id="price"
+          value={values.price}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          placeholder=" "
+        />
+        {!visible && (
+          <button
+            type="button"
+            className="dark:bg-c_color-colorSeven px-3 py-1 w-20 rounded-sm dark:text-white font-bold flex justify-center items-center absolute right-2 top-1 hover:text-[18px] transition-all ease duration-700"
+            onClick={() => handleUpdation({ price: values.price })}
+          >
+            Update
+          </button>
+        )}
+        {errors.price && touched.price && (
+          <p className="text-red-600">{errors.price}</p>
+        )}
+        {/* ========================================================================= */}
+
         <label
           htmlFor="courseName"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
-          Course Name
+          Price
         </label>
       </div>
 

@@ -8,6 +8,7 @@ export interface ICourseResponse {
 }
 //request
 export interface ICourseDataBodyReq {
+  price?:string;
   courseName?: string;
   discription?: string;
   tags?: string;
@@ -29,6 +30,7 @@ export interface ICourseDataBody {
   status: number;
   message: string;
   data: {
+    price: string;
     category:string;
     courseName: string;
     discription: string;
