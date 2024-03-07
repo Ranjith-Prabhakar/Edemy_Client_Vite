@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { addModueleVideosSchema } from "../../../schema/addModuleVideosSchema";
 import { useEffect, useRef, useState } from "react";
 import {
-  useAddModuleMutation,
+  useAddFileToCloudMutation,
   useAddToBucketMutation,
   useAddModuleVideosMutation,
 } from "../../../redux/features/course/courseApi";
@@ -60,7 +60,7 @@ const AddModuleVideos = ({
   setCourseData,
   setModuleVideos,
 }: Props) => {
-  const [addModule] = useAddModuleMutation();
+  const [addFileToCloud] = useAddFileToCloudMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addModuleVideos] = useAddModuleVideosMutation();
   const userId = useSelector(
@@ -94,18 +94,22 @@ const AddModuleVideos = ({
 
   const handleAddModule = async (moduleVideoBody: IModuleVideoBody) => {
     try {
+      console.log(" from handleAddModule ====>>>");
       const fileInput = moduleVideoRef.current;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
         const fileType = fileInput.files[0].name.split(".").pop();
 
         const moduleFileName =
           (videoNameRef.current?.value as string) + "-" + Date.now();
-        const result = await addModule({
+        const result = await addFileToCloud({
           fileName: `${moduleFileName}.${fileType}`,
           userId: userId,
           contentType: `video/${fileType}`,
+          folderName: courseData.courseName,
+          fromAddModuleVideo: true,
         });
 
+        console.log("result from handleAddModule ====>>>", result);
         if ("data" in result) {
           const bucketResult = await addToBucket({
             url: result?.data,
@@ -249,7 +253,6 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-         
         />
         {errors.moduleNo && touched.moduleNo && (
           <p className="text-red-600">{errors.moduleNo}</p>
@@ -272,7 +275,6 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-       
         />
         {errors.moduleTittle && touched.moduleTittle && (
           <p className="text-red-600">{errors.moduleTittle}</p>
@@ -296,7 +298,6 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          
         />
         {errors.videoTittle && touched.videoTittle && (
           <p className="text-red-600">{errors.videoTittle}</p>
@@ -319,7 +320,6 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-          
         />
         {errors.videoNo && touched.videoNo && (
           <p className="text-red-600">{errors.videoNo}</p>
@@ -373,11 +373,10 @@ const AddModuleVideos = ({
           onBlur={handleBlur}
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
-         
         />
-        {errors.videoUrl && touched.videoUrl && (
+        {/* {errors.videoUrl && touched.videoUrl && (
           <p className="text-red-600">{errors.videoUrl}</p>
-        )}
+        )} */}
       </div>
       <button
         type="submit"

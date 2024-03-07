@@ -25,10 +25,10 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
-    addModule: builder.mutation<string, IAddModuleBody>({
+    addFileToCloud: builder.mutation<string, IAddModuleBody>({
       query: (data) => ({
         method: "post",
-        url: "course/addModule",
+        url: "course/addFileToCloud",
         body: data,
         credentials: "include" as const,
       }),
@@ -87,7 +87,7 @@ export const courseApi = apiSlice.injectEndpoints({
           console.log("result from courseApi  > getCourses", result);
           dispatch(getCoursesState({ data: result.data.data }));
         } catch (error) {
-          responseErrorCatch(error)
+          responseErrorCatch(error);
         }
       },
     }),
@@ -142,7 +142,7 @@ export const courseApi = apiSlice.injectEndpoints({
             })
           );
         } catch (error) {
-         responseErrorCatch(RiErrorWarningFill)
+          responseErrorCatch(RiErrorWarningFill);
         }
       },
     }),
@@ -168,7 +168,7 @@ export const courseApi = apiSlice.injectEndpoints({
       },
     }),
 
-    getCategory: builder.query<IAddCategoriesRes ,void>({
+    getCategory: builder.query<IAddCategoriesRes, void>({
       query: () => ({
         method: "get",
         url: "course/get_categories",
@@ -180,7 +180,7 @@ export const courseApi = apiSlice.injectEndpoints({
 
 export const {
   useGetCourseInProgressQuery,
-  useAddModuleMutation,
+  useAddFileToCloudMutation,
   useAddCourseDataMutation,
   useAddToBucketMutation,
   useUpdateCourseMutation,

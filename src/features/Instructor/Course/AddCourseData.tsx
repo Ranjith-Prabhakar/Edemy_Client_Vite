@@ -2,7 +2,7 @@ import { addCourseDataSchema } from "../../../schema/addCourseDataSchema";
 import { useFormik } from "formik";
 import { FaArrowRightLong } from "react-icons/fa6";
 import {
-  useAddModuleMutation,
+  useAddFileToCloudMutation,
   useAddCourseDataMutation,
   useAddToBucketMutation,
   useUpdateCourseMutation,
@@ -60,7 +60,7 @@ const AddCourseData = ({
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const [categoryError, setCategoryError] = useState(false);
 
-  const [addModule] = useAddModuleMutation();
+  const [addFileToCloud] = useAddFileToCloudMutation();
   const [addToBucket] = useAddToBucketMutation();
   const [addCourseData] = useAddCourseDataMutation();
   const [updateCourse, { data, isSuccess, error, isError }] =
@@ -107,11 +107,11 @@ const AddCourseData = ({
 
         if (fileType) {
           const imgageFileName = "thumbnail";
-          const result = await addModule({
+          const result = await addFileToCloud({
             fileName: `${imgageFileName}.${fileType}`,
             userId: userId,
             contentType: `video/${fileType}`,
-            courseName: (courseNameRef?.current?.value as string) || "",
+            folderName: (courseNameRef?.current?.value as string) || "",
           });
 
           console.log("result from handle image ====>>>", result);
