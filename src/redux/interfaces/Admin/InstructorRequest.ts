@@ -6,6 +6,7 @@ export interface IInstructorRequest {
   qualification: string;
   consent: boolean;
   contract: string;
+  certificate:string;
 }
 
 export interface IInstructorState {

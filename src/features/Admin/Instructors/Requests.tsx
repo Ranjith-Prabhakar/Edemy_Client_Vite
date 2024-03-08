@@ -18,6 +18,8 @@ import TableBodyTr from "../../../components/Table/TableBodyTr";
 import Td from "../../../components/Table/Td";
 import { FaBackward, FaForward } from "react-icons/fa";
 import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
+import { useGetVideoMutation } from "../../../redux/features/course/courseApi";
+import responseErrorCatch from "../../../utils/responseErrorToast";
 
 const Requests = () => {
   const dispatch = useDispatch();
@@ -33,22 +35,50 @@ const Requests = () => {
     (state: { users: IUserState }) => state.users.usersData
   );
 
+  const [getVideo, { data: certificateData, isSuccess: certificateSuccess }] =
+    useGetVideoMutation();
+
+  const [certificatUrl,setCertificateUrl ] = useState("") 
+  useEffect(() => {
+    if (certificateSuccess)
+      console.log("certificateData=====>>>><<<<<", certificateData);
+  }, [certificateData, certificateSuccess]);
+
   useEffect(() => {
     setTableData(InstructorRequests);
-  }, [InstructorRequests]);
+    console.log("tableData~~~~~~~~~~~", tableData);
+  }, [InstructorRequests, tableData]);
 
   useEffect(() => {
     if (isSuccess) {
       const user = data as IapproveorRejectInstructorRequestsRes;
       const userInfo = user.data as IInstructorRequest;
       const userId = userInfo.userId;
-      const fetchedUser = userData.find((item) => item._id === userId) ;
+      const fetchedUser = userData.find((item) => item._id === userId);
       const newUser = { ...fetchedUser, role: "instructor" };
       console.log("fetchedAUser", fetchedUser);
       dispatch(removeUser({ data: userId }));
       dispatch(addInstrctor({ data: newUser }));
     }
   }, [dispatch, data, isSuccess, userData]);
+
+  const handleGetCertificate = async (certificate: string) => {
+    try {
+      const presignedUrl = await getVideo({ videoName: certificate });
+      if ("data" in presignedUrl) {
+        if (presignedUrl.data) {
+          // console.log("server url", presignedUrl.data.data);
+          // const result = await fetch(`${presignedUrl.data.data}`, {
+          //   method: "get",
+          // });
+          setCertificateUrl(presignedUrl.data.data as string );
+          console.log("result=====>>>K<<<", certificatUrl);
+        }
+      }
+    } catch (error) {
+      responseErrorCatch(error);
+    }
+  };
 
   return (
     <div>
@@ -62,7 +92,7 @@ const Requests = () => {
                   <Th> User</Th>
                   <Th>Status</Th>
                   <Th>Qualification</Th>
-                  <Th>Consent</Th>
+                  <Th>Certificate</Th>
                   <Th>Action</Th>
                 </tr>
               </Thead>
@@ -99,7 +129,17 @@ const Requests = () => {
                     <Td>{item.userName.toUpperCase()}</Td>
                     <Td>{item.status}</Td>
                     <Td>{item.qualification}</Td>
-                    <Td>{item.consent.toString()}</Td>
+                    <Td>
+                      {" "}
+                      <button
+                        className="dark:bg-c_color-colorSeven rounded-full font-bold py-1 px-3 mr-1 hover:scale-110"
+                        onClick={() => {
+                          handleGetCertificate(item.certificate);
+                        }}
+                      >
+                        View Certificate
+                      </button>
+                    </Td>
                     <Td>
                       <button
                         className="dark:bg-c_color-colorSeven rounded-full font-bold py-1 px-3 mr-1 hover:scale-110"

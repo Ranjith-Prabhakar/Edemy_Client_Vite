@@ -1,15 +1,17 @@
 import { useLocation } from "react-router-dom";
 import VideoPlayer from "../../components/VideoPlayer/videoPlayer";
 import { useEffect, useState } from "react";
-import { useGetVideoMutation } from "../../redux/features/course/courseApi";
+// import { useGetVideoMutation } from "../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";
 import Header from "../../layouts/Header";
 import ContainerLayout from "../../layouts/containerLayout";
 import About from "../../features/Course/About";
 import QuestionForm from "../../features/Course/QuestionForm";
 import ReviewAndRating from "../../features/Course/ReviewAndRating";
+import { useGetVideoForUserMutation } from "../../redux/features/course/courseApi";
 
 type ICourseData = {
+  _id: string;
   instructor: string;
   category: string;
   courseName: string;
@@ -19,10 +21,12 @@ type ICourseData = {
   duration: string;
   modules: [
     {
+      _id: string;
       moduleNo: string;
       moduleTittle: string;
       videos: [
         {
+          _id: string;
           videoTittle: string;
           videoNo: string;
           videoUrl: string;
@@ -33,8 +37,9 @@ type ICourseData = {
 };
 
 const CourseSinglePage = () => {
-  const [getVideo, { data }] = useGetVideoMutation();
+  // const [getVideo, { data }] = useGetVideoMutation();
   const [showModuleVideos, setShowModuleVideos] = useState(0);
+  const [getVideoForUser,{data}] = useGetVideoForUserMutation();
 
   const location = useLocation();
   const courseData: ICourseData = location.state.courseData;
@@ -42,6 +47,7 @@ const CourseSinglePage = () => {
     courseData.modules[0].videos[0].videoTittle
   );
   const [swapper, setSwapper] = useState("about");
+  
 
   const regex = /\/(.*?)-/;
   useEffect(() => {
@@ -143,7 +149,13 @@ const CourseSinglePage = () => {
                           <button
                             className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
                             onClick={() => {
-                              getVideo({ videoName: video.videoTittle });
+                              getVideoForUser({
+                                courseId:courseData._id,
+                                moduleNo:item.moduleNo,
+                                videoNo:video.videoNo,
+                                videoName: video.videoTittle,
+                              });
+                              // getVideo({ videoName: video.videoTittle });
                             }}
                           >
                             {" "}

@@ -52,13 +52,13 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
               </div>
               <div className="flex items-center ">
                 <FaRupeeSign />
-                <h3> 5000/-</h3>
+                <h3>{item.price}</h3>
               </div>
             </div>
             <div className="flex px-4 justify-between">
               <div className="flex gap-1 items-center">
                 <MdFormatListBulletedAdd size={20} />
-                <h4> 12 Lessons</h4>
+                <h4>{item.modules.map(module=>module.videos.length)}</h4>
               </div>
               <div className="">
                 <button className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold">

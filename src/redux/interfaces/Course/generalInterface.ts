@@ -10,11 +10,25 @@ interface Questions {
   ];
 }
 
+// interface IModule {
+//   moduleNo: number;
+//   moduleTittle: string;
+//   duration: number;
+//   questions: Questions;
+// }
+
 interface IModule {
-  moduleNo: number;
+  moduleNo: string;
   moduleTittle: string;
-  duration: number;
-  questions: Questions;
+  videos: [
+    {
+      videoTittle: string;
+      videoNo: string;
+      videoUrl: string;
+      duration: number;
+      questions: Questions;
+    }
+  ];
 }
 
 interface IReviewRating {
@@ -23,8 +37,9 @@ interface IReviewRating {
   rating: number;
 }
 export interface ICourse {
-  _id:string;
+  _id: string;
   courseName: string;
+  price: string;
   instructor: string;
   discription: string;
   tags: string[];
@@ -36,5 +51,5 @@ export interface ICourse {
   review: Array<IReviewRating>;
   rating: number;
   submissionStatus: "work-in-progress" | "completed";
-  noOfPurchase:number
+  noOfPurchase: number;
 }

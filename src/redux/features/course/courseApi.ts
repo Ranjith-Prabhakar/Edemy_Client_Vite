@@ -1,7 +1,8 @@
+import { IAddModuleBody } from "../../interfaces/Course/addModule";
 import {
-  IAddModuleBody,
-} from "../../interfaces/Course/addModule";
-import { ICourseDataBody, ICourseDataBodyReq } from "../../interfaces/Course/addCourseData";
+  ICourseDataBody,
+  ICourseDataBodyReq,
+} from "../../interfaces/Course/addCourseData";
 import { ICourseResponse } from "../../interfaces/Course/addCourseData";
 import { IModuleVideoBody } from "../../interfaces/Course/addModuleVideos";
 
@@ -15,6 +16,7 @@ import { ICourse } from "../../interfaces/Course/generalInterface";
 import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
 import responseErrorCatch from "../../../utils/responseErrorToast";
 import { RiErrorWarningFill } from "react-icons/ri";
+import { IGetVideoForUserReq, IGetVideoForUserRes } from "../../interfaces/Course/getVideoForUser";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -107,7 +109,7 @@ export const courseApi = apiSlice.injectEndpoints({
           );
           dispatch(getCourseseInProgressState({ data: result.data.data }));
         } catch (error) {
-          responseErrorCatch(RiErrorWarningFill);
+          responseErrorCatch(error);
         }
       },
     }),
@@ -175,6 +177,17 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    getVideoForUser: builder.mutation<IGetVideoForUserRes, IGetVideoForUserReq>(
+      {
+        query: (data) => ({
+          method: "post",
+          url: "course/get_video_for_user",
+          body: data,
+          credentials: "include" as const,
+        }),
+      }
+    ),
   }),
 });
 
@@ -191,6 +204,7 @@ export const {
   useApproveOrRejectCourseMutation,
   useGetCoursesForUserQuery,
   useGetCategoryQuery,
+  useGetVideoForUserMutation,
 } = courseApi;
 
 // ===========================================================

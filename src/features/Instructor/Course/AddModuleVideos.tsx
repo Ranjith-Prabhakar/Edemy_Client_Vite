@@ -118,7 +118,7 @@ const AddModuleVideos = ({
             contentType: fileType as string,
           });
           if (bucketResult) {
-            moduleVideoBody.videoTittle = `${userId}/${moduleFileName}.${fileType}`;
+            moduleVideoBody.videoTittle = `${userId}/${courseData.courseName}/${moduleFileName}.${fileType}`;
             if (previewRef.current?.value === "true") {
               ///////
               moduleVideoBody.preview = true;
