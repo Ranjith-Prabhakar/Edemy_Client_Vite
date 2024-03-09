@@ -11,7 +11,9 @@ export interface IUser {
   status?: "active" | "frozen";
   isVerified?: boolean;
   courses?: Array<{ courseId: string }>;
-  enrolledCourses?: Array<{ courseId: string }>;
+  enrolledCourses?: Array<{
+    _id: string; courseId: string 
+}>;
 }
 
 export interface IUserState {

@@ -188,6 +188,17 @@ export const courseApi = apiSlice.injectEndpoints({
         }),
       }
     ),
+
+    getVideoForVisitors: builder.mutation<IGetVideoForUserRes, IGetVideoForUserReq>(
+      {
+        query: (data) => ({
+          method: "post",
+          url: "course/get_video_for_visitors",
+          body: data,
+          credentials: "include" as const,
+        }),
+      }
+    ),
   }),
 });
 
@@ -205,6 +216,7 @@ export const {
   useGetCoursesForUserQuery,
   useGetCategoryQuery,
   useGetVideoForUserMutation,
+  useGetVideoForVisitorsMutation
 } = courseApi;
 
 // ===========================================================

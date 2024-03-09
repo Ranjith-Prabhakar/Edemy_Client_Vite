@@ -8,8 +8,12 @@ import ContainerLayout from "../../layouts/containerLayout";
 import About from "../../features/Course/About";
 import QuestionForm from "../../features/Course/QuestionForm";
 import ReviewAndRating from "../../features/Course/ReviewAndRating";
-import { useGetVideoForUserMutation } from "../../redux/features/course/courseApi";
+import {
+  useGetVideoForUserMutation,
+  useGetVideoForVisitorsMutation,
+} from "../../redux/features/course/courseApi";
 import toast from "react-hot-toast";
+import useGetUser from "../../hooks/useGetUser";
 
 type ICourseData = {
   _id: string;
@@ -39,9 +43,15 @@ type ICourseData = {
 
 const CourseSinglePage = () => {
   // const [getVideo, { data }] = useGetVideoMutation();
+  const user = useGetUser();
   const [showModuleVideos, setShowModuleVideos] = useState(0);
   const [getVideoForUser, { data, isSuccess, isError, error }] =
     useGetVideoForUserMutation();
+
+  const [
+    getVideoForVisitors,
+    { data: visitorsData, isSuccess:visitorsIsSuccess, isError:visitorsIsError, error:visitorsError },
+  ] = useGetVideoForVisitorsMutation();
 
   const location = useLocation();
   const courseData: ICourseData = location.state.courseData;
@@ -70,6 +80,26 @@ const CourseSinglePage = () => {
       }
     }
   }, [data, isSuccess, isError, error]);
+
+  useEffect(() => {
+    if (visitorsIsSuccess) {
+      if (visitorsData && "data" in visitorsData) {
+        console.log("data from course preview", visitorsData);
+        const url = visitorsData.data;
+        setVideoUrl(url as string);
+      }
+    }
+    if (visitorsIsError) {
+      if (visitorsError && "data" in visitorsError) {
+        type TError = {
+          status: number;
+          data: { status: number; message: string; success: boolean };
+        };
+        const Error = visitorsError as TError;
+        toast.error(Error.data.message);
+      }
+    }
+  }, [visitorsData, visitorsIsSuccess, visitorsIsError, visitorsError]);
 
   return (
     <ContainerLayout>
@@ -162,13 +192,27 @@ const CourseSinglePage = () => {
                           <button
                             className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
                             onClick={() => {
-                              getVideoForUser({
-                                courseId: courseData._id,
-                                moduleNo: item.moduleNo,
-                                videoNo: video.videoNo,
-                                videoName: video.videoTittle,
-                              });
-                              // getVideo({ videoName: video.videoTittle });
+                              if (
+                                user &&
+                                user.enrolledCourses?.find(
+                                  (course) =>
+                                    course._id === (courseData._id as string)
+                                )
+                              ) {
+                                getVideoForUser({
+                                  courseId: courseData._id,
+                                  moduleNo: item.moduleNo,
+                                  videoNo: video.videoNo,
+                                  videoName: video.videoTittle,
+                                });
+                              } else {
+                                getVideoForVisitors({
+                                  courseId: courseData._id,
+                                  moduleNo: item.moduleNo,
+                                  videoNo: video.videoNo,
+                                  videoName: video.videoTittle,
+                                });
+                              }
                             }}
                           >
                             {" "}
