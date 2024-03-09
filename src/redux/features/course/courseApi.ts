@@ -17,6 +17,7 @@ import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
 import responseErrorCatch from "../../../utils/responseErrorToast";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { IGetVideoForUserReq, IGetVideoForUserRes } from "../../interfaces/Course/getVideoForUser";
+import { IEnrollReq, IEnrollRes } from "../../interfaces/Course/enrollCourse";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -189,16 +190,26 @@ export const courseApi = apiSlice.injectEndpoints({
       }
     ),
 
-    getVideoForVisitors: builder.mutation<IGetVideoForUserRes, IGetVideoForUserReq>(
-      {
-        query: (data) => ({
-          method: "post",
-          url: "course/get_video_for_visitors",
-          body: data,
-          credentials: "include" as const,
-        }),
-      }
-    ),
+    getVideoForVisitors: builder.mutation<
+      IGetVideoForUserRes,
+      IGetVideoForUserReq
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "course/get_video_for_visitors",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
+
+    enrollCourse: builder.mutation<IEnrollRes, IEnrollReq[]>({
+      query: (data) => ({
+        method: "post",
+        body: data,
+        url: "course/enroll_course",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -216,7 +227,8 @@ export const {
   useGetCoursesForUserQuery,
   useGetCategoryQuery,
   useGetVideoForUserMutation,
-  useGetVideoForVisitorsMutation
+  useGetVideoForVisitorsMutation,
+  useEnrollCourseMutation
 } = courseApi;
 
 // ===========================================================

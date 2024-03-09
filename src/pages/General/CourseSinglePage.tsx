@@ -1,7 +1,6 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import VideoPlayer from "../../components/VideoPlayer/videoPlayer";
 import { useEffect, useState } from "react";
-// import { useGetVideoMutation } from "../../redux/features/course/courseApi";
 import { IoIosArrowDropdown } from "react-icons/io";
 import Header from "../../layouts/Header";
 import ContainerLayout from "../../layouts/containerLayout";
@@ -9,6 +8,7 @@ import About from "../../features/Course/About";
 import QuestionForm from "../../features/Course/QuestionForm";
 import ReviewAndRating from "../../features/Course/ReviewAndRating";
 import {
+  useEnrollCourseMutation,
   useGetVideoForUserMutation,
   useGetVideoForVisitorsMutation,
 } from "../../redux/features/course/courseApi";
@@ -18,6 +18,7 @@ import useGetUser from "../../hooks/useGetUser";
 type ICourseData = {
   _id: string;
   instructor: string;
+  price: string;
   category: string;
   courseName: string;
   discription: string;
@@ -42,7 +43,7 @@ type ICourseData = {
 };
 
 const CourseSinglePage = () => {
-  // const [getVideo, { data }] = useGetVideoMutation();
+  const navigate = useNavigate();
   const user = useGetUser();
   const [showModuleVideos, setShowModuleVideos] = useState(0);
   const [getVideoForUser, { data, isSuccess, isError, error }] =
@@ -50,21 +51,44 @@ const CourseSinglePage = () => {
 
   const [
     getVideoForVisitors,
-    { data: visitorsData, isSuccess:visitorsIsSuccess, isError:visitorsIsError, error:visitorsError },
+    {
+      data: visitorsData,
+      isSuccess: visitorsIsSuccess,
+      isError: visitorsIsError,
+      error: visitorsError,
+    },
   ] = useGetVideoForVisitorsMutation();
 
+  const [
+    enrollCourse,
+    {
+      isSuccess: enrollIsSuccess,
+      data: enrollData,
+      isError: enrollIsError,
+      error: enrollError,
+    },
+  ] = useEnrollCourseMutation();
   const location = useLocation();
   const courseData: ICourseData = location.state.courseData;
   const [videoUrl, setVideoUrl] = useState(
     courseData.modules[0].videos[0].videoTittle
   );
+  const [isPurchased, setIsPurchased] = useState(false);
   const [swapper, setSwapper] = useState("about");
+
+  useEffect(() => {
+    if (user && user.enrolledCourses) {
+      const purchased: boolean = user.enrolledCourses?.some(
+        (course) => course._id === (courseData._id as string)
+      );
+      setIsPurchased(!purchased);
+    }
+  }, [courseData, user]);
 
   const regex = /\/(.*?)-/;
   useEffect(() => {
     if (isSuccess) {
       if (data && "data" in data) {
-        console.log("data from course preview", data);
         const url = data.data;
         setVideoUrl(url as string);
       }
@@ -84,7 +108,6 @@ const CourseSinglePage = () => {
   useEffect(() => {
     if (visitorsIsSuccess) {
       if (visitorsData && "data" in visitorsData) {
-        console.log("data from course preview", visitorsData);
         const url = visitorsData.data;
         setVideoUrl(url as string);
       }
@@ -100,6 +123,17 @@ const CourseSinglePage = () => {
       }
     }
   }, [visitorsData, visitorsIsSuccess, visitorsIsError, visitorsError]);
+
+  useEffect(() => {
+    if (enrollIsSuccess) {
+      console.log("enrollData", enrollData);
+      window.location = enrollData?.data as unknown as Location;
+    }
+    if (enrollIsError) {
+      console.log("enrollError", enrollError);
+      toast.error("something went wrong please try again");
+    }
+  }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
 
   return (
     <ContainerLayout>
@@ -145,6 +179,34 @@ const CourseSinglePage = () => {
               >
                 Review & Rate
               </div>
+              {isPurchased && (
+                <div
+                  className={`dark:bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
+                  onClick={() => {
+                    enrollCourse([
+                      {
+                        courseName: courseData.courseName,
+                        price: courseData.price,
+                      },
+                    ]);
+                  }}
+                >
+                  <button>Enroll</button>
+                </div>
+              )}
+              {!user.name && (
+                <div
+                  className={`dark:bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
+                  onClick={() => {
+                    toast.success("please Login first");
+                    setTimeout(() => {
+                      navigate("/auth/login");
+                    }, 1000);
+                  }}
+                >
+                  Enroll
+                </div>
+              )}
             </div>
             <div className="flex">
               {swapper === "about" && (
