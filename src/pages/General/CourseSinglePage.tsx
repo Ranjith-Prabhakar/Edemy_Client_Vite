@@ -9,6 +9,7 @@ import About from "../../features/Course/About";
 import QuestionForm from "../../features/Course/QuestionForm";
 import ReviewAndRating from "../../features/Course/ReviewAndRating";
 import { useGetVideoForUserMutation } from "../../redux/features/course/courseApi";
+import toast from "react-hot-toast";
 
 type ICourseData = {
   _id: string;
@@ -39,7 +40,8 @@ type ICourseData = {
 const CourseSinglePage = () => {
   // const [getVideo, { data }] = useGetVideoMutation();
   const [showModuleVideos, setShowModuleVideos] = useState(0);
-  const [getVideoForUser,{data}] = useGetVideoForUserMutation();
+  const [getVideoForUser, { data, isSuccess, isError, error }] =
+    useGetVideoForUserMutation();
 
   const location = useLocation();
   const courseData: ICourseData = location.state.courseData;
@@ -47,16 +49,27 @@ const CourseSinglePage = () => {
     courseData.modules[0].videos[0].videoTittle
   );
   const [swapper, setSwapper] = useState("about");
-  
 
   const regex = /\/(.*?)-/;
   useEffect(() => {
-    if (data) {
-      console.log("data from course preview", data);
-      const url = data.data;
-      setVideoUrl(url as string);
+    if (isSuccess) {
+      if (data && "data" in data) {
+        console.log("data from course preview", data);
+        const url = data.data;
+        setVideoUrl(url as string);
+      }
     }
-  }, [data]);
+    if (isError) {
+      if (error && "data" in error) {
+        type TError = {
+          status: number;
+          data: { status: number; message: string; success: boolean };
+        };
+        const Error = error as TError;
+        toast.error(Error.data.message);
+      }
+    }
+  }, [data, isSuccess, isError, error]);
 
   return (
     <ContainerLayout>
@@ -150,9 +163,9 @@ const CourseSinglePage = () => {
                             className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
                             onClick={() => {
                               getVideoForUser({
-                                courseId:courseData._id,
-                                moduleNo:item.moduleNo,
-                                videoNo:video.videoNo,
+                                courseId: courseData._id,
+                                moduleNo: item.moduleNo,
+                                videoNo: video.videoNo,
                                 videoName: video.videoTittle,
                               });
                               // getVideo({ videoName: video.videoTittle });
