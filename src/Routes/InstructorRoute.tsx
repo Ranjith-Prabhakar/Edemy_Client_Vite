@@ -1,6 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import useGetUser from "../hooks/useGetUser";
 import InstructorDash from "../pages/Instructor/InstructorDash";
+import PaymentSucess from "../features/PaymentSucess";
 
 const InstructorRoute = () => {
   const user = useGetUser();
@@ -15,6 +16,7 @@ const InstructorRoute = () => {
       {user.role === "instructor" && (
         <Routes>
           <Route path="/profile/*" element={<InstructorDash />} />
+          <Route path="payment_success" element={<PaymentSucess />} />
         </Routes>
       )}
     </div>

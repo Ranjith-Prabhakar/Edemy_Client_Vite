@@ -14,10 +14,14 @@ import {
 } from "./courseSlice";
 import { ICourse } from "../../interfaces/Course/generalInterface";
 import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
-import responseErrorCatch from "../../../utils/responseErrorToast";
-import { RiErrorWarningFill } from "react-icons/ri";
-import { IGetVideoForUserReq, IGetVideoForUserRes } from "../../interfaces/Course/getVideoForUser";
+import {
+  IGetVideoForUserReq,
+  IGetVideoForUserRes,
+} from "../../interfaces/Course/getVideoForUser";
 import { IEnrollReq, IEnrollRes } from "../../interfaces/Course/enrollCourse";
+import { catchError } from "../../../utils/catchError";
+import { userLoggedIn } from "../auth/authSlice";
+import { IPaymentStatusReq } from "../../interfaces/Course/paymentStatus";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -90,7 +94,7 @@ export const courseApi = apiSlice.injectEndpoints({
           console.log("result from courseApi  > getCourses", result);
           dispatch(getCoursesState({ data: result.data.data }));
         } catch (error) {
-          responseErrorCatch(error);
+          catchError(error);
         }
       },
     }),
@@ -110,7 +114,7 @@ export const courseApi = apiSlice.injectEndpoints({
           );
           dispatch(getCourseseInProgressState({ data: result.data.data }));
         } catch (error) {
-          responseErrorCatch(error);
+          catchError(error);
         }
       },
     }),
@@ -145,7 +149,7 @@ export const courseApi = apiSlice.injectEndpoints({
             })
           );
         } catch (error) {
-          responseErrorCatch(RiErrorWarningFill);
+          catchError(error);
         }
       },
     }),
@@ -166,7 +170,7 @@ export const courseApi = apiSlice.injectEndpoints({
           );
           // dispatch(getCoursesState({ data: result.data.data }));
         } catch (error) {
-          responseErrorCatch(RiErrorWarningFill);
+          catchError(error);
         }
       },
     }),
@@ -210,6 +214,34 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    paymentStatus: builder.mutation<
+      IPaymentStatusReq,
+      { paymentStatus: boolean }
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "course/payment_status",
+        body: data,
+        credentials: "include" as const,
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log("result from onquery courseApi", result.data);
+          dispatch(
+            userLoggedIn({
+              userData: result.data.data,
+            })
+          );
+        } catch (error) {
+          catchError(error);
+        }
+      },
+    }),
+
+    // ______________________________
   }),
 });
 
@@ -228,7 +260,8 @@ export const {
   useGetCategoryQuery,
   useGetVideoForUserMutation,
   useGetVideoForVisitorsMutation,
-  useEnrollCourseMutation
+  useEnrollCourseMutation,
+  usePaymentStatusMutation,
 } = courseApi;
 
 // ===========================================================

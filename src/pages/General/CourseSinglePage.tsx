@@ -79,7 +79,7 @@ const CourseSinglePage = () => {
   useEffect(() => {
     if (user && user.enrolledCourses) {
       const purchased: boolean = user.enrolledCourses?.some(
-        (course) => course._id === (courseData._id as string)
+        (course) => course === (courseData._id as string)
       );
       setIsPurchased(!purchased);
     }
@@ -130,7 +130,6 @@ const CourseSinglePage = () => {
       window.location = enrollData?.data as unknown as Location;
     }
     if (enrollIsError) {
-      console.log("enrollError", enrollError);
       toast.error("something went wrong please try again");
     }
   }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
@@ -185,6 +184,7 @@ const CourseSinglePage = () => {
                   onClick={() => {
                     enrollCourse([
                       {
+                        courseId: courseData._id,
                         courseName: courseData.courseName,
                         price: courseData.price,
                       },
@@ -258,7 +258,7 @@ const CourseSinglePage = () => {
                                 user &&
                                 user.enrolledCourses?.find(
                                   (course) =>
-                                    course._id === (courseData._id as string)
+                                    course === (courseData._id as string)
                                 )
                               ) {
                                 getVideoForUser({

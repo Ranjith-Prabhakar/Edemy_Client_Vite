@@ -10,10 +10,8 @@ export interface IUser {
   role?: "user" | "instructor" | "admin";
   status?: "active" | "frozen";
   isVerified?: boolean;
-  courses?: Array<{ courseId: string }>;
-  enrolledCourses?: Array<{
-    _id: string; courseId: string 
-}>;
+  courses?: string[];
+  enrolledCourses?: string[];
 }
 
 export interface IUserState {
@@ -51,12 +49,11 @@ export interface IForgotPasswordEmailSubmissionReq {
 
 export interface IForgotPasswordEmailSubmissionRes {
   status: boolean;
-  data?:{
-    status:boolean,
-    message:string
+  data?: {
+    status: boolean;
+    message: string;
   };
-  message?:string
+  message?: string;
 }
-
 
 export interface ILogout extends IForgotPasswordEmailSubmissionRes {}
