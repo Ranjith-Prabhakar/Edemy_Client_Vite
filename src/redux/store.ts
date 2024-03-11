@@ -6,6 +6,7 @@ import usersSlice from "./features/admin/Users/userSlice";
 import instructorsSlice from "./features/admin/Instructors/instructorsSlice";
 import instructorRequestSlice from "./features/admin/InstructorRequests/instructorRequestSlice";
 import courseSlice from "./features/course/courseSlice";
+import reviewAndRatingSlice from './features/reviewAndRating/reviewAndRatingSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     instructors: instructorsSlice,
     instructorRequests: instructorRequestSlice,
     courses: courseSlice,
+    reviewAndRating: reviewAndRatingSlice,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

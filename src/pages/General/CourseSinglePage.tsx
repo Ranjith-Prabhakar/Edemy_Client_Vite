@@ -15,7 +15,7 @@ import {
 import toast from "react-hot-toast";
 import useGetUser from "../../hooks/useGetUser";
 
-type ICourseData = {
+export type ICourseData = {
   _id: string;
   instructor: string;
   price: string;
@@ -218,7 +218,9 @@ const CourseSinglePage = () => {
                 />
               )}
               {swapper === "questions" && <QuestionForm />}
-              {swapper === "review" && <ReviewAndRating />}
+              {swapper === "review" && (
+                <ReviewAndRating courseData={courseData} />
+              )}
             </div>
           </div>
 
