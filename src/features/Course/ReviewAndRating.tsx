@@ -15,6 +15,9 @@ const ReviewAndRating = ({ courseData }: Props) => {
   const [showUpdateButton, setShowUpdateButton] = useState(false);
   const [updateReviewAndRating, { data, isSuccess, isError, error }] =
     useUpdateReviewAndRatingMutation();
+  const [fillStar, setFillStar] = useState(0);
+  // const [unFillStar, setUnFillStar] = useState([0, 0, 0, 0, 0]);
+
   useEffect(() => {
     if (isSuccess) {
       console.log("data from ReviewAndRating component", data);
@@ -38,6 +41,16 @@ const ReviewAndRating = ({ courseData }: Props) => {
       catchError(error);
     }
   };
+
+  useEffect(() => {
+    updateReviewAndRating({
+      courseId: courseData._id,
+      courseName: courseData.courseName,
+      fieldToUpdate: "rating",
+      rating: fillStar,
+    });
+  }, [fillStar]);
+
   return (
     <div className=" dark:bg-c_color-colorSix  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
       <div className="border my-2 ml-2 overflow-scroll capitalize  flex-1 rounded-lg text-gray-300 ">
@@ -62,7 +75,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
                     updateReviewAndRating({
                       courseId: courseData._id,
                       courseName: courseData.courseName,
-                      fieldToUpdate:"review",
+                      fieldToUpdate: "review",
                       review: review,
                     });
                   }}
@@ -88,11 +101,35 @@ const ReviewAndRating = ({ courseData }: Props) => {
           <h1 className="text-center font-bold italic">Add your rating</h1>
           <hr className="w-[90%] m-auto mt-1" />
           <div className="flex shadow-2xl px-5 py-2  ">
+            {[...Array(fillStar)].map((_, index) => (
+              <FaStar
+                key={index}
+                size={20}
+                color="#FFD700"
+                className="cursor-pointer"
+                onClick={() => {
+                  setFillStar(index + 1);
+                 
+                }}
+              />
+            ))}
+            {[...Array(5 - fillStar)].map((_, index) => (
+              <FaRegStar
+                key={index}
+                size={20}
+                color="#FFD700"
+                className="cursor-pointer"
+                onClick={() => {
+                  setFillStar(fillStar + (index + 1));
+                  
+                }}
+              />
+            ))}
+            {/* <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" />
             <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" />
             <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" />
             <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" />
-            <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" />
-            <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" />
+            <FaRegStar size={20} color="#FFD700 " className="cursor-pointer" /> */}
           </div>
         </div>
       </div>
