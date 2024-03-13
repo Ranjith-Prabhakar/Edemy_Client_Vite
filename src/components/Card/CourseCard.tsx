@@ -7,7 +7,10 @@ import { MdFormatListBulletedAdd } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import { useNavigate } from "react-router-dom";
-import { useGetThumbnailImagesPreSignedUrlMutation } from "../../redux/features/course/courseApi";
+import {
+  useEnrollCourseMutation,
+  useGetThumbnailImagesPreSignedUrlMutation,
+} from "../../redux/features/course/courseApi";
 
 type Props = {
   // courseCategory: ICourse[];
@@ -15,32 +18,42 @@ type Props = {
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
-  console.log("courseCategory", courseCategory);
-  console.log(
-    "courseCategory.modules ===>",
-    courseCategory.modules.reduce((acc, curr) => {
-      return acc + curr.videos.length;
-    }, 0)
-  );
-
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
   const navigate = useNavigate();
   const [imgUrl, setImagUrl] = useState("");
+  const [
+    enrollCourse,
+    {
+      isSuccess: enrollIsSuccess,
+      data: enrollData,
+      isError: enrollIsError,
+      error: enrollError,
+    },
+  ] = useEnrollCourseMutation();
+
   useEffect(() => {
     getThumbnailImagesPreSignedUrl({
       thumbnail: courseCategory.thumbnail,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (isSuccess) {
-      console.log("data ******", data);
       setImagUrl(data?.data as string);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-  console.log("courseCategory", courseCategory);
+  useEffect(() => {
+    if (enrollIsSuccess) {
+      console.log("enrollData", enrollData);
+      window.location = enrollData?.data as unknown as Location;
+    }
+    if (enrollIsError) {
+      toast.error("something went wrong please try again");
+    }
+  }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
   return (
     <div
       key={courseCategory.courseName}
@@ -90,7 +103,19 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
             </h4>
           </div>
           <div className="">
-            <button className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold">
+            <button
+              className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold"
+              onClick={() => {
+                enrollCourse([
+                  {
+                    courseId: courseCategory._id,
+                    courseName: courseCategory.courseName,
+                    price: courseCategory.price,
+                  },
+                ]);
+                console.log("hello");
+              }}
+            >
               Enroll Now
             </button>
           </div>
