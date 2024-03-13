@@ -23,7 +23,12 @@ const OurBestCourses = () => {
       </h1>
 
       <div className="w-full mt-16">
-        <CourseCard courseCategory={courseCategory} />
+        <div className="flex justify-start gap-3  w-full overflow-x-scroll">
+          {courseCategory.map((item) => (
+            <CourseCard courseCategory={item} />
+          ))}
+          {/* <CourseCard courseCategory={courseCategory} /> */}
+        </div>
         <div className="text-center mt-6">
           <button className="bg-transparent border  border-[#FFD700] px-3 py-1 rounded">
             View more

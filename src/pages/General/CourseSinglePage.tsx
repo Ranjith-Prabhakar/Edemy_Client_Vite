@@ -285,24 +285,6 @@ const CourseSinglePage = () => {
                         </div>
                       )}
                     </>
-
-                    //
-                    // <div
-                    //   key={videoIndex}
-                    //   className="flex gap-2 justify-between mb-2 p-2"
-                    // >
-                    //   {video.videoNo} -{" "}
-                    //   {video.videoTittle.match(regex)?.[1] || "No Match"}
-                    //   <button
-                    //     className=" px-3 rounded-sm h-[30px] font-bold dark:bg-gray-700 dark:text-gray-400"
-                    //     onClick={() => {
-                    //       getVideo({ videoName: video.videoTittle });
-                    //     }}
-                    //   >
-                    //     {" "}
-                    //     Play
-                    //   </button>
-                    // </div>
                   ))}
               </div>
             ))}

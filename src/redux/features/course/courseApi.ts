@@ -22,6 +22,7 @@ import { IEnrollReq, IEnrollRes } from "../../interfaces/Course/enrollCourse";
 import { catchError } from "../../../utils/catchError";
 import { userLoggedIn } from "../auth/authSlice";
 import { IPaymentStatusReq } from "../../interfaces/Course/paymentStatus";
+import { ICloudStorageResponse } from "../../interfaces/CloudStorage/CloudStorageResponse";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -88,7 +89,7 @@ export const courseApi = apiSlice.injectEndpoints({
         url: "course/get_courses",
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           console.log("result from courseApi  > getCourses", result);
@@ -105,7 +106,7 @@ export const courseApi = apiSlice.injectEndpoints({
         url: "course/get_courses_in_Request",
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           console.log(
@@ -139,7 +140,7 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           const data = result?.data?.data as ICourse;
@@ -161,7 +162,7 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled }) {
+      async onQueryStarted(_arg, { queryFulfilled }) {
         try {
           const result = await queryFulfilled;
           console.log(
@@ -226,7 +227,7 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           console.log("result from onquery courseApi", result.data);
@@ -239,6 +240,14 @@ export const courseApi = apiSlice.injectEndpoints({
           catchError(error);
         }
       },
+    }),
+
+    getThumbnailImagesPreSignedUrl: builder.mutation<ICloudStorageResponse,{thumbnail:string}>({
+      query: (data) => ({
+        method: "post",
+        body: data,
+        url: "course/get_thumbnail_image_presigned_url",
+      }),
     }),
 
     // ______________________________
@@ -262,6 +271,7 @@ export const {
   useGetVideoForVisitorsMutation,
   useEnrollCourseMutation,
   usePaymentStatusMutation,
+  useGetThumbnailImagesPreSignedUrlMutation,
 } = courseApi;
 
 // ===========================================================
