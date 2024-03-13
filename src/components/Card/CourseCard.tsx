@@ -15,8 +15,15 @@ type Props = {
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
-  console.log("courseCategory ===>", courseCategory);
-  const [getThumbnailImagesPreSignedUrl,{data,isSuccess}] =
+  console.log("courseCategory", courseCategory);
+  console.log(
+    "courseCategory.modules ===>",
+    courseCategory.modules.reduce((acc, curr) => {
+      return acc + curr.videos.length;
+    }, 0)
+  );
+
+  const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
   const navigate = useNavigate();
   const [imgUrl, setImagUrl] = useState("");
@@ -24,14 +31,13 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
     getThumbnailImagesPreSignedUrl({
       thumbnail: courseCategory.thumbnail,
     });
- 
   }, []);
   useEffect(() => {
-    if(isSuccess){
-console.log("data ******", data);
-setImagUrl(data?.data as string);
+    if (isSuccess) {
+      console.log("data ******", data);
+      setImagUrl(data?.data as string);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   console.log("courseCategory", courseCategory);
@@ -78,7 +84,9 @@ setImagUrl(data?.data as string);
           <div className="flex gap-1 items-center">
             <MdFormatListBulletedAdd size={20} />
             <h4>
-              {courseCategory.modules.map((module) => module.videos.length)}
+              {courseCategory.modules.reduce((acc, curr) => {
+                return acc + curr.videos.length;
+              }, 0)}
             </h4>
           </div>
           <div className="">
@@ -95,8 +103,8 @@ setImagUrl(data?.data as string);
 
 export default CourseCard;
 
-
-{/* <div className="flex justify-start gap-3  w-full overflow-x-scroll">
+{
+  /* <div className="flex justify-start gap-3  w-full overflow-x-scroll">
   {courseCategory.map((item, index) => (
     <div
       key={index}
@@ -154,4 +162,5 @@ export default CourseCard;
       </div>
     </div>
   ))}
-</div>; */}
+</div>; */
+}
