@@ -14,16 +14,17 @@ const instructorsRequestApi = apiSlice.injectEndpoints({
         method: "get",
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           console.log("getInstructorRequests .....", result.data.data);
-          dispatch(getRequests({ data: result.data.data}));
+          dispatch(getRequests({ data: result.data.data }));
         } catch (error) {
           console.log(error);
         }
       },
     }),
+
     approveorRejectInstructorRequests: builder.mutation<
       IapproveorRejectInstructorRequestsRes,
       IapproveorRejectInstructorRequestsReq
@@ -37,9 +38,10 @@ const instructorsRequestApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          console.log("result from onQueryStarted 11111", result);
           const data: IInstructorAgreement = result.data
             .data as IInstructorAgreement;
-          await dispatch(approveorRejectRequest({ data: data.userId }));
+          dispatch(approveorRejectRequest({ data: data.userId }));
         } catch (error) {
           console.log(error);
         }

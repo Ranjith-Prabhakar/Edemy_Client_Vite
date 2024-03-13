@@ -39,7 +39,8 @@ const Table = () => {
   useEffect(() => {
     setTableData(instructorData);
     console.log("table data", tableData);
-  }, [instructorData, tableData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [instructorData]);
 
   useEffect(() => {
     if (isSuccess) toast.success(data.message);

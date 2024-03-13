@@ -8,5 +8,6 @@ export interface IapproveorRejectInstructorRequestsReq {
 export interface IapproveorRejectInstructorRequestsRes {
   success: boolean;
   message: string;
+  status?:number;
   data?: IInstructorAgreement | IInstructorAgreement[] | null;
 }

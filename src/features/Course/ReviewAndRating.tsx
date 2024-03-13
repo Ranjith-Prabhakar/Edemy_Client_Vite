@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { ICourseData } from "../../pages/General/CourseSinglePage";
 import { catchError } from "../../utils/catchError";
 import useGetUser from "../../hooks/useGetUser";
+import { useSelector } from "react-redux";
+import { IReviewAndRatingInitialState } from "../../redux/features/reviewAndRating/reviewAndRatingSlice";
 
 type Props = {
   courseData: ICourseData;
@@ -21,80 +23,60 @@ type TReviewAndRating = {
   review?: string;
   rating?: number;
 };
-type TReviewAndRatingObj = {
-  _id: string;
-  courseId: string;
-  courseName: string;
-  reviewAndRating: TReviewAndRating[];
-};
 
 const ReviewAndRating = ({ courseData }: Props) => {
+  const { isSuccess, data } = useGetReviewAndRatingDataQuery();
+  useEffect(() => {
+    if (isSuccess) console.log("data", data);
+  }, [data, isSuccess]);
+  const reviewAndRatingData = useSelector(
+    (state: { reviewAndRating: IReviewAndRatingInitialState }) =>
+      state.reviewAndRating.reviewAndRatingData
+  );
   const user = useGetUser();
   const [review, setReview] = useState("");
   const [showUpdateButton, setShowUpdateButton] = useState(false);
-  const {
-    isSuccess: getReviewAndRatingIsSuccess,
-    data: getReviewAndRatingData,
-  } = useGetReviewAndRatingDataQuery();
-  const [updateReviewAndRating, { data, isSuccess, isError, error }] =
-    useUpdateReviewAndRatingMutation();
-  const [fillStar, setFillStar] = useState(0);
-  const [existingReview, setExistingReview] = useState("");
-  const [userReviewData, setUserRevieData] = useState<TReviewAndRating>(
-    {} as TReviewAndRating
-  );
-  const [reviewAndRatingCollection, setReviewAndRatingCollection] = useState<
-    TReviewAndRating[]
-  >([] as TReviewAndRating[]);
 
-  useEffect(() => {
-    if (getReviewAndRatingIsSuccess) {
-      const isCourseHaveReviewdAndRated = getReviewAndRatingData.data.find(
-        (course: TReviewAndRatingObj) => course.courseId === courseData._id
-      );
-      if (isCourseHaveReviewdAndRated) {
-        setReviewAndRatingCollection(
-          isCourseHaveReviewdAndRated.reviewAndRating
-        );
-        console.log(
-          "reviewAndRatingCollection22222222",
-          reviewAndRatingCollection
-        );
-        const isUserHaveReviewdOrRatedAlready =
-          isCourseHaveReviewdAndRated.reviewAndRating.find(
-            (reviewOrRating: TReviewAndRating) =>
-              reviewOrRating.userId === user._id
-          );
-        if (isUserHaveReviewdOrRatedAlready) {
-          setUserRevieData(isUserHaveReviewdOrRatedAlready);
-          console.log("userReviewData", userReviewData);
-        }
-        if (isUserHaveReviewdOrRatedAlready?.rating) {
-          setFillStar(isUserHaveReviewdOrRatedAlready.rating);
-          console.log(
-            "isUserHaveReviewdOrRatedAlready```````",
-            isUserHaveReviewdOrRatedAlready
-          );
-        }
-        if (isUserHaveReviewdOrRatedAlready?.review) {
-          console.log(
-            "isUserHaveReviewdOrRatedAlready.review",
-            isUserHaveReviewdOrRatedAlready.review
-          );
-          setExistingReview(isUserHaveReviewdOrRatedAlready.review);
-        }
+  const [updateReviewAndRating] = useUpdateReviewAndRatingMutation();
+
+  
+  console.log("reviewAndRatingData 555555", reviewAndRatingData);
+  const coursereviewAndRatingData = reviewAndRatingData
+    .find((reviewAndRate) => reviewAndRate.courseId === courseData._id)
+    ?.reviewAndRating.map((item) => item);
+  console.log("reviewAndRatingData 9090", coursereviewAndRatingData);
+
+  const userRating =
+    coursereviewAndRatingData?.find(
+      (item: TReviewAndRating) => item.userId === user._id
+    )?.rating || 0;
+
+  const [fillStarUser, setFillStarUser] = useState(userRating);
+
+  const totalRatingData = coursereviewAndRatingData?.reduce(
+    (accu, curr) => {
+      if (curr?.rating !== undefined) {
+        accu.totalRating += curr.rating;
+        accu.countWithRating += 1;
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getReviewAndRatingIsSuccess]);
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("data from ReviewAndRating component", data);
-    }
-    if (isError) {
-      console.log("error from ReviewAndRating component", error);
-    }
-  }, [data, error, isError, isSuccess]);
+
+      return accu;
+    },
+    { totalRating: 0, countWithRating: 0 }
+  );
+
+  const totalRating = totalRatingData?.totalRating || 0;
+  const countWithRating = totalRatingData?.countWithRating || 0;
+  const total = (5 / 100) * ((totalRating / (countWithRating * 5)) * 100);
+  console.log(
+    "totalRating, countWithRating total",
+    totalRating,
+    countWithRating,
+    total
+  );
+
+  const [fillStarTotal] = useState(total);
+  console.log("totalRating", totalRating);
 
   const handleChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     try {
@@ -115,91 +97,97 @@ const ReviewAndRating = ({ courseData }: Props) => {
     <div className=" dark:bg-c_color-colorSix  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
       <div className="border my-2 ml-2 overflow-scroll capitalize  flex-1 rounded-lg text-gray-300 ">
         <div className="dark:bg-c_color-colorSix p-3 rounded-md w-full ">
-          {existingReview !== "" ? (
+          <form className="">
+            <div className="relative w-full">
+              <textarea
+                id="message"
+                value={review}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                rows={1}
+                cols={1000}
+                className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent "
+                placeholder="Leave a your review..."
+              ></textarea>
+              {showUpdateButton && (
+                <VscSend
+                  className="absolute right-2 bottom-1 cursor-pointer"
+                  onClick={() => {
+                    updateReviewAndRating({
+                      courseId: courseData._id,
+                      courseName: courseData.courseName,
+                      fieldToUpdate: "review",
+                      review: review,
+                    });
+                    setReview("");
+                  }}
+                />
+              )}
+            </div>
+          </form>
+          {coursereviewAndRatingData && (
             <div className="ms-2 mb-4">
               <div className="max-w-fit ">
-                <h3 className="italic font-bold">
-                  You{" "}
-                  <span className="text-[10px]">
-                    ( {userReviewData.date.substring(0, 10)} )
-                  </span>
-                  <hr className="border-dashed" />
-                </h3>
+                {coursereviewAndRatingData?.map((item: TReviewAndRating) => (
+                  <>
+                    <h3 className="italic font-bold">
+                      {item.userId === user._id ? "You" : item.userName}
+                      {"  "}(
+                      <span className="text-[10px]">
+                        {item.date.substring(0, 10)}
+                      </span>
+                      )
+                      <hr className="border-dashed" />
+                    </h3>
+                    <p className="ms-4 font-light my-2">{item.review}</p>
+                  </>
+                ))}
               </div>
-              <p className="italic ms-3 mt-1">{existingReview}</p>
             </div>
-          ) : (
-            <form className="">
-              <div className="relative w-full">
-                <textarea
-                  id="message"
-                  value={review}
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  rows={1}
-                  cols={1000}
-                  className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent "
-                  placeholder="Leave a your review..."
-                ></textarea>
-                {showUpdateButton && (
-                  <VscSend
-                    className="absolute right-2 bottom-1 cursor-pointer"
-                    onClick={() => {
-                      updateReviewAndRating({
-                        courseId: courseData._id,
-                        courseName: courseData.courseName,
-                        fieldToUpdate: "review",
-                        review: review,
-                      });
-                    }}
-                  />
-                )}
-              </div>
-            </form>
           )}
-          <>
-            {
-              <div className="ms-2 ">
-                <div className="max-w-fit ">
-                  <h3 className="italic font-bold">
-                    You{" "}
-                    <span className="text-[10px]">
-                      ( {userReviewData.date} )
-                    </span>
-                    <hr className="border-dashed" />
-                  </h3>
-                </div>
-                <p className="italic ms-3 mt-1">{existingReview}</p>
-              </div>
-            }
-          </>
         </div>
       </div>
       <div className="flex flex-col flex-2 mr-2 my-3 gap-2">
         <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
           <h1 className="text-center font-bold italic">Total Rating</h1>
           <hr className="w-[90%] m-auto mt-1" />
-          <div className="flex shadow-2xl px-5 py-2  ">
+          {/* <div className="flex shadow-2xl px-5 py-2  ">
+            {[...Array(fillStarTotal)].map((_, index) => (
+              <FaStar
+                key={index}
+                size={20}
+                color="#FFD700"
+                className="cursor-pointer"
+              />
+            ))}
+            {[...Array(5 - (fillStarTotal as number))].map((_, index) => (
+              <FaRegStar
+                key={index}
+                size={20}
+                color="#FFD700"
+                className="cursor-pointer"
+              />
+            ))}
+            {/* <FaStar size={20} color="#FFD700" />
             <FaStar size={20} color="#FFD700" />
             <FaStar size={20} color="#FFD700" />
             <FaStar size={20} color="#FFD700" />
-            <FaStar size={20} color="#FFD700" />
-            <FaRegStar size={20} color="#FFD700" />
-          </div>
+            <FaRegStar size={20} color="#FFD700" /> */}
+          {/* </div> */} 
         </div>
         <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
           <h1 className="text-center font-bold italic">Add your rating</h1>
           <hr className="w-[90%] m-auto mt-1" />
           <div className="flex shadow-2xl px-5 py-2  ">
-            {[...Array(fillStar)].map((_, index) => (
+            {[...Array(fillStarUser)].map((_, index) => (
               <FaStar
                 key={index}
                 size={20}
                 color="#FFD700"
                 className="cursor-pointer"
                 onClick={() => {
-                  setFillStar(index + 1);
+                  setFillStarUser(index + 1);
                   updateReviewAndRating({
                     courseId: courseData._id,
                     courseName: courseData.courseName,
@@ -209,19 +197,19 @@ const ReviewAndRating = ({ courseData }: Props) => {
                 }}
               />
             ))}
-            {[...Array(5 - fillStar)].map((_, index) => (
+            {[...Array(5 - fillStarUser)].map((_, index) => (
               <FaRegStar
                 key={index}
                 size={20}
                 color="#FFD700"
                 className="cursor-pointer"
                 onClick={() => {
-                  setFillStar(fillStar + (index + 1));
+                  setFillStarUser(fillStarUser + (index + 1));
                   updateReviewAndRating({
                     courseId: courseData._id,
                     courseName: courseData.courseName,
                     fieldToUpdate: "rating",
-                    rating: fillStar + (index + 1),
+                    rating: fillStarUser + (index + 1),
                   });
                 }}
               />

@@ -11,86 +11,103 @@ import responseErrorCatch from "../../utils/responseErrorToast";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
 import FileInput from "../../components/inputFields/FileInput";
-import { useAddFileToCloudMutation, useAddToBucketMutation } from "../../redux/features/course/courseApi";
+import {
+  useAddFileToCloudMutation,
+  useAddToBucketMutation,
+} from "../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/interfaces/authApi";
+import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
 
 const BeInstructor = () => {
   const [invalidFileType, setInvalidFileType] = useState(false);
+  const [loading, setLoading] = useState(false);
   const userId = useSelector(
     (state: { user: IUserState }) => state.user.userData._id as string
   );
   const [addFileToCloud] = useAddFileToCloudMutation();
   const certificateRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [toBeInstructor, { data, isSuccess, isError, error }] =
+  const [toBeInstructor, { data, isSuccess, isError, error, isLoading }] =
     useToBeInstructorMutation();
-    const [addToBucket] = useAddToBucketMutation();
+  const [addToBucket] = useAddToBucketMutation();
   useEffect(() => {
     if (isSuccess) {
+      setLoading(false);
       toast.success(data.message);
       navigate("/user/profile");
+    } else if (isLoading) {
+      setLoading(true);
     } else if (isError) {
+      setLoading(false);
       responseErrorCatch(error);
       navigate("/user/profile");
     }
-  }, [isSuccess, isError, data, navigate, error]);
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useFormik({
-      initialValues: {
-        qualification: "",
-        certificate: "",
-      },
-      validationSchema: beInstructorSchema,
-      onSubmit: async (values, actions) => {
-        console.log("values===>>>", values);
-        const fileInput = certificateRef.current?.files?.[0] as File;
-        const certificateFileType = certificateRef.current?.files?.[0].name
-          .split(".")
-          .pop() as string;
+  }, [isSuccess, isError, data, navigate, error, isLoading]);
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      qualification: "",
+      certificate: "",
+    },
+    validationSchema: beInstructorSchema,
+    onSubmit: async (values, actions) => {
+      console.log("values===>>>", values);
+      const fileInput = certificateRef.current?.files?.[0] as File;
+      const certificateFileType = certificateRef.current?.files?.[0].name
+        .split(".")
+        .pop() as string;
+      console.log("certificateFile)))))))", certificateFileType);
+      if (!["png", "jpeg", "pdf"].includes(certificateFileType?.trim())) {
+        setInvalidFileType(true);
+      } else {
+        setInvalidFileType(false);
+        console.log(
+          "certificate",
+          `${
+            ["png", "jpeg"].includes(certificateFileType)
+              ? "image"
+              : "application"
+          }/${certificateFileType}`
+        );
+        try {
+          const result = await addFileToCloud({
+            fileName: `certificate.${certificateFileType}`,
+            userId: userId,
+            contentType: `${
+              ["png", "jpeg"].includes(certificateFileType)
+                ? "image"
+                : "application"
+            }/${certificateFileType}`,
+            folderName: "certificate",
+          });
 
-        if (
-          !["png", "jpeg", "pdf"].includes(
-            certificateFileType?.trim() 
-          )
-        ) {
-          setInvalidFileType(true);
-        } else {
-          setInvalidFileType(false);
-          console.log("certificate", certificateFileType);
-          try {
-           const result = await addFileToCloud({
-             fileName: `certificate.${certificateFileType}`,
-             userId: userId,
-             contentType: `${
-               certificateFileType === ("png" || "jpeg")
-                 ? "image"
-                 : "application"
-             }/${certificateFileType}`,
-             folderName: "certificate",
-           });
 
-           if("data" in result){
-             await addToBucket({
-               url: result?.data,
-               body: fileInput,
-               contentType: certificateFileType,
-             });
-             await toBeInstructor({
-               qualification: values.qualification,
-               certificate: `${userId}/${"certificate"}/${"certificate"}.${certificateFileType}`,
-             });
-             actions.resetForm();
-           }
-           
-          } catch (error) {
-            responseErrorCatch(error)
+          if ("data" in result) {
+            await addToBucket({
+              url: result?.data,
+              body: fileInput,
+              contentType: certificateFileType,
+            });
+            await toBeInstructor({
+              qualification: values.qualification,
+              certificate: `${userId}/${"certificate"}/${"certificate"}.${certificateFileType}`,
+            });
+            actions.resetForm();
           }
-         
+        } catch (error) {
+          responseErrorCatch(error);
         }
-       
-      },
-    });
+      }
+    },
+  });
 
   return (
     <section>
@@ -153,7 +170,16 @@ const BeInstructor = () => {
                   </p>
                 )}
               </div>
-              <GeneralButton type="submit">Submit</GeneralButton>
+              {loading ? (
+                <SpinnerButton status="Validating Data" />
+              ) : (
+                <GeneralButton
+                  type="submit"
+                  disabled={isSubmitting} //
+                >
+                  Submit
+                </GeneralButton>
+              )}
             </form>
           </div>
         </div>

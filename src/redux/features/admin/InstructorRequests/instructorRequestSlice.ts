@@ -13,8 +13,6 @@ const instructorRequestSlice = createSlice({
   initialState,
   reducers: {
     getRequests: (state, action) => {
-      console.log("inside action action.payload", action.payload);
-      console.log("inside action action.payload.data", action.payload.data);
       state.instructorRequest = action.payload.data;
     },
     approveorRejectRequest: (state, action) => {
@@ -22,7 +20,6 @@ const instructorRequestSlice = createSlice({
         (item) => item.userId !== action.payload.data
       );
     },
-    //  getRequests:
   },
 });
 

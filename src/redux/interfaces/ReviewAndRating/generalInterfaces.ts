@@ -9,7 +9,7 @@ export interface IReviewAndRating {
     date: string;
     review?: string;
     rating?: number;
-  };
+  }[];
 }
 
 
