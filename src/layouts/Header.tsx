@@ -48,7 +48,7 @@ const Header = () => {
           )}
           {userData.name && (
             <>
-              <Link to={"/my_learnings"}>My Learnings</Link>
+              <Link to={`/${userData.role}/my_learnings`}>My Learnings</Link>
               <Link to={"/categories"}>
                 <FaRegHeart size={25} />
               </Link>
@@ -90,19 +90,6 @@ const Header = () => {
               <CgProfile size={35} />
             </Link>
           )}
-          {/* {name !== "" ? (
-            <Link to={`/${userData.role}/profile`}>
-              <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
-                <h1 className=" font-bold">{`${name[0].toUpperCase()}${
-                  name[1]
-                }`}</h1>
-              </div>
-            </Link>
-          ) : (
-            <Link to={"/auth/login"}>
-              <CgProfile size={35} />
-            </Link>
-          )} */}
         </div>
       </div>
     </div>

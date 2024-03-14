@@ -242,11 +242,23 @@ export const courseApi = apiSlice.injectEndpoints({
       },
     }),
 
-    getThumbnailImagesPreSignedUrl: builder.mutation<ICloudStorageResponse,{thumbnail:string}>({
+    getThumbnailImagesPreSignedUrl: builder.mutation<
+      ICloudStorageResponse,
+      { thumbnail: string }
+    >({
       query: (data) => ({
         method: "post",
         body: data,
         url: "course/get_thumbnail_image_presigned_url",
+      }),
+    }),
+
+    getUserEnrolledCourses: builder.mutation<ICourseResponse,{courses:string[]}>({
+      query: (data) => ({
+        method: "post",
+        url: "course/get_user_enrolled_courses",
+        body: data,
+        credentials: "include",
       }),
     }),
 
@@ -272,6 +284,7 @@ export const {
   useEnrollCourseMutation,
   usePaymentStatusMutation,
   useGetThumbnailImagesPreSignedUrlMutation,
+  useGetUserEnrolledCoursesMutation
 } = courseApi;
 
 // ===========================================================

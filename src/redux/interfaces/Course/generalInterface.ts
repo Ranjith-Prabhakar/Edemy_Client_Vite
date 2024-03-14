@@ -53,3 +53,5 @@ export interface ICourse {
   submissionStatus: "work-in-progress" | "completed";
   noOfPurchase: number;
 }
+
+

@@ -48,7 +48,7 @@ const SideBar = ({ sideBarData }: Props) => {
               onClick={() => {
                 if (role === "admin")
                   navigate(`/admin/dash_bord/${item.name.toLowerCase()}`);
-                else navigate(`/${role}/profile/${item.name.toLowerCase()}`);
+                else navigate(`/${role}/profile/${item.name.toLowerCase().replace(/\s+/g, "")}`);// this regex is used for removing spaces between words 
               }}
             >
               <item.icon />
