@@ -1,5 +1,6 @@
+// used in ReviewAndRating component
+
 export interface IGetReviewAndRatingRes {
-  
     success: boolean;
     message: string;
     data: {

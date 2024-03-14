@@ -7,7 +7,6 @@ export interface IReviewAndRatingReq {
 }
 
 export interface IReviewAndRatingRes {
-  data: {
     success: boolean;
     message: string;
     data: {
@@ -22,5 +21,4 @@ export interface IReviewAndRatingRes {
         rating?: number;
       }[];
     };
-  };
 }

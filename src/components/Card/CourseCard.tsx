@@ -11,6 +11,8 @@ import {
   useEnrollCourseMutation,
   useGetThumbnailImagesPreSignedUrlMutation,
 } from "../../redux/features/course/courseApi";
+import toast from "react-hot-toast";
+import useGetUser from "../../hooks/useGetUser";
 
 type Props = {
   // courseCategory: ICourse[];
@@ -20,6 +22,7 @@ type Props = {
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
+  const user = useGetUser();
   const navigate = useNavigate();
   const [imgUrl, setImagUrl] = useState("");
   const [
@@ -54,6 +57,11 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
       toast.error("something went wrong please try again");
     }
   }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
+
+  const isCoursePurchasedByUser = user.enrolledCourses?.includes(
+    courseCategory._id
+  );
+
   return (
     <div
       key={courseCategory.courseName}
@@ -62,7 +70,7 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
       <img
         src={imgUrl || web_development}
         alt=""
-        className="w-full h-[200px]"
+        className="w-full h-[200px] cursor-pointer"
         onClick={() => {
           navigate("/course_single_page", {
             state: { courseData: courseCategory },
@@ -103,21 +111,34 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
             </h4>
           </div>
           <div className="">
-            <button
-              className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold"
-              onClick={() => {
-                enrollCourse([
-                  {
-                    courseId: courseCategory._id,
-                    courseName: courseCategory.courseName,
-                    price: courseCategory.price,
-                  },
-                ]);
-                console.log("hello");
-              }}
-            >
-              Enroll Now
-            </button>
+            {isCoursePurchasedByUser || user.role === "admin" ? (
+              <button
+                className="bg-white text-gray-950 font-bold px-8  py-0.5 rounded-full hover:scale-110"
+                onClick={() => {
+                  navigate("/course_single_page", {
+                    state: { courseData: courseCategory },
+                  });
+                }}
+              >
+                Play
+              </button>
+            ) : (
+              <button
+                className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold"
+                onClick={() => {
+                  enrollCourse([
+                    {
+                      courseId: courseCategory._id,
+                      courseName: courseCategory.courseName,
+                      price: courseCategory.price,
+                    },
+                  ]);
+                  console.log("hello");
+                }}
+              >
+                Enroll Now
+              </button>
+            )}
           </div>
         </div>
         <div className=""></div>
