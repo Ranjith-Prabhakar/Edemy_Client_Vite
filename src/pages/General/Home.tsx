@@ -5,11 +5,13 @@ import Hero from "../../components/Hero/Hero";
 import Slider from "../../components/Slider/Slider";
 import Testimonial from "../../components/Testimonial/Testimonial";
 import ContainerLayout from "../../layouts/containerLayout";
+import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 const Home = () => {
+    const isScrolled = useGetScrollPosition();
   return (
     <ContainerLayout>
-      <Header />
+      <Header isScrolled ={isScrolled}/>
       <Carousal />
       <Hero />
       <Slider />

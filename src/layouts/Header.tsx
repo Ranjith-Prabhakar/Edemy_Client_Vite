@@ -7,12 +7,19 @@ import { CgProfile } from "react-icons/cg";
 import ThemeToggler from "../components/utils/ThemeToggler";
 import { useEffect, useState } from "react";
 import useGetUser from "../hooks/useGetUser";
-
-const Header = () => {
+import { ICategory } from "../redux/interfaces/Course/getCategories";
+import { useGetCategoryQuery } from "../redux/features/course/courseApi";
+type props = {
+  isScrolled?: boolean;
+};
+const Header = ({ isScrolled }: props) => {
+  console.log("isScrolled", isScrolled);
   const userData = useGetUser();
   const [name, setName] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
+  const { data, isSuccess } = useGetCategoryQuery();
+  const [categoryList, addCategoryList] = useState<ICategory[]>([]);
 
-  console.log("userData.role", userData.role);
   useEffect(() => {
     if (userData.name) {
       setName(
@@ -21,8 +28,22 @@ const Header = () => {
       );
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      addCategoryList(data.data as ICategory[]);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    console.log("categoryList ===>", categoryList);
+  }, [categoryList]);
   return (
-    <div className="sticky top-0  z-50 text-xl ">
+    <div
+      className={`sticky top-[15px] rounded-full z-50 text-xl p-5 ${
+        isScrolled ? "bg-c_color-colorOne shadow-lg " : "bg-transparent"
+      }`}
+    >
       <div className="flex justify-between items-end">
         <div className="flex items-end  gap-4">
           <Link to={"/"}>
@@ -30,19 +51,39 @@ const Header = () => {
               <span className="text-4xl font-bold">E</span>demy
             </h1>
           </Link>
-          <Link to={"/categories"}>Categories</Link>
-          <div className="flex flex-1 justify-end ">
-            <ThemeToggler />
-          </div>
+        </div>
+        <div
+          className="relative w-[20%] "
+          onMouseEnter={() => {
+            setIsHovered(true);
+          }}
+          onMouseLeave={() => {
+            setIsHovered(false);
+          }}
+        >
+          <Link to={"/categories"}>Courses</Link>
+          <ul className={`absolute ${isHovered ? "block" : "hidden"}`}>
+            {categoryList &&
+              categoryList.map((item) => (
+                <li className="cursor-pointer min-w-fit">{item.name}</li>
+              ))}
+          </ul>
         </div>
         <div>
           <input
-            className="rounded-full w-96 h-[35px] px-7 outline-none dark:bg-slate-400 opacity-40 focus:border-1 focus:border-white placeholder:text-white"
+            className={`rounded-full w-96 h-[35px] px-7 outline-none ${
+              isScrolled
+                ? "dark:bg-slate-50 placeholder:text-black"
+                : "dark:bg-slate-400 opacity-40 focus:border-1 focus:border-white placeholder:text-white"
+            }  opacity-40 focus:border-1 focus:border-white placeholder:text-white`}
             type="search"
             placeholder="search...."
           />
         </div>
         <div className="flex justify-center items-center gap-4">
+          <div className="flex flex-1 justify-end ">
+            <ThemeToggler />
+          </div>
           {userData.name && userData.role !== "instructor" && (
             <Link to={"/user/be_instructor"}>Teach on Edemy</Link>
           )}

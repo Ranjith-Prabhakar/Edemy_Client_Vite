@@ -13,15 +13,7 @@ const Courses = () => {
     Record<string, string | Record<string, string>[]>[]
   >([]);
 
-  // type moduleData = {
-  //   moduleNo: string;
-  //   moduleTittle: string;
-  //   videoTittle: string;
-  //   videoNo: string;
-  //   videoUrl: string;
-  // };
-
-  const [courseData, setCourseData] = useState({
+    const [courseData, setCourseData] = useState({
     courseName: "",
     price:"",
     discription: "",
@@ -37,7 +29,6 @@ const Courses = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("data=======>", data);
       const regex = /\/(.*?)-/;
       const moduleData = data.data.modules[data.data.modules.length - 1];
       const moduleVideoData = moduleData?.videos[moduleData.videos.length - 1];
@@ -62,9 +53,6 @@ const Courses = () => {
     Array<{ [key: string]: string | number }>
   >([]);
 
-  useEffect(() => {
-    console.log("courseData from course", courseData);
-  }, [courseData]);
 
   return (
     <div className="flex custom-scrollBar">

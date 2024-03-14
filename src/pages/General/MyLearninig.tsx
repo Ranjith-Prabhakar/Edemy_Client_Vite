@@ -5,8 +5,10 @@ import { useGetUserEnrolledCoursesMutation } from "../../redux/features/course/c
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import Header from "../../layouts/Header";
 import CourseCard from "../../components/Card/CourseCard";
+import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 const MyLearninig = () => {
+  const isScrolled = useGetScrollPosition();
   const user = useGetUser();
   console.log("user.enrolledCourses", user.enrolledCourses);
   const [getUserEnrolledCourses, { data, isSuccess }] =
@@ -21,6 +23,7 @@ const MyLearninig = () => {
     if (courses) {
       getUserEnrolledCourses({ courses: courses });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -29,6 +32,7 @@ const MyLearninig = () => {
       setMyLearning(data?.data as ICourse[]);
       setPagination(pagination + 1);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   useEffect(() => {
@@ -39,7 +43,7 @@ const MyLearninig = () => {
   return (
     <div className="min-h-screen">
       <ContainerLayout>
-        <Header />
+        <Header isScrolled={isScrolled} />
         <div className="w-full mt-16">
           <div className="flex justify-start gap-3  w-full overflow-x-scroll">
             {myLearning &&
