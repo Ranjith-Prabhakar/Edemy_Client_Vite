@@ -1,4 +1,3 @@
-"use client";
 import { ReactNode, useEffect, useState } from "react";
 import web_development from "../../../public/Assets/web_development.avif";
 import { FaStar } from "react-icons/fa";

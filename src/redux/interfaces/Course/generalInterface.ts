@@ -1,3 +1,4 @@
+
 interface Questions {
   userId: string;
   question: string;
@@ -52,6 +53,23 @@ export interface ICourse {
   rating: number;
   submissionStatus: "work-in-progress" | "completed";
   noOfPurchase: number;
+}
+
+// export interface ICourseCategoryBaseResponse {
+//   data: {
+//     hasMore: boolean;
+//     status: number;
+//     message: string;
+//     data?: ICourse | ICourse[];
+//   };
+// }
+
+
+export interface ICourseCategoryBaseResponse {
+    hasMore: boolean;
+    status: number;
+    message: string;
+    data?: ICourse | ICourse[];
 }
 
 

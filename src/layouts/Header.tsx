@@ -1,5 +1,4 @@
-"use client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
@@ -13,13 +12,12 @@ type props = {
   isScrolled?: boolean;
 };
 const Header = ({ isScrolled }: props) => {
-  console.log("isScrolled", isScrolled);
   const userData = useGetUser();
   const [name, setName] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const { data, isSuccess } = useGetCategoryQuery();
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (userData.name) {
       setName(
@@ -40,8 +38,8 @@ const Header = ({ isScrolled }: props) => {
   }, [categoryList]);
   return (
     <div
-      className={`sticky top-[15px] rounded-full z-50 text-xl p-5 ${
-        isScrolled ? "bg-c_color-colorOne shadow-lg " : "bg-transparent"
+      className={`sticky top-0 rounded-b-3xl z-50 text-xl p-5 ${
+        isScrolled ? "bg-c_color-colorOne shadow-2xl " : "bg-transparent"
       }`}
     >
       <div className="flex justify-between items-end">
@@ -61,11 +59,30 @@ const Header = ({ isScrolled }: props) => {
             setIsHovered(false);
           }}
         >
-          <Link to={"/categories"}>Courses</Link>
-          <ul className={`absolute ${isHovered ? "block" : "hidden"}`}>
+          <h1 className="cursor-pointer">Courses</h1>
+          <ul
+            className={`absolute ${
+              isHovered ? "block leading-10 pt-3" : "hidden"
+            } `}
+          >
+            <li
+              className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
+              onClick={() =>
+                navigate('/category/all_category')
+              }
+            >
+              All Category
+            </li>
             {categoryList &&
               categoryList.map((item) => (
-                <li className="cursor-pointer min-w-fit">{item.name}</li>
+                <li
+                  className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
+                  onClick={() =>
+                    navigate(`/category/${item.name.toLocaleLowerCase().replace(/\s/g, "_")}`)
+                  }
+                >
+                  {item.name}
+                </li>
               ))}
           </ul>
         </div>

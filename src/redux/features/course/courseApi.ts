@@ -12,7 +12,7 @@ import {
   getCourseseInProgressState,
   removeCourseAfterApprovalOrReject,
 } from "./courseSlice";
-import { ICourse } from "../../interfaces/Course/generalInterface";
+import { ICourse, ICourseCategoryBaseResponse } from "../../interfaces/Course/generalInterface";
 import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
 import {
   IGetVideoForUserReq,
@@ -253,12 +253,26 @@ export const courseApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    getUserEnrolledCourses: builder.mutation<ICourseResponse,{courses:string[]}>({
+    getUserEnrolledCourses: builder.mutation<
+      ICourseResponse,
+      { courses: string[] }
+    >({
       query: (data) => ({
         method: "post",
         url: "course/get_user_enrolled_courses",
         body: data,
         credentials: "include",
+      }),
+    }),
+
+    getCourseByCategory: builder.mutation<
+      ICourseCategoryBaseResponse,
+      { category: string; pageNumber: number; frequency: number }
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "/course/get_courses_by_category",
+        body: data,
       }),
     }),
 
@@ -284,7 +298,8 @@ export const {
   useEnrollCourseMutation,
   usePaymentStatusMutation,
   useGetThumbnailImagesPreSignedUrlMutation,
-  useGetUserEnrolledCoursesMutation
+  useGetUserEnrolledCoursesMutation,
+  useGetCourseByCategoryMutation,
 } = courseApi;
 
 // ===========================================================
