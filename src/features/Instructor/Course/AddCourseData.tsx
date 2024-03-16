@@ -48,6 +48,7 @@ type Props = {
   >;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  submit:boolean
 };
 
 const AddCourseData = ({
@@ -56,6 +57,7 @@ const AddCourseData = ({
   setCourseData,
   visible,
   setVisible,
+  submit,
 }: Props) => {
   const { data: categoryData, isSuccess: categorySuccess } =
     useGetCategoryQuery();
@@ -99,7 +101,7 @@ const AddCourseData = ({
   };
 
   const handleAddImage = async (): Promise<{
-    folderName:string;
+    folderName: string;
     fileType: string;
     imgageFileName: string;
   } | void> => {
@@ -182,7 +184,7 @@ const AddCourseData = ({
         const imageInfo = await handleAddImage();
 
         if (imageInfo) {
-          const {folderName, fileType, imgageFileName } = imageInfo;
+          const { folderName, fileType, imgageFileName } = imageInfo;
           clonedObject.thumbnail = `${userId}/${folderName}/${imgageFileName}.${fileType}`;
           const result = await addCourseData(
             clonedObject as unknown as ICourseDataBodyReq
@@ -255,11 +257,11 @@ const AddCourseData = ({
           ref={categoryRef}
           name="category"
           id="category"
-          className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+          className=" block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
         >
           <option
             value="choose one category"
-            className="italic font-bold dark:bg-c_color-colorSeven dark:hover:bg-c_color"
+            className="italic font-bold dark:bg-c_color-colorSeven dark:hover:bg-c_color "
           >
             choose one category
           </option>
@@ -273,17 +275,9 @@ const AddCourseData = ({
           ))}
         </select>
 
-        {categoryError && (
+        {categoryError && !submit && (
           <p className="text-red-600">please select a category</p>
         )}
-
-        {/* ============================================================================= */}
-        {/* <label
-          htmlFor="price"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Choose the category
-        </label> */}
       </div>
 
       <div className="relative z-0 w-full mb-5 group">
@@ -294,7 +288,7 @@ const AddCourseData = ({
           value={values.price}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className=" block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
           placeholder=" "
         />
         {!visible && (

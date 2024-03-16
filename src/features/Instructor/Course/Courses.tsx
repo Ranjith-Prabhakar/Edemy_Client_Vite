@@ -9,6 +9,7 @@ const Courses = () => {
   const { data, isSuccess } = useGetCourseInProgressQuery();
   const [visible, setVisible] = useState(true);
   const [stepper, setStepper] = useState(1);
+  const [submit,setSubmit] = useState(false)
   const [moduleVideos, setModuleVideos] = useState<
     Record<string, string | Record<string, string>[]>[]
   >([]);
@@ -64,6 +65,7 @@ const Courses = () => {
               stepper={stepper}
               setCourseData={setCourseData}
               setModuleVideos={setModuleVideos}
+              setSubmit={setSubmit}
             />
           </div>
           {stepper === 1 && (
@@ -73,6 +75,7 @@ const Courses = () => {
               setCourseData={setCourseData}
               visible={visible}
               setVisible={setVisible}
+              submit={submit}
             />
           )}
           {stepper === 2 && (

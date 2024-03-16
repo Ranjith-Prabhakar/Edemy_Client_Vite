@@ -78,7 +78,7 @@ const Login = () => {
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <AuthInputs
-                  type="email"
+                  type="text"
                   name="email"
                   value={values.email}
                   onChange={handleChange}

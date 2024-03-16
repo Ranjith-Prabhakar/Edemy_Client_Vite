@@ -1,8 +1,29 @@
 import React from "react";
 import { useUpdateCourseMutation } from "../../redux/features/course/courseApi";
 import { useNavigate } from "react-router-dom";
-import { ICourseDataModel } from "../../features/Instructor/Course/Courses";
+import toast from "react-hot-toast";
+// import { ICourseDataModel } from "../../features/Instructor/Course/Courses";
 
+interface ICourseDataModel {
+  courseName: string;
+  discription: string;
+  tags: string;
+  thumbnail: string;
+  duration: string;
+  modules: [
+    {
+      moduleNo: string;
+      moduleTittle: string;
+      videos: [
+        {
+          videoTittle: string;
+          videoNo: string;
+          videoUrl: string;
+        }
+      ];
+    }
+  ];
+}
 type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -10,9 +31,15 @@ type Props = {
   setModuleVideos: React.Dispatch<
     React.SetStateAction<Record<string, string | Record<string, string>[]>[]>
   >;
+  setSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Model = ({ setOpen, setCourseData, setModuleVideos }: Props) => {
+const Model = ({
+  setOpen,
+  setCourseData,
+  setModuleVideos,
+  setSubmit,
+}: Props) => {
   const [updateCourse] = useUpdateCourseMutation();
   const navigate = useNavigate();
   console.log("inside model");
@@ -68,7 +95,9 @@ const Model = ({ setOpen, setCourseData, setModuleVideos }: Props) => {
                 ],
               });
               setModuleVideos([]);
-              navigate("/instructor/profile/courses");
+              setSubmit(true);
+              toast.success("course has been added")
+              navigate("/instructor/profile");
             }}
           >
             Submit

@@ -67,9 +67,7 @@ const Header = ({ isScrolled }: props) => {
           >
             <li
               className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
-              onClick={() =>
-                navigate('/category/all_category')
-              }
+              onClick={() => navigate("/category/all_category")}
             >
               All Category
             </li>
@@ -78,7 +76,11 @@ const Header = ({ isScrolled }: props) => {
                 <li
                   className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
                   onClick={() =>
-                    navigate(`/category/${item.name.toLocaleLowerCase().replace(/\s/g, "_")}`)
+                    navigate(
+                      `/category/${item.name
+                        .toLocaleLowerCase()
+                        .replace(/\s/g, "_")}`
+                    )
                   }
                 >
                   {item.name}

@@ -22,12 +22,14 @@ type Props = {
   setModuleVideos: React.Dispatch<
     React.SetStateAction<Record<string, string | Record<string, string>[]>[]>
   >;
+  setSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const Tabs = ({
   setStepper,
   stepper,
   setCourseData,
   setModuleVideos,
+  setSubmit,
 }: Props) => {
   const [open, setOpen] = useState(false);
 
@@ -71,6 +73,7 @@ const Tabs = ({
             setOpen={setOpen}
             setCourseData={setCourseData}
             setModuleVideos={setModuleVideos}
+            setSubmit={setSubmit}
           />
         </div>
       )}

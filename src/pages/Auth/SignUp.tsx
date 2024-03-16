@@ -99,7 +99,7 @@ const SignUp = () => {
 
               <div>
                 <AuthInputs
-                  type="email"
+                  type="text"
                   name="email"
                   value={values.email}
                   onChange={handleChange}

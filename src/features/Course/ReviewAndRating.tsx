@@ -72,38 +72,41 @@ const ReviewAndRating = ({ courseData }: Props) => {
   // setting the state values for fillStarUser & fillStarTotal on success updation of the state coursereviewAndRatingData
   useEffect(() => {
     console.log("coursereviewAndRatingData", coursereviewAndRatingData);
-    const userRating =
-      coursereviewAndRatingData?.find(
-        (item: TReviewAndRating) => item.userId === user._id
-      )?.rating || 0;
-    console.log("userRating", userRating);
-    setFillStarUser(userRating);
+    if (coursereviewAndRatingData.length) {
+      const userRating =
+        coursereviewAndRatingData?.find(
+          (item: TReviewAndRating) => item.userId === user._id
+        )?.rating || 0;
+      console.log("userRating", userRating);
+      setFillStarUser(userRating);
 
-    const totalRatingData = coursereviewAndRatingData?.reduce(
-      (accu, curr) => {
-        if (curr?.rating !== undefined) {
-          accu.totalRating += curr.rating;
-          accu.countWithRating += 1;
-        }
+      const totalRatingData = coursereviewAndRatingData?.reduce(
+        (accu, curr) => {
+          if (curr?.rating !== undefined) {
+            accu.totalRating += curr.rating;
+            accu.countWithRating += 1;
+          }
 
-        return accu;
-      },
-      { totalRating: 0, countWithRating: 0 }
-    );
+          return accu;
+        },
+        { totalRating: 0, countWithRating: 0 }
+      );
 
-    const totalRating = totalRatingData?.totalRating || 0;
-    const countWithRating = totalRatingData?.countWithRating || 0;
-    const total = (5 / 100) * ((totalRating / (countWithRating * 5)) * 100);
-    console.log("totalRating && typeof", totalRating, typeof totalRating);
-    console.log(
-      "countWithRating && typeof",
-      countWithRating,
-      typeof countWithRating
-    );
-    console.log("total && typeof", total, typeof total);
-    const newTotal = Math.round(total);
-    console.log("rounded total", newTotal);
-    // setFillStarTotal(newTotal);
+      const totalRating = totalRatingData?.totalRating || 0;
+      const countWithRating = totalRatingData?.countWithRating || 0;
+      const total = (5 / 100) * ((totalRating / (countWithRating * 5)) * 100);
+      console.log("totalRating && typeof", totalRating, typeof totalRating);
+      console.log(
+        "countWithRating && typeof",
+        countWithRating,
+        typeof countWithRating
+      );
+      console.log("total && typeof", total, typeof total);
+      const newTotal = Math.round(total);
+      console.log("rounded total", newTotal);
+      console.log("typeof newTotal", typeof newTotal);
+      setFillStarTotal(newTotal);
+    }
   }, [coursereviewAndRatingData]);
 
   const handleChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {

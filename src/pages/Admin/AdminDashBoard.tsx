@@ -13,7 +13,7 @@ const AdminDash = () => {
   return (
     <ContainerLayout>
       <AdminNavbar />
-      <div className="h-[80vh] flex justify-start gap-2 mt-[2%]">
+      <div className="h-[87vh] flex justify-start gap-2 mt-[2%] pb-2">
         <SideBar sideBarData={adminDashBord} />
         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
           <Routes>
