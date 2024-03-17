@@ -33,9 +33,6 @@ const Header = ({ isScrolled }: props) => {
     }
   }, [isSuccess]);
 
-  useEffect(() => {
-    console.log("categoryList ===>", categoryList);
-  }, [categoryList]);
   return (
     <div
       className={`sticky top-0 rounded-b-3xl z-50 text-xl p-5 ${
@@ -72,7 +69,7 @@ const Header = ({ isScrolled }: props) => {
               All Category
             </li>
             {categoryList &&
-              categoryList.map((item) => (
+              categoryList.map((item, index) => (
                 <li
                   className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
                   onClick={() =>
@@ -82,6 +79,7 @@ const Header = ({ isScrolled }: props) => {
                         .replace(/\s/g, "_")}`
                     )
                   }
+                  key={index}
                 >
                   {item.name}
                 </li>
@@ -103,9 +101,11 @@ const Header = ({ isScrolled }: props) => {
           <div className="flex flex-1 justify-end ">
             <ThemeToggler />
           </div>
-          {userData.name && userData.role !== "instructor" && (
-            <Link to={"/user/be_instructor"}>Teach on Edemy</Link>
-          )}
+          {userData.name &&
+            userData.role !== "instructor" &&
+            userData.role !== "admin" && (
+              <Link to={"/user/be_instructor"}>Teach on Edemy</Link>
+            )}
           {userData.name && (
             <>
               <Link to={`/${userData.role}/my_learnings`}>My Learnings</Link>

@@ -53,9 +53,9 @@ const Requests = () => {
       console.log("data from Request component userInfo", userInfo);
       if (userInfo.status === "approved") {
         const userId = userInfo.userId;
-        
+
         const fetchedUser = userData.find((item) => item._id === userId);
-        const newUser = { ...fetchedUser,role:"instructor" };
+        const newUser = { ...fetchedUser, role: "instructor" };
         console.log("fetchedAUser", fetchedUser);
         dispatch(removeUser({ data: userId }));
         dispatch(addInstrctor({ data: newUser }));
@@ -81,7 +81,7 @@ const Requests = () => {
   return (
     <div>
       <div className="relative overflow-x-auto">
-        {tableData.length && (
+        {tableData.length ? (
           <>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <Thead>
@@ -172,10 +172,9 @@ const Requests = () => {
               </div>
             </div>
           </>
-        )}
-        {!tableData.length && (
+        ) : (
           <div className="flex items-center justify-center h-screen">
-            <h1>No Requests Found</h1>
+            <h1 className="font-bold text-4xl">No Requests Found</h1>
           </div>
         )}
       </div>
