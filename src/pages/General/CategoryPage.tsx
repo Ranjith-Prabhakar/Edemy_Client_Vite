@@ -70,6 +70,8 @@ const CategoryPage = () => {
         category,
         pageNumber: page + 1, // Increment page number to fetch the next page
         frequency: 10,
+        sort,
+        filter,
       });
     }
   };
@@ -84,7 +86,7 @@ const CategoryPage = () => {
   return (
     <ContainerLayout>
       <Header isScrolled={isScrolled} />
-      <div className="flex justify-between items-center mt-8">
+      <div className="flex justify-between items-center mt-8 px-6">
         <h1 className="capitalize font-bold text-4xl italic pb-2 border-b-2 ms-auto me-auto">
           {category}
         </h1>
