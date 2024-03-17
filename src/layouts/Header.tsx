@@ -7,7 +7,10 @@ import ThemeToggler from "../components/utils/ThemeToggler";
 import { useEffect, useState } from "react";
 import useGetUser from "../hooks/useGetUser";
 import { ICategory } from "../redux/interfaces/Course/getCategories";
-import { useGetCategoryQuery } from "../redux/features/course/courseApi";
+import {
+  useGetCategoryQuery,
+} from "../redux/features/course/courseApi";
+import { catchError } from "../utils/catchError";
 type props = {
   isScrolled?: boolean;
 };
@@ -18,6 +21,7 @@ const Header = ({ isScrolled }: props) => {
   const { data, isSuccess } = useGetCategoryQuery();
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
   useEffect(() => {
     if (userData.name) {
       setName(
@@ -32,6 +36,34 @@ const Header = ({ isScrolled }: props) => {
       addCategoryList(data.data as ICategory[]);
     }
   }, [isSuccess]);
+
+  const handleSearch = async (key: string) => {
+    try {
+      if (
+        categoryList.length &&
+        categoryList.some(
+          (category: ICategory) =>
+            category.name.toLowerCase() === key.toLowerCase()
+        )
+      ) {
+        navigate(`/category/${key.toLocaleLowerCase().replace(/\s/g, "_")}`, {
+          state: { sort: "A-Z", filter: "date" },
+        });
+      } else {
+        navigate("/search_course", {
+          state: {
+            queryData: {
+              key,
+              sort: "A-Z",
+              filter: "date",
+            },
+          },
+        });
+      }
+    } catch (error) {
+      catchError(error);
+    }
+  };
 
   return (
     <div
@@ -95,13 +127,18 @@ const Header = ({ isScrolled }: props) => {
         </div>
         <div>
           <input
-            className={`rounded-full w-96 h-[35px] px-7 outline-none ${
+            className={`rounded-full w-96 h-[35px] px-7 outline-none font-semibold ${
               isScrolled
-                ? "dark:bg-slate-50 placeholder:text-black"
-                : "dark:bg-slate-400 opacity-40 focus:border-1 focus:border-white placeholder:text-white"
+                ? "dark:bg-slate-50 placeholder:text-black dark:text-black"
+                : "dark:bg-slate-400 focus:border-1 focus:border-white placeholder:text-white dark:text-black"
             }  opacity-40 focus:border-1 focus:border-white placeholder:text-white`}
             type="search"
             placeholder="search...."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch(searchValue);
+            }}
           />
         </div>
         <div className="flex justify-center items-center gap-4">

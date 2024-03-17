@@ -285,6 +285,23 @@ export const courseApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    getCourseForSearch: builder.mutation<
+      ICourseCategoryBaseResponse,
+      {
+        key: string;
+        pageNumber: number;
+        frequency: number;
+        sort?: string;
+        filter?: string;
+      }
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "/course/get_courses_for_search",
+        body: data,
+      }),
+    }),
+
     // ______________________________
   }),
 });
@@ -309,6 +326,7 @@ export const {
   useGetThumbnailImagesPreSignedUrlMutation,
   useGetUserEnrolledCoursesMutation,
   useGetCourseByCategoryMutation,
+  useGetCourseForSearchMutation
 } = courseApi;
 
 // ===========================================================

@@ -9,6 +9,7 @@ import InstructorRoute from "./Routes/InstructorRoute";
 import UserRoute from "./Routes/UserRoute";
 import CourseSinglePage from "./pages/General/CourseSinglePage";
 import CategoryPage from "./pages/General/CategoryPage";
+import CourseSearchPage from "./pages/General/CourseSearchPage";
 
 const App = () => {
   const userName = useGetUser().name;
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="/category/:id" element={<CategoryPage />} />
         <Route path="/course_single_page" element={<CourseSinglePage />} />
+        <Route path="/search_course" element={<CourseSearchPage />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
