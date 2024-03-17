@@ -12,7 +12,10 @@ import {
   getCourseseInProgressState,
   removeCourseAfterApprovalOrReject,
 } from "./courseSlice";
-import { ICourse, ICourseCategoryBaseResponse } from "../../interfaces/Course/generalInterface";
+import {
+  ICourse,
+  ICourseCategoryBaseResponse,
+} from "../../interfaces/Course/generalInterface";
 import { IAddCategoriesRes } from "../../interfaces/Course/getCategories";
 import {
   IGetVideoForUserReq,
@@ -267,7 +270,13 @@ export const courseApi = apiSlice.injectEndpoints({
 
     getCourseByCategory: builder.mutation<
       ICourseCategoryBaseResponse,
-      { category: string; pageNumber: number; frequency: number }
+      {
+        category: string;
+        pageNumber: number;
+        frequency: number;
+        sort?: string;
+        filter?: string;
+      }
     >({
       query: (data) => ({
         method: "post",

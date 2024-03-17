@@ -64,7 +64,11 @@ const Header = ({ isScrolled }: props) => {
           >
             <li
               className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
-              onClick={() => navigate("/category/all_category")}
+              onClick={() =>
+                navigate("/category/all_category", {
+                  state: { sort: "A-Z", filter: "date" },
+                })
+              }
             >
               All Category
             </li>
@@ -76,7 +80,10 @@ const Header = ({ isScrolled }: props) => {
                     navigate(
                       `/category/${item.name
                         .toLocaleLowerCase()
-                        .replace(/\s/g, "_")}`
+                        .replace(/\s/g, "_")}`,
+                      {
+                        state: { sort: "A-Z", filter: "date" },
+                      }
                     )
                   }
                   key={index}
@@ -108,7 +115,10 @@ const Header = ({ isScrolled }: props) => {
             )}
           {userData.name && (
             <>
-              <Link to={`/${userData.role}/my_learnings`}>My Learnings</Link>
+              {userData.role !== "admin" && (
+                <Link to={`/${userData.role}/my_learnings`}>My Learnings</Link>
+              )}
+
               <Link to={"/categories"}>
                 <FaRegHeart size={25} />
               </Link>

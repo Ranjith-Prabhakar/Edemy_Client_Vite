@@ -28,7 +28,9 @@ const OtpVerification = (): JSX.Element => {
       toast.success("user has been created successfully , please login");
     } else if (isError) {
       console.log("error", error);
-      // toast.error(error.message);
+      
+      toast.error("verification code mis-matches");
+      // catchError(error)
     }
   }, [isError, isLoading, isSuccess, navigate, error]);
 

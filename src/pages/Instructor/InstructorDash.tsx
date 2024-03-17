@@ -15,7 +15,7 @@ const InstructorDash = () => {
         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative ">
           <Routes>
             <Route path="dashboard" element={<Table />} />
-            <Route path="courses" element={<Courses />} />
+            <Route path="addcourses" element={<Courses />} />
           </Routes>
         </div>
       </div>

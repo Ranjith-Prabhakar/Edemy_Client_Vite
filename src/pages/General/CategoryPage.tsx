@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ContainerLayout from "../../layouts/containerLayout";
 import CourseCard from "../../components/Card/CourseCard";
 import { useEffect, useState } from "react";
@@ -7,11 +7,20 @@ import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import Header from "../../layouts/Header";
 import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 import { LuListFilter } from "react-icons/lu";
+import { FaSortAmountUp } from "react-icons/fa";
+import { FaSortAmountDownAlt } from "react-icons/fa";
 
 const CategoryPage = () => {
+  const { sort, filter } = useLocation().state;
+  const navigate = useNavigate();
+
+  // const [filterToggler, setFilterToggler] = useState<"A-Z" | "Z-A" | "">("");
+  // const [sort, setSort] = useState<"price" | "date" | "">("");
+  const [dropDown, setDropDown] = useState(false);
   const isScrolled = useGetScrollPosition();
   const { id } = useParams();
   const category = id?.replace(/_/g, " ") as string;
+  console.log("sort and filter category", sort, filter, category);
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -23,15 +32,19 @@ const CategoryPage = () => {
 
   useEffect(() => {
     // Reset state and fetch data when category changes
+    console.log("initial useEffect");
     setPage(1);
     setData([]);
     setLoading(true);
+
     getCourseByCategory({
       category,
       pageNumber: 1,
       frequency: 10,
+      sort,
+      filter,
     });
-  }, [category]); // Fetch data when category changes
+  }, [category, sort, filter]); // Fetch data when category changes
 
   useEffect(() => {
     if (isSuccess) {
@@ -71,11 +84,70 @@ const CategoryPage = () => {
   return (
     <ContainerLayout>
       <Header isScrolled={isScrolled} />
-      <div className="flex justify-center items-center mt-8">
-        <h1 className="capitalize font-bold text-4xl italic pb-2 border-b-2 ">
+      <div className="flex justify-between items-center mt-8">
+        <h1 className="capitalize font-bold text-4xl italic pb-2 border-b-2 ms-auto me-auto">
           {category}
         </h1>
-        <LuListFilter />
+        <div className="flex gap-3 ">
+          <div
+            className="flex relative h-5"
+            onMouseEnter={() => setDropDown(!dropDown)}
+            onMouseLeave={() => setDropDown(!dropDown)}
+          >
+            <LuListFilter
+              color={"white"}
+              className="cursor-pointer"
+              title="filter"
+            />
+            {dropDown && (
+              <div className="absolute top-5 border -left-8 px-5 py-2 rounded-lg">
+                <h3
+                  className="border-b border-dashed cursor-pointer hover:scale-110 font-bold italic"
+                  onClick={() => {
+                    console.log("id onclick price", id);
+                    navigate(`/category/${id}`, {
+                      state: { filter: "price", sort: "A-Z" },
+                    });
+                  }}
+                >
+                  Price
+                </h3>
+                <h3
+                  className=" cursor-pointer hover:scale-110 font-bold italic"
+                  onClick={() => {
+                    console.log("id onclick ", id);
+                    navigate(`/category/${id}`, {
+                      state: { filter: "date", sort: "A-Z" },
+                    });
+                  }}
+                >
+                  Date
+                </h3>
+              </div>
+            )}
+          </div>
+          {sort === "A-Z" ? (
+            <FaSortAmountDownAlt
+              className="cursor-pointer"
+              title="sort ascending"
+              onClick={() => {
+                navigate(`/category/${id}`, {
+                  state: { filter, sort: "Z-A" },
+                });
+              }}
+            />
+          ) : (
+            <FaSortAmountUp
+              className="cursor-pointer"
+              title="sort descending"
+              onClick={() => {
+                navigate(`/category/${id}`, {
+                  state: { filter, sort: "A-Z" },
+                });
+              }}
+            />
+          )}
+        </div>
       </div>
       <div className="min-h-screen mt-10">
         <div className="grid grid-cols-4 gap-2 ">
