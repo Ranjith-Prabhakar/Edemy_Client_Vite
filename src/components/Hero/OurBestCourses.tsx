@@ -5,15 +5,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const OurBestCourses = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { data, isSuccess } = useGetCoursesForUserQuery();
   const [courseCategory, setCourseCategory] = useState<ICourse[]>([]);
 
   useEffect(() => {
     if (isSuccess) {
       const coursesData = data.data as ICourse[];
-      console.log("data", data);
-      console.log("coursesData", coursesData);
+
       setCourseCategory(coursesData);
     }
   }, [data, isSuccess]);
@@ -26,14 +25,18 @@ const OurBestCourses = () => {
 
       <div className=" mt-16 overflow-x-auto ">
         <div className="flex overflow-x-auto gap-4 ">
-          {courseCategory.map((item) => (
-            <CourseCard courseCategory={item} />
+          {courseCategory.map((item,index) => (
+            <CourseCard courseCategory={item} key={index}/>
           ))}
         </div>
         <div className="text-center mt-6 ">
           <button
             className="bg-transparent border  border-[#FFD700] px-3 py-1 rounded"
-            onClick={() => navigate("/category/all_category")}
+            onClick={() =>
+              navigate("/category/all_category", {
+                state: { sort: "A-Z", filter: "date" },
+              })
+            }
           >
             View more
           </button>

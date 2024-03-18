@@ -28,6 +28,9 @@ const ReviewAndRating = ({ courseData }: Props) => {
 
   const user = useGetUser();
 
+  console.log("*****#####****", user?.enrolledCourses?.includes(courseData._id));
+  console.log("*user?.courses*", user?.courses);
+  console.log("*courseData._id*", courseData._id);
   const [review, setReview] = useState("");
 
   const [showUpdateButton, setShowUpdateButton] = useState(false);
@@ -52,9 +55,9 @@ const ReviewAndRating = ({ courseData }: Props) => {
   //setting the value for coursereviewAndRatingData on success of getSingleCourseReviewAndRating()
   useEffect(() => {
     if (isSuccess) {
-      console.log("data", data);
+      console.log("data ===>", data);
       setCoursereviewAndRatingData(
-        data?.data.reviewAndRating as TReviewAndRating[]
+        data?.data?.reviewAndRating as TReviewAndRating[]
       );
     }
   }, [isSuccess]);
@@ -64,7 +67,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
     if (updateReviewAndRatingIsSuccess) {
       console.log("updateReviewAndRatingData", updateReviewAndRatingData);
       setCoursereviewAndRatingData(
-        updateReviewAndRatingData?.data.reviewAndRating as TReviewAndRating[]
+        updateReviewAndRatingData?.data?.reviewAndRating as TReviewAndRating[]
       );
     }
   }, [updateReviewAndRatingIsSuccess]);
@@ -72,7 +75,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
   // setting the state values for fillStarUser & fillStarTotal on success updation of the state coursereviewAndRatingData
   useEffect(() => {
     console.log("coursereviewAndRatingData", coursereviewAndRatingData);
-    if (coursereviewAndRatingData.length) {
+    if (coursereviewAndRatingData && coursereviewAndRatingData.length) {
       const userRating =
         coursereviewAndRatingData?.find(
           (item: TReviewAndRating) => item.userId === user._id
@@ -94,7 +97,8 @@ const ReviewAndRating = ({ courseData }: Props) => {
 
       const totalRating = totalRatingData?.totalRating || 0;
       const countWithRating = totalRatingData?.countWithRating || 0;
-      const total = (5 / 100) * ((totalRating / (countWithRating * 5)) * 100);
+      const total =
+        (5 / 100) * ((totalRating / (countWithRating * 5)) * 100) || 0;
       console.log("totalRating && typeof", totalRating, typeof totalRating);
       console.log(
         "countWithRating && typeof",
@@ -130,17 +134,20 @@ const ReviewAndRating = ({ courseData }: Props) => {
         <div className="dark:bg-c_color-colorSix p-3 rounded-md w-full ">
           <form className="">
             <div className="relative w-full">
-              <textarea
-                id="message"
-                value={review}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                rows={1}
-                cols={1000}
-                className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent "
-                placeholder="Leave a your review..."
-              ></textarea>
+              {user?.enrolledCourses?.includes(courseData._id) && (
+                <textarea
+                  id="message"
+                  value={review}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  rows={1}
+                  cols={1000}
+                  className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent "
+                  placeholder="Leave a your review..."
+                ></textarea>
+              )}
+
               {showUpdateButton && (
                 <VscSend
                   className="absolute right-2 bottom-1 cursor-pointer"
@@ -157,7 +164,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
               )}
             </div>
           </form>
-          {coursereviewAndRatingData.length && (
+          {coursereviewAndRatingData && coursereviewAndRatingData.length && (
             <div className="ms-2 mb-4">
               <div className="max-w-fit ">
                 <>
@@ -228,46 +235,48 @@ const ReviewAndRating = ({ courseData }: Props) => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
-          <h1 className="text-center font-bold italic">Add your rating</h1>
-          <hr className="w-[90%] m-auto mt-1" />
-          <div className="flex shadow-2xl px-5 py-2  ">
-            {[...Array(fillStarUser)].map((_, index) => (
-              <FaStar
-                key={index}
-                size={20}
-                color="#FFD700"
-                className="cursor-pointer"
-                onClick={() => {
-                  setFillStarUser(index + 1);
-                  updateReviewAndRating({
-                    courseId: courseData._id,
-                    courseName: courseData.courseName,
-                    fieldToUpdate: "rating",
-                    rating: index + 1,
-                  });
-                }}
-              />
-            ))}
-            {[...Array(5 - fillStarUser)].map((_, index) => (
-              <FaRegStar
-                key={index}
-                size={20}
-                color="#FFD700"
-                className="cursor-pointer"
-                onClick={() => {
-                  setFillStarUser(fillStarUser + (index + 1));
-                  updateReviewAndRating({
-                    courseId: courseData._id,
-                    courseName: courseData.courseName,
-                    fieldToUpdate: "rating",
-                    rating: fillStarUser + (index + 1),
-                  });
-                }}
-              />
-            ))}
+        {user?.enrolledCourses?.includes(courseData._id) && (
+          <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
+            <h1 className="text-center font-bold italic">Add your rating</h1>
+            <hr className="w-[90%] m-auto mt-1" />
+            <div className="flex shadow-2xl px-5 py-2  ">
+              {[...Array(fillStarUser)].map((_, index) => (
+                <FaStar
+                  key={index}
+                  size={20}
+                  color="#FFD700"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setFillStarUser(index + 1);
+                    updateReviewAndRating({
+                      courseId: courseData._id,
+                      courseName: courseData.courseName,
+                      fieldToUpdate: "rating",
+                      rating: index + 1,
+                    });
+                  }}
+                />
+              ))}
+              {[...Array(5 - fillStarUser)].map((_, index) => (
+                <FaRegStar
+                  key={index}
+                  size={20}
+                  color="#FFD700"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setFillStarUser(fillStarUser + (index + 1));
+                    updateReviewAndRating({
+                      courseId: courseData._id,
+                      courseName: courseData.courseName,
+                      fieldToUpdate: "rating",
+                      rating: fillStarUser + (index + 1),
+                    });
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

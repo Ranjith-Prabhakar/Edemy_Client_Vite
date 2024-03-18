@@ -19,6 +19,7 @@ type Props = {
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
+
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
   const user = useGetUser();
@@ -49,7 +50,6 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
 
   useEffect(() => {
     if (enrollIsSuccess) {
-      console.log("enrollData", enrollData);
       window.location = enrollData?.data as unknown as Location;
     }
     if (enrollIsError) {
@@ -132,7 +132,6 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
                       price: courseCategory.price,
                     },
                   ]);
-                  console.log("hello");
                 }}
               >
                 Enroll Now

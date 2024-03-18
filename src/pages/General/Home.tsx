@@ -2,19 +2,19 @@ import Carousal from "../../components/Carousal/Carousal";
 import Footer from "../../layouts/Footer";
 import Header from "../../layouts/Header";
 import Hero from "../../components/Hero/Hero";
-import Slider from "../../components/Slider/Slider";
+// import Slider from "../../components/Slider/Slider";
 import Testimonial from "../../components/Testimonial/Testimonial";
 import ContainerLayout from "../../layouts/containerLayout";
 import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 const Home = () => {
-    const isScrolled = useGetScrollPosition();
+  const isScrolled = useGetScrollPosition();
   return (
     <ContainerLayout>
-      <Header isScrolled ={isScrolled}/>
+      <Header isScrolled={isScrolled} />
       <Carousal />
       <Hero />
-      <Slider />
+      {/* <Slider /> */}
       <Testimonial />
       <Footer />
     </ContainerLayout>

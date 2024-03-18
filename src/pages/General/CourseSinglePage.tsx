@@ -226,7 +226,7 @@ const CourseSinglePage = () => {
 
           <div className="dark:bg-c_color-colorSeven capitalize p-5 mt-5 ml-3 rounded-md w-[42%] overflow-scroll h-full">
             {courseData.modules.map((item, index) => (
-              <div className="flex flex-col">
+              <div className="flex flex-col" key={index}>
                 <div
                   className="flex gap-2 rounded-lg justify-between items-center cursor-pointer border border-white  p-2 text-white"
                   onClick={() => {
