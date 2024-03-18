@@ -130,8 +130,8 @@ const Header = ({ isScrolled }: props) => {
             className={`rounded-full w-96 h-[35px] px-7 outline-none font-semibold ${
               isScrolled
                 ? "dark:bg-slate-50 placeholder:text-black dark:text-black"
-                : "dark:bg-slate-400 focus:border-1 focus:border-white placeholder:text-white dark:text-black"
-            }  opacity-40 focus:border-1 focus:border-white placeholder:text-white`}
+                : "dark:bg-slate-400 focus:border-1 focus:border-white placeholder:text-black dark:text-black"
+            }  focus:border-1 focus:border-white `}
             type="search"
             placeholder="search...."
             value={searchValue}
