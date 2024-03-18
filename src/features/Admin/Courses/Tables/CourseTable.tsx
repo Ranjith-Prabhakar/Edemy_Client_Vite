@@ -40,36 +40,6 @@ const CourseTable = () => {
           </tr>
         </Thead>
 
-        {/* <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Sl No
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Id
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Course
-            </th>
-
-            <th scope="col" className="px-6 py-3">
-              Instructor
-            </th>
-            <th scope="col" className="px-6 py-3">
-              No Purchase
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-
-            <th
-              scope="col"
-              className="px-6 py-3 flex justify-center items-center"
-            >
-              Freez
-            </th>
-          </tr>
-        </thead> */}
         <tbody>
           {tableData.map((item: ICourse, index: number) => (
             <TableBodyTr
@@ -100,31 +70,6 @@ const CourseTable = () => {
                 )}
               </Td>
             </TableBodyTr>
-            // <tr
-            //   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-            //   key={index}
-            // >
-            //   <td className="px-6 py-4">{index + 1}</td>
-            //   <td
-            //     className="px-6 py-4 cursor-pointer"
-            //     onClick={() => {
-            //       navigate(`/user_details/${item._id}`);
-            //     }}
-            //   >
-            //     {item._id}
-            //   </td>
-            //   <td className="px-6 py-4">{item.courseName}</td>
-            //   <td className="px-6 py-4">{item.instructor}</td>
-            //   <td className="px-6 py-4">{item.noOfPurchase}</td>
-            //   <td className="px-6 py-4">{item.status}</td>
-            //   <td className="px-6 py-4">
-            //     {item.status === "approved" ? (
-            //       <FaRegCircleStop />
-            //     ) : (
-            //       <FaRegCircleStop color="red" />
-            //     )}
-            //   </td>
-            // </tr>
           ))}
         </tbody>
       </table>

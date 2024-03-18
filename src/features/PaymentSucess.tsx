@@ -1,11 +1,16 @@
 import { useEffect } from "react";
 import { usePaymentStatusMutation } from "../redux/features/course/courseApi";
+import { useNavigate } from "react-router-dom";
+import useGetUser from "../hooks/useGetUser";
 
 const PaymentSucess = () => {
+  const navigate = useNavigate()
+  const user = useGetUser()
   const [paymentStatus,{data,isSuccess,isError,error}] = usePaymentStatusMutation();
   useEffect(()=>{
     if(isSuccess){
-      console.log(data)
+      console.log("success")
+      navigate(`/${user.role}/my_learnings`);
     }
     if(isError) console.log(error)
   },[data, error, isError, isSuccess])
