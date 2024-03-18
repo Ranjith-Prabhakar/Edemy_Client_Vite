@@ -17,14 +17,21 @@ const authSlice = createSlice({
       state.userData = action.payload.userData;
       state.isLoading = false;
     },
-    userLoggedOut: (state,action) => {
+    userLoggedOut: (state, action) => {
       console.log("inside userLoggedOut");
-      state.userData = action.payload.data
-      console.log("inside userLoggedOut",state.userData);
+      state.userData = action.payload.data;
+      console.log("inside userLoggedOut", state.userData);
+    },
+    addTutorialIntoCourseArray: (state, action) => {
+      state.userData = {
+        ...state.userData,
+        courses: [...state.userData.courses as string[], action.payload.data],
+      };
     },
   },
 });
 
-export const { userLoggedIn, userLoggedOut } = authSlice.actions;
+export const { userLoggedIn, userLoggedOut, addTutorialIntoCourseArray } =
+  authSlice.actions;
 export default authSlice.reducer;
 

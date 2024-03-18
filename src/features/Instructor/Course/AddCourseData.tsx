@@ -76,6 +76,7 @@ const AddCourseData = ({
   const thumbnailRef = useRef<HTMLInputElement>(null);
   const courseNameRef = useRef<HTMLInputElement>(null);
   const categoryRef = useRef<HTMLSelectElement>(null);
+
   useEffect(() => {
     if (isSuccess) {
       if (data) {

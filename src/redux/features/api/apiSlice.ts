@@ -39,4 +39,4 @@ export const apiSlice = createApi({
   }),
 });
 
-// export const {useLoadUserQuery} = apiSlice;
+export const {useLoadUserQuery} = apiSlice;

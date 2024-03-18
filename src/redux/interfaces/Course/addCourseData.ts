@@ -30,6 +30,7 @@ export interface ICourseDataBody {
   status: number;
   message: string;
   data: {
+    _id:string;
     price: string;
     category:string;
     courseName: string;

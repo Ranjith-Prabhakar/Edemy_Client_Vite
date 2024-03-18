@@ -23,7 +23,7 @@ import {
 } from "../../interfaces/Course/getVideoForUser";
 import { IEnrollReq, IEnrollRes } from "../../interfaces/Course/enrollCourse";
 import { catchError } from "../../../utils/catchError";
-import { userLoggedIn } from "../auth/authSlice";
+import { addTutorialIntoCourseArray, userLoggedIn } from "../auth/authSlice";
 import { IPaymentStatusReq } from "../../interfaces/Course/paymentStatus";
 import { ICloudStorageResponse } from "../../interfaces/CloudStorage/CloudStorageResponse";
 
@@ -52,6 +52,22 @@ export const courseApi = apiSlice.injectEndpoints({
         body: data,
         credentials: "include" as const,
       }),
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log(
+            "result from courseApi  > getCoursesInRequest",
+            result
+          );
+          console.log(
+            "result from courseApi  > getCoursesInRequest",
+            result.data.data
+          );
+          dispatch(addTutorialIntoCourseArray({ data: result.data.data._id }));
+        } catch (error) {
+          catchError(error);
+        }
+      },
     }),
 
     addToBucket: builder.mutation<
@@ -339,7 +355,7 @@ export const {
   useGetUserEnrolledCoursesMutation,
   useGetCourseByCategoryMutation,
   useGetCourseForSearchMutation,
-  useGetInstructorTutorialMutation
+  useGetInstructorTutorialMutation,
 } = courseApi;
 
 // ===========================================================
