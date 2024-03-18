@@ -302,6 +302,18 @@ export const courseApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    getInstructorTutorial: builder.mutation<
+      ICourseResponse,
+      { courses: string[] }
+    >({
+      query: (data) => ({
+        method: "post",
+        url: "course/get_instructor_tutorials",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+
     // ______________________________
   }),
 });
@@ -326,7 +338,8 @@ export const {
   useGetThumbnailImagesPreSignedUrlMutation,
   useGetUserEnrolledCoursesMutation,
   useGetCourseByCategoryMutation,
-  useGetCourseForSearchMutation
+  useGetCourseForSearchMutation,
+  useGetInstructorTutorialMutation
 } = courseApi;
 
 // ===========================================================

@@ -57,7 +57,7 @@ const Model = ({
               setModuleVideos([]);
               setSubmit(true);
               toast.success("course has been added");
-              navigate("/instructor/profile");
+              navigate("/instructor/profile/mytutorials");
             }}
           >
             Submit
