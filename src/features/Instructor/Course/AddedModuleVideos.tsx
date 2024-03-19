@@ -29,7 +29,8 @@ const AddedModuleVideos = ({ moduleVideos }: Props) => {
                 item.videos.map((video, videoIndex) => (
                   <div key={videoIndex}>
                     {video.videoNo} -{" "}
-                    {video.videoTittle.match(regex)?.[1] || "No Match"}
+                    {video.videoTittle.match(regex)?.[1].split("/").pop() ||
+                      "No Match"}
                   </div>
                 ))}
             </>

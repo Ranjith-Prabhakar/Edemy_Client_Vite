@@ -171,7 +171,7 @@ const AddModuleVideos = ({
                       moduleNo: moduleData.moduleNo ?? "",
                       moduleTittle: moduleData.moduleTittle ?? "",
                       videoTittle:
-                        moduleVideoData.videoTittle.match(regex)?.[1] ?? "",
+                        moduleVideoData.videoTittle.match(regex)?.[1].split('/').pop() ?? "",
                       videoNo: moduleVideoData.videoNo ?? "",
                       videoUrl: moduleVideoData.videoUrl ?? "",
                     });

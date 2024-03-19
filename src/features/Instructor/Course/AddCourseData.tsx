@@ -90,7 +90,6 @@ const AddCourseData = ({
   useEffect(() => {
     if (categorySuccess) {
       addCategoryList(categoryData.data as ICategory[]);
-      console.log("categoryList ===>", categoryList);
     }
   }, [categoryData, categoryList, categorySuccess]);
 
@@ -122,7 +121,6 @@ const AddCourseData = ({
             folderName: folderName,
           });
 
-          console.log("result from handle image ====>>>", result);
           if ("data" in result) {
             if (result.data === "a course already exist in this name") {
               toast.error(result.data);
@@ -193,7 +191,6 @@ const AddCourseData = ({
             clonedObject as unknown as ICourseDataBodyReq
           );
 
-          console.log("second result imageInfo ===>", result);
           if ("data" in result) {
             if (result.data) {
               if ("data" in result.data) {
@@ -610,7 +607,6 @@ export default AddCourseData;
 //             courseName: (courseNameRef?.current?.value as string) || "",
 //           });
 
-//           console.log("result from handle image", result);
 //           if (result.data === "a course already exist in this name") {
 //             toast.error(result.data);
 //             return;
