@@ -28,7 +28,10 @@ const ReviewAndRating = ({ courseData }: Props) => {
 
   const user = useGetUser();
 
-  console.log("*****#####****", user?.enrolledCourses?.includes(courseData._id));
+  console.log(
+    "*****#####****",
+    user?.enrolledCourses?.includes(courseData._id)
+  );
   console.log("*user?.courses*", user?.courses);
   console.log("*courseData._id*", courseData._id);
   const [review, setReview] = useState("");
@@ -147,7 +150,6 @@ const ReviewAndRating = ({ courseData }: Props) => {
                   placeholder="Leave a your review..."
                 ></textarea>
               )}
-
               {showUpdateButton && (
                 <VscSend
                   className="absolute right-2 bottom-1 cursor-pointer"
@@ -164,7 +166,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
               )}
             </div>
           </form>
-          {coursereviewAndRatingData && coursereviewAndRatingData.length && (
+          {coursereviewAndRatingData && coursereviewAndRatingData.length ? (
             <div className="ms-2 mb-4">
               <div className="max-w-fit ">
                 <>
@@ -209,6 +211,8 @@ const ReviewAndRating = ({ courseData }: Props) => {
                 </>
               </div>
             </div>
+          ) : (
+            <h1>No reviews found for this course...</h1>
           )}
         </div>
       </div>

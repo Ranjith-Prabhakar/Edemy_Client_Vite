@@ -14,6 +14,7 @@ import {
 } from "../../redux/features/course/courseApi";
 import toast from "react-hot-toast";
 import useGetUser from "../../hooks/useGetUser";
+import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 export type ICourseData = {
   _id: string;
@@ -36,6 +37,7 @@ export type ICourseData = {
           videoTittle: string;
           videoNo: string;
           videoUrl: string;
+          preview: boolean;
         }
       ];
     }
@@ -43,8 +45,10 @@ export type ICourseData = {
 };
 
 const CourseSinglePage = () => {
+  const isScrolled = useGetScrollPosition();
   const navigate = useNavigate();
   const user = useGetUser();
+
   const [showModuleVideos, setShowModuleVideos] = useState(0);
   const [getVideoForUser, { data, isSuccess, isError, error }] =
     useGetVideoForUserMutation();
@@ -70,6 +74,7 @@ const CourseSinglePage = () => {
   ] = useEnrollCourseMutation();
   const location = useLocation();
   const courseData: ICourseData = location.state.courseData;
+  console.log("courseData  +++++", courseData);
   const [videoUrl, setVideoUrl] = useState(
     courseData.modules[0].videos[0].videoTittle
   );
@@ -77,12 +82,37 @@ const CourseSinglePage = () => {
   const [swapper, setSwapper] = useState("about");
 
   useEffect(() => {
-    if (user && user.enrolledCourses) {
-      const purchased: boolean = user.enrolledCourses?.some(
-        (course) => course === (courseData._id as string)
-      );
-      setIsPurchased(!purchased);
+    if (user) {
+      if (user.role === "admin") {
+        setIsPurchased(false);
+        return;
+      } else if (user.role === "instructor" && user.courses) {
+        const purchased: boolean = user.courses?.some(
+          (course) => course === (courseData._id as string)
+        );
+        console.log("purchased", purchased);
+        console.log("user.courses", user.courses);
+        setIsPurchased(!purchased);
+        return;
+      } else if (user.role === "user" && user.enrolledCourses) {
+        const purchased: boolean = user.enrolledCourses?.some(
+          (course) => course === (courseData._id as string)
+        );
+        setIsPurchased(!purchased);
+        return;
+      }
     }
+
+    // if (user && user.role === "admin") {
+    //   setIsPurchased(false);
+    // } else {
+    //   if (user && user.enrolledCourses) {
+    //     const purchased: boolean = user.enrolledCourses?.some(
+    //       (course) => course === (courseData._id as string)
+    //     );
+    //     setIsPurchased(!purchased);
+    //   }
+    // }
   }, [courseData, user]);
 
   const regex = /\/(.*?)-/;
@@ -136,9 +166,9 @@ const CourseSinglePage = () => {
 
   return (
     <ContainerLayout>
-      <Header />
+      <Header isScrolled={isScrolled} />
       {courseData ? (
-        <div className="flex gap-2 mt-8 justify-between items-start  h-screen  overflow-scroll">
+        <div className="flex gap-2 justify-between items-start  h-screen  overflow-scroll">
           <div className="dark:bg-c_color-colorSeven p-5 mt-5 rounded-md w-[58%]">
             <VideoPlayer videoUrl={videoUrl} width="680px" height="320px" />
             <div className="flex gap-2 justify-between mt-3 ">
@@ -251,26 +281,46 @@ const CourseSinglePage = () => {
                         >
                           <h1> {video.videoNo}</h1>
                           <h1>
-                            {video.videoTittle.match(regex)?.[1] || "No Match"}{" "}
+                            {video.videoTittle
+                              .match(regex)?.[1]
+                              .split("/")
+                              .pop() || "No Match"}{" "}
                           </h1>
                           <button
                             className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
                             onClick={() => {
                               if (
                                 user &&
+                                (user.role === "admin" ||
+                                  user.role === "instructor")
+                              ) {
+                                console.log("admin play");
+                                getVideoForUser({
+                                  // for admin access didnt wrote any extra api but used the same for enrolled user
+                                  courseId: courseData._id,
+                                  moduleNo: item.moduleNo,
+                                  videoNo: video.videoNo,
+                                  videoName: video.videoTittle,
+                                });
+                              } else if (
+                                user &&
                                 user.enrolledCourses?.find(
                                   (course) =>
                                     course === (courseData._id as string)
                                 )
                               ) {
+                                console.log("enrolled user play");
                                 getVideoForUser({
+                                  // for enrolled user
                                   courseId: courseData._id,
                                   moduleNo: item.moduleNo,
                                   videoNo: video.videoNo,
                                   videoName: video.videoTittle,
                                 });
                               } else {
+                                console.log("visitor play");
                                 getVideoForVisitors({
+                                  // only get videos which are under preview section
                                   courseId: courseData._id,
                                   moduleNo: item.moduleNo,
                                   videoNo: video.videoNo,
@@ -279,8 +329,7 @@ const CourseSinglePage = () => {
                               }
                             }}
                           >
-                            {" "}
-                            Play
+                            {video.preview ? "Preview" : "Play"}
                           </button>
                         </div>
                       )}

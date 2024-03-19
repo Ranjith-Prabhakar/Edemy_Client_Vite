@@ -89,8 +89,10 @@ const Courses = () => {
         </div>
       </div>
 
-      <div className="flex-1">
-        <AddedModuleVideos moduleVideos={moduleVideos} />
+      <div className="flex-1 relative">
+        <div className="p-5 absolute top-10 left-2 w-full">
+          <AddedModuleVideos moduleVideos={moduleVideos} />
+        </div>
       </div>
     </div>
   );
