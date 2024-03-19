@@ -55,10 +55,7 @@ export const courseApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log(
-            "result from courseApi  > getCoursesInRequest",
-            result
-          );
+          console.log("result from courseApi  > getCoursesInRequest", result);
           console.log(
             "result from courseApi  > getCoursesInRequest",
             result.data.data
@@ -327,6 +324,16 @@ export const courseApi = apiSlice.injectEndpoints({
         url: "course/get_instructor_tutorials",
         body: data,
         credentials: "include",
+      }),
+    }),
+
+    //22
+    setVideoTrack: builder.mutation<void,>({
+      query: (data) => ({
+        method: "post",
+        url: "course/set_video_track",
+        body: data,
+        credentials: "include" as const,
       }),
     }),
 

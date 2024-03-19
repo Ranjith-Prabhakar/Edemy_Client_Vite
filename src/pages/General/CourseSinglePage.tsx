@@ -74,10 +74,14 @@ const CourseSinglePage = () => {
   ] = useEnrollCourseMutation();
   const location = useLocation();
   const courseData: ICourseData = location.state.courseData;
-  console.log("courseData  +++++", courseData);
   const [videoUrl, setVideoUrl] = useState(
     courseData.modules[0].videos[0].videoTittle
   );
+  
+  const [moduleNo, setModuleNo] = useState("");
+  const [moduleTittle, setModuleTittle] = useState("");
+  const [videoNo, setVideoNo] = useState("");
+  const [videoTittle, setVideoTittle] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
   const [swapper, setSwapper] = useState("about");
 
@@ -90,8 +94,7 @@ const CourseSinglePage = () => {
         const purchased: boolean = user.courses?.some(
           (course) => course === (courseData._id as string)
         );
-        console.log("purchased", purchased);
-        console.log("user.courses", user.courses);
+        
         setIsPurchased(!purchased);
         return;
       } else if (user.role === "user" && user.enrolledCourses) {
@@ -156,7 +159,6 @@ const CourseSinglePage = () => {
 
   useEffect(() => {
     if (enrollIsSuccess) {
-      console.log("enrollData", enrollData);
       window.location = enrollData?.data as unknown as Location;
     }
     if (enrollIsError) {
@@ -170,7 +172,17 @@ const CourseSinglePage = () => {
       {courseData ? (
         <div className="flex gap-2 justify-between items-start  h-screen  overflow-scroll">
           <div className="dark:bg-c_color-colorSeven p-5 mt-5 rounded-md w-[58%]">
-            <VideoPlayer videoUrl={videoUrl} width="680px" height="320px" />
+            <VideoPlayer
+              videoUrl={videoUrl}
+              useId={user._id as string} 
+              courseId={courseData._id}
+              moduleNo={moduleNo}
+              moduleTittle={moduleTittle}
+              videoNo={videoNo}
+              videoTittle={videoTittle}
+              width="680px"
+              height="320px"
+            />
             <div className="flex gap-2 justify-between mt-3 ">
               <div
                 className={`${
@@ -294,7 +306,6 @@ const CourseSinglePage = () => {
                                 (user.role === "admin" ||
                                   user.role === "instructor")
                               ) {
-                                console.log("admin play");
                                 getVideoForUser({
                                   // for admin access didnt wrote any extra api but used the same for enrolled user
                                   courseId: courseData._id,
@@ -302,6 +313,10 @@ const CourseSinglePage = () => {
                                   videoNo: video.videoNo,
                                   videoName: video.videoTittle,
                                 });
+                                setModuleNo(item.moduleNo);
+                                setModuleTittle(item.moduleTittle);
+                                setVideoTittle(video.videoTittle);
+                                setVideoNo(video.videoNo);
                               } else if (
                                 user &&
                                 user.enrolledCourses?.find(
@@ -309,7 +324,6 @@ const CourseSinglePage = () => {
                                     course === (courseData._id as string)
                                 )
                               ) {
-                                console.log("enrolled user play");
                                 getVideoForUser({
                                   // for enrolled user
                                   courseId: courseData._id,
@@ -317,8 +331,11 @@ const CourseSinglePage = () => {
                                   videoNo: video.videoNo,
                                   videoName: video.videoTittle,
                                 });
+                                setModuleNo(item.moduleNo);
+                                setModuleTittle(item.moduleTittle);
+                                setVideoTittle(video.videoTittle);
+                                setVideoNo(video.videoNo);
                               } else {
-                                console.log("visitor play");
                                 getVideoForVisitors({
                                   // only get videos which are under preview section
                                   courseId: courseData._id,
