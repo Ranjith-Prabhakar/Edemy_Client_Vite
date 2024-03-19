@@ -11,9 +11,9 @@ const InstructorDash = () => {
   return (
     <ContainerLayout>
       <Header />
-      <div className="h-[79vh] flex justify-start gap-2 mt-[4%] pb-3">
+      <div className="h-[87vh] flex justify-start mt-1 gap-2 pb-3">
         <SideBar sideBarData={instructorSideBar} />
-        <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative ">
+        <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400   rounded-md w-full relative ">
           <Routes>
             <Route path="dashboard" element={<Table />} />
             <Route path="addcourses" element={<Courses />} />

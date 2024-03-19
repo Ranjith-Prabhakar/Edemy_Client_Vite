@@ -13,13 +13,13 @@ const Tabs = ({ setStepper, stepper, setModuleVideos, setSubmit }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex justify-start relative">
+    <div className="flex justify-start relative pt-5">
       <button
         className={` ${
           stepper === 1
             ? "bg-c_color-colorSix text-white"
             : "bg-c_color-colorOne text-slate-300"
-        } dark:hover:text-[18px] rounded-t-md  px-5 text-black font-bold py-1 transition-all ease duration-700`}
+        } hover:scale-110 rounded-t-md  px-5 text-black font-bold py-3 transition-all ease duration-400`}
         onClick={() => {
           setStepper(1);
         }}
@@ -31,7 +31,7 @@ const Tabs = ({ setStepper, stepper, setModuleVideos, setSubmit }: Props) => {
           stepper === 2
             ? "bg-c_color-colorSix text-white"
             : "bg-c_color-colorOne text-slate-300"
-        } dark:hover:text-[18px] rounded-t-md  px-5 text-black font-bold py-1 transition-all ease duration-700`}
+        } hover:scale-110 rounded-t-md  px-5 text-black font-bold py-1 transition-all ease duration-400`}
         onClick={() => {
           setStepper(2);
         }}
@@ -39,7 +39,7 @@ const Tabs = ({ setStepper, stepper, setModuleVideos, setSubmit }: Props) => {
         Add Modules
       </button>
       <button
-        className="dark:bg-c_color-colorSeven dark:text-white ms-auto rounded-md mb-1 dark:hover:text-[17px] hover:opacity-80 px-5 text-black font-bold py-1 transition-all ease duration-700"
+        className="dark:bg-c_color-colorSeven dark:text-white ms-auto rounded-md mb-1 hover:scale-110 hover:opacity-80 px-5 text-black font-bold py-1 transition-all ease duration-400"
         onClick={() => {
           setOpen(true);
         }}
