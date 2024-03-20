@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import { useSetVideoTrackMutation } from "../../redux/features/course/courseApi";
 
 type Props = {
   videoUrl: string;
-  useId: string;
+  userId: string;
   courseId: string;
   moduleNo: string;
   moduleTittle: string;
@@ -15,47 +16,38 @@ type Props = {
 
 const VideoPlayer = ({
   videoUrl = "",
-  // useId,
-  // courseId,
-  // moduleNo,
-  // moduleTittle,
-  // videoNo,
-  // videoTittle,
+  userId,
+  courseId,
+  moduleNo,
+  moduleTittle,
+  videoNo,
+  videoTittle,
   width = "550px",
   height = "260px",
 }: Props) => {
+  const [setVideoTrack, { isSuccess, data }] = useSetVideoTrackMutation();
   const reactRef = useRef<ReactPlayer>(null);
-  const [track, setTrack] = useState(0);
+  // const [track, setTrack] = useState(0);
   const [progress, setProgress] = useState(false);
   const [end, setEnd] = useState(false);
   const [duration, setDuration] = useState(0);
-
-  // console.log(
-  //   "useId,courseId,moduleNo,moduleTittle,videoNo,videoTittle,",
-  //   useId,
-  //   courseId,
-  //   moduleNo,
-  //   moduleTittle,
-  //   videoNo,
-  //   videoTittle
-  // );
 
   useEffect(() => {
     if (videoUrl !== "") {
       // Only seek to the currentTime if the videoUrl is not empty and playing
       reactRef.current?.seekTo(10); // Start from 10 seconds
+      setProgress(false);
+      setEnd(false);
+      console.log("videoUrl", videoUrl);
+      console.log("progress", progress);
+      console.log("end", end);
     }
   }, [videoUrl]); // Trigger when videoUrl or playing state changes
 
-  const onPause = () => {
-    const currentTime = reactRef.current?.getCurrentTime() || 0;
-    setTrack(currentTime);
-  };
-
-  useEffect(() => {
-    // Cleanup function to log the final track when the component unmounts
-    return () => {};
-  }, []); // Empty dependency array to ensure the cleanup function runs only once
+  // const onPause = () => {
+  //   const currentTime = reactRef.current?.getCurrentTime() || 0;
+  //   setTrack(currentTime);
+  // };
 
   useEffect(() => {
     let time: number;
@@ -64,14 +56,34 @@ const VideoPlayer = ({
       const intervalId = setInterval(() => {
         // Get the current time every 30 seconds
         const currentTime = reactRef.current?.getCurrentTime() || 0;
-        setTrack(currentTime);
+        // setTrack(currentTime);
         time = currentTime;
         intervalIdOut = intervalId;
         const lastTenSecond = duration - time < 20;
         if (lastTenSecond) {
           console.log("Last 10 sec !!!!!");
+          setVideoTrack({
+            userId,
+            courseId,
+            moduleNo,
+            moduleTittle,
+            videoNo,
+            videoTittle,
+            position: time.toString(),
+            complete: "completed",
+          });
         } else {
           console.log("setInterval");
+          setVideoTrack({
+            userId,
+            courseId,
+            moduleNo,
+            moduleTittle,
+            videoNo,
+            videoTittle,
+            position: time.toString(),
+            complete: "inProgress",
+          });
         }
       }, 15000); // Interval set to 30 seconds
     }
@@ -83,8 +95,14 @@ const VideoPlayer = ({
   }, [progress, end]); // Empty dependency array to ensure the effect runs only once
 
   useEffect(() => {
-    console.log("track", track);
-  }, [track]);
+    if (isSuccess) {
+      console.log("data from video player", data);
+    }
+  }, [isSuccess]);
+
+  // useEffect(() => {
+  //   console.log("track", track);
+  // }, [track]);
 
   return (
     <div>
@@ -93,7 +111,9 @@ const VideoPlayer = ({
           ref={reactRef}
           url={videoUrl}
           playing={true}
-          onPause={onPause}
+          onPause={() => {
+            setProgress(false);
+          }}
           width={width}
           height={height}
           onDuration={(duration) => {
@@ -103,8 +123,9 @@ const VideoPlayer = ({
             setProgress(true);
           }}
           onEnded={() => {
-            setTrack(reactRef.current?.getCurrentTime() as number);
+            // setTrack(reactRef.current?.getCurrentTime() as number);
             setEnd(true);
+            setProgress(false);
           }}
           controls
         />

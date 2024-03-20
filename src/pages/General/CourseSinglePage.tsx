@@ -174,7 +174,7 @@ const CourseSinglePage = () => {
           <div className="dark:bg-c_color-colorSeven p-5 mt-5 rounded-md w-[58%]">
             <VideoPlayer
               videoUrl={videoUrl}
-              useId={user._id as string} 
+              userId={user._id as string} 
               courseId={courseData._id}
               moduleNo={moduleNo}
               moduleTittle={moduleTittle}

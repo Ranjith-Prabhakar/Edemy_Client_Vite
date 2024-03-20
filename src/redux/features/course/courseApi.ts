@@ -26,6 +26,7 @@ import { catchError } from "../../../utils/catchError";
 import { addTutorialIntoCourseArray, userLoggedIn } from "../auth/authSlice";
 import { IPaymentStatusReq } from "../../interfaces/Course/paymentStatus";
 import { ICloudStorageResponse } from "../../interfaces/CloudStorage/CloudStorageResponse";
+import { ISetVideoReq } from "../../interfaces/Course/setVideoTrack";
 
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -328,7 +329,7 @@ export const courseApi = apiSlice.injectEndpoints({
     }),
 
     //22
-    setVideoTrack: builder.mutation<void,>({
+    setVideoTrack: builder.mutation<void, ISetVideoReq>({
       query: (data) => ({
         method: "post",
         url: "course/set_video_track",
@@ -363,6 +364,7 @@ export const {
   useGetCourseByCategoryMutation,
   useGetCourseForSearchMutation,
   useGetInstructorTutorialMutation,
+  useSetVideoTrackMutation
 } = courseApi;
 
 // ===========================================================
