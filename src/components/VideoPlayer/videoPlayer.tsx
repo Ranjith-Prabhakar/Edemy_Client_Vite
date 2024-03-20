@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import { useSetVideoTrackMutation } from "../../redux/features/course/courseApi";
 
 type Props = {
+  position: string;
   videoUrl: string;
   userId: string;
   courseId: string;
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const VideoPlayer = ({
+  position,
   videoUrl = "",
   userId,
   courseId,
@@ -25,6 +27,7 @@ const VideoPlayer = ({
   width = "550px",
   height = "260px",
 }: Props) => {
+  console.log("position", position);
   const [setVideoTrack, { isSuccess, data }] = useSetVideoTrackMutation();
   const reactRef = useRef<ReactPlayer>(null);
   // const [track, setTrack] = useState(0);
@@ -35,14 +38,14 @@ const VideoPlayer = ({
   useEffect(() => {
     if (videoUrl !== "") {
       // Only seek to the currentTime if the videoUrl is not empty and playing
-      reactRef.current?.seekTo(10); // Start from 10 seconds
+      reactRef.current?.seekTo(parseInt(position)); // Start from 10 seconds
       setProgress(false);
       setEnd(false);
       console.log("videoUrl", videoUrl);
       console.log("progress", progress);
       console.log("end", end);
     }
-  }, [videoUrl]); // Trigger when videoUrl or playing state changes
+  }, [videoUrl, position]); // Trigger when videoUrl or playing state changes
 
   // const onPause = () => {
   //   const currentTime = reactRef.current?.getCurrentTime() || 0;

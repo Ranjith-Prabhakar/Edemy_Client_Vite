@@ -77,13 +77,14 @@ const CourseSinglePage = () => {
   const [videoUrl, setVideoUrl] = useState(
     courseData.modules[0].videos[0].videoTittle
   );
-  
+
   const [moduleNo, setModuleNo] = useState("");
   const [moduleTittle, setModuleTittle] = useState("");
   const [videoNo, setVideoNo] = useState("");
   const [videoTittle, setVideoTittle] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
   const [swapper, setSwapper] = useState("about");
+  const [position, setPosition] = useState("0");
 
   useEffect(() => {
     if (user) {
@@ -94,7 +95,7 @@ const CourseSinglePage = () => {
         const purchased: boolean = user.courses?.some(
           (course) => course === (courseData._id as string)
         );
-        
+
         setIsPurchased(!purchased);
         return;
       } else if (user.role === "user" && user.enrolledCourses) {
@@ -121,8 +122,10 @@ const CourseSinglePage = () => {
   const regex = /\/(.*?)-/;
   useEffect(() => {
     if (isSuccess) {
+      console.log("data from success effect", data);
       if (data && "data" in data) {
         const url = data.data;
+        setPosition(data.position || "0");
         setVideoUrl(url as string);
       }
     }
@@ -173,8 +176,9 @@ const CourseSinglePage = () => {
         <div className="flex gap-2 justify-between items-start  h-screen  overflow-scroll">
           <div className="dark:bg-c_color-colorSeven p-5 mt-5 rounded-md w-[58%]">
             <VideoPlayer
+              position={position}
               videoUrl={videoUrl}
-              userId={user._id as string} 
+              userId={user._id as string}
               courseId={courseData._id}
               moduleNo={moduleNo}
               moduleTittle={moduleTittle}

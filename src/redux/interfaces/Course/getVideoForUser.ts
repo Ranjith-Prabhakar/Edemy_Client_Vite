@@ -8,5 +8,6 @@ export interface IGetVideoForUserReq {
 export interface IGetVideoForUserRes{
   success:boolean,
   message:string,
-  data?:string
+  data?:string,
+  position?:string
 }
