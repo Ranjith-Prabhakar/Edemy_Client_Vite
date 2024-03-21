@@ -9,17 +9,20 @@ export default {
 
     extend: {
       screens: {
-        "1000px": "1050px",
-        "1100px": "1110px",
-        "800px": "800px",
+
         "1300px": "1300px",
+        "1200px": "1200px",
+        "1100px": "1110px",
+        "1000px": "1000px",
+        "800px": "800px",
+        "500px": "500px",
         "400px": "400px"
 
       },
       colors: {
         primary: { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554" },
-        body: { "gradient-one": "#062C2F", "gradient-two": "#09616A", "lightMode":"#AAD7D9" },
-        c_color: { "colorOne": "#063134", "colorTwo": "#69D3DC", "colorThree": "#b7e2e6", "colorFour": "#008E80", "colorFive": "#009B7D", "colorSix": "#0D4549", "colorSeven":"#012027"}
+        body: { "gradient-one": "#062C2F", "gradient-two": "#09616A", "lightMode": "#AAD7D9" },
+        c_color: { "colorOne": "#063134", "colorTwo": "#69D3DC", "colorThree": "#b7e2e6", "colorFour": "#008E80", "colorFive": "#009B7D", "colorSix": "#0D4549", "colorSeven": "#012027" }
 
       },
       backgroundImage: {

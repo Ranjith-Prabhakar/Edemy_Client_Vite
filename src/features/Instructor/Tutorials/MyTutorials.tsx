@@ -61,7 +61,8 @@ const MyTutorials = () => {
               index={index}
             >
               <Td>{index + 1}</Td>
-              <td className="px-6 py-4">{item.courseName.toUpperCase()}</td>
+              <td className="px-6 py-4"
+              >{item.courseName.toUpperCase()}</td>
               <Td>{item.noOfPurchase}</Td>
               <Td>{item.status}</Td>
             </TableBodyTr>

@@ -22,6 +22,7 @@ const CourseTable = () => {
     (state: { courses: ICourseInitialState }) => state.courses.coursesData
   );
 
+  console.log("coursesData", coursesData);
   useEffect(() => {
     setTableData(coursesData);
   }, [coursesData]);
