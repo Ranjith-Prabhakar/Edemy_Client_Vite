@@ -10,14 +10,20 @@ import { ICategory } from "../redux/interfaces/Course/getCategories";
 import { useGetCategoryQuery } from "../redux/features/course/courseApi";
 import { catchError } from "../utils/catchError";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useSocketContext } from "../context/SocketContextProvider";
+import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 type props = {
   isScrolled?: boolean;
 };
 const Header = ({ isScrolled }: props) => {
+  const { notificationStore } = useSocketContext();
+  console.log("socketStore ~~~~~~~~", notificationStore);
   const userData = useGetUser();
   const [name, setName] = useState("");
   const [isHovered, setIsHovered] = useState(false);
+  const [notificationSideBar, setNotificationSideBar] = useState(false);
   const { data, isSuccess } = useGetCategoryQuery();
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const navigate = useNavigate();
@@ -149,14 +155,16 @@ const Header = ({ isScrolled }: props) => {
           <div>
             <div className="relative 1200px:hidden">
               <RxHamburgerMenu />
-              <div className="absolute  top-8  right-4 flex flex-col  space-y-3 w-[200px] py-5 px-7 border rounded-lg">
-                <ThemeToggler />
+              <div className="absolute  top-8  right-4 flex flex-col  space-y-3 w-[200px] py-5 px-7 border rounded-lg bg-c_color-colorSeven">
                 {userData.role === "admin" && (
-                  <Link to={`/admin/dash_bord`}>
-                    <h1 className=" font-semibold">
-                      {userData.name.split(" ").shift()}
-                    </h1>
-                  </Link>
+                  <div className="flex justify-between items-center">
+                    <Link to={`/admin/dash_bord`}>
+                      <h1 className=" font-semibold">
+                        {userData.name.split(" ").shift()}
+                      </h1>
+                    </Link>
+                    <ThemeToggler />
+                  </div>
                 )}
 
                 {userData.role === "instructor" && (
@@ -237,9 +245,44 @@ const Header = ({ isScrolled }: props) => {
                   <Link to={"/be_instructor"}>
                     <FaCartPlus size={25} />
                   </Link>
-                  <Link to={"/be_instructor"}>
-                    <IoIosNotifications size={25} />
-                  </Link>
+                  <div className="relative">
+                    <IoIosNotifications
+                      size={25}
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setNotificationSideBar(true);
+                      }}
+                    />
+                    {notificationStore.length > 1 && (
+                      <div className="w-[10px] h-[10px] rounded-full bg-red-500 absolute top-0 right-0" />
+                    )}
+                    {notificationSideBar && (
+                      <div className="absolute -right-4 top-10  h-[500px] w-[400px] shadow-2xl ">
+                        <div className="relative p-5 pt-10 w-full h-full border rounded-lg dark:bg-c_color-colorSeven">
+                          <IoCloseCircleOutline
+                            size={25}
+                            className="absolute right-3 top-3 cursor-pointer"
+                            onClick={() => {
+                              setNotificationSideBar(false);
+                            }}
+                          />
+                          {notificationStore.length > 1 ? (
+                            notificationStore.map((notification) => (
+                              <Link
+                                to={notification.url}
+                                className="dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg"
+                              >
+                                {notification.message}{" "}
+                                <IoIosArrowRoundForward />
+                              </Link>
+                            ))
+                          ) : (
+                            <h1>No notifications . . . . </h1>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </>
               )}
 

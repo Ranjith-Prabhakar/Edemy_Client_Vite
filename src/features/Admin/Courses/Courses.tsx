@@ -5,6 +5,7 @@ import SearchButton from "../../../components/Buttons/SearchButton";
 import DashBordSearch from "../../../components/inputFields/DashBordSearch";
 
 const Courses = () => {
+  
   const [toggler, setToggler] = useState(1);
   return (
     <div className="h-full w-full">

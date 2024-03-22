@@ -15,8 +15,10 @@ import Thead from "../../../../components/Table/Thead";
 import Th from "../../../../components/Table/Th";
 import TableBodyTr from "../../../../components/Table/TableBodyTr";
 import Td from "../../../../components/Table/Td";
+import { useSocketContext } from "../../../../context/SocketContextProvider";
 
 const CourseRequestTable = () => {
+  const { socketStore } = useSocketContext();
   const navigate = useNavigate();
   useGetCoursesInRequestQuery();
   const [tableData, setTableData] = useState<ICourse[]>([]);
@@ -25,10 +27,15 @@ const CourseRequestTable = () => {
   );
   const [approveOrRejectCourse] = useApproveOrRejectCourseMutation();
 
+  console.log("socketStore.addedCourse", socketStore.addedCourses);
+
+  useEffect(() => {
+    setTableData([...tableData, ...socketStore.addedCourses]);
+  }, [socketStore.addedCourses]);
+
   useEffect(() => {
     setTableData(coursesInRequest);
-    console.log("table data ", tableData);
-  }, [coursesInRequest, tableData]);
+  }, [coursesInRequest]);
 
   return (
     <>
@@ -123,7 +130,7 @@ const CourseRequestTable = () => {
         <div className="flex justify-center items-center h-full">
           {" "}
           <h1 className="text-4xl font-semibold italic">
-            No courses  requests have been found 
+            No courses requests have been found
           </h1>
         </div>
       )}
