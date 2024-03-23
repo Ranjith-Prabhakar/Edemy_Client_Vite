@@ -6,4 +6,9 @@ export interface IInstructorAgreement {
   qualification: string;
   consent: boolean;
   contract: string;
+  certificate?: string;
 }
+
+
+
+

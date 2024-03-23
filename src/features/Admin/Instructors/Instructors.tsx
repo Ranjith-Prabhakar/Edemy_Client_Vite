@@ -59,7 +59,11 @@ const Instructors = () => {
           <SearchButton />
         </div>
       </div>
-      {switcher === 1 ? <Table /> : <Requests />}
+      {switcher === 1 ? (
+        <Table />
+      ) : (
+        <Requests setNotification={setNotification} />
+      )}
     </div>
   );
 };

@@ -8,10 +8,11 @@ import {
 } from "./Types";
 import notificationSound from "../assets/notification.mp3";
 import { ICourse } from "../redux/interfaces/Course/generalInterface";
+import { IInstructorRequest } from "../redux/interfaces/Admin/InstructorRequest";
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
-  socketStore: { addedCourses: [] },
+  socketStore: { addedCourses: [], instructorRequests: [] },
   notificationStore: [{ message: "", url: "" }],
 });
 
@@ -30,8 +31,10 @@ const SocketContextProvider = ({ children }: Props) => {
 
   const [socketStore, setSocketStore] = useState<{
     addedCourses: ICourse[];
+    instructorRequests: IInstructorRequest[];
   }>({
     addedCourses: [],
+    instructorRequests: [],
   });
 
   const [notificationStore, setNotificationStore] = useState<
@@ -70,6 +73,30 @@ const SocketContextProvider = ({ children }: Props) => {
         ]);
       });
 
+      // instructor request for admin
+      socket.on(
+        "fromServerInstructorRequestSubmitted",
+        (instructroAgreement) => {
+          sound.play();
+          console.log("instructor agreement ", instructroAgreement);
+          setSocketStore({
+            ...socketStore,
+            instructorRequests: [
+              ...socketStore.instructorRequests,
+              instructroAgreement,
+            ],
+          });
+          setNotificationStore([
+            {
+              message:
+                "A Request from a user to be instructor has been registered",
+              url: `/admin/dash_bord/instructors`,
+            },
+            ...notificationStore,
+          ]);
+        }
+      );
+      //
       setSocket(socket);
       setSocketStore({ ...socketStore });
       setNotificationStore([...notificationStore]);
