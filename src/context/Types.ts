@@ -20,4 +20,12 @@ export type SocketContextType = {
     instructorRequests: IInstructorRequest[];
   };
   notificationStore: { message: string; url: string }[];
+  setNotificationStore: React.Dispatch<
+    React.SetStateAction<
+      {
+        message: string;
+        url: string;
+      }[]
+    >
+  >;
 };

@@ -14,6 +14,7 @@ const SocketContext = createContext<SocketContextType>({
   socket: null,
   socketStore: { addedCourses: [], instructorRequests: [] },
   notificationStore: [{ message: "", url: "" }],
+  setNotificationStore: () => {},
 });
 
 export const useSocketContext = () => {
@@ -112,7 +113,9 @@ const SocketContextProvider = ({ children }: Props) => {
   }, [user]);
 
   return (
-    <SocketContext.Provider value={{ socket, socketStore, notificationStore }}>
+    <SocketContext.Provider
+      value={{ socket, socketStore, notificationStore, setNotificationStore }}
+    >
       {children}
     </SocketContext.Provider>
   );

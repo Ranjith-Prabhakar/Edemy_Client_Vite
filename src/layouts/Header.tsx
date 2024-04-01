@@ -13,11 +13,15 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useSocketContext } from "../context/SocketContextProvider";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import useInitialNotificationLoader from "../hooks/useInitialNotificationLoader";
 
 type props = {
   isScrolled?: boolean;
 };
 const Header = ({ isScrolled }: props) => {
+  //
+  useInitialNotificationLoader();
+  //
   const { notificationStore } = useSocketContext();
   console.log("socketStore ~~~~~~~~", notificationStore);
   const userData = useGetUser();
@@ -300,8 +304,9 @@ const Header = ({ isScrolled }: props) => {
                             }}
                           />
                           {notificationStore.length > 1 ? (
-                            notificationStore.map((notification) => (
+                            notificationStore.map((notification,index) => (
                               <Link
+                              key={index}
                                 to={notification.url}
                                 className="dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg"
                               >
