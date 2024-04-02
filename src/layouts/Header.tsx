@@ -13,7 +13,11 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useSocketContext } from "../context/SocketContextProvider";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import useInitialNotificationLoader from "../hooks/useInitialNotificationLoader";
+import useInitialNotificationLoader, {
+  ENotification,
+  ENotificationMsg,
+} from "../hooks/useInitialNotificationLoader";
+import { useEditNotificationMutation } from "../redux/features/notifications/notificationsApi";
 
 type props = {
   isScrolled?: boolean;
@@ -23,6 +27,7 @@ const Header = ({ isScrolled }: props) => {
   useInitialNotificationLoader();
   //
   const { notificationStore } = useSocketContext();
+  const [editNotification] = useEditNotificationMutation();
   console.log("socketStore ~~~~~~~~", notificationStore);
   const userData = useGetUser();
   const [name, setName] = useState("");
@@ -33,6 +38,7 @@ const Header = ({ isScrolled }: props) => {
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+
   useEffect(() => {
     if (userData.name) {
       setName(
@@ -294,7 +300,7 @@ const Header = ({ isScrolled }: props) => {
                       <div className="w-[10px] h-[10px] rounded-full bg-red-500 absolute top-0 right-0" />
                     )}
                     {notificationSideBar && (
-                      <div className="absolute -right-4 top-10  h-[500px] w-[400px] shadow-2xl ">
+                      <div className="absolute -right-4 top-10  h-[500px] min-w-[500px] shadow-2xl ">
                         <div className="relative p-5 pt-10 w-full h-full border rounded-lg dark:bg-c_color-colorSeven">
                           <IoCloseCircleOutline
                             size={25}
@@ -303,16 +309,71 @@ const Header = ({ isScrolled }: props) => {
                               setNotificationSideBar(false);
                             }}
                           />
-                          {notificationStore.length > 1 ? (
-                            notificationStore.map((notification,index) => (
-                              <Link
-                              key={index}
-                                to={notification.url}
-                                className="dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg"
+                          {notificationStore.length ? (
+                            notificationStore.map((notification, index) => (
+                              <h1
+                                key={index}
+                                onClick={async () => {
+                                  let result;
+                                  switch (notification.message) {
+                                    case ENotificationMsg.instructorRequests:
+                                      result = await editNotification({
+                                        notificationHead:
+                                          ENotification.instructorRequests,
+                                      });
+
+                                      if ("data" in result) {
+                                        if ("success" in result.data) {
+                                         
+                                          navigate(`${notification.url}`, {
+                                            state: { index:index },
+                                          });
+                                        }
+                                      }
+                                      break;
+                                    case ENotificationMsg.courseApprovalApprovance:
+                                      result = await editNotification({
+                                        notificationHead:
+                                          ENotification.courseApprovalApprovance,
+                                      });
+
+                                      if ("data" in result) {
+                                        if ("success" in result.data) {
+                                          navigate(`${notification.url}`);
+                                        }
+                                      }
+                                      break;
+                                    case ENotificationMsg.courseApprovalRequest:
+                                      result = await editNotification({
+                                        notificationHead:
+                                          ENotification.courseApprovalRequest,
+                                      });
+
+                                      if ("data" in result) {
+                                        if ("success" in result.data) {
+                                          navigate(`${notification.url}`);
+                                        }
+                                      }
+                                      break;
+                                    case ENotificationMsg.instructorRequestApproval:
+                                      result = await editNotification({
+                                        notificationHead:
+                                          ENotification.instructorRequestApproval,
+                                      });
+
+                                      if ("data" in result) {
+                                        if ("success" in result.data) {
+                                          navigate(`${notification.url}`);
+                                        }
+                                      }
+                                      break;
+                                  }
+                                }}
+                                className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"
                               >
                                 {notification.message}{" "}
-                                <IoIosArrowRoundForward />
-                              </Link>
+                                <IoIosArrowRoundForward className="inline" />
+                              </h1>
                             ))
                           ) : (
                             <h1>No notifications . . . . </h1>

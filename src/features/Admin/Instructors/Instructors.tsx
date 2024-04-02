@@ -9,21 +9,22 @@ import { IInstructorState } from "../../../redux/interfaces/Admin/InstructorRequ
 import { useGetInstructorRequestsQuery } from "../../../redux/features/admin/InstructorRequests/instructorRequestApi";
 const Instructors = () => {
   const [switcher, setSwitcher] = useState(1);
-  const [notification,setNotification] = useState(0)
+  const [notification, setNotification] = useState(0);
   useGetInstructorRequestsQuery({});
-   useGetInstructorsQuery();
+  useGetInstructorsQuery();
 
-   const InstructorRequests = useSelector(
-     (state: { instructorRequests: IInstructorState }) =>
-       state.instructorRequests.instructorRequest
-   );
+  const InstructorRequests = useSelector(
+    (state: { instructorRequests: IInstructorState }) =>
+      state.instructorRequests.instructorRequest
+  );
 
-   useEffect(() => {
+  useEffect(() => {
     setNotification(InstructorRequests.length);
-   }, [InstructorRequests]);
-
+  }, [InstructorRequests]);
 
  
+
+
   return (
     <div className="h-full w-full">
       <div className="flex items-center justify-between mb-1">

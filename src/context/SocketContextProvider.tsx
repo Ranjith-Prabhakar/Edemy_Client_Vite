@@ -97,6 +97,18 @@ const SocketContextProvider = ({ children }: Props) => {
           ]);
         }
       );
+      // instroctor approval or rejection by admin
+      socket.on("fromServerInstrctorRequestApproval",(message)=>{
+        sound.play()
+        console.log("(*^*)",message)
+         setNotificationStore([
+           {
+             message,
+             url: `/`,
+           },
+           ...notificationStore,
+         ]);
+      })
       //
       setSocket(socket);
       setSocketStore({ ...socketStore });

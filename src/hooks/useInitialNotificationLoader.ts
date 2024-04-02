@@ -9,10 +9,16 @@ export enum ENotification {
   "courseApprovalApprovance" = "courseApprovalApprovance",
   "broadCasting" = "broadCasting",
 }
+export enum ENotificationMsg{
+"instructorRequests"= "A Request from a user to be instructor has been registered",
+"instructorRequestApproval"="Request for being instructor has been approved",
+"courseApprovalRequest"="A Request from a instructor for new course approval has been recorded",
+"courseApprovalApprovance"="Request for new course has been approved",
+}
 
 const useInitialNotificationLoader = () => {
   const { isSuccess, data } = useGetNotificationsQuery();
-  const { setNotificationStore, notificationStore } = useSocketContext();
+  const { setNotificationStore } = useSocketContext();
 
   useEffect(() => {
     if (isSuccess) {
@@ -32,13 +38,13 @@ const useInitialNotificationLoader = () => {
             {
               message:
                 notification === ENotification.instructorRequests
-                  ? "A Request from a user to be instructor has been registered"
+                  ? ENotificationMsg.instructorRequests
                   : notification === ENotification.courseApprovalRequest
-                  ? "A Request from a instructor for new course approval has been recorded"
+                  ? ENotificationMsg.courseApprovalRequest
                   : notification === ENotification.instructorRequestApproval
-                  ? "Request for being instructor has been approved"
+                  ? ENotificationMsg.instructorRequestApproval
                   : notification === ENotification.courseApprovalApprovance
-                  ? "Request for new course has been approved"
+                  ? ENotificationMsg.courseApprovalApprovance
                   : "",
               url:
                 notification === ENotification.instructorRequests
@@ -51,7 +57,6 @@ const useInitialNotificationLoader = () => {
                   ? `/admin/dash_bord/courses`
                   : "",
             },
-            ...notificationStore,
           ])
         );
       }

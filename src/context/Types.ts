@@ -7,6 +7,7 @@ export interface ServerToClientEvents {
   serverSideLogout: (message: string) => void;
   fromServerCourseAdded: (course: ICourse, message: string) => void;
   fromServerInstructorRequestSubmitted: (agreement: IInstructorRequest) => void;
+  fromServerInstrctorRequestApproval: (message: string) => void;
 }
 
 export interface ClientToServerEvents {
