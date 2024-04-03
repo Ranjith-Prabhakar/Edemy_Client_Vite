@@ -38,10 +38,10 @@ const CoursePreview = () => {
   const location = useLocation();
   const courseData = location.state.courseData as TCourseData;
 
-   const [videoUrl, setVideoUrl] = useState(
-     courseData.modules[0].videos[0].videoTittle
-   );
-   
+  const [videoUrl, setVideoUrl] = useState(
+    courseData.modules[0].videos[0].videoTittle
+  );
+
   console.log("courseData ====>>>>>", courseData);
   const regex = /\/(.*?)-/;
   useEffect(() => {
@@ -79,6 +79,8 @@ const CoursePreview = () => {
                     approveOrRejectCourse({
                       courseId: courseData._id,
                       action: "approved",
+                      instructorId: courseData.instructor,
+                      courseName: courseData.courseName,
                     });
                   }}
                 >
@@ -90,6 +92,8 @@ const CoursePreview = () => {
                     approveOrRejectCourse({
                       courseId: courseData._id,
                       action: "rejected",
+                      instructorId: courseData.instructor,
+                      courseName: courseData.courseName,
                     });
                   }}
                 >

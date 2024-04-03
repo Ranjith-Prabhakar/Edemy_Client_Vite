@@ -98,17 +98,30 @@ const SocketContextProvider = ({ children }: Props) => {
         }
       );
       // instroctor approval or rejection by admin
-      socket.on("fromServerInstrctorRequestApproval",(message)=>{
-        sound.play()
-        console.log("(*^*)",message)
-         setNotificationStore([
-           {
-             message,
-             url: `/`,
-           },
-           ...notificationStore,
-         ]);
-      })
+      socket.on("fromServerInstrctorRequestApproval", (message) => {
+        sound.play();
+        console.log("(*^*)", message);
+        setNotificationStore([
+          {
+            message,
+            url: `/`,
+          },
+          ...notificationStore,
+        ]);
+      });
+      // course approval by admin
+      socket.on("fromServerCourseApproved", (message) => {
+        sound.play();
+        console.log("message from socket for course approval ==>>", message);
+        setNotificationStore([
+          {
+            message,
+            url: `/`,
+          },
+          ...notificationStore,
+        ]);
+      });
+
       //
       setSocket(socket);
       setSocketStore({ ...socketStore });

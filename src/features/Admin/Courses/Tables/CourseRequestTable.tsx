@@ -79,6 +79,8 @@ const CourseRequestTable = () => {
                           approveOrRejectCourse({
                             courseId: item._id,
                             action: "approved",
+                            instructorId: item.instructor,
+                            courseName:item.courseName
                           });
                         }}
                       >
@@ -90,6 +92,8 @@ const CourseRequestTable = () => {
                           approveOrRejectCourse({
                             courseId: item._id,
                             action: "rejected",
+                            instructorId: item.instructor,
+                            courseName: item.courseName,
                           });
                         }}
                       >

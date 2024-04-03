@@ -148,7 +148,7 @@ export const courseApi = apiSlice.injectEndpoints({
 
     approveOrRejectCourse: builder.mutation<
       ICourseResponse,
-      { courseId: string; action: "approved" | "rejected" }
+      { courseId: string; action: "approved" | "rejected";instructorId?:string;courseName?:string }
     >({
       query: (data) => ({
         method: "post",
