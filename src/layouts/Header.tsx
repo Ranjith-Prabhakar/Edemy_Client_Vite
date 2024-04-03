@@ -18,7 +18,8 @@ import useInitialNotificationLoader, {
   ENotificationMsg,
 } from "../hooks/useInitialNotificationLoader";
 import { useEditNotificationMutation } from "../redux/features/notifications/notificationsApi";
-
+import {useDispatch} from "react-redux"
+import { userRoleChange } from "../redux/features/auth/authSlice";
 type props = {
   isScrolled?: boolean;
 };
@@ -38,6 +39,7 @@ const Header = ({ isScrolled }: props) => {
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (userData.name) {
@@ -81,6 +83,8 @@ const Header = ({ isScrolled }: props) => {
       catchError(error);
     }
   };
+
+ 
 
   return (
     <>
@@ -315,18 +319,18 @@ const Header = ({ isScrolled }: props) => {
                                 key={index}
                                 onClick={async () => {
                                   let result;
+                                
                                   switch (notification.message) {
+                                    
                                     case ENotificationMsg.instructorRequests:
                                       result = await editNotification({
                                         notificationHead:
                                           ENotification.instructorRequests,
                                       });
-
                                       if ("data" in result) {
                                         if ("success" in result.data) {
-                                         
                                           navigate(`${notification.url}`, {
-                                            state: { index:index },
+                                            state: { index: index },
                                           });
                                         }
                                       }
@@ -361,6 +365,8 @@ const Header = ({ isScrolled }: props) => {
                                           ENotification.instructorRequestApproval,
                                       });
 
+                                      dispatch(userRoleChange());
+                                     
                                       if ("data" in result) {
                                         if ("success" in result.data) {
                                           navigate(`${notification.url}`);

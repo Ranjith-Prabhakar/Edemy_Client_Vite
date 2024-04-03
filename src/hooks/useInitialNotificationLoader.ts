@@ -14,6 +14,7 @@ export enum ENotificationMsg{
 "instructorRequestApproval"="Request for being instructor has been approved",
 "courseApprovalRequest"="A Request from a instructor for new course approval has been recorded",
 "courseApprovalApprovance"="Request for new course has been approved",
+"courseApprovalApprovanceForAllUsers"="A new course has been added"
 }
 
 const useInitialNotificationLoader = () => {
@@ -52,7 +53,7 @@ const useInitialNotificationLoader = () => {
                   : notification === ENotification.courseApprovalRequest
                   ? `/admin/dash_bord/courses`
                   : notification === ENotification.instructorRequestApproval
-                  ? `/admin/dash_bord/courses`
+                  ? `/instructor/profile`
                   : notification === ENotification.courseApprovalApprovance
                   ? `/admin/dash_bord/courses`
                   : "",

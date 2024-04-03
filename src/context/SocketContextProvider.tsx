@@ -9,6 +9,7 @@ import {
 import notificationSound from "../assets/notification.mp3";
 import { ICourse } from "../redux/interfaces/Course/generalInterface";
 import { IInstructorRequest } from "../redux/interfaces/Admin/InstructorRequest";
+import { ENotificationMsg } from "../hooks/useInitialNotificationLoader";
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
@@ -67,7 +68,7 @@ const SocketContextProvider = ({ children }: Props) => {
         });
         setNotificationStore([
           {
-            message: "A new course has been added",
+            message: ENotificationMsg.courseApprovalRequest,
             url: `/admin/dash_bord/courses`,
           },
           ...notificationStore,
@@ -89,8 +90,7 @@ const SocketContextProvider = ({ children }: Props) => {
           });
           setNotificationStore([
             {
-              message:
-                "A Request from a user to be instructor has been registered",
+              message: ENotificationMsg.instructorRequests,
               url: `/admin/dash_bord/instructors`,
             },
             ...notificationStore,
@@ -103,25 +103,42 @@ const SocketContextProvider = ({ children }: Props) => {
         console.log("(*^*)", message);
         setNotificationStore([
           {
-            message,
-            url: `/`,
+            message: ENotificationMsg.instructorRequestApproval,
+            url: `/instructor/profile`,
           },
           ...notificationStore,
         ]);
       });
-      // course approval by admin
+      // course approval by admin(to the instructor)
       socket.on("fromServerCourseApproved", (message) => {
         sound.play();
         console.log("message from socket for course approval ==>>", message);
         setNotificationStore([
           {
-            message,
+            message: ENotificationMsg.courseApprovalApprovance,
             url: `/`,
           },
           ...notificationStore,
         ]);
       });
-
+      // course approval by admin(to every users)
+      socket.on(
+        "fromServerCourseApprovedNotificationForAllUsers",
+        (message) => {
+          sound.play();
+          console.log(
+            "message from socket for course approval to all ==>>",
+            message
+          );
+          setNotificationStore([
+            {
+              message: ENotificationMsg.courseApprovalApprovanceForAllUsers,
+              url: `/`,
+            },
+            ...notificationStore,
+          ]);
+        }
+      );
       //
       setSocket(socket);
       setSocketStore({ ...socketStore });

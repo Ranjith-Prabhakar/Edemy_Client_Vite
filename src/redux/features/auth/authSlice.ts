@@ -28,10 +28,18 @@ const authSlice = createSlice({
         courses: [...state.userData.courses as string[], action.payload.data],
       };
     },
+    userRoleChange:(state)=>{
+      state.userData = {...state.userData,role:"instructor"}
+      state.isLoading = false;
+    }
   },
 });
 
-export const { userLoggedIn, userLoggedOut, addTutorialIntoCourseArray } =
-  authSlice.actions;
+export const {
+  userLoggedIn,
+  userLoggedOut,
+  addTutorialIntoCourseArray,
+  userRoleChange,
+} = authSlice.actions;
 export default authSlice.reducer;
 
