@@ -3,7 +3,7 @@ import VideoPlayer from "../../components/VideoPlayer/videoPlayer";
 import { useEffect, useState } from "react";
 import { IoIosArrowDropdown } from "react-icons/io";
 import Header from "../../layouts/Header";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import About from "../../features/Course/About";
 import QuestionForm from "../../features/Course/QuestionForm";
 import ReviewAndRating from "../../features/Course/ReviewAndRating";

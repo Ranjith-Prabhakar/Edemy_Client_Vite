@@ -2,7 +2,7 @@ import SideBar from "../../layouts/SideBar";
 import { userSideBar } from "../../data/UserSideBar";
 import Table from "../../features/Instructor/Table";
 import Header from "../../layouts/Header";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import { Route, Routes } from "react-router-dom";
 
 const UserDash = () => {

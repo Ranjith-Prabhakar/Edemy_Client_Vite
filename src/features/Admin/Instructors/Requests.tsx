@@ -50,13 +50,17 @@ const Requests = ({ setNotification }: props) => {
   const [extention, setExtention] = useState("");
 
   useEffect(() => {
-    setTableData([...socketStore.instructorRequests, ...tableData]);
+    // setTableData([...socketStore.instructorRequests, ...tableData]);
     setNotification(socketStore.instructorRequests.length);
   }, [socketStore.instructorRequests]);
 
-  useEffect(() => {
-    setTableData([...InstructorRequests, ...socketStore.instructorRequests]);
-  }, [InstructorRequests]);
+   useEffect(() => {
+     setTableData([...InstructorRequests]);
+   }, [InstructorRequests]);
+
+  // useEffect(() => {
+  //   setTableData([...InstructorRequests, ...socketStore.instructorRequests]);
+  // }, [InstructorRequests]);
 
   useEffect(() => {
     if (certificatUrl) {

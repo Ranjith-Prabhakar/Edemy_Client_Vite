@@ -17,7 +17,7 @@ const categoryApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           if (!result.data.success) {
@@ -37,7 +37,7 @@ const categoryApi = apiSlice.injectEndpoints({
         method: "get",
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(getCategories({ data: result.data.data })); // Use data directly
@@ -54,7 +54,7 @@ const categoryApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(freezCategory({ categoryName: result.data.data.name }));
@@ -71,7 +71,7 @@ const categoryApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(unfreezCategory({ categoryName: result.data.data.name }));

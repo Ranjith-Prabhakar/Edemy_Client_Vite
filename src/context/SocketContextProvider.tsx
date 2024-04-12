@@ -57,6 +57,7 @@ const SocketContextProvider = ({ children }: Props) => {
       //user logout
       socket.on("serverSideLogout", () => {
         sound.play();
+        setNotificationStore([{ message: "", url: "" }]);
       });
 
       // course added by instructor
@@ -80,14 +81,18 @@ const SocketContextProvider = ({ children }: Props) => {
         "fromServerInstructorRequestSubmitted",
         (instructroAgreement) => {
           sound.play();
-          console.log("instructor agreement ", instructroAgreement);
+          console.log(
+            "instructor agreement from socketContextProvider",
+            instructroAgreement
+          );
           setSocketStore({
             ...socketStore,
             instructorRequests: [
-              ...socketStore.instructorRequests,
               instructroAgreement,
+              ...socketStore.instructorRequests,
             ],
           });
+
           setNotificationStore([
             {
               message: ENotificationMsg.instructorRequests,
@@ -116,7 +121,7 @@ const SocketContextProvider = ({ children }: Props) => {
         setNotificationStore([
           {
             message: ENotificationMsg.courseApprovalApprovance,
-            url: `/`,
+            url: `/instructor/profile/mytutorials`,
           },
           ...notificationStore,
         ]);
@@ -141,8 +146,8 @@ const SocketContextProvider = ({ children }: Props) => {
       );
       //
       setSocket(socket);
-      setSocketStore({ ...socketStore });
-      setNotificationStore([...notificationStore]);
+      // setSocketStore({ ...socketStore });
+      // setNotificationStore([...notificationStore]);
       return () => {
         socket.close();
       };

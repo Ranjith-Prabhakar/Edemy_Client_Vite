@@ -4,7 +4,7 @@ import Header from "../../layouts/Header";
 import Hero from "../../components/Hero/Hero";
 // import Slider from "../../components/Slider/Slider";
 import Testimonial from "../../components/Testimonial/Testimonial";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 const Home = () => {

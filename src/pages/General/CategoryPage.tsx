@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import CourseCard from "../../components/Card/CourseCard";
 import { useEffect, useState } from "react";
 import { useGetCourseByCategoryMutation } from "../../redux/features/course/courseApi";

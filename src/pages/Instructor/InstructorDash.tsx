@@ -3,7 +3,7 @@ import { instructorSideBar } from "../../data/InstructorSideBar";
 import Table from "../../features/Instructor/Table";
 import Courses from "../../features/Instructor/Course/Courses";
 import Header from "../../layouts/Header";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import { Route, Routes } from "react-router-dom";
 import MyTutorials from "../../features/Instructor/Tutorials/MyTutorials";
 

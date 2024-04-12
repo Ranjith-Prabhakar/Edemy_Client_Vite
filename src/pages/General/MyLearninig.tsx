@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useGetUser from "../../hooks/useGetUser";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import { useGetUserEnrolledCoursesMutation } from "../../redux/features/course/courseApi";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import Header from "../../layouts/Header";

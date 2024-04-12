@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGetCourseForSearchMutation } from "../../redux/features/course/courseApi";
 import { FaSortAmountDownAlt, FaSortAmountUp } from "react-icons/fa";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import Header from "../../layouts/Header";
 import { useEffect, useState } from "react";
 import useGetScrollPosition from "../../hooks/useGetScrollPosition";

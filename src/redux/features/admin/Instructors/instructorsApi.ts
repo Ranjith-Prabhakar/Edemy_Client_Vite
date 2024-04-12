@@ -14,7 +14,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "get",
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(getInstructor(result.data));
@@ -30,7 +30,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "post",
         credentials: "include",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           
@@ -47,7 +47,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "post",
         credentials: "include",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(unBlockInstructor({ userName: result.data.data.name }));

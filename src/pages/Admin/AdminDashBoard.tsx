@@ -5,7 +5,7 @@ import Categories from "../../features/Admin/Categories/Categories";
 import Users from "../../features/Admin/Users/Users";
 import Instructors from "../../features/Admin/Instructors/Instructors";
 import Courses from "../../features/Admin/Courses/Courses";
-import ContainerLayout from "../../layouts/containerLayout";
+import ContainerLayout from "../../layouts/ContainerLayout";
 import { Route, Routes } from "react-router-dom";
 import UserDetails from "./UserDetails";
 import CoursePreview from "../../features/Admin/Courses/CoursePreview";

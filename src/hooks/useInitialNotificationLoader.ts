@@ -25,6 +25,7 @@ const useInitialNotificationLoader = () => {
     if (isSuccess) {
       console.log("data", data);
       if (data.data) {
+        
         const notifications = Object.entries(data.data);
 
         console.log("notifications", notifications);
@@ -55,7 +56,7 @@ const useInitialNotificationLoader = () => {
                   : notification === ENotification.instructorRequestApproval
                   ? `/instructor/profile`
                   : notification === ENotification.courseApprovalApprovance
-                  ? `/admin/dash_bord/courses`
+                  ? `/instructor/profile/mytutorials`
                   : "",
             },
           ])
