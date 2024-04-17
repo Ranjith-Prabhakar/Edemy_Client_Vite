@@ -59,24 +59,14 @@ const BeInstructor = () => {
     },
     validationSchema: beInstructorSchema,
     onSubmit: async (values, actions) => {
-      console.log("values===>>>", values);
       const fileInput = certificateRef.current?.files?.[0] as File;
       const certificateFileType = certificateRef.current?.files?.[0].name
         .split(".")
         .pop() as string;
-      console.log("certificateFile)))))))", certificateFileType);
       if (!["png", "jpeg", "pdf"].includes(certificateFileType?.trim())) {
         setInvalidFileType(true);
       } else {
         setInvalidFileType(false);
-        console.log(
-          "certificate",
-          `${
-            ["png", "jpeg"].includes(certificateFileType)
-              ? "image"
-              : "application"
-          }/${certificateFileType}`
-        );
         try {
           const result = await addFileToCloud({
             fileName: `certificate.${certificateFileType}`,
