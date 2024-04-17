@@ -17,7 +17,6 @@ const instructorsRequestApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("getInstructorRequests .....", result.data.data);
           dispatch(getRequests({ data: result.data.data }));
         } catch (error) {
           console.log(error);
