@@ -16,7 +16,6 @@ const UserDetails = () => {
     const currentUser = usersData.find((user: IUser) => user._id === id);
     setUser(currentUser);
   }, [id, usersData]);
-  console.log("usersData", user);
   return (
     <div>
       <h1>{user?.name && user?.name}</h1>
