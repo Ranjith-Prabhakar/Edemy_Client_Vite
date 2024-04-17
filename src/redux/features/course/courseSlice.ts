@@ -24,11 +24,6 @@ const courseSlice = createSlice({
       state.coursesInRequest = action.payload.data;
     },
     removeCourseAfterApprovalOrReject: (state, action) => {
-      console.log(
-        "inside removeCourseAfterApprovalOrReject ",
-        action.payload.data
-      );
-
       const courseData = state.coursesInRequest.find(
         (course) => course._id === action.payload.data
       );
