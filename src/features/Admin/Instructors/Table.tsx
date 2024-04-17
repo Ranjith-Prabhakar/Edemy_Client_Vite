@@ -41,7 +41,6 @@ const Table = () => {
 
   useEffect(() => {
     setTableData(instructorData);
-    console.log("table data", tableData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [instructorData]);
 
