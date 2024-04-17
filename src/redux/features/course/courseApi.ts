@@ -56,11 +56,6 @@ export const courseApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("result from courseApi  > getCoursesInRequest", result);
-          console.log(
-            "result from courseApi  > getCoursesInRequest",
-            result.data.data
-          );
           dispatch(addTutorialIntoCourseArray({ data: result.data.data._id }));
         } catch (error) {
           catchError(error);
@@ -109,7 +104,6 @@ export const courseApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("result from courseApi  > getCourses", result);
           dispatch(getCoursesState({ data: result.data.data }));
         } catch (error) {
           catchError(error);
@@ -126,10 +120,6 @@ export const courseApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log(
-            "result from courseApi  > getCoursesInRequest",
-            result.data.data
-          );
           dispatch(getCourseseInProgressState({ data: result.data.data }));
         } catch (error) {
           catchError(error);
@@ -179,18 +169,14 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
 
-      async onQueryStarted(_arg, { queryFulfilled }) {
-        try {
-          const result = await queryFulfilled;
-          console.log(
-            "result from getCoursesForUser  > getCoursesForUser",
-            result
-          );
-          // dispatch(getCoursesState({ data: result.data.data }));
-        } catch (error) {
-          catchError(error);
-        }
-      },
+      // async onQueryStarted(_arg, { queryFulfilled }) {
+      //   try {
+      //      await queryFulfilled;
+      //     // dispatch(getCoursesState({ data: result.data.data }));
+      //   } catch (error) {
+      //     catchError(error);
+      //   }
+      // },
     }),
 
     getCategory: builder.query<IAddCategoriesRes, void>({
@@ -247,7 +233,6 @@ export const courseApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("result from onquery courseApi", result.data);
           dispatch(
             userLoggedIn({
               userData: result.data.data,
