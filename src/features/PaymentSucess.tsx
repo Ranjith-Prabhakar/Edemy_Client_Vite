@@ -9,7 +9,6 @@ const PaymentSucess = () => {
   const [paymentStatus,{data,isSuccess,isError,error}] = usePaymentStatusMutation();
   useEffect(()=>{
     if(isSuccess){
-      console.log("success")
       navigate(`/${user.role}/my_learnings`);
     }
     if(isError) console.log(error)
