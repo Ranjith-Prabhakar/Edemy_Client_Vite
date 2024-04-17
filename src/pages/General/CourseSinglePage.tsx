@@ -106,23 +106,12 @@ const CourseSinglePage = () => {
         return;
       }
     }
-
-    // if (user && user.role === "admin") {
-    //   setIsPurchased(false);
-    // } else {
-    //   if (user && user.enrolledCourses) {
-    //     const purchased: boolean = user.enrolledCourses?.some(
-    //       (course) => course === (courseData._id as string)
-    //     );
-    //     setIsPurchased(!purchased);
-    //   }
-    // }
+ 
   }, [courseData, user]);
 
   const regex = /\/(.*?)-/;
   useEffect(() => {
     if (isSuccess) {
-      console.log("data from success effect", data);
       if (data && "data" in data) {
         const url = data.data;
         setPosition(data.position || "0");
