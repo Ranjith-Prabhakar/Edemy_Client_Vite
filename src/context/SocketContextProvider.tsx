@@ -81,10 +81,6 @@ const SocketContextProvider = ({ children }: Props) => {
         "fromServerInstructorRequestSubmitted",
         (instructroAgreement) => {
           sound.play();
-          console.log(
-            "instructor agreement from socketContextProvider",
-            instructroAgreement
-          );
           setSocketStore({
             ...socketStore,
             instructorRequests: [
@@ -103,9 +99,8 @@ const SocketContextProvider = ({ children }: Props) => {
         }
       );
       // instroctor approval or rejection by admin
-      socket.on("fromServerInstrctorRequestApproval", (message) => {
+      socket.on("fromServerInstrctorRequestApproval", () => {
         sound.play();
-        console.log("(*^*)", message);
         setNotificationStore([
           {
             message: ENotificationMsg.instructorRequestApproval,
@@ -115,9 +110,8 @@ const SocketContextProvider = ({ children }: Props) => {
         ]);
       });
       // course approval by admin(to the instructor)
-      socket.on("fromServerCourseApproved", (message) => {
+      socket.on("fromServerCourseApproved", () => {
         sound.play();
-        console.log("message from socket for course approval ==>>", message);
         setNotificationStore([
           {
             message: ENotificationMsg.courseApprovalApprovance,
@@ -129,12 +123,9 @@ const SocketContextProvider = ({ children }: Props) => {
       // course approval by admin(to every users)
       socket.on(
         "fromServerCourseApprovedNotificationForAllUsers",
-        (message) => {
+        () => {
           sound.play();
-          console.log(
-            "message from socket for course approval to all ==>>",
-            message
-          );
+          
           setNotificationStore([
             {
               message: ENotificationMsg.courseApprovalApprovanceForAllUsers,
