@@ -10,7 +10,6 @@ import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 const MyLearninig = () => {
   const isScrolled = useGetScrollPosition();
   const user = useGetUser();
-  console.log("user.enrolledCourses", user.enrolledCourses);
   const [getUserEnrolledCourses, { data, isSuccess }] =
     useGetUserEnrolledCoursesMutation();
   const [pagination, setPagination] = useState(1);
@@ -28,17 +27,13 @@ const MyLearninig = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("data", data);
       setMyLearning(data?.data as ICourse[]);
       setPagination(pagination + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-  useEffect(() => {
-    console.log("myLearning", myLearning);
-    console.log("pagination", pagination);
-  }, [myLearning, pagination]);
+
 
   return (
     <div className="min-h-screen">
