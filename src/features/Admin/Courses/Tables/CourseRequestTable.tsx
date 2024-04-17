@@ -27,8 +27,6 @@ const CourseRequestTable = () => {
   );
   const [approveOrRejectCourse] = useApproveOrRejectCourseMutation();
 
-  console.log("socketStore.addedCourse", socketStore.addedCourses);
-
   useEffect(() => {
     setTableData([...tableData, ...socketStore.addedCourses]);
   }, [socketStore.addedCourses]);
