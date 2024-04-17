@@ -18,9 +18,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     },
     userLoggedOut: (state, action) => {
-      console.log("inside userLoggedOut");
       state.userData = action.payload.data;
-      console.log("inside userLoggedOut", state.userData);
     },
     addTutorialIntoCourseArray: (state, action) => {
       state.userData = {
