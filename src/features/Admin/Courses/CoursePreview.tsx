@@ -42,11 +42,9 @@ const CoursePreview = () => {
     courseData.modules[0].videos[0].videoTittle
   );
 
-  console.log("courseData ====>>>>>", courseData);
   const regex = /\/(.*?)-/;
   useEffect(() => {
     if (data) {
-      console.log("data from course preview", data);
       const url = data.data;
       setVideoUrl(url as string);
     }
