@@ -21,11 +21,9 @@ const CourseSearchPage = () => {
 
   const [getCourseForSearch, { data: searchData, isSuccess }] =
     useGetCourseForSearchMutation();
-  console.log(" key, sort, filter", key, sort, filter);
 
   useEffect(() => {
     // Reset state and fetch data when category changes
-    console.log("initial useEffect");
     setPage(1);
     setData([]);
     setLoading(true);
