@@ -23,18 +23,15 @@ const useInitialNotificationLoader = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("data", data);
       if (data.data) {
         
         const notifications = Object.entries(data.data);
 
-        console.log("notifications", notifications);
         const trueNotifications = notifications
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           .filter(([_, value]) => value === "true")
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           .map(([key, _]) => key);
-        console.log("trueNotifications", trueNotifications);
         trueNotifications.map((notification) =>
           setNotificationStore([
             {
