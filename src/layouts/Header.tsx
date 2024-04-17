@@ -29,7 +29,6 @@ const Header = ({ isScrolled }: props) => {
   //
   const { notificationStore } = useSocketContext();
   const [editNotification] = useEditNotificationMutation();
-  console.log("notificationStore ~~~~~~~~", notificationStore);
   const userData = useGetUser();
   const [name, setName] = useState("");
   const [isHovered, setIsHovered] = useState(false);
