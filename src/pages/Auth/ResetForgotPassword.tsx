@@ -18,7 +18,6 @@ const ResetForgotPassword = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("success", data);
       toast.success(data.message);
       navigate("/auth/login");
     } else if (isError) {
@@ -39,7 +38,6 @@ const ResetForgotPassword = () => {
     },
     validationSchema: resetForgotPasswordSchema,
     onSubmit: async (values, actions) => {
-      console.log("onsubmit", values.password);
       await resetPassword({ password: values.password });
       actions.resetForm();
     },
