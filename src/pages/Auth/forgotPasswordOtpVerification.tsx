@@ -27,7 +27,6 @@ const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
     if (isLoading) {
       <div>Loading...</div>;
     } else if (isSuccess) {
-      console.log(data);
       toast.success("enter the new password");
       navigate("/auth/reset_forgot_password");
     } else if (isError) {
