@@ -38,7 +38,6 @@ const Table = () => {
 
   useEffect(() => {
     setTableData(usersData);
-    console.log("table data", tableData);
   }, [tableData, usersData]);
 
   useEffect(() => {
