@@ -18,9 +18,7 @@ const SideBar = ({ sideBarData }: Props) => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("outer");
       if (data && data.message) {
-        console.log("data.message", data.message);
         toast.success(data.message);
         navigate("/auth/login");
       }
