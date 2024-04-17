@@ -12,7 +12,6 @@ import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
 
 const MyTutorials = () => {
   const user = useGetUser();
-  console.log("user.enrolledCourses", user.enrolledCourses);
   const [getInstructorTutorial, { data, isSuccess }] =
     useGetInstructorTutorialMutation();
   const [pagination, setPagination] = useState(1);
@@ -30,17 +29,12 @@ const MyTutorials = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("data", data);
       setMyTutorials(data?.data as ICourse[]);
       setPagination(pagination + 1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-  useEffect(() => {
-    console.log("myLearning", myTutorials);
-    console.log("pagination", pagination);
-  }, [myTutorials, pagination]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -99,13 +93,3 @@ const MyTutorials = () => {
 
 export default MyTutorials;
 
-// return (
-//   <div className="min-h-screen">
-//     <div className="w-full mt-16">
-//       <div className="flex justify-start gap-3  w-full overflow-x-scroll">
-//         {myTutorials &&
-//           myTutorials.map((item) => <CourseCard courseCategory={item} />)}
-//       </div>
-//     </div>
-//   </div>
-// );
