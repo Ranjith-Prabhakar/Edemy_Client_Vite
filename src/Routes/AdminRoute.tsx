@@ -14,7 +14,6 @@ const AdminRoute = () => {
     }
   }, [navigate, user.name]);
 
-  console.log("user in adminRoute", user);
   return (
     <div>
       {user.role === "admin" && (
