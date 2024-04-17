@@ -11,7 +11,6 @@ const InstructorRoute = () => {
     // logout isnt working to make it work proper made this line have to re-consider the logout
     navigate("/auth/login");
   }
-  console.log("user in User", user);
   return (
     <div>
       {user.role === "instructor" && (
