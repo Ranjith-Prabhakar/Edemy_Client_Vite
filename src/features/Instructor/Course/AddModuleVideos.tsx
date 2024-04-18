@@ -124,23 +124,33 @@ const AddModuleVideos = ({
             }
 
             const serverRespons = await addModuleVideos(moduleVideoBody);
-           
+
             if ("data" in serverRespons) {
               if (serverRespons.data) {
                 if ("data" in serverRespons.data) {
                   const newServerResponse =
                     serverRespons.data as unknown as ICourseDataBody;
                   if (serverRespons.data.data) {
-                    const regex = /\/(.*?)-/;
 
                     const moduleData =
                       newServerResponse.data.modules[
                         newServerResponse.data.modules.length - 1
                       ];
-                   
-
                     const moduleVideoData =
                       moduleData.videos[moduleData.videos.length - 1];
+
+                    console.log("moduleVideoData", moduleVideoData);
+                    const lastDashIndex =
+                      moduleVideoData.videoTittle.lastIndexOf("-");
+                    const lastSlashIndex =
+                      moduleVideoData.videoTittle.lastIndexOf("/");
+                    const extractedString =
+                      moduleVideoData.videoTittle.substring(
+                        lastSlashIndex + 1,
+                        lastDashIndex
+                      );
+                    console.log("extractedString", extractedString);
+
                     setCourseData({
                       courseName: newServerResponse.data.courseName ?? "",
                       price: newServerResponse.data.price ?? "",
@@ -150,8 +160,7 @@ const AddModuleVideos = ({
                       duration: newServerResponse.data.duration ?? "",
                       moduleNo: moduleData.moduleNo ?? "",
                       moduleTittle: moduleData.moduleTittle ?? "",
-                      videoTittle:
-                        moduleVideoData.videoTittle.match(regex)?.[1].split('/').pop() ?? "",
+                      videoTittle:extractedString,
                       videoNo: moduleVideoData.videoNo ?? "",
                       videoUrl: moduleVideoData.videoUrl ?? "",
                     });
@@ -355,7 +364,6 @@ const AddModuleVideos = ({
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
         />
-       
       </div>
       <button
         type="submit"
@@ -377,4 +385,3 @@ const AddModuleVideos = ({
 };
 
 export default AddModuleVideos;
-

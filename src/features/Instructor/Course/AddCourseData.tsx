@@ -195,6 +195,7 @@ const AddCourseData = ({
             if (result.data) {
               if ("data" in result.data) {
                 if (result.data) {
+                  
                   const regex = /\/(.*?)-/;
                   const moduleData =
                     result.data.data.modules[
