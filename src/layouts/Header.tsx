@@ -18,7 +18,7 @@ import useInitialNotificationLoader, {
   ENotificationMsg,
 } from "../hooks/useInitialNotificationLoader";
 import { useEditNotificationMutation } from "../redux/features/notifications/notificationsApi";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import { userRoleChange } from "../redux/features/auth/authSlice";
 type props = {
   isScrolled?: boolean;
@@ -38,7 +38,7 @@ const Header = ({ isScrolled }: props) => {
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userData.name) {
@@ -82,8 +82,6 @@ const Header = ({ isScrolled }: props) => {
       catchError(error);
     }
   };
-
- 
 
   return (
     <>
@@ -312,76 +310,83 @@ const Header = ({ isScrolled }: props) => {
                               setNotificationSideBar(false);
                             }}
                           />
-                          {notificationStore.length ? (
-                            notificationStore.map((notification, index) => (
-                              <h1
-                                key={index}
-                                onClick={async () => {
-                                  let result;
-                                
-                                  switch (notification.message) {
-                                    
-                                    case ENotificationMsg.instructorRequests:
-                                      result = await editNotification({
-                                        notificationHead:
-                                          ENotification.instructorRequests,
-                                      });
-                                      if ("data" in result) {
-                                        if ("success" in result.data) {
-                                          navigate(`${notification.url}`, {
-                                            state: { index: index },
+                          {notificationStore.length && (
+                            notificationStore.map((notification, index) => {
+                              console.log(notification.message.length);
+                              if (notification.message !== "") {
+                                return (
+                                  <h1
+                                    key={index}
+                                    onClick={async () => {
+                                      let result;
+
+                                      switch (notification.message) {
+                                        case ENotificationMsg.instructorRequests:
+                                          result = await editNotification({
+                                            notificationHead:
+                                              ENotification.instructorRequests,
                                           });
-                                        }
-                                      }
-                                      break;
-                                    case ENotificationMsg.courseApprovalApprovance:
-                                      result = await editNotification({
-                                        notificationHead:
-                                          ENotification.courseApprovalApprovance,
-                                      });
+                                          if ("data" in result) {
+                                            if ("success" in result.data) {
+                                              navigate(`${notification.url}`, {
+                                                state: { index: index },
+                                              });
+                                            }
+                                          }
+                                          break;
+                                        case ENotificationMsg.courseApprovalApprovance:
+                                          result = await editNotification({
+                                            notificationHead:
+                                              ENotification.courseApprovalApprovance,
+                                          });
 
-                                      if ("data" in result) {
-                                        if ("success" in result.data) {
-                                          navigate(`${notification.url}`);
-                                        }
-                                      }
-                                      break;
-                                    case ENotificationMsg.courseApprovalRequest:
-                                      result = await editNotification({
-                                        notificationHead:
-                                          ENotification.courseApprovalRequest,
-                                      });
+                                          if ("data" in result) {
+                                            if ("success" in result.data) {
+                                              navigate(`${notification.url}`);
+                                            }
+                                          }
+                                          break;
+                                        case ENotificationMsg.courseApprovalRequest:
+                                          result = await editNotification({
+                                            notificationHead:
+                                              ENotification.courseApprovalRequest,
+                                          });
 
-                                      if ("data" in result) {
-                                        if ("success" in result.data) {
-                                          navigate(`${notification.url}`);
-                                        }
-                                      }
-                                      break;
-                                    case ENotificationMsg.instructorRequestApproval:
-                                      result = await editNotification({
-                                        notificationHead:
-                                          ENotification.instructorRequestApproval,
-                                      });
+                                          if ("data" in result) {
+                                            if ("success" in result.data) {
+                                              navigate(`${notification.url}`);
+                                            }
+                                          }
+                                          break;
+                                        case ENotificationMsg.instructorRequestApproval:
+                                          result = await editNotification({
+                                            notificationHead:
+                                              ENotification.instructorRequestApproval,
+                                          });
 
-                                      dispatch(userRoleChange());
-                                     
-                                      if ("data" in result) {
-                                        if ("success" in result.data) {
-                                          navigate(`${notification.url}`);
-                                        }
+                                          dispatch(userRoleChange());
+
+                                          if ("data" in result) {
+                                            if ("success" in result.data) {
+                                              navigate(`${notification.url}`);
+                                            }
+                                          }
+                                          break;
                                       }
-                                      break;
-                                  }
-                                }}
-                                className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"
-                              >
-                                {notification.message}{" "}
-                                <IoIosArrowRoundForward className="inline" />
-                              </h1>
-                            ))
-                          ) : (
-                            <h1>No notifications . . . . </h1>
+                                    }}
+                                    className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"
+                                  >
+                                    {notification.message}{" "}
+                                    <IoIosArrowRoundForward className="inline" />
+                                  </h1>
+                                );
+                              } else  if (
+                                notification.message === "" &&
+                                notificationStore.length === 1
+                              ) {
+                                return <h1>No notifications . . . . </h1>;
+                              }
+                            })
                           )}
                         </div>
                       </div>
