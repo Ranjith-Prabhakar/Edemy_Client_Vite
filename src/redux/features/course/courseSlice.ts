@@ -28,7 +28,6 @@ const courseSlice = createSlice({
         (course) => course._id === action.payload.data
       );
       if (courseData) {
-        console.log("courseData ++++", courseData.status);
         courseData.status = "approved";
         state.coursesData = [...state.coursesData, courseData];
         state.coursesInRequest = state.coursesInRequest.filter(

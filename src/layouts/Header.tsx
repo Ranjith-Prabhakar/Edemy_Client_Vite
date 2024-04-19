@@ -372,6 +372,14 @@ const Header = ({ isScrolled }: props) => {
                                             }
                                           }
                                           break;
+                                        case ENotificationMsg.courseApprovalApprovanceForAllUsers:
+                                            navigate(`${notification.url}`,{
+                                              state: {
+                                                sort: "A-Z",
+                                                filter: "date",
+                                              },
+                                            });
+                                            break
                                       }
                                     }}
                                     className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"

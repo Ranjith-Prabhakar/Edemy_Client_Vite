@@ -126,11 +126,10 @@ const SocketContextProvider = ({ children }: Props) => {
         "fromServerCourseApprovedNotificationForAllUsers",
         () => {
           sound.play();
-          
           setNotificationStore([
             {
               message: ENotificationMsg.courseApprovalApprovanceForAllUsers,
-              url: `/`,
+              url: `/category/all_category`,
             },
             ...notificationStore,
           ]);

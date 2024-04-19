@@ -9,8 +9,10 @@ import TableBodyTr from "../../../components/Table/TableBodyTr";
 import Td from "../../../components/Table/Td";
 import { FaBackward, FaForward } from "react-icons/fa";
 import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const MyTutorials = () => {
+  const navigate = useNavigate()
   const user = useGetUser();
   const [getInstructorTutorial, { data, isSuccess }] =
     useGetInstructorTutorialMutation();
@@ -35,7 +37,6 @@ const MyTutorials = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
@@ -55,8 +56,19 @@ const MyTutorials = () => {
               index={index}
             >
               <Td>{index + 1}</Td>
-              <td className="px-6 py-4"
-              >{item.courseName.toUpperCase()}</td>
+              <td
+                className="px-6 py-4"
+                onClick={() => {
+                  navigate(`/category/all_category`, {
+                    state: {
+                      sort: "A-Z",
+                      filter: "date",
+                    },
+                  });
+                }}
+              >
+                {item.courseName.toUpperCase()}
+              </td>
               <Td>{item.noOfPurchase}</Td>
               <Td>{item.status}</Td>
             </TableBodyTr>
@@ -92,4 +104,3 @@ const MyTutorials = () => {
 };
 
 export default MyTutorials;
-
