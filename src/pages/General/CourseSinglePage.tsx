@@ -88,25 +88,32 @@ const CourseSinglePage = () => {
 
   useEffect(() => {
     if (user) {
+      let purchased: boolean = false
       if (user.role === "admin") {
         setIsPurchased(false);
         return;
       } else if (user.role === "instructor" && user.courses) {
-        const purchased: boolean = user.courses?.some(
+        purchased = user.courses?.some(
           (course) => course === (courseData._id as string)
         );
 
         setIsPurchased(!purchased);
-        return;
       } else if (user.role === "user" && user.enrolledCourses) {
-        const purchased: boolean = user.enrolledCourses?.some(
+        purchased= user.enrolledCourses?.some(
+          (course) => course === (courseData._id as string)
+        );
+        setIsPurchased(!purchased);
+        return;
+      }
+
+      if (user.role === "instructor" && user.enrolledCourses && !purchased) {
+        purchased = user.enrolledCourses?.some(
           (course) => course === (courseData._id as string)
         );
         setIsPurchased(!purchased);
         return;
       }
     }
- 
   }, [courseData, user]);
 
   const regex = /\/(.*?)-/;
