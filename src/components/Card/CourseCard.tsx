@@ -18,7 +18,6 @@ type Props = {
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
-
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
   const user = useGetUser();
@@ -56,9 +55,13 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
     }
   }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
 
-  const isCoursePurchasedByUser = user.enrolledCourses?.includes(
+  let isCoursePurchasedByUser = user.enrolledCourses?.includes(
     courseCategory._id
   );
+
+  if (!isCoursePurchasedByUser) {
+    isCoursePurchasedByUser = user.courses?.includes(courseCategory._id);
+  }
 
   return (
     <div
@@ -145,5 +148,3 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
 };
 
 export default CourseCard;
-
-
