@@ -109,6 +109,7 @@ const SocketContextProvider = ({ children }: Props) => {
           ...notificationStore,
         ]);
       });
+      
       // course approval by admin(to the instructor)
       socket.on("fromServerCourseApproved", () => {
         sound.play();
