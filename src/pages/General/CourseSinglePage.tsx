@@ -229,6 +229,7 @@ const CourseSinglePage = () => {
                         courseId: courseData._id,
                         courseName: courseData.courseName,
                         price: courseData.price,
+                        category: courseData.category,
                       },
                     ]);
                   }}

@@ -1,7 +1,8 @@
 export interface IEnrollReq {
-  courseId: string,
+  courseId: string;
   courseName: string;
   price: string;
+  category?: string;
 }
 
 export interface IEnrollRes {

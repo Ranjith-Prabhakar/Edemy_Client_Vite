@@ -18,6 +18,8 @@ type Props = {
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
+  console.log("courseCategory", courseCategory)
+  
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
   const user = useGetUser();
@@ -51,6 +53,7 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
       window.location = enrollData?.data as unknown as Location;
     }
     if (enrollIsError) {
+      console.log("enrollIsError", enrollIsError);
       toast.error("something went wrong please try again");
     }
   }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
@@ -132,6 +135,7 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
                       courseId: courseCategory._id,
                       courseName: courseCategory.courseName,
                       price: courseCategory.price,
+                      category: courseCategory.category,
                     },
                   ]);
                 }}
