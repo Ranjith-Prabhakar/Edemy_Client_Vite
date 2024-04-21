@@ -18,8 +18,6 @@ type Props = {
 };
 
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
-  console.log("courseCategory", courseCategory)
-  
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
   const user = useGetUser();

@@ -9,7 +9,6 @@ const AdminRoute = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!user.name) {
-      // logout isnt working to make it work proper made this line have to re-consider the logout
       navigate("/auth/login");
     }
   }, [navigate, user.name]);

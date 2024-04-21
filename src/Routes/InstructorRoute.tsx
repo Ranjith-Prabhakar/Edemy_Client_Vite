@@ -8,7 +8,6 @@ const InstructorRoute = () => {
   const user = useGetUser();
   const navigate = useNavigate();
   if (!user.name) {
-    // logout isnt working to make it work proper made this line have to re-consider the logout
     navigate("/auth/login");
   }
   return (
