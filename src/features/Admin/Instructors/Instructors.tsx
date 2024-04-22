@@ -29,8 +29,12 @@ const Instructors = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("datadddddd", data.data.permitedNext);
-      setPermitedNext(data.data.permitedNext);
+      if ("data" in data) {
+        if ("permitedNext" in data.data) {
+          console.log("datadddddd", data.data.permitedNext);
+          setPermitedNext(data.data.permitedNext);
+        }
+      }
     }
   }, [isSuccess]);
 
@@ -74,7 +78,11 @@ const Instructors = () => {
         </div>
       </div>
       {switcher === 1 ? (
-        <Table setPageNo={setPageNo} permitedNext={permitedNext} pageNo ={pageNo}/>
+        <Table
+          setPageNo={setPageNo}
+          permitedNext={permitedNext}
+          pageNo={pageNo}
+        />
       ) : (
         <Requests setNotification={setNotification} />
       )}
