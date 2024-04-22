@@ -32,7 +32,7 @@ const Instructors = () => {
       if ("data" in data) {
         if ("permitedNext" in data.data) {
           console.log("datadddddd", data.data.permitedNext);
-          setPermitedNext(data.data.permitedNext);
+          setPermitedNext(data?.data?.permitedNext);
         }
       }
     }

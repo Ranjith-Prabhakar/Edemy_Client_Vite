@@ -26,7 +26,7 @@ const Users = () => {
       if (isSuccess) {
         if ("data" in data) {
           console.log("datadddddd", data.data.permitedNext);
-          setPermitedNext(data.data.permitedNext);
+          setPermitedNext(data?.data?.permitedNext);
         }
       }
     }
