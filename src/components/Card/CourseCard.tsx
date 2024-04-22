@@ -12,6 +12,7 @@ import {
 } from "../../redux/features/course/courseApi";
 import toast from "react-hot-toast";
 import useGetUser from "../../hooks/useGetUser";
+import { FaCartPlus } from "react-icons/fa";
 
 type Props = {
   courseCategory: ICourse;
@@ -69,81 +70,86 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
       key={courseCategory.courseName}
       className="flex flex-col w-[300px] rounded-2xl overflow-hidden dark:bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
     >
-      <img
-        src={imgUrl || web_development}
-        alt=""
-        className="w-full h-[200px] cursor-pointer"
-        onClick={() => {
-          navigate("/course_single_page", {
-            state: { courseData: courseCategory },
-          });
-        }}
-      />
-      <h4
-        className="text-[#fffff] mt-2 text-xl ps-4 cursor-pointer"
-        onClick={() => {
-          navigate("/course_single_page", {
-            state: { courseData: courseCategory },
-          });
-        }}
-      >
-        {courseCategory.courseName}
-      </h4>
-      <div className="space-y-2">
-        <div className="flex justify-between px-4">
-          <div className="flex ">
-            <FaStar color={"#fffff"} />
-            <FaStar color={"#fffff"} />
-            <FaStar color={"#fffff"} />
-            <FaStar color={"#fffff"} />
-            <FaStarHalf color={"#fffff"} />
-          </div>
-          <div className="flex items-center ">
-            <FaRupeeSign />
-            <h3>{courseCategory.price}</h3>
-          </div>
+      <div className="relative">
+        <div className="absolute right-3 top-3 cursor-pointer">
+          <FaCartPlus size={25} title="Add to cart"/>
         </div>
-        <div className="flex px-4 justify-between">
-          <div className="flex gap-1 items-center">
-            <MdFormatListBulletedAdd size={20} />
-            <h4>
-              {courseCategory.modules.reduce((acc, curr) => {
-                return acc + curr.videos.length;
-              }, 0)}
-            </h4>
+        <img
+          src={imgUrl || web_development}
+          alt=""
+          className="w-full h-[200px] cursor-pointer"
+          onClick={() => {
+            navigate("/course_single_page", {
+              state: { courseData: courseCategory },
+            });
+          }}
+        />
+        <h4
+          className="text-[#fffff] mt-2 text-xl ps-4 cursor-pointer"
+          onClick={() => {
+            navigate("/course_single_page", {
+              state: { courseData: courseCategory },
+            });
+          }}
+        >
+          {courseCategory.courseName}
+        </h4>
+        <div className="space-y-2">
+          <div className="flex justify-between px-4">
+            <div className="flex ">
+              <FaStar color={"#fffff"} />
+              <FaStar color={"#fffff"} />
+              <FaStar color={"#fffff"} />
+              <FaStar color={"#fffff"} />
+              <FaStarHalf color={"#fffff"} />
+            </div>
+            <div className="flex items-center ">
+              <FaRupeeSign />
+              <h3>{courseCategory.price}</h3>
+            </div>
           </div>
-          <div className="">
-            {isCoursePurchasedByUser || user.role === "admin" ? (
-              <button
-                className="bg-white text-gray-950 font-bold px-8  py-0.5 rounded-full hover:scale-110"
-                onClick={() => {
-                  navigate("/course_single_page", {
-                    state: { courseData: courseCategory },
-                  });
-                }}
-              >
-                Play
-              </button>
-            ) : (
-              <button
-                className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold"
-                onClick={() => {
-                  enrollCourse([
-                    {
-                      courseId: courseCategory._id,
-                      courseName: courseCategory.courseName,
-                      price: courseCategory.price,
-                      category: courseCategory.category,
-                    },
-                  ]);
-                }}
-              >
-                Enroll Now
-              </button>
-            )}
+          <div className="flex px-4 justify-between">
+            <div className="flex gap-1 items-center">
+              <MdFormatListBulletedAdd size={20} />
+              <h4>
+                {courseCategory.modules.reduce((acc, curr) => {
+                  return acc + curr.videos.length;
+                }, 0)}
+              </h4>
+            </div>
+            <div className="">
+              {isCoursePurchasedByUser || user.role === "admin" ? (
+                <button
+                  className="bg-white text-gray-950 font-bold px-8  py-0.5 rounded-full hover:scale-110"
+                  onClick={() => {
+                    navigate("/course_single_page", {
+                      state: { courseData: courseCategory },
+                    });
+                  }}
+                >
+                  Play
+                </button>
+              ) : (
+                <button
+                  className="bg-white text-gray-950 py-1 px-2 rounded-sm font-semibold"
+                  onClick={() => {
+                    enrollCourse([
+                      {
+                        courseId: courseCategory._id,
+                        courseName: courseCategory.courseName,
+                        price: courseCategory.price,
+                        category: courseCategory.category,
+                      },
+                    ]);
+                  }}
+                >
+                  Enroll Now
+                </button>
+              )}
+            </div>
           </div>
+          <div className=""></div>
         </div>
-        <div className=""></div>
       </div>
     </div>
   );

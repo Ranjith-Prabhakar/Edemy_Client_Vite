@@ -3,12 +3,9 @@ import useGetUser from "../../hooks/useGetUser";
 import ContainerLayout from "../../layouts/ContainerLayout";
 import { useGetUserEnrolledCoursesMutation } from "../../redux/features/course/courseApi";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
-import Header from "../../layouts/Header";
 import CourseCard from "../../components/Card/CourseCard";
-import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 const MyLearninig = () => {
-  const isScrolled = useGetScrollPosition();
   const user = useGetUser();
   const [getUserEnrolledCourses, { data, isSuccess }] =
     useGetUserEnrolledCoursesMutation();
@@ -22,7 +19,7 @@ const MyLearninig = () => {
     if (courses) {
       getUserEnrolledCourses({ courses: courses });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -30,17 +27,14 @@ const MyLearninig = () => {
       setMyLearning(data?.data as ICourse[]);
       setPagination(pagination + 1);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
-
-
 
   return (
     <div className="min-h-screen">
       <ContainerLayout>
-        <Header isScrolled={isScrolled} />
         <div className="w-full mt-16">
-          <div className="flex justify-start gap-3  w-full overflow-x-scroll">
+          <div className="grid grid-cols-3 gap-1 space-y-3 w-full overflow-x-scroll ">
             {myLearning &&
               myLearning.map((item) => <CourseCard courseCategory={item} />)}
           </div>

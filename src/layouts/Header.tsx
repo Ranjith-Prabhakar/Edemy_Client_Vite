@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaRegHeart } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
@@ -240,13 +239,6 @@ const Header = ({ isScrolled }: props) => {
                           )}
 
                           <Link
-                            to={"/categories"}
-                            className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
-                          >
-                            <FaRegHeart size={25} />
-                            <h1>Favourite</h1>
-                          </Link>
-                          <Link
                             to={"/be_instructor"}
                             className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
                           >
@@ -270,22 +262,20 @@ const Header = ({ isScrolled }: props) => {
 
             <div className="hidden 1200px:flex justify-center items-center gap-4">
               <ThemeToggler />
-              {userData.name &&
+              {/* {userData.name &&
                 userData.role !== "instructor" &&
                 userData.role !== "admin" && (
                   <Link to={"/user/be_instructor"}>Teach on Edemy</Link>
-                )}
+                )} */}
               {userData.name && (
                 <>
-                  {userData.role !== "admin" && (
+                  {/* {userData.role !== "admin" && (
                     <Link to={`/${userData.role}/my_learnings`}>
                       My Learnings
                     </Link>
-                  )}
+                  )} */}
 
-                  <Link to={"/categories"}>
-                    <FaRegHeart size={25} />
-                  </Link>
+                  
                   <Link to={"/be_instructor"}>
                     <FaCartPlus size={25} />
                   </Link>
