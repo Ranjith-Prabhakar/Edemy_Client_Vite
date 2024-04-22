@@ -19,6 +19,8 @@ import useInitialNotificationLoader, {
 import { useEditNotificationMutation } from "../redux/features/notifications/notificationsApi";
 import { useDispatch } from "react-redux";
 import { userRoleChange } from "../redux/features/auth/authSlice";
+import Cart from "../components/Navbar/Cart";
+import Courses from "../components/Navbar/Courses";
 type props = {
   isScrolled?: boolean;
 };
@@ -30,7 +32,7 @@ const Header = ({ isScrolled }: props) => {
   const [editNotification] = useEditNotificationMutation();
   const userData = useGetUser();
   const [name, setName] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
   const [notificationSideBar, setNotificationSideBar] = useState(false);
   const [hamburgerDropDown, setHamburgerDropDown] = useState(false);
   const { data, isSuccess } = useGetCategoryQuery();
@@ -98,53 +100,7 @@ const Header = ({ isScrolled }: props) => {
                 <span className="text-4xl font-bold">E</span>demy
               </h1>
             </Link>
-
-            <div
-              className="relative w-[20%] hidden 1200px:block"
-              onMouseEnter={() => {
-                setIsHovered(true);
-              }}
-              onMouseLeave={() => {
-                setIsHovered(false);
-              }}
-            >
-              <h1 className="cursor-pointer">Courses</h1>
-              <ul
-                className={`absolute ${
-                  isHovered ? "block leading-10 pt-3" : "hidden"
-                } `}
-              >
-                <li
-                  className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
-                  onClick={() =>
-                    navigate("/category/all_category", {
-                      state: { sort: "A-Z", filter: "date" },
-                    })
-                  }
-                >
-                  All Category
-                </li>
-                {categoryList &&
-                  categoryList.map((item, index) => (
-                    <li
-                      className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
-                      onClick={() =>
-                        navigate(
-                          `/category/${item.name
-                            .toLocaleLowerCase()
-                            .replace(/\s/g, "_")}`,
-                          {
-                            state: { sort: "A-Z", filter: "date" },
-                          }
-                        )
-                      }
-                      key={index}
-                    >
-                      {item.name}
-                    </li>
-                  ))}
-              </ul>
-            </div>
+            <Courses categoryList={categoryList} />
           </div>
 
           <div className="1200px:flex-2">
@@ -275,10 +231,10 @@ const Header = ({ isScrolled }: props) => {
                     </Link>
                   )} */}
 
-                  
-                  <Link to={"/be_instructor"}>
-                    <FaCartPlus size={25} />
-                  </Link>
+                  {/* <Link to={"/be_instructor"}> */}
+                  {/* <FaCartPlus size={25} /> */}
+                  <Cart />
+                  {/* </Link> */}
                   <div className="relative">
                     <IoIosNotifications
                       size={25}
@@ -300,7 +256,7 @@ const Header = ({ isScrolled }: props) => {
                               setNotificationSideBar(false);
                             }}
                           />
-                          {notificationStore.length && (
+                          {notificationStore.length &&
                             notificationStore.map((notification, index) => {
                               console.log(notification.message.length);
                               if (notification.message !== "") {
@@ -363,13 +319,13 @@ const Header = ({ isScrolled }: props) => {
                                           }
                                           break;
                                         case ENotificationMsg.courseApprovalApprovanceForAllUsers:
-                                            navigate(`${notification.url}`,{
-                                              state: {
-                                                sort: "A-Z",
-                                                filter: "date",
-                                              },
-                                            });
-                                            break
+                                          navigate(`${notification.url}`, {
+                                            state: {
+                                              sort: "A-Z",
+                                              filter: "date",
+                                            },
+                                          });
+                                          break;
                                       }
                                     }}
                                     className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"
@@ -378,14 +334,13 @@ const Header = ({ isScrolled }: props) => {
                                     <IoIosArrowRoundForward className="inline" />
                                   </h1>
                                 );
-                              } else  if (
+                              } else if (
                                 notification.message === "" &&
                                 notificationStore.length === 1
                               ) {
                                 return <h1>No notifications . . . . </h1>;
                               }
-                            })
-                          )}
+                            })}
                         </div>
                       </div>
                     )}
