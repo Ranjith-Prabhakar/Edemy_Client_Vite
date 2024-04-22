@@ -1,19 +1,20 @@
+import { IGetInstructorsRes } from "../../../interfaces/Instructor/getInstructors";
 import { apiSlice } from "../../api/apiSlice";
 import { blockUser, getUsers, unBlockUser } from "./userSlice";
-import { IUser } from "./userSlice";
 
 const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query<IUser[], void>({
-      query: () => ({
+    getUsers: builder.mutation<IGetInstructorsRes, { pageNo: number }>({
+      query: (pageNo) => ({
         url: "admin/get_users",
-        method: "get",
+        method: "post",
+        body: pageNo,
         credentials: "include" as const,
       }),
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          dispatch(getUsers(result.data));
+          dispatch(getUsers({ data: result.data.data.data }));
         } catch (error) {
           console.log(error);
         }
@@ -54,4 +55,4 @@ const userApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery,useFreezUserMutation,useUnFreezUserMutation } = userApi;
+export const { useGetUsersMutation,useFreezUserMutation,useUnFreezUserMutation } = userApi;

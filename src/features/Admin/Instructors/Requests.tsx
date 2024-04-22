@@ -20,7 +20,7 @@ import { FaBackward, FaForward } from "react-icons/fa";
 import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
 import { useGetVideoMutation } from "../../../redux/features/course/courseApi";
 import responseErrorCatch from "../../../utils/responseErrorToast";
-import { useGetUsersQuery } from "../../../redux/features/admin/Users/userApi";
+import { useGetUsersMutation } from "../../../redux/features/admin/Users/userApi";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useSocketContext } from "../../../context/SocketContextProvider";
 
@@ -28,7 +28,10 @@ type props = {
   setNotification: React.Dispatch<React.SetStateAction<number>>;
 };
 const Requests = ({ setNotification }: props) => {
-  useGetUsersQuery();
+  const [getUsers] = useGetUsersMutation();
+  useEffect(() => {
+    getUsers({ pageNo:1 });
+  }, []);
   const { socketStore } = useSocketContext();
   console.log("socketStore.instructorRequests", socketStore.instructorRequests);
   const dispatch = useDispatch();

@@ -1,7 +1,6 @@
-import { FaBackward } from "react-icons/fa";
-import { FaForward } from "react-icons/fa";
-import { IoCaretBack } from "react-icons/io5";
-import { IoCaretForwardOutline } from "react-icons/io5";
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
+
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +18,13 @@ import {
   IUser,
 } from "../../../redux/features/admin/Users/userSlice";
 
-const Table = () => {
+type Props = {
+  setPageNo: React.Dispatch<React.SetStateAction<number>>;
+  permitedNext: number;
+  pageNo: number;
+};
+
+const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState<IUser[]>([]);
   const usersData = useSelector(
@@ -49,6 +54,27 @@ const Table = () => {
     if (unFreezUserIsSuccess) toast.success(unFreezUserData.message);
     else if (unFreezUserIsError) toast.error("exicution failed");
   }, [unFreezUserIsSuccess, unFreezUserIsError, unFreezUserData]);
+
+  const handlePrev = () => {
+    setPageNo((prev) => {
+      if (prev > 1) {
+        return prev - 1;
+      } else {
+        return prev;
+      }
+    });
+  };
+  const handleNext = () => {
+    setPageNo((prev) => {
+      if (prev < permitedNext) {
+        console.log("IsMOOOOOOOR");
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    });
+  };
+
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
@@ -70,7 +96,7 @@ const Table = () => {
                 lastIndex={tableData.length !== index + 1}
                 index={index}
               >
-                <Td>{index + 1}</Td>
+                <Td>{pageNo * 10 - 10 + (index + 1)}</Td>
 
                 <td
                   className="px-6 py-4"
@@ -104,30 +130,21 @@ const Table = () => {
             ))}
           </tbody>
         </table>
-
-        <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
-          <h4 className="me-2">4 of 5</h4>
-          <input
-            type="text"
-            className="w-[30px] h-[25px] text-black p-0 text-center rounded-md"
+        <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
+          <FaRegArrowAltCircleLeft
+            size={30}
+            title="prev"
+            onClick={() => {
+              handlePrev();
+            }}
+            className="cursor-pointer"
           />
-          <select
-            name=""
-            id=""
-            className="w-[120px] h-[25px] text-black p-0 ps-2 text-center rounded-md"
-          >
-            <option value="">5 pages</option>
-            <option value="">10 pages</option>
-            <option value="">25 pages</option>
-            <option value="">50 pages</option>
-            <option value="">100 pages</option>
-          </select>
-          <div className="flex gap-2 mx-2 items-center">
-            <FaBackward />
-            <IoCaretBack />
-            <IoCaretForwardOutline />
-            <FaForward />
-          </div>
+          <FaRegArrowAltCircleRight
+            size={30}
+            title="next"
+            onClick={() => handleNext()}
+            className="cursor-pointer"
+          />
         </div>
       </div>
     </>

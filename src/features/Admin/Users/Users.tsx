@@ -1,15 +1,32 @@
 import Table from "./Table";
-import { useGetUsersQuery } from "../../../redux/features/admin/Users/userApi";
+import { useGetUsersMutation } from "../../../redux/features/admin/Users/userApi";
 import SearchButton from "../../../components/Buttons/SearchButton";
 import DashBordSearch from "../../../components/inputFields/DashBordSearch";
+import { useEffect, useState } from "react";
 const Users = () => {
-  const { data, isError, isSuccess, error } = useGetUsersQuery();
+  const [pageNo, setPageNo] = useState(1);
+  const [permitedNext, setPermitedNext] = useState(1);
+  const [getUsers, { isSuccess, data }] = useGetUsersMutation();
 
-  if (isSuccess) {
-    console.log(data);
-  } else if (isError) {
-    console.log(error);
-  }
+  // if (isSuccess) {
+  //   console.log(data);
+  // } else if (isError) {
+  //   console.log(error);
+  // }
+
+  useEffect(() => {
+    getUsers({ pageNo });
+  }, [pageNo]);
+  useEffect(() => {
+    getUsers({ pageNo });
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("datadddddd", data.data.permitedNext);
+      setPermitedNext(data.data.permitedNext);
+    }
+  }, [isSuccess]);
 
   return (
     <div className="h-full w-full">
@@ -20,7 +37,11 @@ const Users = () => {
           <SearchButton />
         </div>
       </div>
-      <Table />
+      <Table
+        setPageNo={setPageNo}
+        permitedNext={permitedNext}
+        pageNo={pageNo}
+      />
     </div>
   );
 };
