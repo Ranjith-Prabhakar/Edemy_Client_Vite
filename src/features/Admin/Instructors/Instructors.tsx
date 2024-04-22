@@ -29,10 +29,10 @@ const Instructors = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      if ("data" in data) {
+      if (data && "data" in data) {
         if ("permitedNext" in data.data) {
           console.log("datadddddd", data.data.permitedNext);
-          setPermitedNext(data?.data?.permitedNext);
+          setPermitedNext(data.data.permitedNext);
         }
       }
     }
