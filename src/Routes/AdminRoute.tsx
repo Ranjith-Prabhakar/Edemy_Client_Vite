@@ -2,17 +2,13 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 
 import useGetUser from "../hooks/useGetUser";
 import AdminDash from "../pages/Admin/AdminDashBoard";
-import { useEffect } from "react";
 
 const AdminRoute = () => {
   const user = useGetUser();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!user.name) {
-      navigate("/auth/login");
-    }
-  }, [navigate, user.name]);
-
+  if (!user.name) {
+    navigate("/auth/login");
+  }
   return (
     <div>
       {user.role === "admin" && (
