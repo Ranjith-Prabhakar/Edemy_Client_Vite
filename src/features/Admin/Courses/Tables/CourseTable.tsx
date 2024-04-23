@@ -15,12 +15,18 @@ import TableBodyTr from "../../../../components/Table/TableBodyTr";
 import Td from "../../../../components/Table/Td";
 
 const CourseTable = () => {
-  useGetCoursesQuery();
+  const {isSuccess, data} = useGetCoursesQuery();
   const navigate = useNavigate();
   const [tableData, setTableData] = useState<ICourse[]>([]);
   const coursesData = useSelector(
     (state: { courses: ICourseInitialState }) => state.courses.coursesData
   );
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("data..............", data);
+    }
+  }, [isSuccess]);
 
   useEffect(() => {
     setTableData(coursesData);
@@ -57,7 +63,7 @@ const CourseTable = () => {
                   >
                     {item.courseName.toUpperCase()}
                   </td>
-                  <Td>{item.instructor}</Td>
+                  <Td>{item.instructorName}</Td>
                   <Td>{item.noOfPurchase}</Td>
                   <Td>{item.status}</Td>
                   <Td>

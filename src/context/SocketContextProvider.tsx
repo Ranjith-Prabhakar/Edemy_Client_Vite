@@ -116,7 +116,7 @@ const SocketContextProvider = ({ children }: Props) => {
         setNotificationStore([
           {
             message: ENotificationMsg.courseApprovalApprovance,
-            url: `/instructor/profile/mytutorials`,
+            url: `/instructor/mytutorials`,
           },
           ...notificationStore,
         ]);

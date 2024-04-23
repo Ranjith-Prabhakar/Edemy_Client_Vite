@@ -67,7 +67,7 @@ const CourseRequestTable = () => {
                   >
                     {item.courseName.toUpperCase()}
                   </td>
-                  <Td>{item.instructor}</Td>
+                  <Td>{item.instructorName}</Td>
                   <Td>{item.status}</Td>
                   <Td>
                     <div className="flex justify-start gap-3 ">

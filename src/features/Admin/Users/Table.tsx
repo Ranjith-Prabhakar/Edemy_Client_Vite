@@ -82,10 +82,8 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
           <Thead>
             <tr>
               <Th>Sl No</Th>
-
               <Th>Name</Th>
               <Th>Enrolled course</Th>
-              <Th>courses</Th>
               <Th>Status</Th>
               <Th>Freez</Th>
             </tr>
@@ -107,7 +105,6 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
                   {item.name.toUpperCase()}
                 </td>
                 <Td>{item.enrolledCourses?.length}</Td>
-                <Td>{item.courses?.length}</Td>
                 <Td>{item.status}</Td>
                 <Td>
                   {item.status === "active" ? (
