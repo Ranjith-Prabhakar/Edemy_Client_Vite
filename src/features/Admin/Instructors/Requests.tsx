@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { useApproveorRejectInstructorRequestsMutation } from "../../../redux/features/admin/InstructorRequests/instructorRequestApi";
-import {
-  IUserState,
-  removeUser,
-} from "../../../redux/features/admin/Users/userSlice";
-import { addInstrctor } from "../../../redux/features/admin/Instructors/instructorsSlice";
 
-import { useSelector, useDispatch } from "react-redux";
-import { IapproveorRejectInstructorRequestsRes } from "../../../redux/interfaces/Instructor/approveorRejectInstructorRequests";
+import { useSelector } from "react-redux";
 import {
   IInstructorRequest,
   IInstructorState,
@@ -30,12 +24,10 @@ type props = {
 const Requests = ({ setNotification }: props) => {
   const [getUsers] = useGetUsersMutation();
   useEffect(() => {
-    getUsers({ pageNo:1 });
+    getUsers({ pageNo: 1 });
   }, []);
   const { socketStore } = useSocketContext();
-  console.log("socketStore.instructorRequests", socketStore.instructorRequests);
-  const dispatch = useDispatch();
-  const [approveorRejectInstructorRequests, { data, isSuccess }] =
+  const [approveorRejectInstructorRequests] =
     useApproveorRejectInstructorRequestsMutation();
 
   const [tableData, setTableData] = useState<IInstructorRequest[]>([]);
@@ -43,9 +35,7 @@ const Requests = ({ setNotification }: props) => {
     (state: { instructorRequests: IInstructorState }) =>
       state.instructorRequests.instructorRequest
   );
-  const userData = useSelector(
-    (state: { users: IUserState }) => state.users.usersData
-  );
+
 
   const [getVideo] = useGetVideoMutation();
 
@@ -56,10 +46,9 @@ const Requests = ({ setNotification }: props) => {
     setNotification(socketStore.instructorRequests.length);
   }, [socketStore.instructorRequests]);
 
-   useEffect(() => {
-     setTableData([...InstructorRequests]);
-   }, [InstructorRequests]);
-
+  useEffect(() => {
+    setTableData([...InstructorRequests]);
+  }, [InstructorRequests]);
 
   useEffect(() => {
     if (certificatUrl) {
@@ -73,22 +62,7 @@ const Requests = ({ setNotification }: props) => {
     }
   }, [certificatUrl]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      const user = data as IapproveorRejectInstructorRequestsRes;
-      const userInfo = user.data as IInstructorRequest;
-      if (userInfo.status === "approved") {
-        const userId = userInfo.userId;
-
-        const fetchedUser = userData.find((item) => item._id === userId);
-        const newUser = { ...fetchedUser, role: "instructor" };
-        dispatch(removeUser({ data: userId }));
-        dispatch(addInstrctor({ data: newUser }));
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess]);
-
+ 
   const handleGetCertificate = async (certificate: string) => {
     try {
       const presignedUrl = await getVideo({ videoName: certificate });
@@ -245,4 +219,3 @@ const Requests = ({ setNotification }: props) => {
 };
 
 export default Requests;
-

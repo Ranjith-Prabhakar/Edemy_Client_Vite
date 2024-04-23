@@ -39,6 +39,7 @@ const instructorsRequestApi = apiSlice.injectEndpoints({
           const result = await queryFulfilled;
           const data: IInstructorAgreement = result.data
             .data as IInstructorAgreement;
+            console.log("data", data);
           dispatch(approveorRejectRequest({ data: data.userId }));
         } catch (error) {
           console.log(error);

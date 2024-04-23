@@ -108,7 +108,7 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
                       navigate(`user_details/${item._id}`);
                     }}
                   >
-                    {item.name.toUpperCase()}
+                    {item?.name.toUpperCase()}
                   </td>
                   <Td>{item?.enrolledCourses?.length}</Td>
                   <Td>{item?.courses?.length}</Td>

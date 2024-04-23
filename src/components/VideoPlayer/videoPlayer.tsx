@@ -36,15 +36,74 @@ const VideoPlayer = ({
 
   useEffect(() => {
     if (videoUrl !== "") {
-      reactRef.current?.seekTo(parseInt(position)); // Start from 10 seconds
-      setProgress(false);
-      setEnd(false);
+      reactRef.current?.seekTo(parseInt(position));
+      setProgress(false); // for working of next useEffect immediatly it is relevent
+      setEnd(false); // for working of next useEffect immediatly it is relevent
     }
-  }, [videoUrl, position]); // Trigger when videoUrl or playing state changes
+  }, [videoUrl, position]);
 
   useEffect(() => {
+    if (end) {
+      console.log(
+        "if end true",
+        ` userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,`,
+        userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,
+        duration.toString()
+      );
+      setVideoTrack({
+        // updating the time immediatly because this useEffect will call even after resume also
+        userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,
+        position: duration.toString(),
+        complete: "inProgress",
+      });
+    } else {
+      console.log(
+        "if end false",
+        ` userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,`,
+        userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,
+        position.toString()
+      );
+      setVideoTrack({
+        // updating the time immediatly because this useEffect will call even after resume also
+        userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,
+        position: position.toString(),
+        complete: "inProgress",
+      });
+    }
+
     let time: number;
     let intervalIdOut: NodeJS.Timeout;
+    if (!progress) console.log("progress false");
     if (progress && !end) {
       const intervalId = setInterval(() => {
         // Get the current time every 30 seconds
@@ -53,6 +112,24 @@ const VideoPlayer = ({
         intervalIdOut = intervalId;
         const lastTenSecond = duration - time < 20;
         if (lastTenSecond) {
+          console.log("completed");
+          console.log(
+            "completed",
+            ` userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,`,
+            userId,
+            courseId,
+            moduleNo,
+            moduleTittle,
+            videoNo,
+            videoTittle,
+            time.toString()
+          );
+
           setVideoTrack({
             userId,
             courseId,
@@ -63,7 +140,26 @@ const VideoPlayer = ({
             position: time.toString(),
             complete: "completed",
           });
+          clearInterval(intervalIdOut);
         } else {
+          console.log(" not completed");
+
+          console.log(
+            `" not completed",
+             userId,
+        courseId,
+        moduleNo,
+        moduleTittle,
+        videoNo,
+        videoTittle,`,
+            userId,
+            courseId,
+            moduleNo,
+            moduleTittle,
+            videoNo,
+            videoTittle,
+            time.toString()
+          );
           setVideoTrack({
             userId,
             courseId,
@@ -83,6 +179,9 @@ const VideoPlayer = ({
     };
   }, [progress, end]); // Empty dependency array to ensure the effect runs only once
 
+  useEffect(() => {
+    console.log("duration", duration);
+  }, [duration]);
 
   return (
     <div>
@@ -91,6 +190,12 @@ const VideoPlayer = ({
           ref={reactRef}
           url={videoUrl}
           playing={true}
+          onPlay={
+            // it will triger onStart as well as onResume
+            () => {
+              position = reactRef.current?.getCurrentTime()?.toString() || "0";
+            }
+          }
           onPause={() => {
             setProgress(false);
           }}
@@ -115,4 +220,3 @@ const VideoPlayer = ({
 };
 
 export default VideoPlayer;
-
