@@ -19,6 +19,7 @@ import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 export type ICourseData = {
   _id: string;
   instructor: string;
+  instructorName:string;
   price: string;
   category: string;
   courseName: string;
@@ -257,7 +258,7 @@ const CourseSinglePage = () => {
                   courseName={courseData.courseName}
                   Description={courseData.discription}
                   Duration={courseData.duration}
-                  Instructor={courseData.instructor}
+                  Instructor={courseData.instructorName}
                 />
               )}
               {swapper === "questions" && <QuestionForm />}

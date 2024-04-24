@@ -99,11 +99,12 @@ const SocketContextProvider = ({ children }: Props) => {
         }
       );
       // instroctor approval or rejection by admin
-      socket.on("fromServerInstrctorRequestApproval", () => {
+      socket.on("fromServerInstrctorRequestApproval", (message) => {
+        console.log("message", message);
         sound.play();
         setNotificationStore([
           {
-            message: ENotificationMsg.instructorRequestApproval,
+            message: message,
             url: `/instructor/profile`,
           },
           ...notificationStore,

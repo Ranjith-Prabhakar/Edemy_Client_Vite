@@ -32,7 +32,6 @@ const Header = ({ isScrolled }: props) => {
   const [editNotification] = useEditNotificationMutation();
   const userData = useGetUser();
   const [name, setName] = useState("");
-  // const [isHovered, setIsHovered] = useState(false);
   const [notificationSideBar, setNotificationSideBar] = useState(false);
   const [hamburgerDropDown, setHamburgerDropDown] = useState(false);
   const { data, isSuccess } = useGetCategoryQuery();
@@ -218,23 +217,9 @@ const Header = ({ isScrolled }: props) => {
 
             <div className="hidden 1200px:flex justify-center items-center gap-4">
               <ThemeToggler />
-              {/* {userData.name &&
-                userData.role !== "instructor" &&
-                userData.role !== "admin" && (
-                  <Link to={"/user/be_instructor"}>Teach on Edemy</Link>
-                )} */}
               {userData.name && (
                 <>
-                  {/* {userData.role !== "admin" && (
-                    <Link to={`/${userData.role}/my_learnings`}>
-                      My Learnings
-                    </Link>
-                  )} */}
-
-                  {/* <Link to={"/be_instructor"}> */}
-                  {/* <FaCartPlus size={25} /> */}
                   <Cart />
-                  {/* </Link> */}
                   <div className="relative">
                     <IoIosNotifications
                       size={25}
@@ -258,14 +243,16 @@ const Header = ({ isScrolled }: props) => {
                           />
                           {notificationStore.length &&
                             notificationStore.map((notification, index) => {
-                              console.log(notification.message.length);
                               if (notification.message !== "") {
+                                console.log(
+                                  "notification.message",
+                                  notification.message
+                                );
                                 return (
                                   <h1
                                     key={index}
                                     onClick={async () => {
                                       let result;
-
                                       switch (notification.message) {
                                         case ENotificationMsg.instructorRequests:
                                           result = await editNotification({
@@ -292,6 +279,7 @@ const Header = ({ isScrolled }: props) => {
                                             }
                                           }
                                           break;
+
                                         case ENotificationMsg.courseApprovalRequest:
                                           result = await editNotification({
                                             notificationHead:
@@ -315,6 +303,20 @@ const Header = ({ isScrolled }: props) => {
                                           if ("data" in result) {
                                             if ("success" in result.data) {
                                               navigate(`${notification.url}`);
+                                            }
+                                          }
+                                          break;
+                                        case ENotificationMsg.instructorRequestRejection:
+                                          result = await editNotification({
+                                            notificationHead:
+                                              ENotification.instructorRequestRejection,
+                                          });
+                                          if ("data" in result) {
+                                            if ("success" in result.data) {
+                                              console.log("result", result);
+                                              setNotificationSideBar(
+                                                !notificationSideBar
+                                              );
                                             }
                                           }
                                           break;

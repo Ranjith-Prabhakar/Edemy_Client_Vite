@@ -30,23 +30,26 @@ const Courses = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const regex = /\/(.*?)-/;
-      const moduleData = data.data.modules[data.data.modules.length - 1];
-      const moduleVideoData = moduleData?.videos[moduleData.videos.length - 1];
-      setCourseData({
-        courseName: data.data.courseName ?? "",
-        price: data.data.price ?? "",
-        discription: data.data.discription ?? "",
-        tags: data.data.tags ?? "",
-        thumbnail: data.data.thumbnail ?? "",
-        duration: data.data.duration ?? "",
-        moduleNo: moduleData?.moduleNo ?? "",
-        moduleTittle: moduleData?.moduleTittle ?? "",
-        videoTittle: moduleVideoData?.videoTittle?.match(regex)?.[1] ?? "",
-        videoNo: moduleVideoData?.videoNo ?? "",
-        videoUrl: moduleVideoData?.videoUrl ?? "",
-      });
-      setModuleVideos(data.data.modules);
+      if(data){
+        const regex = /\/(.*?)-/;
+        const moduleData = data.data.modules[data.data.modules.length - 1];
+        const moduleVideoData =
+          moduleData?.videos[moduleData.videos.length - 1];
+        setCourseData({
+          courseName: data.data.courseName ?? "",
+          price: data.data.price ?? "",
+          discription: data.data.discription ?? "",
+          tags: data.data.tags ?? "",
+          thumbnail: data.data.thumbnail ?? "",
+          duration: data.data.duration ?? "",
+          moduleNo: moduleData?.moduleNo ?? "",
+          moduleTittle: moduleData?.moduleTittle ?? "",
+          videoTittle: moduleVideoData?.videoTittle?.match(regex)?.[1] ?? "",
+          videoNo: moduleVideoData?.videoNo ?? "",
+          videoUrl: moduleVideoData?.videoUrl ?? "",
+        });
+        setModuleVideos(data.data.modules);
+      }
     }
   }, [data, isSuccess]);
 

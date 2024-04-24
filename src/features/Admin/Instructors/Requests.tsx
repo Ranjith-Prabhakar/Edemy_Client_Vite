@@ -27,6 +27,7 @@ const Requests = ({ setNotification }: props) => {
     getUsers({ pageNo: 1 });
   }, []);
   const { socketStore } = useSocketContext();
+  console.log("socketStore", socketStore);
   const [approveorRejectInstructorRequests] =
     useApproveorRejectInstructorRequestsMutation();
 
