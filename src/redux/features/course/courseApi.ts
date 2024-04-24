@@ -151,9 +151,11 @@ export const courseApi = apiSlice.injectEndpoints({
         try {
           const result = await queryFulfilled;
           const data = result?.data?.data as ICourse;
+          console.log("data from api", data.status);
           dispatch(
             removeCourseAfterApprovalOrReject({
               data: data?._id as string,
+              status: data?.status as string
             })
           );
         } catch (error) {

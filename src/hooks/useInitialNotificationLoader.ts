@@ -55,7 +55,7 @@ const useInitialNotificationLoader = () => {
                   : notification === ENotification.instructorRequestApproval
                   ? `/instructor/profile`
                   : notification === ENotification.courseApprovalApprovance
-                  ? `/instructor/profile/mytutorials`
+                  ? `/instructor/mytutorials`
                   : "",
             },
           ])
