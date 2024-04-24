@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useGetStatisticsQuery } from "../../../redux/features/statistics/statisticsApi";
+import { useGetStatisticsQuery } from "../../redux/features/statistics/statisticsApi";
 import {
   IData,
   IRatingAndNoOfCourses,
   TMonthlySaleAndRevenue,
   TTopSellingCategories,
   TTopTenInstructorAndNoOfCourses,
-} from "../../../redux/interfaces/statistics/statistics";
-import BarChart from "../../../components/Chart/BarChart";
-import PieChart from "../../../components/Chart/PieChart";
-import DoughnutChart from "../../../components/Chart/DoughnutChart";
-import LineChart from "../../../components/Chart/LineChart";
+} from "../../redux/interfaces/statistics/statistics";
+import BarChart from "../../components/Chart/BarChart";
+import PieChart from "../../components/Chart/PieChart";
+import DoughnutChart from "../../components/Chart/DoughnutChart";
+import LineChart from "../../components/Chart/LineChart";
 
 const DashBoard = () => {
   const { data, isSuccess } = useGetStatisticsQuery();

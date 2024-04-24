@@ -20,11 +20,11 @@ const DoughnutChart = ({ ratingAndNoOfCourses }: Props) => {
       {
         label: "No Of Courses",
         data: [
-          ratingAndNoOfCourses[0].ratingRange_4_5,
-          ratingAndNoOfCourses[0].ratingRange_3_4,
-          ratingAndNoOfCourses[0].ratingRange_2_3,
-          ratingAndNoOfCourses[0].ratingRange_1_2,
-          ratingAndNoOfCourses[0].ratingRange_0_1,
+          ratingAndNoOfCourses[0]?.ratingRange_4_5 || 0,
+          ratingAndNoOfCourses[0]?.ratingRange_3_4 || 0,
+          ratingAndNoOfCourses[0]?.ratingRange_2_3 || 0,
+          ratingAndNoOfCourses[0]?.ratingRange_1_2 || 0,
+          ratingAndNoOfCourses[0]?.ratingRange_0_1 || 0,
         ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",

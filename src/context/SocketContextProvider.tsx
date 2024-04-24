@@ -62,6 +62,7 @@ const SocketContextProvider = ({ children }: Props) => {
 
       // course added by instructor
       socket.on("fromServerCourseAdded", (e) => {
+        console.log("course added by instructor",e)
         sound.play();
         setSocketStore({
           ...socketStore,
@@ -100,7 +101,6 @@ const SocketContextProvider = ({ children }: Props) => {
       );
       // instroctor approval or rejection by admin
       socket.on("fromServerInstrctorRequestApproval", (message) => {
-        console.log("message", message);
         sound.play();
         setNotificationStore([
           {
@@ -112,11 +112,11 @@ const SocketContextProvider = ({ children }: Props) => {
       });
       
       // course approval by admin(to the instructor)
-      socket.on("fromServerCourseApproved", () => {
+      socket.on("fromServerCourseApproved", (message) => {
         sound.play();
         setNotificationStore([
           {
-            message: ENotificationMsg.courseApprovalApprovance,
+            message: message,
             url: `/instructor/mytutorials`,
           },
           ...notificationStore,

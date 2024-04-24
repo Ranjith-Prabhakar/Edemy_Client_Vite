@@ -1,7 +1,7 @@
 import SideBar from "../../layouts/SideBar";
 import { adminDashBord } from "../../data/AdminSideBar";
 import Categories from "../../features/Admin/Categories/Categories";
-import DashBoard from "../../features/Admin/Users/DashBoard";
+import DashBoard from "../../features/Admin/DashBoard";
 import Users from "../../features/Admin/Users/Users";
 import Instructors from "../../features/Admin/Instructors/Instructors";
 import Courses from "../../features/Admin/Courses/Courses";
@@ -13,7 +13,7 @@ import Header from "../../layouts/Header";
 const AdminDash = () => {
   return (
     <ContainerLayout>
-      <Header/>
+      <Header />
       <div className="h-[87vh] flex justify-start gap-2 mt-[2%] pb-2">
         <SideBar sideBarData={adminDashBord} />
         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">

@@ -279,6 +279,18 @@ const Header = ({ isScrolled }: props) => {
                                             }
                                           }
                                           break;
+                                        case ENotificationMsg.courseApprovalRejection:
+                                          result = await editNotification({
+                                            notificationHead:
+                                              ENotification.courseApprovalRejection,
+                                          });
+
+                                          if ("data" in result) {
+                                            if ("success" in result.data) {
+                                              navigate(`${notification.url}`);
+                                            }
+                                          }
+                                          break;
 
                                         case ENotificationMsg.courseApprovalRequest:
                                           result = await editNotification({
