@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ICategory } from "../../redux/interfaces/Course/getCategories";
 
-type Props ={
-  categoryList : ICategory[]
-}
+type Props = {
+  categoryList: ICategory[];
+};
 const Courses = ({ categoryList }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
@@ -23,10 +23,10 @@ const Courses = ({ categoryList }: Props) => {
       <ul
         className={`absolute ${
           isHovered ? "block leading-10 pt-3" : "hidden"
-        } `}
+        }  w-[300px] text-md`}
       >
         <li
-          className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
+          className="cursor-pointer rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
           onClick={() =>
             navigate("/category/all_category", {
               state: { sort: "A-Z", filter: "date" },
@@ -38,7 +38,7 @@ const Courses = ({ categoryList }: Props) => {
         {categoryList &&
           categoryList.map((item, index) => (
             <li
-              className="cursor-pointer min-w-fit rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
+              className="cursor-pointer rounded-xl capitalize italic font-normal hover:scale-110 bg-c_color-colorSeven mb-1 px-5"
               onClick={() =>
                 navigate(
                   `/category/${item.name
@@ -59,4 +59,4 @@ const Courses = ({ categoryList }: Props) => {
   );
 };
 
-export default Courses
+export default Courses;

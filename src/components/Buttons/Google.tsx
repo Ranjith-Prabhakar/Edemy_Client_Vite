@@ -2,7 +2,7 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../../lib/firebase";
 import { FcGoogle } from "react-icons/fc";
 import GeneralButton from "./GeneralButton";
-import axios from "axios";
+// import axios from "axios";
 function GoogleButton() {
   const handleSignup = async () => {
     try {
@@ -13,11 +13,11 @@ function GoogleButton() {
       // const data: string = {data:result.user.uid}
       const data: { data: string } = { data: result.user.uid };
       console.log("result", data);
-      const serverResult = await axios.post(
-        `http://localhost:3500/gauth`,
-        data
-      );
-      console.log("serverResult", serverResult);
+      // const serverResult = await axios.post(
+      //   `http://localhost:3500/gauth`,
+      //   data
+      // );
+      // console.log("serverResult", serverResult);
     } catch (error) {
       console.log(error);
     }

@@ -27,7 +27,6 @@ const VideoPlayer = ({
   width = "550px",
   height = "260px",
 }: Props) => {
-  console.log("position", position);
   const [setVideoTrack] = useSetVideoTrackMutation();
   const reactRef = useRef<ReactPlayer>(null);
   const [progress, setProgress] = useState(false);
@@ -44,22 +43,6 @@ const VideoPlayer = ({
 
   useEffect(() => {
     if (end) {
-      console.log(
-        "if end true",
-        ` userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,`,
-        userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,
-        duration.toString()
-      );
       setVideoTrack({
         // updating the time immediatly because this useEffect will call even after resume also
         userId,
@@ -72,22 +55,6 @@ const VideoPlayer = ({
         complete: "inProgress",
       });
     } else {
-      console.log(
-        "if end false",
-        ` userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,`,
-        userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,
-        position.toString()
-      );
       setVideoTrack({
         // updating the time immediatly because this useEffect will call even after resume also
         userId,
@@ -103,7 +70,7 @@ const VideoPlayer = ({
 
     let time: number;
     let intervalIdOut: NodeJS.Timeout;
-    if (!progress) console.log("progress false");
+
     if (progress && !end) {
       const intervalId = setInterval(() => {
         // Get the current time every 30 seconds
@@ -112,24 +79,6 @@ const VideoPlayer = ({
         intervalIdOut = intervalId;
         const lastTenSecond = duration - time < 20;
         if (lastTenSecond) {
-          console.log("completed");
-          console.log(
-            "completed",
-            ` userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,`,
-            userId,
-            courseId,
-            moduleNo,
-            moduleTittle,
-            videoNo,
-            videoTittle,
-            time.toString()
-          );
-
           setVideoTrack({
             userId,
             courseId,
@@ -142,24 +91,6 @@ const VideoPlayer = ({
           });
           clearInterval(intervalIdOut);
         } else {
-          console.log(" not completed");
-
-          console.log(
-            `" not completed",
-             userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,`,
-            userId,
-            courseId,
-            moduleNo,
-            moduleTittle,
-            videoNo,
-            videoTittle,
-            time.toString()
-          );
           setVideoTrack({
             userId,
             courseId,
@@ -171,17 +102,13 @@ const VideoPlayer = ({
             complete: "inProgress",
           });
         }
-      }, 15000); // Interval set to 30 seconds
+      }, 15000); // Interval set to 15 seconds
     }
     return () => {
       // Cleanup function to clear the interval
       clearInterval(intervalIdOut);
     };
   }, [progress, end]); // Empty dependency array to ensure the effect runs only once
-
-  useEffect(() => {
-    console.log("duration", duration);
-  }, [duration]);
 
   return (
     <div>
