@@ -13,6 +13,7 @@ type Props = {
   videoTittle?: string;
   width?: string;
   height?: string;
+  isSetSetTrack?: boolean;
 };
 
 const VideoPlayer = ({
@@ -26,6 +27,7 @@ const VideoPlayer = ({
   videoTittle = "",
   width = "550px",
   height = "260px",
+  isSetSetTrack = true,
 }: Props) => {
   const [setVideoTrack] = useSetVideoTrackMutation();
   const reactRef = useRef<ReactPlayer>(null);
@@ -43,29 +45,33 @@ const VideoPlayer = ({
 
   useEffect(() => {
     if (end) {
-      setVideoTrack({
-        // updating the time immediatly because this useEffect will call even after resume also
-        userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,
-        position: duration.toString(),
-        complete: "inProgress",
-      });
+      if (isSetSetTrack) {
+        setVideoTrack({
+          // updating the time immediatly because this useEffect will call even after resume also
+          userId,
+          courseId,
+          moduleNo,
+          moduleTittle,
+          videoNo,
+          videoTittle,
+          position: duration.toString(),
+          complete: "inProgress",
+        });
+      }
     } else {
-      setVideoTrack({
-        // updating the time immediatly because this useEffect will call even after resume also
-        userId,
-        courseId,
-        moduleNo,
-        moduleTittle,
-        videoNo,
-        videoTittle,
-        position: position.toString(),
-        complete: "inProgress",
-      });
+      if (isSetSetTrack) {
+        setVideoTrack({
+          // updating the time immediatly because this useEffect will call even after resume also
+          userId,
+          courseId,
+          moduleNo,
+          moduleTittle,
+          videoNo,
+          videoTittle,
+          position: position.toString(),
+          complete: "inProgress",
+        });
+      }
     }
 
     let time: number;
@@ -79,30 +85,33 @@ const VideoPlayer = ({
         intervalIdOut = intervalId;
         const lastTenSecond = duration - time < 20;
         if (lastTenSecond) {
-          setVideoTrack({
-            userId,
-            courseId,
-            moduleNo,
-            moduleTittle,
-            videoNo,
-            videoTittle,
-            position: time.toString(),
-            complete: "completed",
-          });
-          
+          if (isSetSetTrack) {
+            setVideoTrack({
+              userId,
+              courseId,
+              moduleNo,
+              moduleTittle,
+              videoNo,
+              videoTittle,
+              position: time.toString(),
+              complete: "completed",
+            });
+
             clearInterval(intervalIdOut);
-                    
+          }
         } else {
-          setVideoTrack({
-            userId,
-            courseId,
-            moduleNo,
-            moduleTittle,
-            videoNo,
-            videoTittle,
-            position: time.toString(),
-            complete: "inProgress",
-          });
+          if (isSetSetTrack) {
+            setVideoTrack({
+              userId,
+              courseId,
+              moduleNo,
+              moduleTittle,
+              videoNo,
+              videoTittle,
+              position: time.toString(),
+              complete: "inProgress",
+            });
+          }
         }
       }, 15000); // Interval set to 15 seconds
     }
