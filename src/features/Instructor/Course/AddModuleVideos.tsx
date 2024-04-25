@@ -139,7 +139,6 @@ const AddModuleVideos = ({
                     const moduleVideoData =
                       moduleData.videos[moduleData.videos.length - 1];
 
-                    console.log("moduleVideoData", moduleVideoData);
                     const lastDashIndex =
                       moduleVideoData.videoTittle.lastIndexOf("-");
                     const lastSlashIndex =
@@ -149,7 +148,6 @@ const AddModuleVideos = ({
                         lastSlashIndex + 1,
                         lastDashIndex
                       );
-                    console.log("extractedString", extractedString);
 
                     setCourseData({
                       courseName: newServerResponse.data.courseName ?? "",

@@ -67,7 +67,6 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
   const handleNext = () => {
     setPageNo((prev) => {
       if (prev < permitedNext) {
-        console.log("IsMOOOOOOOR");
         return prev + 1;
       } else {
         return prev;

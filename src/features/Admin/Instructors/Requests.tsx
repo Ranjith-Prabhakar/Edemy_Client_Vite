@@ -27,7 +27,6 @@ const Requests = ({ setNotification }: props) => {
     getUsers({ pageNo: 1 });
   }, []);
   const { socketStore } = useSocketContext();
-  console.log("socketStore", socketStore);
   const [approveorRejectInstructorRequests] =
     useApproveorRejectInstructorRequestsMutation();
 
@@ -36,7 +35,6 @@ const Requests = ({ setNotification }: props) => {
     (state: { instructorRequests: IInstructorState }) =>
       state.instructorRequests.instructorRequest
   );
-
 
   const [getVideo] = useGetVideoMutation();
 
@@ -63,7 +61,6 @@ const Requests = ({ setNotification }: props) => {
     }
   }, [certificatUrl]);
 
- 
   const handleGetCertificate = async (certificate: string) => {
     try {
       const presignedUrl = await getVideo({ videoName: certificate });

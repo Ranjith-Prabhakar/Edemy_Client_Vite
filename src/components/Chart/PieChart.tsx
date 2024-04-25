@@ -11,7 +11,6 @@ type Props = {
 const PieChart = ({ topSellingCategories }: Props) => {
   const names = topSellingCategories.map((value) => value.name);
   const counts = topSellingCategories.map((value) => value.noOfCourses);
-  console.log("counts...", counts);
   const data = {
     labels: names,
     datasets: [

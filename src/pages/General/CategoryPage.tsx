@@ -100,7 +100,6 @@ const CategoryPage = () => {
                 <h3
                   className="border-b border-dashed cursor-pointer hover:scale-110 font-bold italic"
                   onClick={() => {
-                    console.log("id onclick price", id);
                     navigate(`/category/${id}`, {
                       state: { filter: "price", sort: "A-Z" },
                     });
@@ -111,7 +110,6 @@ const CategoryPage = () => {
                 <h3
                   className=" cursor-pointer hover:scale-110 font-bold italic"
                   onClick={() => {
-                    console.log("id onclick ", id);
                     navigate(`/category/${id}`, {
                       state: { filter: "date", sort: "A-Z" },
                     });

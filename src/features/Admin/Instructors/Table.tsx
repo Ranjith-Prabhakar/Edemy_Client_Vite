@@ -33,8 +33,7 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
       state.instructors.instructorData
   );
 
-  console.log("instructorData~~~~~", instructorData);
-  console.log("permitedNext~~~~~", permitedNext);
+  
   const [freezInstructor, { data, isSuccess, isError }] =
     useFreezInstructorMutation();
   const [
@@ -73,7 +72,6 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
   const handleNext = () => {
     setPageNo((prev) => {
       if (prev < permitedNext) {
-        console.log("IsMOOOOOOOR");
         return prev + 1;
       } else {
         return prev;

@@ -270,6 +270,7 @@ const AddCourseData = ({
           </option>
           {categoryList.map((option) => (
             <option
+            key={option.name}
               value={option.name}
               className="italic font-bold dark:bg-c_color-colorSeven"
             >

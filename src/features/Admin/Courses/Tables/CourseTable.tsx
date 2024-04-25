@@ -15,18 +15,12 @@ import TableBodyTr from "../../../../components/Table/TableBodyTr";
 import Td from "../../../../components/Table/Td";
 
 const CourseTable = () => {
-  const {isSuccess, data} = useGetCoursesQuery();
+  useGetCoursesQuery();
   const navigate = useNavigate();
   const [tableData, setTableData] = useState<ICourse[]>([]);
   const coursesData = useSelector(
     (state: { courses: ICourseInitialState }) => state.courses.coursesData
   );
-
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("data..............", data);
-    }
-  }, [isSuccess]);
 
   useEffect(() => {
     setTableData(coursesData);
@@ -53,6 +47,7 @@ const CourseTable = () => {
                 <TableBodyTr
                   lastIndex={tableData.length !== index + 1}
                   index={index}
+                  key={index}
                 >
                   <Td>{index + 1}</Td>
                   <td

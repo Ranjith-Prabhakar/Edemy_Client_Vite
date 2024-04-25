@@ -19,8 +19,8 @@ const Cart = () => {
         }}
       />
       <div className={`absolute ${dropDown ? "block" : "hidden"}`}>
-        {cartData.map((course) => (
-          <div className="flex justify-between">
+        {cartData.map((course, index) => (
+          <div className="flex justify-between" key={index}>
             <ul>
               <li>{course.courseName}</li>
               <li>{course.price}</li>

@@ -55,6 +55,7 @@ const CourseRequestTable = () => {
                 <TableBodyTr
                   lastIndex={tableData.length !== index + 1}
                   index={index}
+                  key={index}
                 >
                   <Td>{index + 1}</Td>
                   <td
@@ -78,7 +79,7 @@ const CourseRequestTable = () => {
                             courseId: item._id,
                             action: "approved",
                             instructorId: item.instructor,
-                            courseName:item.courseName
+                            courseName: item.courseName,
                           });
                         }}
                       >

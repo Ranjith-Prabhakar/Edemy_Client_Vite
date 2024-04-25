@@ -38,7 +38,6 @@ const DashBoard = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("data", data.data);
       setMonthlySaleAndRevenue(
         (data.data as IData).monthlySaleAndRevenue as TMonthlySaleAndRevenue
       );

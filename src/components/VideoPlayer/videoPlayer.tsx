@@ -89,7 +89,9 @@ const VideoPlayer = ({
             position: time.toString(),
             complete: "completed",
           });
-          clearInterval(intervalIdOut);
+          
+            clearInterval(intervalIdOut);
+                    
         } else {
           setVideoTrack({
             userId,

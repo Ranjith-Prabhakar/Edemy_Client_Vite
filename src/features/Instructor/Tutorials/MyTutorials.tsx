@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useGetUser from "../../../hooks/useGetUser";
-// import CourseCard from "../../../components/Card/CourseCard";
 import { ICourse } from "../../../redux/interfaces/Course/generalInterface";
 import { useGetInstructorTutorialMutation } from "../../../redux/features/course/courseApi";
 import Thead from "../../../components/Table/Thead";
@@ -54,6 +53,7 @@ const MyTutorials = () => {
             <TableBodyTr
               lastIndex={myTutorials.length !== index + 1}
               index={index}
+              key={index}
             >
               <Td>{index + 1}</Td>
               <td

@@ -4,11 +4,10 @@ type Props = {
 };
 
 const AddedModuleVideos = ({ moduleVideos }: Props) => {
-  
   const courseName = (videoTittle: string) => {
     const lastDashIndex = videoTittle.lastIndexOf("-");
     const lastSlashIndex = videoTittle.lastIndexOf("/");
-    const extractedString =videoTittle.substring(
+    const extractedString = videoTittle.substring(
       lastSlashIndex + 1,
       lastDashIndex
     );
@@ -18,7 +17,6 @@ const AddedModuleVideos = ({ moduleVideos }: Props) => {
     <div className="p-5 flex flex-col gap-3">
       {moduleVideos.length > 0 &&
         moduleVideos.map((item, index) => {
-          console.log("item", item);
           return (
             <>
               <li
@@ -38,8 +36,7 @@ const AddedModuleVideos = ({ moduleVideos }: Props) => {
                 item.videos.map((video, videoIndex) => (
                   <div key={videoIndex}>
                     {video.videoNo} -{" "}
-                    { courseName(video.videoTittle)||
-                      "No Match"}
+                    {courseName(video.videoTittle) || "No Match"}
                   </div>
                 ))}
             </>
@@ -50,4 +47,3 @@ const AddedModuleVideos = ({ moduleVideos }: Props) => {
 };
 
 export default AddedModuleVideos;
-

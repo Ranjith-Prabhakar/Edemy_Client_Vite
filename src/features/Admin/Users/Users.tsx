@@ -7,14 +7,7 @@ const Users = () => {
   const [pageNo, setPageNo] = useState(1);
   const [permitedNext, setPermitedNext] = useState(1);
   const [getUsers, { isSuccess, data }] = useGetUsersMutation();
-
-  // if (isSuccess) {
-  //   console.log(data);
-  // } else if (isError) {
-  //   console.log(error);
-  // }
-
-  useEffect(() => {
+   useEffect(() => {
     getUsers({ pageNo });
   }, [pageNo]);
   useEffect(() => {
@@ -25,7 +18,6 @@ const Users = () => {
     if (isSuccess) {
       if (isSuccess) {
         if (data && "data" in data) {
-          console.log("datadddddd", data.data.permitedNext);
           setPermitedNext(data.data.permitedNext);
         }
       }

@@ -1,5 +1,5 @@
 import { TbCategoryPlus } from "react-icons/tb";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import AddCategory from "./AddCategoryForm";
 import { useFetchCategoriesQuery } from "../../../redux/features/admin/Categories/categoryApi";
 import Table from "./Table";
@@ -8,11 +8,9 @@ import DashBordSearch from "../../../components/inputFields/DashBordSearch";
 
 const Categories = () => {
   const [addCategory, setAddCategory] = useState(false);
-  const { data } = useFetchCategoriesQuery([]);
+  useFetchCategoriesQuery([]);
 
-  useEffect(() => {
-    console.log("data from categories", data);
-  }, [data]);
+ 
 
   return (
     <div className="h-full w-full">
