@@ -8,6 +8,7 @@ type Props = {
   ratingAndNoOfCourses: IRatingAndNoOfCourses;
 };
 const DoughnutChart = ({ ratingAndNoOfCourses }: Props) => {
+  console.log("ratingAndNoOfCourses", ratingAndNoOfCourses);
   const data = {
     labels: [
       "Rating : 5",
