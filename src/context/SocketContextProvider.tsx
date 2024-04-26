@@ -62,7 +62,6 @@ const SocketContextProvider = ({ children }: Props) => {
 
       // course added by instructor
       socket.on("fromServerCourseAdded", (e) => {
-        console.log("course added by instructor",e)
         sound.play();
         setSocketStore({
           ...socketStore,

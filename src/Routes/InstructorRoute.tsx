@@ -19,11 +19,7 @@ const InstructorRoute = () => {
   return (
     <div>
       {user.role === "instructor" && (
-        // <Routes>
-        //   <Route path="/profile/*" element={<InstructorDash />} />
-        //   <Route path="payment_success" element={<PaymentSucess />} />
-        //   <Route path="my_learnings" element={<MyLearninig />} />
-        // </Routes>
+      
         <ContainerLayout>
           <Header />
           <div className="h-[87vh] flex justify-start mt-1 gap-2 pb-3">

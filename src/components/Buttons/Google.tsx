@@ -1,7 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import GeneralButton from "./GeneralButton";
 function GoogleButton() {
-  console.log("GoogleButton");
 
   function navigate(url: string) {
     window.location.href = url;

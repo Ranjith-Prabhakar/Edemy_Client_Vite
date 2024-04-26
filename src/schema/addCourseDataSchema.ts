@@ -16,10 +16,7 @@ export const addCourseDataSchema = yup.object().shape({
   discription: yup
     .string()
     .required("Please enter a valid description")
-    // .matches(
-    //   /^(?! )[a-zA-Z0-9_, -]+(?<! )$/,
-    //   "Only underscores (_) and hyphens (-) are allowed, and space at the beginning is not allowed"
-    // )
+   
     .transform((value) => value.trim()) // Remove spaces
     .min(3),
   tags: yup

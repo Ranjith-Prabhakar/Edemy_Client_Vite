@@ -52,7 +52,6 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
       window.location = enrollData?.data as unknown as Location;
     }
     if (enrollIsError) {
-      console.log("enrollIsError", enrollIsError);
       toast.error("something went wrong please try again");
     }
   }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);

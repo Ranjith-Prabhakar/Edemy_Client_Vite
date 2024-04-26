@@ -19,7 +19,6 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (isSuccess) {
       setLoading(false);
-      console.log("success", data);
       if (data && "message" in data) {
         toast.success(data.message as string);
         navigate("/auth/forgot_password_otp_verification");
@@ -45,7 +44,6 @@ const ForgotPassword = () => {
     },
     validationSchema: forgotPasswordEmailSchema,
     onSubmit: async (values, actions) => {
-      console.log("onsubmit", values.email);
       await forgotPasswordEmailSubmission({ email: values.email });
       actions.resetForm(); // after submission to clear the fields
     },
@@ -107,7 +105,6 @@ const ForgotPassword = () => {
               className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "
               onClick={(e) => {
                 e.preventDefault();
-                console.log("cliced cancel");
                 navigate("/auth/login");
               }}
             >

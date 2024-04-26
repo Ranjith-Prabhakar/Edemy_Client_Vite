@@ -41,7 +41,6 @@ const categoryApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("resutl",result)
           dispatch(getCategories({ data: result.data.data })); // Use data directly
         } catch (error) {
           console.log(error);

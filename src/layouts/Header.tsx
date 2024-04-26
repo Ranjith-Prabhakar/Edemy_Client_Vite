@@ -244,10 +244,6 @@ const Header = ({ isScrolled }: props) => {
                           {notificationStore.length &&
                             notificationStore.map((notification, index) => {
                               if (notification.message !== "") {
-                                console.log(
-                                  "notification.message",
-                                  notification.message
-                                );
                                 return (
                                   <h1
                                     key={index}
@@ -325,7 +321,6 @@ const Header = ({ isScrolled }: props) => {
                                           });
                                           if ("data" in result) {
                                             if ("success" in result.data) {
-                                              console.log("result", result);
                                               setNotificationSideBar(
                                                 !notificationSideBar
                                               );

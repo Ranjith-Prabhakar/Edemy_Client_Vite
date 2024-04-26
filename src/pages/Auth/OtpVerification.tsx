@@ -54,7 +54,6 @@ const OtpVerification = (): JSX.Element => {
       inputRefs.current[index + 1].focus();
     }
     const combinedOtp = newOtp.join(""); // at this point if we console log otp it wont updated because it is asyncrounous so that take the newOtp
-    console.log(combinedOtp, newOtp);
     if (combinedOtp.length === length) {
       onSubmit(combinedOtp);
     }
