@@ -11,6 +11,7 @@ import CourseSinglePage from "./pages/General/CourseSinglePage";
 import CategoryPage from "./pages/General/CategoryPage";
 import CourseSearchPage from "./pages/General/CourseSearchPage";
 import ErrorBoundary from "./components/ErrorBoundry/ErrorBoundry";
+import AuthCookieChecker from "./components/AuthCookieChecker/AuthCookieChecker";
 
 const App = () => {
   const userName = useGetUser().name;
@@ -22,6 +23,10 @@ const App = () => {
           <Route
             path="/auth/*"
             element={userName ? <Navigate to={"/"} /> : <AuthRoute />}
+          />
+          <Route
+            path="/google_auth/*"
+            element={<AuthCookieChecker />}
           />
           <Route path="/user/*" element={<UserRoute />} />
           <Route path="/instructor/*" element={<InstructorRoute />} />

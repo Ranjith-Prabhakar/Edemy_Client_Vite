@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schema/authSchema";
@@ -12,11 +12,13 @@ import { ILoginRes } from "../../redux/interfaces/authApi";
 import AuthInputs from "../../components/inputFields/AuthInputs";
 import GeneralButton from "../../components/Buttons/GeneralButton";
 import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
+import GoogleButton from "../../components/Buttons/Google";
 
 const Login = () => {
   const navigate = useNavigate();
   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
   const [loading, setLoading] = useState(false);
+  const [gButtonError,setGButtonError] = useState(true)
 
   useEffect(() => {
     if (isSuccess) {
@@ -86,7 +88,7 @@ const Login = () => {
                   placeholder="name@company.com"
                   label="Your email"
                 />
-                {errors.email && touched.email && (
+                {errors.email && touched.email && gButtonError && (
                   <p className="text-red-600">{errors.email}</p>
                 )}
               </div>
@@ -99,7 +101,7 @@ const Login = () => {
                   onBlur={handleBlur}
                   label="Password"
                 />
-                {errors.password && touched.password && (
+                {errors.password && touched.password && gButtonError && (
                   <p className="text-red-600">{errors.password}</p>
                 )}
               </div>
@@ -135,15 +137,21 @@ const Login = () => {
                   Sign in
                 </GeneralButton>
               )}
-              <div className="flex gap-3">
-                <GeneralButton>
+              <div
+                className="flex gap-3"
+                onClick={() => {
+                  setGButtonError(false);
+                }}
+              >
+                {/* <GeneralButton>
                   <p className="inline">
                     Login with
                     <span>
                       <FcGoogle className="inline ms-2" size={25} />
                     </span>
                   </p>
-                </GeneralButton>
+                </GeneralButton> */}
+                <GoogleButton />
               </div>
               <p className="text-sm font-light">
                 Don’t have an account yet?{"    "}

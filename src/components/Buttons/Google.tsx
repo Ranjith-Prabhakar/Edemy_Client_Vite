@@ -1,31 +1,22 @@
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import { app } from "../../lib/firebase";
 import { FcGoogle } from "react-icons/fc";
 import GeneralButton from "./GeneralButton";
-// import axios from "axios";
 function GoogleButton() {
-  const handleSignup = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const auth = getAuth(app);
-      const result = await signInWithPopup(auth, provider);
-      console.log("result", result);
-      // const data: string = {data:result.user.uid}
-      const data: { data: string } = { data: result.user.uid };
-      console.log("result", data);
-      // const serverResult = await axios.post(
-      //   `http://localhost:3500/gauth`,
-      //   data
-      // );
-      // console.log("serverResult", serverResult);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log("GoogleButton");
+
+  function navigate(url: string) {
+    window.location.href = url;
+  }
+  async function auth() {
+    const response = await fetch("http://127.0.0.1:8000/api/v1/gauth_url", {
+      method: "post",
+    });
+    const data = await response.json();
+    navigate(data.url);
+  }
   return (
     <GeneralButton
       onClick={() => {
-        handleSignup();
+        auth();
       }}
     >
       <p className="inline">
