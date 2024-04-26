@@ -54,7 +54,7 @@ const PieChart = ({ topSellingCategories }: Props) => {
       },
       title: {
         display: true,
-        text: "Leading categoriesnpm ",
+        text: "Leading categories ",
       },
     },
   };
