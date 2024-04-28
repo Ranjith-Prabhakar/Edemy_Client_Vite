@@ -15,11 +15,12 @@ import {
 import toast from "react-hot-toast";
 import useGetUser from "../../hooks/useGetUser";
 import useGetScrollPosition from "../../hooks/useGetScrollPosition";
+import Chat from "../../features/Course/Chat";
 
 export type ICourseData = {
   _id: string;
   instructor: string;
-  instructorName:string;
+  instructorName: string;
   price: string;
   category: string;
   courseName: string;
@@ -89,7 +90,7 @@ const CourseSinglePage = () => {
 
   useEffect(() => {
     if (user) {
-      let purchased: boolean = false
+      let purchased: boolean = false;
       if (user.role === "admin") {
         setIsPurchased(false);
         return;
@@ -100,7 +101,7 @@ const CourseSinglePage = () => {
 
         setIsPurchased(!purchased);
       } else if (user.role === "user" && user.enrolledCourses) {
-        purchased= user.enrolledCourses?.some(
+        purchased = user.enrolledCourses?.some(
           (course) => course === (courseData._id as string)
         );
         setIsPurchased(!purchased);
@@ -221,6 +222,18 @@ const CourseSinglePage = () => {
               >
                 Review & Rate
               </div>
+              <div
+                className={`${
+                  swapper === "chat"
+                    ? "dark:bg-c_color-colorSix  border-b border-dashed"
+                    : ""
+                } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
+                onClick={() => {
+                  setSwapper("chat");
+                }}
+              >
+                Chat
+              </div>
               {isPurchased && (
                 <div
                   className={`dark:bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
@@ -252,7 +265,7 @@ const CourseSinglePage = () => {
                 </div>
               )}
             </div>
-            <div className="flex">
+            <div className="flex ">
               {swapper === "about" && (
                 <About
                   courseName={courseData.courseName}
@@ -265,12 +278,18 @@ const CourseSinglePage = () => {
               {swapper === "review" && (
                 <ReviewAndRating courseData={courseData} />
               )}
+              {swapper === "chat" && (
+                <Chat
+                  courseId={courseData._id}
+                  courseName={courseData.courseName}
+                />
+              )}
             </div>
           </div>
 
           <div className="dark:bg-c_color-colorSeven capitalize p-5 mt-5 ml-3 rounded-md w-[42%] overflow-scroll h-full">
             {courseData.modules.map((item, index) => (
-              <div className="flex flex-col" key={index} >
+              <div className="flex flex-col" key={index}>
                 <div
                   className="flex gap-2 rounded-lg justify-between items-center cursor-pointer border border-white  p-2 text-white"
                   onClick={() => {
