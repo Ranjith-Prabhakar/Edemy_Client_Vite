@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface IChatInitialState {
   chatList: [
     {
-      _id: string;
-      courseId: string;
+      _id?: string;
+      courseId?: string;
       senderId: {
         _id: string;
         name: string;
       };
       message: string;
       createdAt: string;
-      updatedAt: string;
+      updatedAt?: string;
     }
   ];
 }
@@ -39,8 +39,11 @@ const chatSlice = createSlice({
     addChatList: (state, action) => {
       state.chatList = action.payload.data;
     },
+    updateChatList: (state, action) => {
+      state.chatList.push(action.payload.data);
+    },
   },
 });
 
-export const { addChatList } = chatSlice.actions;
+export const { addChatList, updateChatList } = chatSlice.actions;
 export default chatSlice.reducer
