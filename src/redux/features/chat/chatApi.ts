@@ -3,8 +3,11 @@ import {
   IGetMessageReq,
   IGetMessageRes,
 } from "../../interfaces/chat/getMessage";
+import {
+  IGetOnlineUsersReq,
+  IGetOnlineUsersRes,
+} from "../../interfaces/chat/getOnlineUsers";
 import { apiSlice } from "../api/apiSlice";
-// import { addChatList } from "./chatSlice";
 
 export const chatApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,8 +28,21 @@ export const chatApi = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    //
+    getOnlineUsers: builder.mutation<IGetOnlineUsersRes, IGetOnlineUsersReq>({
+      query: (courseId) => ({
+        method: "post",
+        body: courseId,
+        url: "chat/get_online_users",
+        credentials: "include",
+      }),
+    }),
     // ----
   }),
 });
 
-export const { useAddMessageMutation, useGetMessagesMutation } = chatApi;
+export const {
+  useAddMessageMutation,
+  useGetMessagesMutation,
+  useGetOnlineUsersMutation,
+} = chatApi;

@@ -3,12 +3,10 @@ import { useEffect } from "react";
 import useGetUser from "../../hooks/useGetUser";
 import {
   useGetMessagesMutation,
+  useGetOnlineUsersMutation,
 } from "../../redux/features/chat/chatApi";
-import {  useDispatch } from "react-redux";
-import {
-  // IChatInitialState,
-  addChatList,
-} from "../../redux/features/chat/chatSlice";
+import { useDispatch } from "react-redux";
+import { addChatList, addOnlineUsersList } from "../../redux/features/chat/chatSlice";
 import LeftPanel from "../../components/Chat/LeftPanel";
 import ChatHeader from "../../components/Chat/ChatHeader";
 import ChatBody from "../../components/Chat/ChatBody";
@@ -19,12 +17,15 @@ interface Props {
   courseName: string;
 }
 const Chat = ({ courseId, courseName }: Props) => {
- 
   const dispatch = useDispatch();
   const user = useGetUser();
   const navigate = useNavigate();
   const [getMessages, { isSuccess, data, isError, error }] =
     useGetMessagesMutation();
+  const [
+    getOnlineUsers,
+    { isSuccess: getOnlineUsersIsSuccess, data: getOnlineUsersIsData },
+  ] = useGetOnlineUsersMutation();
 
   useEffect(() => {
     if (
@@ -35,9 +36,16 @@ const Chat = ({ courseId, courseName }: Props) => {
       navigate("/");
     } else {
       getMessages({ courseId });
+      getOnlineUsers({ courseId });
     }
   }, [user]);
 
+  useEffect(() => {
+    if (getOnlineUsersIsSuccess) {
+      console.log("getOnlineUsersIsData", getOnlineUsersIsData.result.data);
+      dispatch(addOnlineUsersList({ data: getOnlineUsersIsData.result.data }));
+    }
+  }, [getOnlineUsersIsSuccess]);
   useEffect(() => {
     if (isSuccess) {
       dispatch(addChatList({ data: data.result.data.messages }));
@@ -45,8 +53,6 @@ const Chat = ({ courseId, courseName }: Props) => {
       console.log(error);
     }
   }, [isSuccess]);
-
-  
 
   return (
     <div className="h-screen w-screen absolute top-12 dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two left-0 z-10">
@@ -60,7 +66,7 @@ const Chat = ({ courseId, courseName }: Props) => {
           {/* message body*/}
           <ChatBody />
           {/* message input */}
-          <MessageInput courseId={courseId}/>
+          <MessageInput courseId={courseId} />
         </div>
       </div>
     </div>
