@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import { io, Socket } from "socket.io-client";
 import useGetUser from "../hooks/useGetUser";
+import { useDispatch } from "react-redux";
 import {
   ClientToServerEvents,
   ServerToClientEvents,
@@ -10,6 +11,7 @@ import notificationSound from "../assets/notification.mp3";
 import { ICourse } from "../redux/interfaces/Course/generalInterface";
 import { IInstructorRequest } from "../redux/interfaces/Admin/InstructorRequest";
 import { ENotificationMsg } from "../hooks/useInitialNotificationLoader";
+import { updateChatList } from "../redux/features/chat/chatSlice";
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
@@ -28,6 +30,7 @@ type Props = {
 
 const SocketContextProvider = ({ children }: Props) => {
   const user = useGetUser();
+  const dispatch = useDispatch()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [socket, setSocket] = useState<any>(null);
 
@@ -135,6 +138,12 @@ const SocketContextProvider = ({ children }: Props) => {
           ]);
         }
       );
+      //getting new chats
+      socket.on("fromServerCommunityChatNewChatMessage",(message)=>{
+        sound.play()
+        console.log("message", message);
+        dispatch(updateChatList({data:message}))
+      })
       //
       setSocket(socket);
       // setSocketStore({ ...socketStore });

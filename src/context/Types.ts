@@ -1,6 +1,7 @@
 import { Socket } from "socket.io-client";
 import { ICourse } from "../redux/interfaces/Course/generalInterface";
 import { IInstructorRequest } from "../redux/interfaces/Admin/InstructorRequest";
+import { IMessage } from "../redux/interfaces/chat/getMessage";
 
 export interface ServerToClientEvents {
   serverSideLogin: (message: string) => void;
@@ -10,6 +11,7 @@ export interface ServerToClientEvents {
   fromServerInstrctorRequestApproval: (message: string) => void;
   fromServerCourseApproved: (message: string) => void;
   fromServerCourseApprovedNotificationForAllUsers: (message: string) => void;
+  fromServerCommunityChatNewChatMessage: (message: IMessage) => void;
 }
 
 export interface ClientToServerEvents {
