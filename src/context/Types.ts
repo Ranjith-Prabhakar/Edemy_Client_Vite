@@ -5,7 +5,7 @@ import { IMessage } from "../redux/interfaces/chat/getMessage";
 
 export interface ServerToClientEvents {
   serverSideLogin: (message: string) => void;
-  serverSideLogout: (message: string) => void;
+  fromServerUserLogout: (userId: string) => void;
   fromServerCourseAdded: (course: ICourse, message: string) => void;
   fromServerInstructorRequestSubmitted: (agreement: IInstructorRequest) => void;
   fromServerInstrctorRequestApproval: (message: string) => void;
