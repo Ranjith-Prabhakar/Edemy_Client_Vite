@@ -2,27 +2,56 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useGetUser from "../../hooks/useGetUser";
 import { IoSend } from "react-icons/io5";
-import { useAddMessageMutation } from "../../redux/features/chat/chatApi";
+import {
+  useAddMessageMutation,
+  useGetMessagesMutation,
+} from "../../redux/features/chat/chatApi";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  IChatInitialState,
+  addChatList,
+} from "../../redux/features/chat/chatSlice";
+
 interface Props {
   courseId: string;
   courseName: string;
 }
 const Chat = ({ courseId, courseName }: Props) => {
+  const chatList = useSelector(
+    (state: { chat: IChatInitialState }) => state.chat.chatList
+  );
+  const dispatch = useDispatch();
   const [addMessage] = useAddMessageMutation();
   const [message, setMessage] = useState("");
   const user = useGetUser();
   const navigate = useNavigate();
+  const [getMessages, { isSuccess, data, isError, error }] =
+    useGetMessagesMutation();
 
   useEffect(() => {
-    console.log("courseId", courseId);
     if (
       !user.enrolledCourses?.some(
         (enrolledCourseId) => enrolledCourseId === courseId
       )
     ) {
       navigate("/");
+    } else {
+      getMessages({ courseId });
     }
   }, [user]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(addChatList({ data: data.result.data.messages }));
+    } else if (isError) {
+      console.log(error);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    console.log("chatList----", chatList);
+  }, [chatList]);
+
   return (
     <div className="h-screen w-screen absolute top-12 dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two left-0 z-10">
       <div className=" flex justify-center  gap-4 mt-10">

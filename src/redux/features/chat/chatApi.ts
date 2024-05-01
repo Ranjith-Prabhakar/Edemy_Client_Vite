@@ -1,9 +1,10 @@
+import { IAddMessageReq } from "../../interfaces/chat/addMessage";
+import {
+  IGetMessageReq,
+  IGetMessageRes,
+} from "../../interfaces/chat/getMessage";
 import { apiSlice } from "../api/apiSlice";
-
-export interface IAddMessageReq {
-  courseId: string;
-  message: string;
-}
+// import { addChatList } from "./chatSlice";
 
 export const chatApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,7 +16,17 @@ export const chatApi = apiSlice.injectEndpoints({
         credentials: "include",
       }),
     }),
+    //
+    getMessages: builder.mutation<IGetMessageRes, IGetMessageReq>({
+      query: (data) => ({
+        method: "post",
+        url: "chat/get_message",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    // ----
   }),
 });
 
-export const { useAddMessageMutation } = chatApi;
+export const { useAddMessageMutation, useGetMessagesMutation } = chatApi;
