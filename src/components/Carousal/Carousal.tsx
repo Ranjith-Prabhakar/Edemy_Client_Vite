@@ -6,7 +6,7 @@ const Carousal = () => {
       <div className="mt-[8%] 400px:w-2/5 ">
         <img
           src={carousal}
-          className="1000px:ms-[80px] w-full h-[80vh] "
+          className="ms-5 1000px:ms-[80px] w-full h-[80vh] "
           alt="carousal image"
         />
       </div>
