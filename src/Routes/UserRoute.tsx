@@ -6,7 +6,7 @@ import MyLearninig from "../pages/General/MyLearninig";
 import ContainerLayout from "../layouts/ContainerLayout";
 import Header from "../layouts/Header";
 import SideBar from "../layouts/SideBar";
-import Table from "../features/Instructor/Table";
+import Profile from "../features/Instructor/Table";
 import { userSideBar } from "../data/UserSideBar";
 
 const UserRoute = () => {
@@ -18,14 +18,16 @@ const UserRoute = () => {
   return (
     <div>
       {user.role === "user" && (
-        
         <ContainerLayout>
           <Header />
-          <div className="h-[79vh] flex justify-start gap-2 mt-[4%] pb-2">
+          <div className="400px:h-[79vh] flex justify-start gap-2 mt-[4%] pb-2">
             <SideBar sideBarData={userSideBar} />
-            <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
+            <div className="flex flex-col item-center justify-center gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
               <Routes>
-                <Route path="dashboard" element={<Table />} />
+                <Route
+                  path="/profile"
+                  element={<Profile sideBarData={userSideBar} />}
+                />
                 <Route path="/be_instructor" element={<BeInstructor />} />
                 <Route path="payment_success" element={<PaymentSucess />} />
                 <Route path="my_learnings" element={<MyLearninig />} />

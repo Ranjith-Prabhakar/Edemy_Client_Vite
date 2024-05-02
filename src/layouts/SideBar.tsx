@@ -36,7 +36,7 @@ const SideBar = ({ sideBarData }: Props) => {
   };
 
   return (
-    <div className=" custom-scrollBar 400px:flex flex-col h-full overflow-scroll  max-w-[15%] w-full m-auto rounded-lg text-xl dark:bg-c_color-colorOne shadow-md ring-gray-400 space-y-3">
+    <div className=" custom-scrollBar hidden 400px:flex flex-col h-full overflow-scroll  max-w-[15%] w-full m-auto rounded-lg text-xl dark:bg-c_color-colorOne shadow-md ring-gray-400 space-y-3">
       <div className="flex flex-col  w-full">
         {sideBarData &&
           sideBarData.map((item) => (

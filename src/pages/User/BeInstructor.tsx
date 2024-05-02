@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom";
-import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import ThemeToggler from "../../components/utils/ThemeToggler";
 import { beInstructorSchema } from "../../schema/beInstructor";
 import { useToBeInstructorMutation } from "../../redux/features/user/userApi";
 import toast from "react-hot-toast";
@@ -101,20 +98,20 @@ const BeInstructor = () => {
 
   return (
     <section>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center 400px:px-6 400px:py-8 mx-auto h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-center items-center">
               <h1 className="text-xl font-bold capitalize leading-tight tracking-tightmd:text-2xl ">
                 Be a instructor
               </h1>
-              <div className="flex justify-center items-center gap-3">
+              {/* <div className="flex justify-center items-center gap-3">
                 {" "}
                 <Link to={"/"}>
                   <IoHome />
                 </Link>
                 <ThemeToggler />
-              </div>
+              </div> */}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
