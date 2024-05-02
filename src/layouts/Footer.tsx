@@ -8,15 +8,15 @@ const Footer = () => {
   return (
     <div className="mt-[8%] flex flex-col text-xl">
       <hr className="w-full h-1 mb-5" />
-      <div className=" flex justify-between w-full">
-        <div className="flex flex-col ms-2">
+      <div className="text-center 400px:flex 400px:justify-between w-full">
+        <div className="flex flex-col ms-2 mb-3">
           <Link to={"/"}>
-            <h1 className=" text-2xl font-bold italic ">
+            <h1 className="hidden 400px:block text-2xl font-bold italic ">
               <span className="text-4xl font-bold">E</span>demy
             </h1>
           </Link>
           <h5>Follow Us On Social Media</h5>
-          <div className="flex gap-2 items-center mt-2">
+          <div className=" flex justify-center 400px:justify-start  gap-2 items-center mt-2">
             <CgMail
               size={25}
               className="cursor-pointer hover:scale-150 hover:opacity-75"
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col ms-3 gap-1">
+        <div className="hidden 400px:flex flex-col ms-3 gap-1">
           <h5 className="text-2xl font-bold italic">Explore</h5>
           <p className="font-extralight cursor-pointer italic hover:font-bold">
             Home
