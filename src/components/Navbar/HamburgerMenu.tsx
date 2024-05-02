@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import useGetUser from "../../hooks/useGetUser";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeToggler from "../utils/ThemeToggler";
 import { CgProfile } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
@@ -11,29 +11,33 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import responseErrorCatch from "../../utils/responseErrorToast";
+import { FaUsers } from "react-icons/fa";
+import { GiTeacher } from "react-icons/gi";
+import { TbCategoryPlus } from "react-icons/tb";
+import { FaPhotoVideo } from "react-icons/fa";
 
 const HamburgerMenu = () => {
   const userData = useGetUser();
   const [hamburgerDropDown, setHamburgerDropDown] = useState(false);
-const [logout, { data, isError, isSuccess, error }] = useLogoutMutation();
-const navigate = useNavigate();
- useEffect(() => {
-   if (isSuccess) {
-     if (data && data.message) {
-       toast.success(data.message);
-       navigate("/auth/login");
-     }
-   } else if (isError) {
-     responseErrorCatch(error);
-   }
- }, [data, error, isError, isSuccess, navigate]);
-   const handleLogout = async () => {
-     try {
-       await logout();
-     } catch (error) {
-       console.log(error);
-     }
-   };
+  const [logout, { data, isError, isSuccess, error }] = useLogoutMutation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isSuccess) {
+      if (data && data.message) {
+        toast.success(data.message);
+        navigate("/auth/login");
+      }
+    } else if (isError) {
+      responseErrorCatch(error);
+    }
+  }, [data, error, isError, isSuccess, navigate]);
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="relative 1200px:hidden">
@@ -55,19 +59,82 @@ const navigate = useNavigate();
             />
             <div className=" mt-20 ps-4 flex flex-col ">
               {userData.role === "admin" && (
-                <div
-                  onClick={() => {
-                    setHamburgerDropDown(false);
-                  }}
-                  className="py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
-                >
-                  <Link to={`/admin/dash_bord`}>
-                    <h1 className=" font-semibold">
-                      {userData.name.split(" ").shift()}
-                    </h1>
-                  </Link>
-                  <ThemeToggler />
-                </div>
+                <>
+                  {/* profile */}
+                  <div
+                    onClick={() => {
+                      setHamburgerDropDown(false);
+                    }}
+                    className="py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  >
+                    <Link to={`/admin/dash_bord`}>
+                      <h1 className=" font-semibold">
+                        {userData.name.split(" ").shift()}
+                      </h1>
+                    </Link>
+                    <ThemeToggler />
+                  </div>
+                  {/* users */}
+                  <div
+                    onClick={() => {
+                      setHamburgerDropDown(false);
+                    }}
+                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  >
+                    <Link
+                      to={`/admin/dash_bord/users`}
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <FaUsers />
+                      <h1 className=" font-semibold">Users</h1>
+                    </Link>
+                  </div>
+                  {/* instructors */}
+                  <div
+                    onClick={() => {
+                      setHamburgerDropDown(false);
+                    }}
+                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  >
+                    <Link
+                      to={`/admin/dash_bord/instructors`}
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <GiTeacher />
+                      <h1 className=" font-semibold">Instructors</h1>
+                    </Link>
+                  </div>
+                  {/* category */}
+                  <div
+                    onClick={() => {
+                      setHamburgerDropDown(false);
+                    }}
+                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  >
+                    <Link
+                      to={`/admin/dash_bord/categories`}
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <TbCategoryPlus />
+                      <h1 className=" font-semibold">Categories</h1>
+                    </Link>
+                  </div>
+                  {/* courses */}
+                  <div
+                    onClick={() => {
+                      setHamburgerDropDown(false);
+                    }}
+                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  >
+                    <Link
+                      to={`/admin/dash_bord/courses`}
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <FaPhotoVideo />
+                      <h1 className=" font-semibold">Courses</h1>
+                    </Link>
+                  </div>
+                </>
               )}
               <div>
                 {userData.role === "instructor" && (
