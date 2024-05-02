@@ -16,7 +16,8 @@ export default {
         "1000px": "1000px",
         "800px": "800px",
         "500px": "500px",
-        "400px": "400px"
+        "400px": "400px",
+        "300px": "300px"
 
       },
       colors: {

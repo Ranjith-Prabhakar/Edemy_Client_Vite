@@ -2,8 +2,8 @@ import carousal from "../../../public/Assets/carousal.png";
 
 const Carousal = () => {
   return (
-    <div className="flex items-center justify-between">
-      <div className="mt-[8%] w-2/5 hidden 400px:block">
+    <div className="400px:flex items-center justify-between">
+      <div className="mt-[8%] 400px:w-2/5 ">
         <img
           src={carousal}
           className="1000px:ms-[80px] w-full h-[80vh] "
@@ -11,7 +11,7 @@ const Carousal = () => {
         />
       </div>
 
-      <div className="flex flex-col 800px:ms-[100px] 1000px:ms-[200px] text-start w-3/5  mt-7">
+      <div className="hidden  400px:flex flex-col 800px:ms-[100px] 1000px:ms-[200px] text-start w-3/5  mt-7">
         <h1 className="font-bold text-4xl 1000px:text-5xl italic  leading-[60px] ">
           Find The Best Courses
           <br /> To Grow Your <span className="text-[#FFD700]">Skills</span>
@@ -23,8 +23,6 @@ const Carousal = () => {
           flexible approach. Stay ahead with up-to-date content
         </p>
         <div className="mt-4">
-         
-
           <div className="flex gap-10 mt-7">
             <div className="flex flex-col">
               <h1 className="font-bold text-4xl text-[#FFD700]">
