@@ -15,6 +15,10 @@ import { FaUsers } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { TbCategoryPlus } from "react-icons/tb";
 import { FaPhotoVideo } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaBookOpenReader } from "react-icons/fa6";
+import { MobileSearch } from "./Search";
+import { MobileCourses } from "./Courses";
 
 const HamburgerMenu = () => {
   const userData = useGetUser();
@@ -48,7 +52,7 @@ const HamburgerMenu = () => {
         }}
       />
       {hamburgerDropDown && (
-        <div className="absolute top-8  -right-1 400px:right-4 w-[350px] 400px:w-[200px]     border rounded-lg bg-c_color-colorSeven">
+        <div className="absolute top-8  -right-1 400px:right-4 w-[350px] 400px:w-[200px] h-[600px] overflow-scroll   border rounded-lg bg-c_color-colorSeven">
           <div className="relative w-full h-full p-3 pb-11">
             <IoCloseCircleOutline
               size={45}
@@ -58,6 +62,8 @@ const HamburgerMenu = () => {
               }}
             />
             <div className=" mt-20 ps-4 flex flex-col ">
+              <MobileSearch />
+
               {userData.role === "admin" && (
                 <>
                   {/* profile */}
@@ -74,6 +80,15 @@ const HamburgerMenu = () => {
                     </Link>
                     <ThemeToggler />
                   </div>
+                  {/*  *******/}
+                  <div className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                      <MobileCourses
+                        setHamburgerDropDown={setHamburgerDropDown}
+                      />
+                    </div>
+                  </div>
+                  {/******* *  */}
                   {/* users */}
                   <div
                     onClick={() => {
@@ -138,37 +153,105 @@ const HamburgerMenu = () => {
               )}
               <div>
                 {userData.role === "instructor" && (
-                  <div
-                    onClick={() => {
-                      setHamburgerDropDown(false);
-                    }}
-                    className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
-                  >
-                    <Link
-                      to={`/instructor/profile`}
-                      className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  <>
+                    {/* // profile */}
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
+                      className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
-                      {userData.name.split(" ").shift()}
-                    </Link>
-                    <ThemeToggler />
-                  </div>
+                      <Link
+                        to={`/instructor/profile`}
+                        className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      >
+                        {userData.name.split(" ").shift()}
+                      </Link>
+                      <ThemeToggler />
+                    </div>
+                    {/*  *******/}
+                    <div className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                      <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                        <MobileCourses
+                          setHamburgerDropDown={setHamburgerDropDown}
+                        />
+                      </div>
+                    </div>
+                    {/******* *  */}
+                    {/* // add course */}
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
+                      className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <Link
+                        to={`/instructor/addcourses`}
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      >
+                        <FaPhotoVideo />
+                        <h1 className=" font-semibold">Add Course</h1>
+                      </Link>
+                    </div>
+                    {/* // my tutorial */}
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
+                      className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <Link
+                        to={`/instructor/mytutorials`}
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      >
+                        <FaYoutube />
+                        <h1 className=" font-semibold">My Tutorial</h1>
+                      </Link>
+                    </div>
+                    {/* // my Learning */}
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
+                      className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    >
+                      <Link
+                        to={`/instructor/my_learnings`}
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      >
+                        <FaBookOpenReader />
+                        <h1 className=" font-semibold">My Learning</h1>
+                      </Link>
+                    </div>
+                  </>
                 )}
 
                 {userData.role === "user" && (
-                  <div
-                    onClick={() => {
-                      setHamburgerDropDown(false);
-                    }}
-                    className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
-                  >
-                    <Link
-                      to={`/user/profile`}
-                      className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  <>
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
+                      className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
-                      {userData.name.split(" ").shift()}
-                    </Link>
-                    <ThemeToggler />
-                  </div>
+                      <Link
+                        to={`/user/profile`}
+                        className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      >
+                        {userData.name.split(" ").shift()}
+                      </Link>
+                      <ThemeToggler />
+                    </div>
+                    {/*  *******/}
+                    <div className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                      <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                        <MobileCourses
+                          setHamburgerDropDown={setHamburgerDropDown}
+                        />
+                      </div>
+                    </div>
+                    {/******* *  */}
+                  </>
                 )}
 
                 {!userData.role && (
@@ -257,7 +340,7 @@ const HamburgerMenu = () => {
                     </div>
 
                     <div
-                      className="mt-3 flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 rounded-lg dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one hover:text-[21px]  transition-all ease duration-700"
+                      className="my-3 flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 rounded-lg dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one hover:text-[21px]  transition-all ease duration-700"
                       onClick={() => {
                         handleLogout();
                       }}
