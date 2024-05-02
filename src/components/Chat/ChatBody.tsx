@@ -9,14 +9,14 @@ const ChatBody = () => {
     (state: { chat: IChatInitialState }) => state.chat.chatList
   );
   return (
-    <div className="flex h-[88%] w-full border border-red-500 align-bottom overflow-scroll" >
+    <div className="flex h-[88%] w-full border p-4 align-bottom overflow-scroll">
       <ul className="w-full">
         {chatList.map((item) => {
           console.log("item", item);
           if (item.senderId._id === user._id) {
             return (
-              <div className="flex justify-end pe-2">
-                <div className="ms-end border rounded-sm p-2 mb-1">
+              <div className="flex justify-end pe-2 ">
+                <div className="ms-end border rounded-md p-2 mb-1 w-[300px]">
                   <li>{item.senderId.name}</li>
                   <li>{item.message}</li>
                 </div>
@@ -24,8 +24,8 @@ const ChatBody = () => {
             );
           } else {
             return (
-              <div className="flex justify-start ps-2 mb-1">
-                <div className="ms-end border rounded-sm p-2 ">
+              <div className="flex justify-start ps-2 mb-1 ">
+                <div className="ms-end border rounded-md p-2 w-[300px] ">
                   <li>{item.senderId.name}</li>
                   <li>{item.message}</li>
                 </div>

@@ -221,6 +221,7 @@ const CourseSinglePage = () => {
               >
                 Review & Rate
               </div>
+              
               <div
                 className={`${
                   swapper === "chat"

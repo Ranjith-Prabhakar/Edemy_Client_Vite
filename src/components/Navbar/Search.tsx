@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { catchError } from "../../utils/catchError";
 import { ICategory } from "../../redux/interfaces/Course/getCategories";
 import { useNavigate } from "react-router-dom";
+import { useGetCategoryQuery } from "../../redux/features/course/courseApi";
+import useGetScrollPosition from "../../hooks/useGetScrollPosition";
 
 type Props = {
   isScrolled?: boolean;
@@ -62,9 +64,19 @@ export default Search;
 
 //mobile search
 
-const MobileSearch = ({ isScrolled, categoryList }: Props) => {
+const MobileSearch = () => {
+  const [categoryList, addCategoryList] = useState<ICategory[]>([]);
+  const { data, isSuccess } = useGetCategoryQuery();
+  const isScrolled = useGetScrollPosition();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      addCategoryList(data.data as ICategory[]);
+    }
+  }, [isSuccess]);
+
   const handleSearch = async (key: string) => {
     try {
       if (
@@ -113,4 +125,4 @@ const MobileSearch = ({ isScrolled, categoryList }: Props) => {
   );
 };
 
-export  {MobileSearch};
+export { MobileSearch };

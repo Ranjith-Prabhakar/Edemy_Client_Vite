@@ -1,6 +1,6 @@
 import { IoSend } from "react-icons/io5";
 import { useAddMessageMutation } from "../../redux/features/chat/chatApi";
-import {  useState } from "react";
+import { useState } from "react";
 
 type Props = {
   courseId: string;
@@ -9,7 +9,6 @@ type Props = {
 const MessageInput = ({ courseId }: Props) => {
   const [message, setMessage] = useState("");
   const [addMessage] = useAddMessageMutation();
-
 
   const handleKeyPress = async (
     event: React.KeyboardEvent<HTMLInputElement>
@@ -20,11 +19,11 @@ const MessageInput = ({ courseId }: Props) => {
     }
   };
   return (
-    <div className="flex w-full relative">
+    <div className="flex w-full relative p-2">
       <input
         value={message}
         type="text"
-        className="w-[99%] m-auto text-black mb-1"
+        className="w-[95%] m-auto text-white font-bold mb-1 bg-slate-700 rounded-full  bg-opacity-5 outline-none"
         onChange={(e) => {
           setMessage(e.target.value);
         }}
@@ -32,10 +31,10 @@ const MessageInput = ({ courseId }: Props) => {
       />
       <IoSend
         size={30}
-        className="absolute top-1 right-2 z-10 text-black"
+        className="absolute top-3 right-10 z-10 text-white"
         onClick={async () => {
           addMessage({ courseId, message });
-           setMessage("");
+          setMessage("");
         }}
       />
     </div>

@@ -56,11 +56,11 @@ const Chat = ({ courseId, courseName }: Props) => {
 
   return (
     <div className="h-screen w-screen absolute top-12 dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two left-0 z-10">
-      <div className=" flex justify-center  gap-4 mt-10">
+      <div className=" flex justify-center  gap-4 mt-10 dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two">
         {/* left side */}
         <LeftPanel />
         {/* right side */}
-        <div className="flex flex-col border rounded-md h-[78vh] w-[50vw]">
+        <div className="flex flex-col border rounded-md h-[78vh] w-[50vw] dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two">
           {/* header */}
           <ChatHeader courseName={courseName} />
           {/* message body*/}
