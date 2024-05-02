@@ -27,18 +27,19 @@ const Header = ({ isScrolled }: props) => {
 
   return (
     <>
+      {/* */}
       <div
-        className={`sticky top-0 rounded-b-3xl z-50 text-xl p-5 ${
+        className={`w-full sticky top-0 rounded-b-3xl z-50 text-xl p-5 ${
           isScrolled
-            ? "bg-c_color-colorOne shadow-2xl opacity-0 hover:opacity-100 "
-            : "bg-transparent"
+            ? " bg-c_color-colorOne  shadow-2xl opacity-0 hover:opacity-100 "
+            : "bg-transparent "
         }`}
       >
         <div className="flex justify-between items-end ">
           {/* ---------------------brand and category ---------------------------- */}
           <Brand />
           {/* ---------------------- search  -------------------------------*/}
-         
+
           <Search isScrolled={isScrolled} categoryList={categoryList} />
 
           {/* ---------------------- toggler,cart,notification,profile,hamburgur -------------------------------*/}
