@@ -11,7 +11,7 @@ import notificationSound from "../assets/notification.mp3";
 import { ICourse } from "../redux/interfaces/Course/generalInterface";
 import { IInstructorRequest } from "../redux/interfaces/Admin/InstructorRequest";
 import { ENotificationMsg } from "../hooks/useInitialNotificationLoader";
-import { removeOnlineUser, updateChatList } from "../redux/features/chat/chatSlice";
+import { addOnlineUser, removeOnlineUser, updateChatList } from "../redux/features/chat/chatSlice";
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
@@ -145,6 +145,12 @@ const SocketContextProvider = ({ children }: Props) => {
         console.log("userId from fromServerUserLogout", userId);
         setNotificationStore([{ message: "", url: "" }]);
         dispatch(removeOnlineUser({data:userId}))
+      });
+      //user login
+      socket.on("fromServerUserLogin",(user)=>{
+        sound.play()
+        console.log("user from fromServerUserLogin",user)
+        dispatch(addOnlineUser({data:user}));
       });
       //
       setSocket(socket);

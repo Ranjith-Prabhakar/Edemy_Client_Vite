@@ -58,6 +58,9 @@ const chatSlice = createSlice({
         (user) => user._id !== action.payload.data
       );
     },
+    addOnlineUser: (state, action) => {
+      state.onlineUsersList.push(action.payload.data);
+    },
   },
 });
 
@@ -66,6 +69,7 @@ export const {
   updateChatList,
   addOnlineUsersList,
   removeOnlineUser,
+  addOnlineUser,
 } = chatSlice.actions;
 export default chatSlice.reducer;
 

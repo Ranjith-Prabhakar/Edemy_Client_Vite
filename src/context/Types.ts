@@ -4,7 +4,7 @@ import { IInstructorRequest } from "../redux/interfaces/Admin/InstructorRequest"
 import { IMessage } from "../redux/interfaces/chat/getMessage";
 
 export interface ServerToClientEvents {
-  serverSideLogin: (message: string) => void;
+  fromServerUserLogin: ({ _id, name }: { _id: string; name: string }) => void;
   fromServerUserLogout: (userId: string) => void;
   fromServerCourseAdded: (course: ICourse, message: string) => void;
   fromServerInstructorRequestSubmitted: (agreement: IInstructorRequest) => void;
