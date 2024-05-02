@@ -42,22 +42,26 @@ const Testimonial = () => {
 
   return (
     <div className="flex flex-col h-6/3 overflow-hidden mt-[8%]">
-      <h1 className="text-5xl font-bold italic text-center mt-7">
+      <h1 className=" text-3xl 400px:text-5xl font-bold italic text-center mt-7">
         <span className="text-[#FFD700]"> Our </span>
         Students Voice
       </h1>
-      <div className="flex mt-5 h-full">
-        <div className="w-1/2">
+      <div className="400px:flex mt-5 h-full">
+        <div className="hidden 400px:block w-1/2">
           <img
             src={StudentVoice}
             alt="student"
             className="w-[80%] h-full"
           ></img>
         </div>
-        <div className="flex flex-col justify-center w-1/2 text-xl italic opacity-85">
-          <p>{testimonials[testimonialData].paragraph}</p>
+        <div className="flex flex-col justify-center 400px:w-1/2 text-xl italic opacity-85">
+          <p className="text-center p-2 pb-0">
+            {testimonials[testimonialData].paragraph}
+          </p>
           <br />
-          <h4>Name : {testimonials[testimonialData].name}</h4>
+          <h4 className="text-center p-2 pt-0">
+            Name : {testimonials[testimonialData].name}
+          </h4>
         </div>
       </div>
     </div>

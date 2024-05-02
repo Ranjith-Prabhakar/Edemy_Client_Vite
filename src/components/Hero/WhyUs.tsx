@@ -14,7 +14,7 @@ const WhyUs = () => {
           <h3 className="text-center font-bold text-3xl italic">
             Quick Learning
           </h3>
-          <p className="text-center mb-2 400px:text-start me-4   leading-7 text-lg italic opacity-85">
+          <p className="text-center mb-2 p-2 400px:text-start me-4   leading-7 text-lg italic opacity-85">
             Empower your growth with Quick Learning – concise, focused modules
             for rapid skill acquisition. Tailored for efficiency, our platform
             ensures swift comprehension, letting you learn at your own pace
@@ -27,7 +27,7 @@ const WhyUs = () => {
           <h3 className="text-center font-medium text-3xl italic">
             Al Time Support
           </h3>
-          <p className="text-center mb-2 400px:text-start me-4 leading-7 text-lg italic opacity-85">
+          <p className="text-center mb-2 p-2 400px:text-start me-4 leading-7 text-lg italic opacity-85">
             24/7 Support: Elevate your learning experience with our
             always-available support. Our dedicated team ensures immediate
             assistance, making your educational journey seamless, responsive,
@@ -40,7 +40,7 @@ const WhyUs = () => {
           <h3 className="text-center font-medium text-3xl italic">
             Certificate
           </h3>
-          <p className="text-center mb-2 400px:text-start leading-7 text-lg italic opacity-85">
+          <p className="text-center mb-2 p-2 400px:text-start leading-7 text-lg italic opacity-85">
             24/7 Support: Elevate your learning experience with our
             always-available support. Our dedicated team ensures immediate
             assistance, making your educational journey seamless, responsive,
