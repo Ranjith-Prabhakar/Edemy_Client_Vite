@@ -21,7 +21,7 @@ const Courses = () => {
 
   return (
     <div
-      className="relative w-[20%] hidden 1200px:block"
+      className="relative w-[20%] hidden 400px:block 1200px:block"
       onMouseEnter={() => {
         setIsHovered(true);
       }}
