@@ -90,7 +90,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "post",
         credentials: "include",
       }),
-      async onQueryStarted(_arg,{ queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
           dispatch(userLoggedOut({ data: {} }));
@@ -99,6 +99,15 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    // resend otp
+    resendOtp: builder.mutation<void, void>({
+      query: () => ({
+        url: "resend_otp",
+        method: "post",
+        credentials: "include",
+      }),
+    }),
+    //
   }),
 });
 
@@ -110,4 +119,5 @@ export const {
   useForgotPasswordOtpVerificationMutation,
   useResetPasswordMutation,
   useLogoutMutation,
+  useResendOtpMutation,
 } = authApi;
