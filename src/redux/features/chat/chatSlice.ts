@@ -16,6 +16,10 @@ export interface IChatInitialState {
     _id: string;
     name: string;
   }[];
+  allUsersList: {
+    _id: string;
+    name: string;
+  }[];
 }
 
 const initialState: IChatInitialState = {
@@ -33,6 +37,12 @@ const initialState: IChatInitialState = {
     },
   ],
   onlineUsersList: [
+    {
+      _id: "",
+      name: "",
+    },
+  ],
+  allUsersList: [
     {
       _id: "",
       name: "",
@@ -61,6 +71,9 @@ const chatSlice = createSlice({
     addOnlineUser: (state, action) => {
       state.onlineUsersList.push(action.payload.data);
     },
+    addAllUsersList: (state, action) => {
+      state.allUsersList = action.payload.data;
+    },
   },
 });
 
@@ -70,6 +83,7 @@ export const {
   addOnlineUsersList,
   removeOnlineUser,
   addOnlineUser,
+  addAllUsersList,
 } = chatSlice.actions;
 export default chatSlice.reducer;
 

@@ -1,6 +1,9 @@
 export interface IGetOnlineUsersRes {
   result: {
-    data?: [{ _id: string; name: string }];
+    data?: {
+      onlineUsers: [{ _id: string; name: string }];
+      allUsers: [{ _id: string; name: string }];
+    };
     message: string;
     success: boolean;
   };
@@ -9,4 +12,3 @@ export interface IGetOnlineUsersRes {
 export interface IGetOnlineUsersReq {
   courseId: string;
 }
- 

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   addChatList,
   addOnlineUsersList,
+  addAllUsersList,
 } from "../../redux/features/chat/chatSlice";
 import LeftPanel from "../../components/Chat/LeftPanel";
 import ChatHeader from "../../components/Chat/ChatHeader";
@@ -61,8 +62,18 @@ const Chat = ({ courseId, courseName }: Props) => {
 
   useEffect(() => {
     if (getOnlineUsersIsSuccess) {
-      console.log("getOnlineUsersIsData", getOnlineUsersIsData.result.data);
-      dispatch(addOnlineUsersList({ data: getOnlineUsersIsData.result.data }));
+      console.log(
+        "getOnlineUsersIsData@@@@@@",
+        getOnlineUsersIsData.result.data?.onlineUsers
+      );
+      dispatch(
+        addOnlineUsersList({
+          data: getOnlineUsersIsData.result.data?.onlineUsers,
+        })
+      );
+      dispatch(
+        addAllUsersList({ data: getOnlineUsersIsData.result.data?.allUsers})
+      );
     }
   }, [getOnlineUsersIsSuccess]);
   useEffect(() => {

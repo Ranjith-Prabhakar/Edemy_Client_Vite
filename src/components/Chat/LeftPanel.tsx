@@ -8,8 +8,8 @@ const LeftPanel = () => {
   const [active, setActive] = useState<"onlineUsers" | "allUsers">(
     "onlineUsers"
   );
-  const onlineUsers = useSelector(
-    (state: { chat: IChatInitialState }) => state.chat.onlineUsersList
+  const {onlineUsersList:onlineUsers,allUsersList }= useSelector(
+    (state: { chat: IChatInitialState }) => state.chat
   );
 
   return (
@@ -37,6 +37,17 @@ const LeftPanel = () => {
         {active === "onlineUsers" &&
           onlineUsers &&
           onlineUsers.map((listUser) => {
+            if (user._id !== listUser._id)
+              return (
+                <li className="list-none  text-md font-poppins p-3 ps-5 font-bold hover:bg-teal-900">
+                  {listUser.name}
+                </li>
+              );
+          })}
+
+        {active === "allUsers" &&
+          allUsersList &&
+          allUsersList.map((listUser) => {
             if (user._id !== listUser._id)
               return (
                 <li className="list-none  text-md font-poppins p-3 ps-5 font-bold hover:bg-teal-900">
