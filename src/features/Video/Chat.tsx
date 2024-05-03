@@ -6,7 +6,10 @@ import {
   useGetOnlineUsersMutation,
 } from "../../redux/features/chat/chatApi";
 import { useDispatch } from "react-redux";
-import { addChatList, addOnlineUsersList } from "../../redux/features/chat/chatSlice";
+import {
+  addChatList,
+  addOnlineUsersList,
+} from "../../redux/features/chat/chatSlice";
 import LeftPanel from "../../components/Chat/LeftPanel";
 import ChatHeader from "../../components/Chat/ChatHeader";
 import ChatBody from "../../components/Chat/ChatBody";
@@ -28,15 +31,31 @@ const Chat = ({ courseId, courseName }: Props) => {
   ] = useGetOnlineUsersMutation();
 
   useEffect(() => {
-    if (
-      !user.enrolledCourses?.some(
+    if (user.role === "admin") {
+      getMessages({ courseId });
+      getOnlineUsers({ courseId });
+    } else if (
+      (user.role === "instructor" &&
+        user.courses?.some(
+          (enrolledCourseId) => enrolledCourseId === courseId
+        )) ||
+      (user.role === "instructor" &&
+        user.enrolledCourses?.some(
+          (enrolledCourseId) => enrolledCourseId === courseId
+        ))
+    ) {
+      getMessages({ courseId });
+      getOnlineUsers({ courseId });
+    } else if (
+      user.role === "user" &&
+      user.enrolledCourses?.some(
         (enrolledCourseId) => enrolledCourseId === courseId
       )
     ) {
-      navigate("/");
-    } else {
       getMessages({ courseId });
       getOnlineUsers({ courseId });
+    } else {
+      navigate("/");
     }
   }, [user]);
 
