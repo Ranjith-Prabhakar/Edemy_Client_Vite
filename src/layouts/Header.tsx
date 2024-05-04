@@ -9,7 +9,8 @@ import Brand from "../components/Navbar/Brand";
 import Search from "../components/Navbar/Search";
 import HamburgerMenu from "../components/Navbar/HamburgerMenu";
 import Notification from "../components/Navbar/Notification";
-import ProfileMenu from "../components/Navbar/ProfileMenu";
+// import ProfileMenu from "../components/Navbar/ProfileMenu";
+import ProfileDropDown from "../components/ProfileDropDown/ProfileDropDown";
 type props = {
   isScrolled?: boolean;
 };
@@ -46,6 +47,7 @@ const Header = ({ isScrolled }: props) => {
           <div>
             <HamburgerMenu />
             {/* other items  */}
+
             <div className="hidden 1200px:flex justify-center items-center gap-4">
               {/* theme toggler */}
               <ThemeToggler />
@@ -59,7 +61,8 @@ const Header = ({ isScrolled }: props) => {
               )}
 
               {/* profile */}
-              <ProfileMenu />
+              <ProfileDropDown />
+              {/* <ProfileMenu /> */}
             </div>
           </div>
         </div>

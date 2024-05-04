@@ -15,6 +15,8 @@ import {
 import { useSelector } from "react-redux";
 import { IUserState } from "../../redux/interfaces/authApi";
 import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
+import ContainerLayout from "../../layouts/ContainerLayout";
+import Header from "../../layouts/Header";
 
 const BeInstructor = () => {
   const [invalidFileType, setInvalidFileType] = useState(false);
@@ -97,81 +99,84 @@ const BeInstructor = () => {
   });
 
   return (
-    <section>
-      <div className="flex flex-col items-center justify-center 400px:px-6 400px:py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <div className="flex justify-center items-center">
-              <h1 className="text-xl font-bold capitalize leading-tight tracking-tightmd:text-2xl ">
-                Be a instructor
-              </h1>
-              {/* <div className="flex justify-center items-center gap-3">
+    <ContainerLayout>
+      <Header />
+      <section>
+        <div className="flex flex-col items-center justify-center 400px:px-6 400px:py-8 mx-auto h-screen lg:py-0">
+          <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <div className="flex justify-center items-center">
+                <h1 className="text-xl font-bold capitalize leading-tight tracking-tightmd:text-2xl ">
+                  Be a instructor
+                </h1>
+                {/* <div className="flex justify-center items-center gap-3">
                 {" "}
                 <Link to={"/"}>
                   <IoHome />
                 </Link>
                 <ThemeToggler />
               </div> */}
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <div>
+                  <h3 className="mb-2  border border-gray text-md rounded-lg  block  p-2.5">
+                    You are responsible to provide quality education, adhere to
+                    the platform's guidelines, maintain professionalism, engage
+                    students effectively, and continuously improve your teaching
+                    methods for an enriching e-learning experience. tutor agrees
+                    to a revenue-sharing model of 30/70, where the tutor
+                    receives 70% of the income generated, and the platform
+                    retains 30%, as specified in our terms and conditions
+                  </h3>
+                  <AuthInputs
+                    type="text"
+                    name="qualification"
+                    value={values.qualification}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Add Qualification"
+                    label="Add Qualification"
+                  />
+                  {errors.qualification && touched.qualification && (
+                    <p className="text-red-600">{errors.qualification}</p>
+                  )}
+                </div>
+                <div>
+                  <FileInput
+                    ref={certificateRef}
+                    id="certificate"
+                    value={values.certificate}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    label="Add Certificate"
+                  />
+
+                  {errors.certificate && touched.certificate && (
+                    <p className="text-red-600">{errors.certificate}</p>
+                  )}
+                  {invalidFileType && (
+                    <p className="text-red-600">
+                      invalid file type (accepts only jpeg,png and pdf)
+                    </p>
+                  )}
+                </div>
+                {loading ? (
+                  <SpinnerButton status="Validating Data" />
+                ) : (
+                  <GeneralButton
+                    type="submit"
+                    disabled={isSubmitting} //
+                  >
+                    Submit
+                  </GeneralButton>
+                )}
+              </form>
             </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-              <div>
-                <h3 className="mb-2  border border-gray text-md rounded-lg  block  p-2.5">
-                  You are responsible to provide quality education, adhere to
-                  the platform's guidelines, maintain professionalism, engage
-                  students effectively, and continuously improve your teaching
-                  methods for an enriching e-learning experience. tutor agrees
-                  to a revenue-sharing model of 30/70, where the tutor receives
-                  70% of the income generated, and the platform retains 30%, as
-                  specified in our terms and conditions
-                </h3>
-                <AuthInputs
-                  type="text"
-                  name="qualification"
-                  value={values.qualification}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Add Qualification"
-                  label="Add Qualification"
-                />
-                {errors.qualification && touched.qualification && (
-                  <p className="text-red-600">{errors.qualification}</p>
-                )}
-              </div>
-              <div>
-                <FileInput
-                  ref={certificateRef}
-                  id="certificate"
-                  value={values.certificate}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  label="Add Certificate"
-                />
-
-                {errors.certificate && touched.certificate && (
-                  <p className="text-red-600">{errors.certificate}</p>
-                )}
-                {invalidFileType && (
-                  <p className="text-red-600">
-                    invalid file type (accepts only jpeg,png and pdf)
-                  </p>
-                )}
-              </div>
-              {loading ? (
-                <SpinnerButton status="Validating Data" />
-              ) : (
-                <GeneralButton
-                  type="submit"
-                  disabled={isSubmitting} //
-                >
-                  Submit
-                </GeneralButton>
-              )}
-            </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </ContainerLayout>
   );
 };
 

@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import useGetUser from "../../hooks/useGetUser";
 import { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
-
+import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
 
 const ProfileMenu = () => {
   const userData = useGetUser();
   const [name, setName] = useState("");
+  const [profileDropDownMenu,setProfileDropDownMenu] = useState(false);
 
   useEffect(() => {
     if (userData.name) {
@@ -35,12 +36,26 @@ const ProfileMenu = () => {
         </Link>
       )}
 
-      {userData.role === "user" && (
+      {/* {userData.role === "user" && (
         <Link to={`/user/profile`}>
           <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
             <h1 className=" font-bold">{name}</h1>
           </div>
         </Link>
+      )} */}
+      {userData.role === "user" && (
+        <div
+          onClick={() => {
+            setProfileDropDownMenu(true);
+          }}
+        >
+          <div className="rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]">
+            <h1 className=" font-bold">{name}</h1>
+          </div>
+          {profileDropDownMenu && (
+            <ProfileDropDown  />
+          )}
+        </div>
       )}
 
       {!userData.role && (
@@ -50,6 +65,6 @@ const ProfileMenu = () => {
       )}
     </>
   );
-}
+};
 
-export default ProfileMenu
+export default ProfileMenu;

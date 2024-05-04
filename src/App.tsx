@@ -12,6 +12,7 @@ import CategoryPage from "./pages/General/CategoryPage";
 import CourseSearchPage from "./pages/General/CourseSearchPage";
 import ErrorBoundary from "./components/ErrorBoundry/ErrorBoundry";
 import AuthCookieChecker from "./components/AuthCookieChecker/AuthCookieChecker";
+import BeInstructor from "./pages/User/BeInstructor";
 
 const App = () => {
   const userName = useGetUser().name;
@@ -24,11 +25,9 @@ const App = () => {
             path="/auth/*"
             element={userName ? <Navigate to={"/"} /> : <AuthRoute />}
           />
-          <Route
-            path="/google_auth/*"
-            element={<AuthCookieChecker />}
-          />
+          <Route path="/google_auth/*" element={<AuthCookieChecker />} />
           <Route path="/user/*" element={<UserRoute />} />
+          <Route path="/be_instructor" element={<BeInstructor />} />
           <Route path="/instructor/*" element={<InstructorRoute />} />
           <Route path="/admin/*" element={<AdminRoute />} />
           <Route path="/category/:id" element={<CategoryPage />} />
