@@ -138,7 +138,9 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
           <FaRegArrowAltCircleRight
             size={30}
             title="next"
-            onClick={() => handleNext()}
+            onClick={() => {
+              handleNext();
+            }}
             className="cursor-pointer"
           />
         </div>

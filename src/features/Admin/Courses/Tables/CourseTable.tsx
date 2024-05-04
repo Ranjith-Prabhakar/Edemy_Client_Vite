@@ -1,7 +1,7 @@
-import { FaBackward } from "react-icons/fa";
-import { FaForward } from "react-icons/fa";
-import { IoCaretBack } from "react-icons/io5";
-import { IoCaretForwardOutline } from "react-icons/io5";
+import {  FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
+// import { FaForward } from "react-icons/fa";
+// import { IoCaretBack } from "react-icons/io5";
+// import { IoCaretForwardOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -76,7 +76,7 @@ const CourseTable = () => {
               ))}
             </tbody>
           </table>
-          <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
+          {/* <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
             <h4 className="me-2">4 of 5</h4>
             <input
               type="text"
@@ -99,6 +99,24 @@ const CourseTable = () => {
               <IoCaretForwardOutline />
               <FaForward />
             </div>
+          </div> */}
+          <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
+            <FaRegArrowAltCircleLeft
+              size={30}
+              title="prev"
+              onClick={() => {
+                // handlePrev();
+              }}
+              className="cursor-pointer"
+            />
+            <FaRegArrowAltCircleRight
+              size={30}
+              title="next"
+              onClick={() => {
+                // handleNext();
+              }}
+              className="cursor-pointer"
+            />
           </div>
         </div>
       ) : (

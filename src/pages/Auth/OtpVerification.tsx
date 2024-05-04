@@ -18,6 +18,7 @@ const OtpVerification = (): JSX.Element => {
 
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
+
   useEffect(() => {
     if (resendOtpIsSuccess) console.log("resendOtpData", resendOtpData);
   }, [resendOtpIsSuccess]);
@@ -213,6 +214,8 @@ const OtpVerification = (): JSX.Element => {
           </div>
         </div>
       </div>
+      
+
     </>
   );
 };

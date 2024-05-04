@@ -19,7 +19,7 @@ const MessageInput = ({ courseId }: Props) => {
     }
   };
   return (
-    <div className="flex w-full relative p-2">
+    <div className="flex w-full relative p-2 border-t">
       <input
         value={message}
         type="text"

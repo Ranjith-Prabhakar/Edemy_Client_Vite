@@ -6,9 +6,10 @@ import Thead from "../../../components/Table/Thead";
 import Th from "../../../components/Table/Th";
 import TableBodyTr from "../../../components/Table/TableBodyTr";
 import Td from "../../../components/Table/Td";
-import { FaBackward, FaForward } from "react-icons/fa";
-import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
+// import { FaBackward, FaForward } from "react-icons/fa";
+// import { IoCaretBack, IoCaretForwardOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const MyTutorials = () => {
   const navigate = useNavigate()
@@ -75,7 +76,7 @@ const MyTutorials = () => {
           ))}
         </tbody>
       </table>
-      <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
+      {/* <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
         <h4 className="me-2">4 of 5</h4>
         <input
           type="text"
@@ -98,6 +99,24 @@ const MyTutorials = () => {
           <IoCaretForwardOutline />
           <FaForward />
         </div>
+      </div> */}
+      <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
+        <FaRegArrowAltCircleLeft
+          size={30}
+          title="prev"
+          onClick={() => {
+            // handlePrev();
+          }}
+          className="cursor-pointer"
+        />
+        <FaRegArrowAltCircleRight
+          size={30}
+          title="next"
+          onClick={() => {
+            // handleNext();
+          }}
+          className="cursor-pointer"
+        />
       </div>
     </div>
   );

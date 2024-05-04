@@ -7,9 +7,11 @@ const Users = () => {
   const [pageNo, setPageNo] = useState(1);
   const [permitedNext, setPermitedNext] = useState(1);
   const [getUsers, { isSuccess, data }] = useGetUsersMutation();
-   useEffect(() => {
+
+  useEffect(() => {
     getUsers({ pageNo });
   }, [pageNo]);
+
   useEffect(() => {
     getUsers({ pageNo });
   }, []);
