@@ -168,18 +168,24 @@ const ReviewAndRating = ({ courseData }: Props) => {
                       (item: TReviewAndRating) => item.userId === user._id
                     )
                     .map((item: TReviewAndRating) => (
-                      <div key={item.userId}>
-                        {" "}
-                        {/* Ensure each child has a unique key */}
-                        <h3 className="italic font-bold">
-                          You{" : "}
-                          <span className="text-[10px]">
-                            ( {item.date.substring(0, 10)} ){" "}
-                          </span>
-                        </h3>
-                        <hr className="border-dashed" />
-                        <p className="ms-4 font-light my-2">{item.review}</p>
-                      </div>
+                      <>
+                        {item.review && (
+                          <div key={item.userId}>
+                            {" "}
+                            {/* Ensure each child has a unique key */}
+                            <h3 className="italic font-bold">
+                              You{" : "}
+                              <span className="text-[10px]">
+                                ( {item.date.substring(0, 10)} ){" "}
+                              </span>
+                            </h3>
+                            <hr className="border-dashed" />
+                            <p className="ms-4 font-light my-2">
+                              {item.review}
+                            </p>
+                          </div>
+                        )}
+                      </>
                     ))}
 
                   {coursereviewAndRatingData
