@@ -19,8 +19,9 @@ import MessageInput from "../../components/Chat/MessageInput";
 interface Props {
   courseId: string;
   courseName: string;
+  setSwapper: React.Dispatch<React.SetStateAction<string>>;
 }
-const Chat = ({ courseId, courseName }: Props) => {
+const Chat = ({ courseId, courseName, setSwapper }: Props) => {
   const dispatch = useDispatch();
   const user = useGetUser();
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ const Chat = ({ courseId, courseName }: Props) => {
         })
       );
       dispatch(
-        addAllUsersList({ data: getOnlineUsersIsData.result.data?.allUsers})
+        addAllUsersList({ data: getOnlineUsersIsData.result.data?.allUsers })
       );
     }
   }, [getOnlineUsersIsSuccess]);
@@ -92,7 +93,7 @@ const Chat = ({ courseId, courseName }: Props) => {
         {/* right side */}
         <div className="flex flex-col border rounded-md h-[78vh] w-[50vw] dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two">
           {/* header */}
-          <ChatHeader courseName={courseName} />
+          <ChatHeader courseName={courseName} setSwapper={setSwapper}/>
           {/* message body*/}
           <ChatBody />
           {/* message input */}

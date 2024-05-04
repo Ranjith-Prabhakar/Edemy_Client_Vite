@@ -87,6 +87,7 @@ const CourseSinglePage = () => {
   const [swapper, setSwapper] = useState("about");
   const [position, setPosition] = useState("0");
 
+ 
   useEffect(() => {
     if (user) {
       let purchased: boolean = false;
@@ -221,7 +222,7 @@ const CourseSinglePage = () => {
               >
                 Review & Rate
               </div>
-              
+
               <div
                 className={`${
                   swapper === "chat"
@@ -229,7 +230,13 @@ const CourseSinglePage = () => {
                     : ""
                 } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
                 onClick={() => {
-                  setSwapper("chat");
+                  if (!isPurchased) {
+                    setSwapper("chat");
+                  } else {
+                    toast.error(
+                      "you have to purchase this course to get this feature"
+                    );
+                  }
                 }}
               >
                 Chat
@@ -282,7 +289,7 @@ const CourseSinglePage = () => {
                   {courseData.modules.map((item, index) => (
                     <div className="flex flex-col" key={index}>
                       <div
-                        className="flex gap-2 mb-2 rounded-lg justify-between items-center cursor-pointer border border-white  p-2 text-white"
+                        className="flex gap-2 mb- rounded-lg justify-between items-center cursor-pointer border border-white  p-2 text-white "
                         onClick={() => {
                           if (showModuleVideos === index + 1)
                             setShowModuleVideos(0);
@@ -298,11 +305,11 @@ const CourseSinglePage = () => {
 
                       {Array.isArray(item.videos) &&
                         item.videos.map((video, videoIndex) => (
-                          <>
+                          <div className="my-3">
                             {showModuleVideos === index + 1 && (
                               <div
                                 key={videoIndex}
-                                className="flex capitalize gap-2  justify-between m-1 px-2 py-1 dark:bg-c_color-colorSix cursor-pointer hover:scale-105"
+                                className={`flex 400px:w-[80%] 400px:mx-auto capitalize gap-2  justify-between p-3  dark:bg-c_color-colorSix cursor-pointer hover:scale-105`}
                               >
                                 <h1> {video.videoNo}</h1>
                                 <h1>
@@ -363,7 +370,7 @@ const CourseSinglePage = () => {
                                 </button>
                               </div>
                             )}
-                          </>
+                          </div>
                         ))}
                     </div>
                   ))}
@@ -373,6 +380,7 @@ const CourseSinglePage = () => {
                 <Chat
                   courseId={courseData._id}
                   courseName={courseData.courseName}
+                  setSwapper={setSwapper}
                 />
               )}
             </div>
