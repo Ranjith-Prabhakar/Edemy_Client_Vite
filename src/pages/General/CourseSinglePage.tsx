@@ -87,7 +87,6 @@ const CourseSinglePage = () => {
   const [swapper, setSwapper] = useState("about");
   const [position, setPosition] = useState("0");
 
- 
   useEffect(() => {
     if (user) {
       let purchased: boolean = false;

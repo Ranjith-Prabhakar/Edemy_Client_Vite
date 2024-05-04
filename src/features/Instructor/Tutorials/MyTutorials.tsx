@@ -60,11 +60,14 @@ const MyTutorials = () => {
               <td
                 className="px-6 py-4"
                 onClick={() => {
-                  navigate(`/category/all_category`, {
-                    state: {
-                      sort: "A-Z",
-                      filter: "date",
-                    },
+                  // navigate(`/category/all_category`, {
+                  //   state: {
+                  //     sort: "A-Z",
+                  //     filter: "date",
+                  //   },
+                  // });
+                  navigate("/course_single_page", {
+                    state: { courseData: item },
                   });
                 }}
               >
