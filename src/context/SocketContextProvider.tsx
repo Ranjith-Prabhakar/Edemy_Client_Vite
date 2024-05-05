@@ -136,7 +136,7 @@ const SocketContextProvider = ({ children }: Props) => {
       );
       //getting new chats
       socket.on("fromServerCommunityChatNewChatMessage",(message)=>{
-        console.log("new messages ----",message)
+        console.log("new messages -->>--",message)
         sound.play()
         dispatch(updateChatList({data:message}))
       })
