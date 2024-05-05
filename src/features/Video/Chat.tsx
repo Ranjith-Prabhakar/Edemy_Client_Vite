@@ -72,7 +72,7 @@ const Chat = ({ courseId, courseName, setSwapper }: Props) => {
         })
       );
       dispatch(
-        addAllUsersList({ data: getOnlineUsersIsData.result.data?.allUsers })
+        addAllUsersList({ data: getOnlineUsersIsData?.result.data?.allUsers })
       );
     }
   }, [getOnlineUsersIsSuccess]);
