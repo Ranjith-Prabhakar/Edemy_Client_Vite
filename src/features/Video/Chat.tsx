@@ -63,17 +63,19 @@ const Chat = ({ courseId, courseName, setSwapper }: Props) => {
 
   useEffect(() => {
     if (getOnlineUsersIsSuccess) {
-      console.log(
-        getOnlineUsersIsData?.result.data?.onlineUsers
-      );
-      dispatch(
-        addOnlineUsersList({
-          data: getOnlineUsersIsData?.result.data?.onlineUsers,
-        })
-      );
-      dispatch(
-        addAllUsersList({ data: getOnlineUsersIsData?.result.data?.allUsers })
-      );
+      // console.log(
+      //   getOnlineUsersIsData?.result.data?.onlineUsers
+      // );
+      if (getOnlineUsersIsData) {
+        dispatch(
+          addOnlineUsersList({
+            data: getOnlineUsersIsData?.result.data?.onlineUsers,
+          })
+        );
+        dispatch(
+          addAllUsersList({ data: getOnlineUsersIsData?.result.data?.allUsers })
+        );
+      }
     }
   }, [getOnlineUsersIsSuccess]);
   useEffect(() => {
@@ -92,7 +94,7 @@ const Chat = ({ courseId, courseName, setSwapper }: Props) => {
         {/* right side */}
         <div className="flex flex-col border rounded-md h-[78vh] w-[50vw] dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two">
           {/* header */}
-          <ChatHeader courseName={courseName} setSwapper={setSwapper}/>
+          <ChatHeader courseName={courseName} setSwapper={setSwapper} />
           {/* message body*/}
           <ChatBody />
           {/* message input */}
