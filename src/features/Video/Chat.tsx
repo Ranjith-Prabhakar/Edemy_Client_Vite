@@ -80,7 +80,9 @@ const Chat = ({ courseId, courseName, setSwapper }: Props) => {
   }, [getOnlineUsersIsSuccess]);
   useEffect(() => {
     if (isSuccess) {
-      dispatch(addChatList({ data: data.result.data.messages }));
+      if (data) {
+        dispatch(addChatList({ data: data.result.data.messages }));
+      }
     } else if (isError) {
       console.log(error);
     }
