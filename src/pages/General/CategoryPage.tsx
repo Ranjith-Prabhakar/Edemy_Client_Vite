@@ -96,7 +96,7 @@ const CategoryPage = () => {
               title="filter"
             />
             {dropDown && (
-              <div className="absolute top-5 border -left-8 px-5 py-2 rounded-lg">
+              <div className="absolute z-10 top-5 border -left-8 px-5 py-2 rounded-lg">
                 <h3
                   className="border-b border-dashed cursor-pointer hover:scale-110 font-bold italic"
                   onClick={() => {
