@@ -85,7 +85,6 @@ const ProfileDropDown = () => {
       {!userData.role && (
         <Link
           to={"/auth/login"}
-          className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
         >
           <CgProfile size={35} />
         </Link>
