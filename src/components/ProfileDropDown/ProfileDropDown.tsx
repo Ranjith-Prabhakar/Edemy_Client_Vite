@@ -82,6 +82,20 @@ const ProfileDropDown = () => {
 
   return (
     <div className="relative">
+      {!userData.role && (
+        <Link
+          to={"/auth/login"}
+          className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+        >
+          <CgProfile
+            size={35}
+            onClick={() => {
+              setHamburgerDropDown(false);
+            }}
+          />
+        </Link>
+      )}
+
       <div
         className="cursor-pointer rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]"
         onClick={() => {
@@ -159,7 +173,7 @@ const ProfileDropDown = () => {
                   </>
                 )}
 
-                {!userData.role && (
+                {/* {!userData.role && (
                   <div
                     onClick={() => {
                       setHamburgerDropDown(false);
@@ -176,7 +190,7 @@ const ProfileDropDown = () => {
                       </h1>
                     </Link>
                   </div>
-                )}
+                )} */}
 
                 {userData.name &&
                   userData.role !== "instructor" &&
@@ -195,7 +209,6 @@ const ProfileDropDown = () => {
                         <h1 className=" font-semibold">Teach on Edemy</h1>
                       </Link>
                     </div>
-                   
                   )}
                 {userData.name && (
                   <>
