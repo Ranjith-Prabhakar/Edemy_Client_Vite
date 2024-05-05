@@ -64,12 +64,11 @@ const Chat = ({ courseId, courseName, setSwapper }: Props) => {
   useEffect(() => {
     if (getOnlineUsersIsSuccess) {
       console.log(
-        "getOnlineUsersIsData@@@@@@",
-        getOnlineUsersIsData.result.data?.onlineUsers
+        getOnlineUsersIsData?.result.data?.onlineUsers
       );
       dispatch(
         addOnlineUsersList({
-          data: getOnlineUsersIsData.result.data?.onlineUsers,
+          data: getOnlineUsersIsData?.result.data?.onlineUsers,
         })
       );
       dispatch(
