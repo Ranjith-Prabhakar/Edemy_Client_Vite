@@ -87,27 +87,23 @@ const ProfileDropDown = () => {
           to={"/auth/login"}
           className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
         >
-          <CgProfile
-            size={35}
-            onClick={() => {
-              setHamburgerDropDown(false);
-            }}
-          />
+          <CgProfile size={35} />
         </Link>
       )}
-
-      <div
-        className="cursor-pointer rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]"
-        onClick={() => {
-          if (userData.role === "admin") {
-            navigate("/admin/dash_bord");
-          } else {
-            setHamburgerDropDown(!hamburgerDropDown);
-          }
-        }}
-      >
-        <h1 className=" font-bold">{name}</h1>
-      </div>
+      {userData.role && (
+          <div
+            className="cursor-pointer rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]"
+            onClick={() => {
+              if (userData.role === "admin") {
+                navigate("/admin/dash_bord");
+              } else {
+                setHamburgerDropDown(!hamburgerDropDown);
+              }
+            }}
+          >
+            <h1 className=" font-bold">{name}</h1>
+          </div>
+      )}
 
       {hamburgerDropDown && (
         <div className="absolute top-10  right-4 w-[300px]  h-[580px] overflow-scroll   border rounded-lg bg-c_color-colorSeven">
