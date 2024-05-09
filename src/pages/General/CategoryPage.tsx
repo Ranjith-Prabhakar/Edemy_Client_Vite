@@ -144,7 +144,8 @@ const CategoryPage = () => {
         </div>
       </div>
       <div className="min-h-screen mt-10">
-        <div className="flex flex-col justify-center items-center 400px:grid grid-cols-4 gap-2 ">
+        <div className="flex flex-col justify-center items-center gap-2 400px:flex-wrap 400px:flex-row ">
+          {/* 400px:grid 400px:grid-cols-2   1000px:grid-cols-3   */}
           {!data.length && !loading && !hasMore ? (
             <div className="w-screen h-screen  flex justify-center items-start mt-44">
               <h1 className="text-4xl font-extrabold text-center">
