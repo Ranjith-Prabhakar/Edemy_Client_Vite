@@ -113,7 +113,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
   };
 
   return (
-    <div className=" dark:bg-c_color-colorSix  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
+    <div className=" dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
       <div className="border my-2 ml-2 overflow-scroll capitalize  flex-1 rounded-lg text-gray-300 ">
         <div className="dark:bg-c_color-colorSix p-3 rounded-md w-full ">
           <form className="">

@@ -65,8 +65,8 @@ const SignUp = () => {
 
   return (
     <section>
-      <div className="flex flex-col  items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full py-5 bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
+      <div className="flex flex-col  items-center justify-center px-4 py-8 mx-auto h-screen lg:py-0">
+        <div className="w-full py-5 px-3 bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
           <div className=" sm:p-8">
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl  mb-4">

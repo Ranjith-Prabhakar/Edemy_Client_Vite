@@ -219,27 +219,29 @@ const CourseSinglePage = () => {
                   setSwapper("review");
                 }}
               >
-                Review & Rate
+                Review
               </div>
 
-              <div
-                className={`${
-                  swapper === "chat"
-                    ? "dark:bg-c_color-colorSix  border-b border-dashed"
-                    : ""
-                } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
-                onClick={() => {
-                  if (!isPurchased) {
-                    setSwapper("chat");
-                  } else {
-                    toast.error(
-                      "you have to purchase this course to get this feature"
-                    );
-                  }
-                }}
-              >
-                Chat
-              </div>
+              {!isPurchased && (
+                <div
+                  className={`${
+                    swapper === "chat"
+                      ? "dark:bg-c_color-colorSix  border-b border-dashed"
+                      : ""
+                  } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
+                  onClick={() => {
+                    if (!isPurchased) {
+                      setSwapper("chat");
+                    } else {
+                      toast.error(
+                        "you have to purchase this course to get this feature"
+                      );
+                    }
+                  }}
+                >
+                  Chat
+                </div>
+              )}
               {isPurchased && (
                 <div
                   className={`dark:bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
@@ -288,7 +290,7 @@ const CourseSinglePage = () => {
                   {courseData.modules.map((item, index) => (
                     <div className="flex flex-col" key={index}>
                       <div
-                        className="flex gap-2 mb- rounded-lg justify-between items-center cursor-pointer border border-white  p-2 text-white "
+                        className="flex gap-2  rounded-lg justify-between items-center cursor-pointer border border-white  p-2 text-white "
                         onClick={() => {
                           if (showModuleVideos === index + 1)
                             setShowModuleVideos(0);
@@ -304,7 +306,7 @@ const CourseSinglePage = () => {
 
                       {Array.isArray(item.videos) &&
                         item.videos.map((video, videoIndex) => (
-                          <div className="my-3">
+                          <div className="mt-1">
                             {showModuleVideos === index + 1 && (
                               <div
                                 key={videoIndex}
@@ -376,11 +378,13 @@ const CourseSinglePage = () => {
                 </div>
               )}
               {swapper === "chat" && (
-                <Chat
-                  courseId={courseData._id}
-                  courseName={courseData.courseName}
-                  setSwapper={setSwapper}
-                />
+                <>
+                  <Chat
+                    courseId={courseData._id}
+                    courseName={courseData.courseName}
+                    setSwapper={setSwapper}
+                  />
+                </>
               )}
             </div>
           </div>

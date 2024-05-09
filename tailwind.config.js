@@ -77,3 +77,5 @@ export default {
     require('daisyui'),
   ],
 }
+
+// "lightMode": "#AAD7D9"
