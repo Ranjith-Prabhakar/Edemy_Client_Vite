@@ -41,7 +41,7 @@ const Search = ({ isScrolled, categoryList }: Props) => {
   };
 
   return (
-    <div className="hidden 400px:block 1200px:flex-2">
+    <div className="hidden 800px:block 1200px:flex-2">
       <input
         className={`rounded-full w-96 h-[35px] px-7 outline-none font-semibold ${
           isScrolled
@@ -106,7 +106,7 @@ const MobileSearch = () => {
   };
 
   return (
-    <div className=" 400px:block 1200px:flex-2">
+    <div className=" 800px:hidden 1200px:flex-2">
       <input
         className={`rounded-full w-full mb-2 h-[35px] px-7 outline-none font-semibold ${
           isScrolled

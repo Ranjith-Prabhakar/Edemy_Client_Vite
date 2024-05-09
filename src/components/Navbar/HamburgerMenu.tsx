@@ -52,7 +52,7 @@ const HamburgerMenu = () => {
         }}
       />
       {hamburgerDropDown && (
-        <div className="absolute top-8  -right-1 400px:right-4 w-[350px] 400px:w-[200px] h-[600px] overflow-scroll   border rounded-lg bg-c_color-colorSeven">
+        <div className="absolute top-8  -right-1  h-[600px] w-[350px]  overflow-scroll   border rounded-lg bg-c_color-colorSeven 400px:right-4 400px:w-[300px] ">
           <div className="relative w-full h-full p-3 pb-11">
             <IoCloseCircleOutline
               size={45}
@@ -63,7 +63,11 @@ const HamburgerMenu = () => {
             />
             <div className=" mt-20 ps-4 flex flex-col ">
               <MobileSearch />
-
+              <div className="800px:hidden 400px:py-0 py-2  px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                  <MobileCourses setHamburgerDropDown={setHamburgerDropDown} />
+                </div>
+              </div>
               {userData.role === "admin" && (
                 <>
                   {/* profile */}
@@ -81,24 +85,24 @@ const HamburgerMenu = () => {
                     <ThemeToggler />
                   </div>
                   {/*  *******/}
-                  <div className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                  {/* <div className="800px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
                     <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
                       <MobileCourses
                         setHamburgerDropDown={setHamburgerDropDown}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   {/******* *  */}
                   {/* users */}
                   <div
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/users`}
-                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 400px:py-0 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <FaUsers />
                       <h1 className=" font-semibold">Users</h1>
@@ -109,11 +113,11 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/instructors`}
-                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 400px:py-0 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <GiTeacher />
                       <h1 className=" font-semibold">Instructors</h1>
@@ -124,7 +128,7 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/categories`}
@@ -139,7 +143,7 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/courses`}
@@ -170,7 +174,7 @@ const HamburgerMenu = () => {
                       <ThemeToggler />
                     </div>
                     {/*  *******/}
-                    <div className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
                       <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
                         <MobileCourses
                           setHamburgerDropDown={setHamburgerDropDown}
@@ -183,7 +187,7 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <Link
                         to={`/instructor/addcourses`}
@@ -198,7 +202,7 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <Link
                         to={`/instructor/mytutorials`}
@@ -213,7 +217,7 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <Link
                         to={`/instructor/my_learnings`}
@@ -243,7 +247,7 @@ const HamburgerMenu = () => {
                       <ThemeToggler />
                     </div>
                     {/*  *******/}
-                    <div className="400px:hidden py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
                       <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
                         <MobileCourses
                           setHamburgerDropDown={setHamburgerDropDown}
