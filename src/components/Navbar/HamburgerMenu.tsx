@@ -71,17 +71,18 @@ const HamburgerMenu = () => {
               {userData.role === "admin" && (
                 <>
                   {/* profile */}
-                  <div
-                    onClick={() => {
-                      setHamburgerDropDown(false);
-                    }}
-                    className="py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
-                  >
-                    <Link to={`/admin/dash_bord`}>
-                      <h1 className=" font-semibold">
-                        {userData.name.split(" ").shift()}
-                      </h1>
-                    </Link>
+                  <div className="py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
+                    >
+                      <Link to={`/admin/dash_bord`}>
+                        <h1 className=" font-semibold">
+                          {userData.name.split(" ").shift()}
+                        </h1>
+                      </Link>
+                    </div>
                     <ThemeToggler />
                   </div>
                   {/*  *******/}
@@ -160,17 +161,18 @@ const HamburgerMenu = () => {
                   <>
                     {/* // profile */}
                     <div
-                      onClick={() => {
-                        setHamburgerDropDown(false);
-                      }}
+                      
                       className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
-                      <Link
-                        to={`/instructor/profile`}
-                        className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      <div
+                        
                       >
-                        {userData.name.split(" ").shift()}
-                      </Link>
+                        <div
+                          // to={`/instructor/profile`}
+                        >
+                          {userData.name.split(" ").shift()}
+                        </div>
+                      </div>
                       <ThemeToggler />
                     </div>
                     {/*  *******/}
@@ -187,7 +189,7 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className=" 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <Link
                         to={`/instructor/addcourses`}
@@ -232,18 +234,21 @@ const HamburgerMenu = () => {
 
                 {userData.role === "user" && (
                   <>
-                    <div
-                      onClick={() => {
-                        setHamburgerDropDown(false);
-                      }}
-                      className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
-                    >
-                      <Link
-                        to={`/user/profile`}
-                        className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    <div 
+                    
+                    className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                      <div
+                        onClick={() => {
+                          setHamburgerDropDown(false);
+                        }}
                       >
-                        {userData.name.split(" ").shift()}
-                      </Link>
+                        <Link
+                          to={`/user/profile`}
+                          // className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        >
+                          {userData.name.split(" ").shift()}
+                        </Link>
+                      </div>
                       <ThemeToggler />
                     </div>
                     {/*  *******/}
@@ -259,22 +264,20 @@ const HamburgerMenu = () => {
                 )}
 
                 {!userData.role && (
-                  <div
-                    onClick={() => {
-                      setHamburgerDropDown(false);
-                    }}
-                    className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
-                  >
-                    <Link
-                      to={"/auth/login"}
-                      className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                  <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div
+                      onClick={() => {
+                        setHamburgerDropDown(false);
+                      }}
                     >
-                      <h1 className="flex justify-start items-end gap-5 text-2xl">
-                        <CgProfile size={35} />
-                        Profile
-                      </h1>
-                      <ThemeToggler />
-                    </Link>
+                      <Link to={"/auth/login"}>
+                        <h1 className="flex justify-start items-end gap-5 text-2xl">
+                          <CgProfile size={35} />
+                          Profile
+                        </h1>
+                      </Link>
+                    </div>
+                    <ThemeToggler />
                   </div>
                 )}
 
@@ -288,7 +291,7 @@ const HamburgerMenu = () => {
                       className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                     >
                       <Link
-                        to={"/user/be_instructor"}
+                        to={"/be_instructor"}
                         className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
                       >
                         Teach on Edemy

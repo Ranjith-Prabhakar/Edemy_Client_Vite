@@ -83,25 +83,23 @@ const ProfileDropDown = () => {
   return (
     <div className="relative">
       {!userData.role && (
-        <Link
-          to={"/auth/login"}
-        >
+        <Link to={"/auth/login"}>
           <CgProfile size={35} />
         </Link>
       )}
       {userData.role && (
-          <div
-            className="cursor-pointer rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]"
-            onClick={() => {
-              if (userData.role === "admin") {
-                navigate("/admin/dash_bord");
-              } else {
-                setHamburgerDropDown(!hamburgerDropDown);
-              }
-            }}
-          >
-            <h1 className=" font-bold">{name}</h1>
-          </div>
+        <div
+          className="cursor-pointer rounded-full flex justify-center items-center w-[35px] h-[35px] bg-white text-[#09616A]"
+          onClick={() => {
+            if (userData.role === "admin") {
+              navigate("/admin/dash_bord");
+            } else {
+              setHamburgerDropDown(!hamburgerDropDown);
+            }
+          }}
+        >
+          <h1 className=" font-bold">{name}</h1>
+        </div>
       )}
 
       {hamburgerDropDown && (

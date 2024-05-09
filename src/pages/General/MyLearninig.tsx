@@ -35,9 +35,7 @@ const MyLearninig = () => {
       <ContainerLayout>
         <div className="w-full mt-16">
           <div
-            className={`ms-8 400px:ms-0 400px:grid ${
-              user.role === "user" ? "grid-cols-4" : "grid-cols-3"
-            } gap-1 space-y-3 w-full overflow-x-scroll `}
+            className={`ms-8 400px:ms-0 400px:flex justify-center flex-wrap gap-2 space-y-3 w-full overflow-x-scroll `}
           >
             {myLearning &&
               myLearning.map((item) => <CourseCard courseCategory={item} />)}

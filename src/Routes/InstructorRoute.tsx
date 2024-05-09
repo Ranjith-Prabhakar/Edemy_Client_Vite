@@ -4,7 +4,7 @@ import PaymentSucess from "../features/PaymentSucess";
 import MyLearninig from "../pages/General/MyLearninig";
 import Header from "../layouts/Header";
 import { instructorSideBar } from "../data/InstructorSideBar";
-import SideBar from "../layouts/SideBar";
+// import SideBar from "../layouts/SideBar";
 import Table from "../features/Instructor/Table";
 import Courses from "../features/Instructor/Course/Courses";
 import MyTutorials from "../features/Instructor/Tutorials/MyTutorials";
@@ -22,7 +22,7 @@ const InstructorRoute = () => {
         <ContainerLayout>
           <Header />
           <div className="h-[87vh] flex justify-start mt-1 gap-2 pb-3">
-            <SideBar sideBarData={instructorSideBar} />
+            {/* <SideBar sideBarData={instructorSideBar} /> */}
             <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400   rounded-md w-full relative ">
               <Routes>
                 <Route
