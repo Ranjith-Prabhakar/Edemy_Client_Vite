@@ -55,22 +55,23 @@ const DashBoard = () => {
   }, [isSuccess]);
 
   return (
-    <div className="grid grid-cols-2 gap-4 space-y-10">
-      <div>
+    <div className="flex justify-center w-full items-center flex-wrap gap-4 p-4 space-y-[40px]">
+      {/* 800px:grid 800px:grid-cols-2 800px:gap-4 */}
+      <div className=" w-[40%]">
         <BarChart
           chartData={monthlySaleAndRevenue}
           chartName="Monthly Sales And Revenue"
         />
       </div>
-      <div>
+      <div className=" w-[40%]">
         <LineChart
           topTenInstructorAndNoOfCourses={topTenInstructorAndNoOfCourses}
         />
       </div>
-      <div>
+      <div className=" w-[40%]">
         <DoughnutChart ratingAndNoOfCourses={ratingAndNoOfCourses} />
       </div>
-      <div>
+      <div className="w-[40%]">
         <PieChart topSellingCategories={topSellingCategories} />
       </div>
     </div>

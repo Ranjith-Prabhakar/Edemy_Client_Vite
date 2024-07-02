@@ -1,5 +1,3 @@
-
-
 import CourseCard from "../Card/CourseCard";
 import { useGetCoursesForUserQuery } from "../../redux/features/course/courseApi";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
@@ -25,8 +23,8 @@ const OurBestCourses = () => {
         for your needs
       </h1>
 
-      <div className="mt-8 400px:mt-16 overflow-x-auto ">
-        <div className="flex flex-col  400px:flex-row 400px:overflow-x-auto gap-4 ">
+      <div className="mt-8 400px:mt-16 ">
+        <div className="flex flex-col  400px:flex-row  overflow-x-scroll gap-4 ">
           {courseCategory.map((item, index) => (
             <CourseCard courseCategory={item} key={index} />
           ))}

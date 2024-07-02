@@ -4,7 +4,7 @@ import useGetUser from "../hooks/useGetUser";
 import { ICategory } from "../redux/interfaces/Course/getCategories";
 import { useGetCategoryQuery } from "../redux/features/course/courseApi";
 import useInitialNotificationLoader from "../hooks/useInitialNotificationLoader";
-import Cart from "../components/Navbar/Cart";
+// import Cart from "../components/Navbar/Cart";
 import Brand from "../components/Navbar/Brand";
 import Search from "../components/Navbar/Search";
 import HamburgerMenu from "../components/Navbar/HamburgerMenu";
@@ -54,7 +54,7 @@ const Header = ({ isScrolled }: props) => {
               {userData.name && (
                 <>
                   {/* cart */}
-                  <Cart />
+                  {/* <Cart /> it has to uncomment*/}  
                   {/* notification */}
                   <Notification />
                 </>
