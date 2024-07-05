@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@stripe/stripe-js": "^3.0.7",
     "@types/faker": "^6.6.9",
+    "axios": "^1.7.2",
     "chart.js": "^4.4.2",
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",

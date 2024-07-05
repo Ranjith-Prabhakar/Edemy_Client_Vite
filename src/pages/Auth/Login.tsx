@@ -144,15 +144,7 @@ const Login = () => {
                   setGButtonError(false);
                 }}
               >
-                {/* <GeneralButton>
-                  <p className="inline">
-                    Login with
-                    <span>
-                      <FcGoogle className="inline ms-2" size={25} />
-                    </span>
-                  </p>
-                </GeneralButton> */}
-                <GoogleButton />
+               <GoogleButton />
               </div>
               <p className="text-sm font-light">
                 Don’t have an account yet?{"    "}

@@ -3,6 +3,7 @@ import { userLoggedIn } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 const AuthCookieChecker = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -10,9 +11,11 @@ const AuthCookieChecker = () => {
   const refreshToken = urlParams.get("refreshToken");
   const userData = urlParams.get("userData");
 
-  Cookies.set("accessToken", accessToken as string);
-  Cookies.set("refreshToken", refreshToken as string);
+  // Cookies.set("accessToken", accessToken as string);
+  // Cookies.set("refreshToken", refreshToken as string);
 
+  console.log("accessToken3333", accessToken);
+  console.log("refreshToken33333", refreshToken);
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -22,11 +25,28 @@ const AuthCookieChecker = () => {
     if (userData) {
       dispatch(userLoggedIn({ userData: JSON.parse(userData) }));
 
-      // Delay navigation until cookies are set
-      setTimeout(() => {
-        setLoading(false);
-        navigate("/");
-      }, 1000); // Adjust the delay time as needed
+      // api call to set cookie
+      let setCookie = async () => {
+        let result = await axios.post(
+          `${import.meta.env.VITE_BASEURL}/setCookie`,
+          { accessToken, refreshToken },
+          { withCredentials: true }
+        );
+        console.log("result", result);
+        if (result.data.success) {
+          setLoading(false);
+          navigate("/");
+        } else {
+          navigate("/login");
+        }
+      };
+
+      setCookie();
+    //   // Delay navigation until cookies are set
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //     navigate("/");
+    //   }, 1000); // Adjust the delay time as needed
     }
   }, [dispatch, navigate, userData]);
 

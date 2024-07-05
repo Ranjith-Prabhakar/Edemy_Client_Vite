@@ -6,12 +6,12 @@ function GoogleButton() {
     window.location.href = url;
   }
   async function auth() {
-    // const response = await fetch("http://127.0.0.1:8000/api/v1/gauth_url", {
-    //   method: "post",
-    // });
-    const response = await fetch("https://digi-world.online/api/v1/gauth_url", {
+    const response = await fetch("http://127.0.0.1:8000/api/v1/gauth_url", {
       method: "post",
     });
+    // const response = await fetch("https://digi-world.online/api/v1/gauth_url", {
+    //   method: "post",
+    // });
     const data = await response.json();
     navigate(data.url);
   }
