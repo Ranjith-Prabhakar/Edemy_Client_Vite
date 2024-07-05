@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { userLoggedIn } from "../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import axios from "axios";
 
 const AuthCookieChecker = () => {
