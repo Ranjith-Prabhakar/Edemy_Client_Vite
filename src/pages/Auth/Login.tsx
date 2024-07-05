@@ -18,7 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
   const [loading, setLoading] = useState(false);
-  const [gButtonError,setGButtonError] = useState(true)
+  const [gButtonError, setGButtonError] = useState(true);
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,7 +29,7 @@ const Login = () => {
       setLoading(true);
       toast.loading;
     } else if (isError && error) {
-      console.log("erorr Login",error)
+      console.log("erorr Login", error);
       setLoading(false);
       if ("data" in error) {
         if (error.data) {
@@ -144,7 +144,7 @@ const Login = () => {
                   setGButtonError(false);
                 }}
               >
-               <GoogleButton />
+                <GoogleButton />
               </div>
               <p className="text-sm font-light">
                 Don’t have an account yet?{"    "}
@@ -155,6 +155,16 @@ const Login = () => {
                   Sign up
                 </Link>
               </p>
+              <div className="flex items-center justify-center flex-col">
+                <div className="flex items-start justify-center flex-col">
+                  <h4 className="text-lg text-yellow-300 font-bold">
+                    Demo User EmailId : hadi@gmail.com
+                  </h4>
+                  <h4 className="text-lg text-yellow-300 font-bold">
+                    Demo User Password : Test@123
+                  </h4>
+                </div>
+              </div>
             </form>
           </div>
         </div>
