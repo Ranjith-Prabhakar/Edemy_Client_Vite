@@ -125,15 +125,16 @@ const BeInstructor = () => {
                   {/* Demo Data */}
                   <div className="flex items-center justify-center flex-col">
                     <div className="flex items-start justify-center flex-col">
-                      <h6 className="text-lg text-[#FFC0CB] font-bold my-2">
+                      <h6 className="text-lg text-yellow-300 font-thin my-2">
                         {" "}
-                        Admin approval may take a little time. If you want to
-                        just try out you can use the below data
+                        Approval from the administration may take some time. In
+                        the meantime, you can use the following credentials to
+                        proceed
                       </h6>
-                      <h4 className="text-lg text-yellow-300 font-bold">
+                      <h4 className="text-lg text-[#FFC0CB]  font-bold">
                         Email: hadi@gmail.com
                       </h4>
-                      <h4 className="text-lg text-yellow-300 font-bold mb-2">
+                      <h4 className="text-lg text-[#FFC0CB] font-bold mb-2">
                         Password: Test@123
                       </h4>
                     </div>

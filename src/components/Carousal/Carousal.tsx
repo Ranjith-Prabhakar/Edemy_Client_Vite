@@ -1,4 +1,5 @@
 import carousal from "../../../public/Assets/carousal.png";
+// import student from "../../../public/Assets/student.png";
 
 const Carousal = () => {
   return (
