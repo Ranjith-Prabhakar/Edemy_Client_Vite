@@ -71,9 +71,12 @@ const ChatBody = () => {
     (state: { chat: IChatInitialState }) => state.chat.chatList
   );
   console.log("chatList", chatList);
-  useEffect(()=>{
-    endMessageRef.current?.scrollIntoView()
-  },[chatList])
+  useEffect(() => {
+    endMessageRef.current?.scrollIntoView();
+
+    // to adjust scroll position
+    window.scrollTo(0, 0);
+  }, [chatList]);
   return (
     <div className="flex h-[88%] w-full  p-4 align-bottom overflow-scroll">
       <ul className="w-full">
@@ -141,7 +144,7 @@ const ChatBody = () => {
             );
           }
         })}
-      <div ref={endMessageRef} />
+        <div ref={endMessageRef} />
       </ul>
     </div>
   );

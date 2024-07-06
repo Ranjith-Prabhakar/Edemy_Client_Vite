@@ -12,6 +12,7 @@ const LeftPanel = () => {
     (state: { chat: IChatInitialState }) => state.chat
   );
 
+  
   return (
     <div className="border border-slate-400  rounded-md h-[78vh] w-[20vw] overflow-hidden ">
       <div className="flex justify-start border border-slate-400 border-b-2">

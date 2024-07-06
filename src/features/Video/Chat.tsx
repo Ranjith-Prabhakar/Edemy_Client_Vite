@@ -32,6 +32,12 @@ const Chat = ({ courseId, courseName, setSwapper }: Props) => {
     { isSuccess: getOnlineUsersIsSuccess, data: getOnlineUsersIsData },
   ] = useGetOnlineUsersMutation();
 
+  // to adjust scroll position
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  
   useEffect(() => {
     if (user.role === "admin") {
       getMessages({ courseId });

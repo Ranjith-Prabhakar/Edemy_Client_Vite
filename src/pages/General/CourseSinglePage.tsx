@@ -87,6 +87,12 @@ const CourseSinglePage = () => {
   const [swapper, setSwapper] = useState("about");
   const [position, setPosition] = useState("0");
 
+  // to adjust scroll position
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   useEffect(() => {
     if (user) {
       let purchased: boolean = false;
@@ -170,7 +176,7 @@ const CourseSinglePage = () => {
     <ContainerLayout>
       <Header isScrolled={isScrolled} />
       {courseData ? (
-        <div className="mt-0 h-screen  overflow-scroll">
+        <div className="mt-0 h-full  overflow-scroll">
           <div className="dark:bg-c_color-colorSeven 400px:p-5 400px:mt-5 rounded-md ">
             <VideoPlayer
               position={position}
