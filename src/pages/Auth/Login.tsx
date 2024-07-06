@@ -155,16 +155,7 @@ const Login = () => {
                   Sign up
                 </Link>
               </p>
-              <div className="flex items-center justify-center flex-col">
-                <div className="flex items-start justify-center flex-col">
-                  <h4 className="text-lg text-yellow-300 font-bold">
-                    Demo User EmailId : hadi@gmail.com
-                  </h4>
-                  <h4 className="text-lg text-yellow-300 font-bold">
-                    Demo User Password : Test@123
-                  </h4>
-                </div>
-              </div>
+              
             </form>
           </div>
         </div>

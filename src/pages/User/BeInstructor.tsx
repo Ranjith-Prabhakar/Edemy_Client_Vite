@@ -78,7 +78,6 @@ const BeInstructor = () => {
             folderName: "certificate",
           });
 
-
           if ("data" in result) {
             await addToBucket({
               url: result?.data,
@@ -102,20 +101,13 @@ const BeInstructor = () => {
     <ContainerLayout>
       <Header />
       <section>
-        <div className="flex flex-col items-center justify-center 400px:px-6 400px:py-8 mx-auto h-screen lg:py-0">
+        <div className="flex flex-col items-center justify-center 400px:px-6 400px:py-8 mx-auto h-full lg:py-0">
           <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <div className="flex justify-center items-center">
                 <h1 className="text-xl font-bold capitalize leading-tight tracking-tightmd:text-2xl ">
                   Be a instructor
                 </h1>
-                {/* <div className="flex justify-center items-center gap-3">
-                {" "}
-                <Link to={"/"}>
-                  <IoHome />
-                </Link>
-                <ThemeToggler />
-              </div> */}
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
@@ -129,6 +121,24 @@ const BeInstructor = () => {
                     receives 70% of the income generated, and the platform
                     retains 30%, as specified in our terms and conditions
                   </h3>
+
+                  {/* Demo Data */}
+                  <div className="flex items-center justify-center flex-col">
+                    <div className="flex items-start justify-center flex-col">
+                      <h6 className="text-lg text-[#FFC0CB] font-bold my-2">
+                        {" "}
+                        Admin approval may take a little time. If you want to
+                        just try out you can use the below data
+                      </h6>
+                      <h4 className="text-lg text-yellow-300 font-bold">
+                        Email: hadi@gmail.com
+                      </h4>
+                      <h4 className="text-lg text-yellow-300 font-bold mb-2">
+                        Password: Test@123
+                      </h4>
+                    </div>
+                  </div>
+
                   <AuthInputs
                     type="text"
                     name="qualification"
@@ -161,6 +171,7 @@ const BeInstructor = () => {
                     </p>
                   )}
                 </div>
+
                 {loading ? (
                   <SpinnerButton status="Validating Data" />
                 ) : (
