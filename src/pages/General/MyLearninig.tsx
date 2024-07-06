@@ -39,6 +39,13 @@ const MyLearninig = () => {
           >
             {myLearning &&
               myLearning.map((item) => <CourseCard courseCategory={item} />)}
+            {myLearning.length === 0 && (
+              <div className="flex items-center justify-center h-[50vh]">
+                <h1 className="text-white font-extrabold text-4xl text-center">
+                  No Courses Have Been Purchased Yet !
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       </ContainerLayout>

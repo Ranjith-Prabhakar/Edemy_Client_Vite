@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { usePaymentStatusMutation } from "../redux/features/course/courseApi";
+// import { useEffect } from "react";
+// import { usePaymentStatusMutation } from "../redux/features/course/courseApi";
 import { useNavigate } from "react-router-dom";
 import useGetUser from "../hooks/useGetUser";
 
 const PaymentSucess = () => {
   const navigate = useNavigate()
   const user = useGetUser()
-  const [paymentStatus,{data,isSuccess,isError,error}] = usePaymentStatusMutation();
-  useEffect(()=>{
-    if(isSuccess){
-      navigate(`/${user.role}/my_learnings`);
-    }
-    if(isError) console.log(error)
-  },[data, error, isError, isSuccess])
+  // const [paymentStatus,{data,isSuccess,isError,error}] = usePaymentStatusMutation();
+  // useEffect(()=>{
+  //   if(isSuccess){
+  //     navigate(`/${user.role}/my_learnings`);
+  //   }
+  //   if(isError) console.log(error)
+  // },[data, error, isError, isSuccess])
   return (
     <div className=" bg-gradient-to-r from-body-gradient-one to-body-gradient-two h-screen flex items-center justify-center">
       <div className="p-6 bg-c_color-colorSeven text-white md:mx-auto rounded-md shadow-lg">
@@ -36,7 +36,7 @@ const PaymentSucess = () => {
           <div className="py-10 text-center">
             <button
               onClick={() => {
-                paymentStatus({ paymentStatus: true });
+                navigate(`/${user.role}/my_learnings`);
               }}
               className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
             >
