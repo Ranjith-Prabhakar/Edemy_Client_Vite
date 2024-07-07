@@ -3,17 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ICategory } from "../../redux/interfaces/Course/getCategories";
 import { useGetCategoryQuery } from "../../redux/features/course/courseApi";
 
-// type Props = {
-//   categoryList: ICategory[];
-// };
-// { categoryList }: Props
 const Courses = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { data, isSuccess } = useGetCategoryQuery();
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   useEffect(() => {
-    console.log("inside the categorty", data);
     if (isSuccess) {
       addCategoryList(data.data as ICategory[]);
     }

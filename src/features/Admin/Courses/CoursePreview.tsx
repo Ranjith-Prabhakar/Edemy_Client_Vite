@@ -42,8 +42,10 @@ const CoursePreview = () => {
     courseData.modules[0].videos[0].videoTittle
   );
 
+  console.log("videoUrl", videoUrl);
   const regex = /\/(.*?)-/;
   useEffect(() => {
+    console.log("data", data);
     if (data) {
       const url = data.data;
       setVideoUrl(url as string);
