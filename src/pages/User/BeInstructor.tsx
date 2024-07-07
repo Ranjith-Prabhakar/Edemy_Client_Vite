@@ -34,13 +34,15 @@ const BeInstructor = () => {
     if (isSuccess) {
       setLoading(false);
       toast.success(data.message);
-      navigate("/user/profile");
+      window.scrollTo(0, 0);
+      navigate("/");
     } else if (isLoading) {
       setLoading(true);
     } else if (isError) {
       setLoading(false);
       responseErrorCatch(error);
-      navigate("/user/profile");
+      window.scrollTo(0, 0);
+      navigate("/");
     }
   }, [isSuccess, isError, data, navigate, error, isLoading]);
   const {
@@ -62,7 +64,7 @@ const BeInstructor = () => {
       const certificateFileType = certificateRef.current?.files?.[0].name
         .split(".")
         .pop() as string;
-      if (!["png", "jpeg", "pdf"].includes(certificateFileType?.trim())) {
+      if (!["png", "jpeg", "pdf","jpg"].includes(certificateFileType?.trim())) {
         setInvalidFileType(true);
       } else {
         setInvalidFileType(false);

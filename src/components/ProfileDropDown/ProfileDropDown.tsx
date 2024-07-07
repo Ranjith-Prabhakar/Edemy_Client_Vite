@@ -103,7 +103,7 @@ const ProfileDropDown = () => {
       )}
 
       {hamburgerDropDown && (
-        <div className="absolute top-10  right-4 w-[300px]  h-[580px] overflow-scroll   border rounded-lg bg-c_color-colorSeven">
+        <div className="absolute top-10  right-4 w-[300px]  h-[480px] overflow-scroll   border rounded-lg bg-c_color-colorSeven">
           <div className="relative w-full h-full p-3 pb-11">
             <IoCloseCircleOutline
               size={45}
