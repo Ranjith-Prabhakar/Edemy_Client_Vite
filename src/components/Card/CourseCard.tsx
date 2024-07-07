@@ -63,16 +63,12 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
   ] = useEnrollCourseMutation();
 
   useEffect(() => {
-    console.log("courseId", courseCategory._id);
     getSingleCourseReviewAndRating({ courseId: courseCategory._id });
   }, []);
 
   useEffect(() => {
     if (singleCourseReviewAndRatingIsSuccess) {
-      console.log(
-        "singleCourseReviewAndRatingData",
-        singleCourseReviewAndRatingData
-      );
+    
        setCoursereviewAndRatingData(
          (setCoursereviewAndRatingData as unknown as TResponse)?.data?.reviewAndRating 
        );
@@ -81,7 +77,6 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
 
 
   useEffect(() => {
-    console.log("coursereviewAndRatingData", coursereviewAndRatingData);
   }, [coursereviewAndRatingData]);
 
   useEffect(() => {
