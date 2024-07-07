@@ -63,6 +63,10 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
   ] = useEnrollCourseMutation();
 
   useEffect(() => {
+     console.log(
+       "singleCourseReviewAndRatingData",
+       singleCourseReviewAndRatingData
+     );
     getSingleCourseReviewAndRating({ courseId: courseCategory._id });
   }, []);
 
