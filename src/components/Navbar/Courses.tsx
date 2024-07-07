@@ -75,7 +75,6 @@ const MobileCourses = ({ setHamburgerDropDown }: MobileProps) => {
   const { data, isSuccess } = useGetCategoryQuery();
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   useEffect(() => {
-    console.log("inside the categorty", data);
     if (isSuccess) {
       addCategoryList(data.data as ICategory[]);
     }

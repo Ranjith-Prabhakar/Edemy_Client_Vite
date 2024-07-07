@@ -15,8 +15,8 @@ type props = {
   isScrolled?: boolean;
 };
 const Header = ({ isScrolled }: props) => {
-  useInitialNotificationLoader();
   const userData = useGetUser();
+  useInitialNotificationLoader();
   const { data, isSuccess } = useGetCategoryQuery();
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
 
