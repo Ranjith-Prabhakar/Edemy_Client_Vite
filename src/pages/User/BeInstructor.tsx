@@ -39,18 +39,13 @@ const BeInstructor = () => {
   const [
     logout,
     {
-      data: logoutData,
       isSuccess: logoutIsSuccess,
-      isError: logoutIsError,
-      error: logoutError,
-      isLoading: logoutIsLoading,
     },
   ] = useLogoutMutation();
 
   const [
     login,
     {
-      data: loginData,
       isSuccess: loginIsSuccess,
       isError: loginIsError,
       error: loginError,
