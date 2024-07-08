@@ -13,10 +13,14 @@ import {
   useAddToBucketMutation,
 } from "../../redux/features/course/courseApi";
 import { useSelector } from "react-redux";
-import { IUserState } from "../../redux/interfaces/authApi";
+import { ILoginRes, IUserState } from "../../redux/interfaces/authApi";
 import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
 import ContainerLayout from "../../layouts/ContainerLayout";
 import Header from "../../layouts/Header";
+import {
+  useLoginMutation,
+  useLogoutMutation,
+} from "../../redux/features/auth/authApi";
 
 const BeInstructor = () => {
   const [invalidFileType, setInvalidFileType] = useState(false);
@@ -24,12 +28,36 @@ const BeInstructor = () => {
   const userId = useSelector(
     (state: { user: IUserState }) => state.user.userData._id as string
   );
+
   const [addFileToCloud] = useAddFileToCloudMutation();
   const certificateRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [toBeInstructor, { data, isSuccess, isError, error, isLoading }] =
     useToBeInstructorMutation();
   const [addToBucket] = useAddToBucketMutation();
+
+  const [
+    logout,
+    {
+      data: logoutData,
+      isSuccess: logoutIsSuccess,
+      isError: logoutIsError,
+      error: logoutError,
+      isLoading: logoutIsLoading,
+    },
+  ] = useLogoutMutation();
+
+  const [
+    login,
+    {
+      data: loginData,
+      isSuccess: loginIsSuccess,
+      isError: loginIsError,
+      error: loginError,
+      isLoading: loginIsLoading,
+    },
+  ] = useLoginMutation();
+
   useEffect(() => {
     if (isSuccess) {
       setLoading(false);
@@ -64,7 +92,9 @@ const BeInstructor = () => {
       const certificateFileType = certificateRef.current?.files?.[0].name
         .split(".")
         .pop() as string;
-      if (!["png", "jpeg", "pdf","jpg"].includes(certificateFileType?.trim())) {
+      if (
+        !["png", "jpeg", "pdf", "jpg"].includes(certificateFileType?.trim())
+      ) {
         setInvalidFileType(true);
       } else {
         setInvalidFileType(false);
@@ -99,6 +129,35 @@ const BeInstructor = () => {
     },
   });
 
+  //demo instructor
+  const handleDemoInstructor = async () => {
+    await logout();
+  };
+  useEffect(() => {
+    if (logoutIsSuccess) {
+      login({ email: "hadi@gmail.com", password: "Test@123" });
+    }
+  }, [logoutIsSuccess]);
+
+  useEffect(() => {
+    if (loginIsSuccess) {
+      setLoading(false);
+      toast.success("user logged in successfully");
+      navigate("/");
+    } else if (loginIsLoading) {
+      setLoading(true);
+      toast.loading;
+    } else if (loginIsError && loginError) {
+      console.log("erorr Login", loginError);
+      setLoading(false);
+      if ("data" in loginError) {
+        if (loginError.data) {
+          const dataType = loginError.data as ILoginRes;
+          toast.error(dataType.message);
+        }
+      }
+    }
+  }, [loginIsSuccess]);
   return (
     <ContainerLayout>
       <Header />
@@ -133,15 +192,12 @@ const BeInstructor = () => {
                         the meantime, you can use the following credentials to
                         proceed
                       </h6>
-                      <h4 className="text-lg text-[#FFC0CB]  font-bold">
-                        Email: hadi@gmail.com
-                      </h4>
-                      <h4 className="text-lg text-[#FFC0CB] font-bold mb-2">
-                        Password: Test@123
-                      </h4>
+                      <GeneralButton onClick={handleDemoInstructor}>
+                        Login as Demo Instructor
+                      </GeneralButton>
                     </div>
                   </div>
-
+                  <br />
                   <AuthInputs
                     type="text"
                     name="qualification"
