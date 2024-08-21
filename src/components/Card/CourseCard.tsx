@@ -7,10 +7,10 @@ import { FaRupeeSign } from "react-icons/fa";
 import { ICourse } from "../../redux/interfaces/Course/generalInterface";
 import { useNavigate } from "react-router-dom";
 import {
-  useEnrollCourseMutation,
+  // useEnrollCourseMutation,
   useGetThumbnailImagesPreSignedUrlMutation,
 } from "../../redux/features/course/courseApi";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import useGetUser from "../../hooks/useGetUser";
 import { FaCartPlus } from "react-icons/fa";
 import { useGetSingleCourseReviewAndRatingMutation } from "../../redux/features/reviewAndRating/reiewAndRatingApi";
@@ -52,15 +52,16 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
   const user = useGetUser();
   const navigate = useNavigate();
   const [imgUrl, setImagUrl] = useState("");
-  const [
-    enrollCourse,
-    {
-      isSuccess: enrollIsSuccess,
-      data: enrollData,
-      isError: enrollIsError,
-      error: enrollError,
-    },
-  ] = useEnrollCourseMutation();
+
+  // const [
+  //   enrollCourse,
+  //   {
+  //     isSuccess: enrollIsSuccess,
+  //     data: enrollData,
+  //     isError: enrollIsError,
+  //     error: enrollError,
+  //   },
+  // ] = useEnrollCourseMutation();
 
   useEffect(() => {
      console.log(
@@ -96,14 +97,14 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-  useEffect(() => {
-    if (enrollIsSuccess) {
-      window.location = enrollData?.data as unknown as Location;
-    }
-    if (enrollIsError) {
-      toast.error("something went wrong please try again");
-    }
-  }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
+  // useEffect(() => {
+  //   if (enrollIsSuccess) {
+  //     window.location = enrollData?.data as unknown as Location;
+  //   }
+  //   if (enrollIsError) {
+  //     toast.error("something went wrong please try again");
+  //   }
+  // }, [enrollData, enrollError, enrollIsError, enrollIsSuccess]);
 
   let isCoursePurchasedByUser = user.enrolledCourses?.includes(
     courseCategory._id

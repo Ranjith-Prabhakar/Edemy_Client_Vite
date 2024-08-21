@@ -1,4 +1,4 @@
-import ThemeToggler from "../components/utils/ThemeToggler";
+// import ThemeToggler from "../components/utils/ThemeToggler";
 import { useEffect, useState } from "react";
 import useGetUser from "../hooks/useGetUser";
 import { ICategory } from "../redux/interfaces/Course/getCategories";
