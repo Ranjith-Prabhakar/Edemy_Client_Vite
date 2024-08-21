@@ -10,7 +10,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <SocketContextProvider>
-        <div className="font-poppins  bg-body-lightMode  text-black dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white">
+        {/* <div className="font-poppins  bg-body-lightMode  text-black dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"> */}
+        <div className="font-poppins  bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white">
           <App />
         </div>
       </SocketContextProvider>

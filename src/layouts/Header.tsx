@@ -50,11 +50,11 @@ const Header = ({ isScrolled }: props) => {
 
             <div className="hidden 1200px:flex justify-center items-center gap-4">
               {/* theme toggler */}
-              <ThemeToggler />
+              {/* <ThemeToggler /> */}
               {userData.name && (
                 <>
                   {/* cart */}
-                  {/* <Cart /> it has to uncomment*/}  
+                  {/* <Cart /> it has to uncomment*/}
                   {/* notification */}
                   <Notification />
                 </>
