@@ -165,7 +165,8 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
                 }, 0)}
               </h4>
             </div>
-            <div className="">
+            {/* enroll button */}
+            {/* <div className="">
               {isCoursePurchasedByUser || user.role === "admin" ? (
                 <button
                   className="bg-white text-gray-950 font-bold px-8  py-0.5 rounded-full hover:scale-110"
@@ -194,7 +195,9 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
                   Enroll Now
                 </button>
               )}
-            </div>
+            </div> */}
+
+
           </div>
           <div className=""></div>
         </div>
