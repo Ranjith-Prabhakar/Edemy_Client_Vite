@@ -117,7 +117,8 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
   return (
     <div
       key={courseCategory.courseName}
-      className="flex flex-col w-[300px] rounded-2xl overflow-hidden dark:bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
+      // className="flex flex-col w-[300px] rounded-2xl overflow-hidden dark:bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
+      className="flex flex-col w-[300px] rounded-2xl overflow-hidden bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
     >
       <div className="relative">
         <div className="absolute right-3 top-3 cursor-pointer">
