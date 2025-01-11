@@ -33,6 +33,7 @@ const InstructorRoute = () => {
                 <Route path="mytutorials" element={<MyTutorials />} />
                 <Route path="payment_success" element={<PaymentSucess />} />
                 <Route path="my_learnings" element={<MyLearninig />} />
+                <Route path="*" element={<MyLearninig />} />
               </Routes>
             </div>
           </div>
