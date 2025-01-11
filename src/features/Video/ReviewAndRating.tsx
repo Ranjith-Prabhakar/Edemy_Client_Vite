@@ -113,7 +113,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
   };
 
   return (
-    <div className=" dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
+    <div className=" bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
       <div className="border my-2 ml-2 overflow-scroll capitalize  flex-1 rounded-lg text-gray-300 ">
         <div className=" p-3 rounded-md w-full ">
           <form className="">
@@ -127,7 +127,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
                   }}
                   rows={1}
                   cols={1000}
-                  className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent "
+                  className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 bg-transparent "
                   placeholder="Leave a your review..."
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
@@ -222,7 +222,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
         </div>
       </div>
       <div className="flex flex-col flex-2 mr-2 my-3 gap-2">
-        <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
+        <div className="flex flex-col rounded-md bg-[#062e2a]">
           <h1 className="text-center font-bold italic">Total Rating</h1>
           <hr className="w-[90%] m-auto mt-1" />
           <div className="flex shadow-2xl px-5 py-2  ">
@@ -245,7 +245,7 @@ const ReviewAndRating = ({ courseData }: Props) => {
           </div>
         </div>
         {user?.enrolledCourses?.includes(courseData._id) && (
-          <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
+          <div className="flex flex-col rounded-md bg-[#062e2a]">
             <h1 className="text-center font-bold italic">Add your rating</h1>
             <hr className="w-[90%] m-auto mt-1" />
             <div className="flex shadow-2xl px-5 py-2  ">
@@ -408,9 +408,9 @@ export default ReviewAndRating;
 //   };
 
 //   return (
-//     <div className=" dark:bg-c_color-colorSix  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
+//     <div className=" bg-c_color-colorSix  rounded-b-md rounded-tl-md w-full flex justify-between gap-2">
 //       <div className="border my-2 ml-2 overflow-scroll capitalize  flex-1 rounded-lg text-gray-300 ">
-//         <div className="dark:bg-c_color-colorSix p-3 rounded-md w-full ">
+//         <div className="bg-c_color-colorSix p-3 rounded-md w-full ">
 //           <form className="">
 //             <div className="relative w-full">
 //               {user?.enrolledCourses?.includes(courseData._id) && (
@@ -422,7 +422,7 @@ export default ReviewAndRating;
 //                   }}
 //                   rows={1}
 //                   cols={1000}
-//                   className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent "
+//                   className=" block p-2.5 w-full text-sm  rounded-lg  focus:ring-blue-500 focus:border-blue-500 bg-transparent "
 //                   placeholder="Leave a your review..."
 //                 ></textarea>
 //               )}
@@ -493,7 +493,7 @@ export default ReviewAndRating;
 //         </div>
 //       </div>
 //       <div className="flex flex-col flex-2 mr-2 my-3 gap-2">
-//         <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
+//         <div className="flex flex-col rounded-md bg-[#062e2a]">
 //           <h1 className="text-center font-bold italic">Total Rating</h1>
 //           <hr className="w-[90%] m-auto mt-1" />
 //           <div className="flex shadow-2xl px-5 py-2  ">
@@ -516,7 +516,7 @@ export default ReviewAndRating;
 //           </div>
 //         </div>
 //         {user?.enrolledCourses?.includes(courseData._id) && (
-//           <div className="flex flex-col rounded-md dark:bg-[#062e2a]">
+//           <div className="flex flex-col rounded-md bg-[#062e2a]">
 //             <h1 className="text-center font-bold italic">Add your rating</h1>
 //             <hr className="w-[90%] m-auto mt-1" />
 //             <div className="flex shadow-2xl px-5 py-2  ">

@@ -13,7 +13,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
         </label>
         <input
           ref={ref}
-          className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-c_color-colorTwo focus:border-c_color-colorTwo block w-full  dark:bg-c_color-colorThree dark:placeholder-gray-400"
+          className="border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-c_color-colorTwo focus:border-c_color-colorTwo block w-full  bg-c_color-colorThree placeholder-gray-400"
           aria-describedby={`${props.id}_help`}
           id={props.id}
           type="file"

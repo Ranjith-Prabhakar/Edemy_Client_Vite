@@ -187,8 +187,8 @@ export default Header;
 //             <input
 //               className={`rounded-full w-96 h-[35px] px-7 outline-none font-semibold ${
 //                 isScrolled
-//                   ? "dark:bg-slate-50 placeholder:text-black dark:text-black"
-//                   : "dark:bg-slate-400 focus:border-1 focus:border-white placeholder:text-black dark:text-black"
+//                   ? "bg-slate-50 placeholder:text-black text-black"
+//                   : "bg-slate-400 focus:border-1 focus:border-white placeholder:text-black text-black"
 //               }  focus:border-1 focus:border-white `}
 //               type="search"
 //               placeholder="search...."
@@ -223,7 +223,7 @@ export default Header;
 //                     />
 //                     <div className="mt-10 flex flex-col">
 //                       {userData.role === "admin" && (
-//                         <div className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white">
+//                         <div className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white">
 //                           <Link to={`/admin/dash_bord`}>
 //                             <h1 className=" font-semibold">
 //                               {userData.name.split(" ").shift()}
@@ -236,7 +236,7 @@ export default Header;
 //                       {userData.role === "instructor" && (
 //                         <Link
 //                           to={`/instructor/profile`}
-//                           className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
+//                           className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white"
 //                         >
 //                           {userData.name.split(" ").shift()}
 //                         </Link>
@@ -245,7 +245,7 @@ export default Header;
 //                       {userData.role === "user" && (
 //                         <Link
 //                           to={`/user/profile`}
-//                           className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
+//                           className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white"
 //                         >
 //                           {userData.name.split(" ").shift()}
 //                         </Link>
@@ -262,7 +262,7 @@ export default Header;
 //                         userData.role !== "admin" && (
 //                           <Link
 //                             to={"/user/be_instructor"}
-//                             className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
+//                             className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white"
 //                           >
 //                             Teach on Edemy
 //                           </Link>
@@ -272,7 +272,7 @@ export default Header;
 //                           {userData.role !== "admin" && (
 //                             <Link
 //                               to={`/${userData.role}/my_learnings`}
-//                               className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
+//                               className="py-2 px-3 rounded-lg  flex justify-between items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white"
 //                             >
 //                               My Learnings
 //                             </Link>
@@ -280,14 +280,14 @@ export default Header;
 
 //                           <Link
 //                             to={"/be_instructor"}
-//                             className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
+//                             className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white"
 //                           >
 //                             <FaCartPlus size={25} />
 //                             <h1>Cart</h1>
 //                           </Link>
 //                           <Link
 //                             to={"/be_instructor"}
-//                             className="pt-2 pb-4 px-3 rounded-lg   flex justify-start gap-2 items-center w-full hover:dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white"
+//                             className="pt-2 pb-4 px-3 rounded-lg   flex justify-start gap-2 items-center w-full hover:bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white"
 //                           >
 //                             <IoIosNotifications size={25} />
 //                             <h1>Notification</h1>
@@ -321,7 +321,7 @@ export default Header;
 //                     )}
 //                     {notificationSideBar && (
 //                       <div className="absolute -right-4 top-10  h-[500px] min-w-[500px] shadow-2xl ">
-//                         <div className="relative p-5 pt-10 w-full h-full border rounded-lg dark:bg-c_color-colorSeven">
+//                         <div className="relative p-5 pt-10 w-full h-full border rounded-lg bg-c_color-colorSeven">
 //                           <IoCloseCircleOutline
 //                             size={25}
 //                             className="absolute right-3 top-3 cursor-pointer"
@@ -425,7 +425,7 @@ export default Header;
 //                                           break;
 //                                       }
 //                                     }}
-//                                     className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"
+//                                     className="cursor-pointer bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white p-3 rounded-lg text-sm border"
 //                                   >
 //                                     {notification.message}{" "}
 //                                     <IoIosArrowRoundForward className="inline" />

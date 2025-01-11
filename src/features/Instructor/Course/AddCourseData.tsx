@@ -260,11 +260,11 @@ const AddCourseData = ({
           ref={categoryRef}
           name="category"
           id="category"
-          className=" block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+          className=" block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-gray-400 border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
         >
           <option
             value="choose one category"
-            className="italic font-bold dark:bg-c_color-colorSeven dark:hover:bg-c_color "
+            className="italic font-bold bg-c_color-colorSeven hover:bg-c_color "
           >
             choose one category
           </option>
@@ -272,7 +272,7 @@ const AddCourseData = ({
             <option
             key={option.name}
               value={option.name}
-              className="italic font-bold dark:bg-c_color-colorSeven"
+              className="italic font-bold bg-c_color-colorSeven"
             >
               {option.name}
             </option>
@@ -292,13 +292,13 @@ const AddCourseData = ({
           value={values.price}
           onChange={handleChange}
           onBlur={handleBlur}
-          className=" block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className=" block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer relative"
           placeholder=" "
         />
         {!visible && (
           <button
             type="button"
-            className="dark:bg-c_color-colorSeven px-3 py-1 w-20 rounded-sm dark:text-white font-bold flex justify-center items-center absolute right-2 top-1 hover:text-[18px] transition-all ease duration-700"
+            className="bg-c_color-colorSeven px-3 py-1 w-20 rounded-sm text-white font-bold flex justify-center items-center absolute right-2 top-1 hover:text-[18px] transition-all ease duration-700"
             onClick={() => handleUpdation({ price: values.price })}
           >
             Update
@@ -311,7 +311,7 @@ const AddCourseData = ({
 
         <label
           htmlFor="courseName"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Price
         </label>
@@ -326,13 +326,13 @@ const AddCourseData = ({
           value={values.courseName}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer relative"
           placeholder=" "
         />
         {!visible && (
           <button
             type="button"
-            className="dark:bg-c_color-colorSeven px-3 py-1 w-20 rounded-sm dark:text-white font-bold flex justify-center items-center absolute right-2 top-1 hover:text-[18px] transition-all ease duration-700"
+            className="bg-c_color-colorSeven px-3 py-1 w-20 rounded-sm text-white font-bold flex justify-center items-center absolute right-2 top-1 hover:text-[18px] transition-all ease duration-700"
             onClick={() => handleUpdation({ courseName: values.courseName })}
           >
             Update
@@ -343,7 +343,7 @@ const AddCourseData = ({
         )}
         <label
           htmlFor="courseName"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Course Name
         </label>
@@ -356,13 +356,13 @@ const AddCourseData = ({
           value={values.discription}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer relative"
           placeholder=" "
         />
         {!visible && (
           <button
             type="button"
-            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-2"
+            className="hover:text-[18px] transition-all ease duration-700 bg-c_color-colorSeven text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-2"
             onClick={() => handleUpdation({ discription: values.discription })}
           >
             Update
@@ -373,7 +373,7 @@ const AddCourseData = ({
         )}
         <label
           htmlFor="discription"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Description
         </label>
@@ -387,13 +387,13 @@ const AddCourseData = ({
           value={values.tags}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer relative"
           placeholder=" "
         />
         {!visible && (
           <button
             type="button"
-            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
+            className="hover:text-[18px] transition-all ease duration-700 bg-c_color-colorSeven text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
             onClick={() => handleUpdation({ tags: values.tags })}
           >
             Update
@@ -404,7 +404,7 @@ const AddCourseData = ({
         )}
         <label
           htmlFor="tags"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Tags
         </label>
@@ -413,7 +413,7 @@ const AddCourseData = ({
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="thumbnail"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Thumbnail
         </label>
@@ -425,13 +425,13 @@ const AddCourseData = ({
           // value={values.thumbnail}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer relative"
           placeholder=" "
         />
         {!visible && (
           <button
             type="button"
-            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-2"
+            className="hover:text-[18px] transition-all ease duration-700 bg-c_color-colorSeven text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-2"
             onClick={() => handleUpdation({ thumbnail: values.thumbnail })}
           >
             Update
@@ -450,13 +450,13 @@ const AddCourseData = ({
           value={values.duration}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer relative"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer relative"
           placeholder=" "
         />
         {!visible && (
           <button
             type="button"
-            className="hover:text-[18px] transition-all ease duration-700 dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
+            className="hover:text-[18px] transition-all ease duration-700 bg-c_color-colorSeven text-white font-bold px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
             onClick={() => handleUpdation({ duration: values.duration })}
           >
             Update
@@ -467,7 +467,7 @@ const AddCourseData = ({
         )}
         <label
           htmlFor="duration"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Duration
         </label>
@@ -476,13 +476,13 @@ const AddCourseData = ({
         <button
           type="submit"
           // className="  px-3 py-1 w-20 rounded-sm  flex justify-center items-center absolute right-2 top-1"
-          className="dark:bg-c_color-colorSeven dark:text-white hover:text-[18px] transition-all ease duration-700 font-bold  px-3 py-1 w-20 rounded-sm text-black flex justify-center items-center"
+          className="bg-c_color-colorSeven text-white hover:text-[18px] transition-all ease duration-700 font-bold  px-3 py-1 w-20 rounded-sm  flex justify-center items-center"
         >
           {loading ? (
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="inline w-10 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+                className="inline w-10 h-5  animate-spin text-gray-600  fill-gray-300"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

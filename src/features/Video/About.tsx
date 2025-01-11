@@ -7,7 +7,7 @@ type Props = {
 
 const About = ({ courseName, Description, Duration, Instructor }: Props) => {
   return (
-    <div className="dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize p-3 rounded-b-md w-full">
+    <div className="bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize p-3 rounded-b-md w-full">
       <h1 className="capitalize text-4xl font-bold mb-3 mt-1">{courseName}</h1>
       <h1 className="capitalize text-md font-light text-slate-300 mb-3 italic">
         {Description}

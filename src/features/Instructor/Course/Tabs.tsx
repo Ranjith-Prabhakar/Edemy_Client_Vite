@@ -39,7 +39,7 @@ const Tabs = ({ setStepper, stepper, setModuleVideos, setSubmit }: Props) => {
         Add Modules
       </button>
       <button
-        className="dark:bg-c_color-colorSeven dark:text-white ms-auto rounded-md mb-1 hover:scale-110 hover:opacity-80 px-5 text-black font-bold py-1 transition-all ease duration-400"
+        className="bg-c_color-colorSeven text-white ms-auto rounded-md mb-1 hover:scale-110 hover:opacity-80 px-5  font-bold py-1 transition-all ease duration-400"
         onClick={() => {
           setOpen(true);
         }}

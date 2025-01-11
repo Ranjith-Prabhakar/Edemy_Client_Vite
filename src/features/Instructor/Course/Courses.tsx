@@ -59,8 +59,8 @@ const Courses = () => {
   return (
     <div className="flex custom-scrollBar ">
       <div className="flex-1 ">
-        <div className="flex flex-col dark:bg-c_color-colorSix ">
-          <div className="sticky top-0 z-10  dark:bg-c_color-colorOne">
+        <div className="flex flex-col bg-c_color-colorSix ">
+          <div className="sticky top-0 z-10  bg-c_color-colorOne">
             {" "}
             <Tabs
               setStepper={setStepper}

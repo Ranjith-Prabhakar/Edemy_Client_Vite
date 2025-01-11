@@ -30,7 +30,7 @@ const CourseTable = () => {
     <>
       {tableData && tableData.length ? (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+          <table className="w-full text-sm text-left rtl:text-right  text-gray-400 ">
             <Thead>
               <tr>
                 <Th>Sl No</Th>
@@ -76,7 +76,7 @@ const CourseTable = () => {
               ))}
             </tbody>
           </table>
-          {/* <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
+          {/* <div className=" bg-c_color-colorSeven p-3 flex justify-end gap-1">
             <h4 className="me-2">4 of 5</h4>
             <input
               type="text"
@@ -100,7 +100,7 @@ const CourseTable = () => {
               <FaForward />
             </div>
           </div> */}
-          <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
+          <div className=" bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
             <FaRegArrowAltCircleLeft
               size={30}
               title="prev"

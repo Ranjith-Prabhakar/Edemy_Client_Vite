@@ -177,7 +177,7 @@ const CourseSinglePage = () => {
       <Header isScrolled={isScrolled} />
       {courseData ? (
         <div className="mt-0 h-full  overflow-scroll">
-          <div className="dark:bg-c_color-colorSeven 400px:p-5 400px:mt-5 rounded-md ">
+          <div className="bg-c_color-colorSeven 400px:p-5 400px:mt-5 rounded-md ">
             <VideoPlayer
               position={position}
               videoUrl={videoUrl}
@@ -194,7 +194,7 @@ const CourseSinglePage = () => {
               <div
                 className={`${
                   swapper === "about"
-                    ? "dark:bg-c_color-colorSix  border-b border-dashed"
+                    ? "bg-c_color-colorSix  border-b border-dashed"
                     : ""
                 } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
                 onClick={() => {
@@ -206,7 +206,7 @@ const CourseSinglePage = () => {
               <div
                 className={`${
                   swapper === "chapters"
-                    ? "dark:bg-c_color-colorSix  border-b border-dashed"
+                    ? "bg-c_color-colorSix  border-b border-dashed"
                     : ""
                 } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
                 onClick={() => {
@@ -218,7 +218,7 @@ const CourseSinglePage = () => {
               <div
                 className={`${
                   swapper === "review"
-                    ? "dark:bg-c_color-colorSix  border-b border-dashed"
+                    ? "bg-c_color-colorSix  border-b border-dashed"
                     : ""
                 } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
                 onClick={() => {
@@ -232,7 +232,7 @@ const CourseSinglePage = () => {
                 <div
                   className={`${
                     swapper === "chat"
-                      ? "dark:bg-c_color-colorSix  border-b border-dashed"
+                      ? "bg-c_color-colorSix  border-b border-dashed"
                       : ""
                   } flex-1 text-center p-2 rounded-t-md cursor-pointer font-bold`}
                   onClick={() => {
@@ -250,7 +250,7 @@ const CourseSinglePage = () => {
               )}
               {isPurchased && (
                 <div
-                  className={`dark:bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
+                  className={`bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
                   onClick={() => {
                     enrollCourse([
                       {
@@ -267,7 +267,7 @@ const CourseSinglePage = () => {
               )}
               {!user.name && (
                 <div
-                  className={`dark:bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
+                  className={`bg-cyan-400 mb-1 flex-1 text-center p-2 rounded-md cursor-pointer font-bold`}
                   onClick={() => {
                     toast.success("please Login first");
                     setTimeout(() => {
@@ -292,7 +292,7 @@ const CourseSinglePage = () => {
                 <ReviewAndRating courseData={courseData} />
               )}
               {swapper === "chapters" && (
-                <div className="dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize p-2  rounded-md w-full  overflow-scroll h-full">
+                <div className="bg-gradient-to-r from-body-gradient-one to-body-gradient-two capitalize p-2  rounded-md w-full  overflow-scroll h-full">
                   {courseData.modules.map((item, index) => (
                     <div className="flex flex-col" key={index}>
                       <div
@@ -316,7 +316,7 @@ const CourseSinglePage = () => {
                             {showModuleVideos === index + 1 && (
                               <div
                                 key={videoIndex}
-                                className={`flex 400px:w-[80%] 400px:mx-auto capitalize gap-2  justify-between p-3  dark:bg-c_color-colorSix cursor-pointer hover:scale-105`}
+                                className={`flex 400px:w-[80%] 400px:mx-auto capitalize gap-2  justify-between p-3  bg-c_color-colorSix cursor-pointer hover:scale-105`}
                               >
                                 <h1> {video.videoNo}</h1>
                                 <h1>
@@ -326,7 +326,7 @@ const CourseSinglePage = () => {
                                     .pop() || "No Match"}{" "}
                                 </h1>
                                 <button
-                                  className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
+                                  className=" px-5 rounded-full h-[25px] font-bold bg-cyan-500 "
                                   onClick={() => {
                                     if (
                                       user &&
@@ -395,7 +395,7 @@ const CourseSinglePage = () => {
             </div>
           </div>
 
-          {/* <div className="dark:bg-c_color-colorSeven capitalize p-5 mt-5 ml-3 rounded-md w-[42%] overflow-scroll h-full">
+          {/* <div className="bg-c_color-colorSeven capitalize p-5 mt-5 ml-3 rounded-md w-[42%] overflow-scroll h-full">
             {courseData.modules.map((item, index) => (
               <div className="flex flex-col" key={index}>
                 <div
@@ -418,7 +418,7 @@ const CourseSinglePage = () => {
                       {showModuleVideos === index + 1 && (
                         <div
                           key={videoIndex}
-                          className="flex capitalize gap-2 justify-between m-1 px-2 py-1 dark:bg-c_color-colorSix cursor-pointer hover:scale-105"
+                          className="flex capitalize gap-2 justify-between m-1 px-2 py-1 bg-c_color-colorSix cursor-pointer hover:scale-105"
                         >
                           <h1> {video.videoNo}</h1>
                           <h1>
@@ -428,7 +428,7 @@ const CourseSinglePage = () => {
                               .pop() || "No Match"}{" "}
                           </h1>
                           <button
-                            className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
+                            className=" px-5 rounded-full h-[25px] font-bold bg-cyan-500 "
                             onClick={() => {
                               if (
                                 user &&

@@ -6,7 +6,7 @@ type TableHeadProps = {
 
 const Thead = ({ children }: TableHeadProps) => {
   return (
-    <thead className="text-xs uppercase dark:bg-c_color-colorSeven dark:text-white">
+    <thead className="text-xs uppercase bg-c_color-colorSeven text-white">
       {children}
     </thead>
   );

@@ -29,7 +29,7 @@ const Notification = () => {
       )}
       {notificationSideBar && (
         <div className="absolute -right-4 top-10  h-[500px] min-w-[500px] shadow-2xl ">
-          <div className="relative p-5 pt-10 w-full h-full border rounded-lg dark:bg-c_color-colorSeven">
+          <div className="relative p-5 pt-10 w-full h-full border rounded-lg bg-c_color-colorSeven">
             <IoCloseCircleOutline
               size={25}
               className="absolute right-3 top-3 cursor-pointer"
@@ -131,7 +131,7 @@ const Notification = () => {
                             break;
                         }
                       }}
-                      className="cursor-pointer dark:bg-gradient-to-r from-body-gradient-one to-body-gradient-two dark:text-white p-3 rounded-lg text-sm border"
+                      className="cursor-pointer bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white p-3 rounded-lg text-sm border"
                     >
                       {notification.message}{" "}
                       <IoIosArrowRoundForward className="inline" />

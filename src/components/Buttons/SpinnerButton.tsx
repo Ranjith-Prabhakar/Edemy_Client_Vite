@@ -7,12 +7,12 @@ export const SpinnerButton = ({ status }: SpinnerButtonProp) => {
     <button
       disabled
       type="button"
-      className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#FFd700] dark:hover:bg-[#fafd58] dark:focus:ring-[#FFd700] dark:text-black"
+      className="w-full focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#FFd700] hover:bg-[#fafd58] focus:ring-[#FFd700] text-black"
     >
       <svg
         aria-hidden="true"
         role="status"
-        className="inline w-4 h-4 me-3 text-gray-200 animate-spin dark:text-gray-600"
+        className="inline w-4 h-4 me-3 animate-spin text-gray-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

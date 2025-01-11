@@ -45,8 +45,8 @@ const Search = ({ isScrolled, categoryList }: Props) => {
       <input
         className={`rounded-full w-96 h-[35px] px-7 outline-none font-semibold ${
           isScrolled
-            ? "dark:bg-slate-50 placeholder:text-black dark:text-black"
-            : "dark:bg-slate-400 focus:border-1 focus:border-white placeholder:text-black dark:text-black"
+            ? "bg-slate-50 placeholder:text-black text-black"
+            : "bg-slate-400 focus:border-1 focus:border-white placeholder:text-black text-black"
         }  focus:border-1 focus:border-white `}
         type="search"
         placeholder="search...."
@@ -110,8 +110,8 @@ const MobileSearch = () => {
       <input
         className={`rounded-full w-full mb-2 h-[35px] px-7 outline-none font-semibold ${
           isScrolled
-            ? "dark:bg-slate-50 placeholder:text-black dark:text-black"
-            : "dark:bg-slate-400 focus:border-1 focus:border-white placeholder:text-black dark:text-black"
+            ? "bg-slate-50 placeholder:text-black text-black"
+            : "bg-slate-400 focus:border-1 focus:border-white placeholder:text-black text-black"
         }  focus:border-1 focus:border-white `}
         type="search"
         placeholder="search...."

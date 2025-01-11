@@ -178,7 +178,7 @@ const OtpVerification = (): JSX.Element => {
   return (
     <>
       <div className="flex justify-center items-center h-screen">
-        <div className="flex  flex-col justify-center items-center  p-6 pb-12 rounded-md shadow-lg dark:bg-[#063134]">
+        <div className="flex  flex-col justify-center items-center  p-6 pb-12 rounded-md shadow-lg bg-[#063134]">
           <BsShieldLockFill size={60} className="mb-2 " />
           <h1 className="text-3xl font-bold mb-5 ">Verify Otp</h1>
           <div className="flex gap-2">

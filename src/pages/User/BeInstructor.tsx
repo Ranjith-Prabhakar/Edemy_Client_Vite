@@ -158,7 +158,7 @@ const BeInstructor = () => {
       <Header />
       <section>
         <div className="flex flex-col items-center justify-center 400px:px-6 400px:py-8 mx-auto h-full lg:py-0">
-          <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorSeven">
+          <div className="w-full  rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 bg-c_color-colorSeven">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <div className="flex justify-center items-center">
                 <h1 className="text-xl font-bold capitalize leading-tight tracking-tightmd:text-2xl ">

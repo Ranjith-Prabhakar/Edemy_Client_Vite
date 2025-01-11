@@ -60,7 +60,7 @@ const CoursePreview = () => {
     <>
       {courseData ? (
         <div className="flex h-[70vh]">
-          <div className="dark:bg-c_color-colorSeven p-5 mt-5 ml-3 rounded-md w-[58%] overflow-scroll h-full">
+          <div className="bg-c_color-colorSeven p-5 mt-5 ml-3 rounded-md w-[58%] overflow-scroll h-full">
             <VideoPlayer
               videoUrl={videoUrl}
               position=""
@@ -86,7 +86,7 @@ const CoursePreview = () => {
 
               <div className="flex flex-col gap-2 p-5">
                 <button
-                  className=" px-3 hover:scale-105 h-[30px] font-bold dark:bg-cyan-600 dark:text-white rounded-full"
+                  className=" px-3 hover:scale-105 h-[30px] font-bold bg-cyan-600 text-white rounded-full"
                   onClick={() => {
                     approveOrRejectCourse({
                       courseId: courseData._id,
@@ -99,7 +99,7 @@ const CoursePreview = () => {
                   Approve
                 </button>
                 <button
-                  className=" px-3 hover:scale-105 h-[30px] font-bold dark:bg-red-700 dark:text-white rounded-full"
+                  className=" px-3 hover:scale-105 h-[30px] font-bold bg-red-700 text-white rounded-full"
                   onClick={() => {
                     approveOrRejectCourse({
                       courseId: courseData._id,
@@ -115,7 +115,7 @@ const CoursePreview = () => {
             </div>
           </div>
 
-          <div className="dark:bg-c_color-colorSeven capitalize p-5 mt-5 ml-3 rounded-md w-[42%] overflow-scroll h-full">
+          <div className="bg-c_color-colorSeven capitalize p-5 mt-5 ml-3 rounded-md w-[42%] overflow-scroll h-full">
             {courseData.modules.map((item, index) => (
               <div className="flex flex-col " key={index}>
                 <div
@@ -137,14 +137,14 @@ const CoursePreview = () => {
                       {showModuleVideos === index + 1 && (
                         <div
                           key={videoIndex}
-                          className="flex capitalize gap-2 justify-between m-1 px-2 py-1 dark:bg-c_color-colorSix cursor-pointer hover:scale-105"
+                          className="flex capitalize gap-2 justify-between m-1 px-2 py-1 bg-c_color-colorSix cursor-pointer hover:scale-105"
                         >
                           <h1> {video.videoNo}</h1>
                           <h1>
                             {video.videoTittle.match(regex)?.[1] || "No Match"}{" "}
                           </h1>
                           <button
-                            className=" px-5 rounded-full h-[25px] font-bold dark:bg-cyan-500 "
+                            className=" px-5 rounded-full h-[25px] font-bold bg-cyan-500 "
                             onClick={() => {
                               getVideo({ videoName: video.videoTittle });
                             }}

@@ -228,7 +228,7 @@ const AddModuleVideos = ({
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="moduleNo"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Module No
         </label>
@@ -239,7 +239,7 @@ const AddModuleVideos = ({
           value={values.moduleNo}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
           placeholder=" "
         />
         {errors.moduleNo && touched.moduleNo && (
@@ -250,7 +250,7 @@ const AddModuleVideos = ({
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="moduleTittle"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Module Tittle
         </label>
@@ -261,7 +261,7 @@ const AddModuleVideos = ({
           value={values.moduleTittle}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
           placeholder=" "
         />
         {errors.moduleTittle && touched.moduleTittle && (
@@ -272,7 +272,7 @@ const AddModuleVideos = ({
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="videoTittle"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Video Tittle
         </label>
@@ -284,7 +284,7 @@ const AddModuleVideos = ({
           value={values.videoTittle}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
           placeholder=" "
         />
         {errors.videoTittle && touched.videoTittle && (
@@ -295,7 +295,7 @@ const AddModuleVideos = ({
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="videoNo"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Video No
         </label>
@@ -306,7 +306,7 @@ const AddModuleVideos = ({
           value={values.videoNo}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
           placeholder=" "
         />
         {errors.videoNo && touched.videoNo && (
@@ -318,25 +318,25 @@ const AddModuleVideos = ({
         ref={previewRef}
         name="preview"
         id="preview"
-        className="block py-2.5 px-0 w-full mb-8 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+        className="block py-2.5 px-0 w-full mb-8 text-sm  bg-transparent border-0 border-b-2  appearance-none text-gray-400 border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
       >
         <option
           value="choose one option"
-          className="italic font-bold dark:bg-c_color-colorSeven dark:hover:bg-c_color"
+          className="italic font-bold bg-c_color-colorSeven hover:bg-c_color"
         >
           choose one preview option
         </option>
 
         <option
           value="true"
-          className="italic font-bold dark:bg-c_color-colorSeven"
+          className="italic font-bold bg-c_color-colorSeven"
         >
           true
         </option>
 
         <option
           value="false"
-          className="italic font-bold dark:bg-c_color-colorSeven"
+          className="italic font-bold bg-c_color-colorSeven"
         >
           false
         </option>
@@ -347,7 +347,7 @@ const AddModuleVideos = ({
       <div className="relative z-0 w-full mb-5 group">
         <label
           htmlFor="videoUrl"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm  text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Add File
         </label>
@@ -359,13 +359,13 @@ const AddModuleVideos = ({
           value={values.videoUrl}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2  appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
           placeholder=" "
         />
       </div>
       <button
         type="submit"
-        className="dark:bg-c_color-colorSeven dark:text-white font-bold px-3 py-1 w-30 rounded-sm text-black hover:text-[18px] transition-all ease duration-700"
+        className="bg-c_color-colorSeven text-white font-bold px-3 py-1 w-30 rounded-sm  hover:text-[18px] transition-all ease duration-700"
       >
         Add Modules
       </button>

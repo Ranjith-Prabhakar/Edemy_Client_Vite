@@ -16,11 +16,11 @@
 //             onClick={() => {
 //               setProfileDropDownMenu(false);
 //             }}
-//             className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+//             className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
 //           >
 //             <Link
 //               to={`/instructor/my_learnings`}
-//               className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+//               className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
 //             >
 //               <FaBookOpenReader />
 //               <h1 className=" font-semibold">My Learning</h1>
@@ -117,8 +117,8 @@ const ProfileDropDown = () => {
                 {userData.role === "instructor" && (
                   <>
                     {/* // profile */}
-                    <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
-                      <div className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
+                      <div className="py-2 px-3 rounded-lg  flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                         {userData.name.split(" ").shift()}
                       </div>
                     </div>
@@ -128,11 +128,11 @@ const ProfileDropDown = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={`/instructor/addcourses`}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <FaPhotoVideo />
                         <h1 className=" font-semibold">Add Course</h1>
@@ -143,11 +143,11 @@ const ProfileDropDown = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={`/instructor/mytutorials`}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <FaYoutube />
                         <h1 className=" font-semibold">My Tutorial</h1>
@@ -158,8 +158,8 @@ const ProfileDropDown = () => {
 
                 {userData.role === "user" && (
                   <>
-                    <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
-                      <div className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
+                      <div className="py-2 px-3 rounded-lg  flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                         {userData.name.split(" ").shift()}
                       </div>
                     </div>
@@ -171,11 +171,11 @@ const ProfileDropDown = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                   >
                     <Link
                       to={"/auth/login"}
-                      className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 px-3 rounded-lg  flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <h1 className="flex justify-start items-end gap-5 text-2xl">
                         <CgProfile size={35} />
@@ -192,11 +192,11 @@ const ProfileDropDown = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={"/be_instructor"}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <GiTeacher />
                         <h1 className=" font-semibold">Teach on Edemy</h1>
@@ -210,11 +210,11 @@ const ProfileDropDown = () => {
                         onClick={() => {
                           setHamburgerDropDown(false);
                         }}
-                        className="py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <Link
                           to={`/${userData.role}/my_learnings`}
-                          className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                          className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                         >
                           <FaBookOpenReader />
                           <h1 className=" font-semibold">My Learning</h1>
@@ -222,7 +222,7 @@ const ProfileDropDown = () => {
                       </div>
                     )}
                     <div
-                      className="my-3 flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 rounded-lg dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one hover:text-[21px]  transition-all ease duration-700"
+                      className="my-3 flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 rounded-lg bg-gradient-to-r from-body-gradient-two to-body-gradient-one hover:text-[21px]  transition-all ease duration-700"
                       onClick={() => {
                         handleLogout();
                       }}

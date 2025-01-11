@@ -107,7 +107,7 @@ const Requests = ({ setNotification }: props) => {
             <div className="relative overflow-x-auto">
               {tableData.length ? (
                 <>
-                  <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <table className="w-full text-sm text-left rtl:text-right  text-gray-400">
                     <Thead>
                       <tr>
                         <Th> Sl No</Th>
@@ -132,7 +132,7 @@ const Requests = ({ setNotification }: props) => {
                           <Td>
                             {" "}
                             <button
-                              className="dark:bg-c_color-colorSeven rounded-full font-bold py-1 px-3 mr-1 hover:scale-110"
+                              className="bg-c_color-colorSeven rounded-full font-bold py-1 px-3 mr-1 hover:scale-110"
                               onClick={() => {
                                 handleGetCertificate(item.certificate);
                               }}
@@ -142,7 +142,7 @@ const Requests = ({ setNotification }: props) => {
                           </Td>
                           <Td>
                             <button
-                              className="dark:bg-c_color-colorSeven rounded-full font-bold py-1 px-3 mr-1 hover:scale-110"
+                              className="bg-c_color-colorSeven rounded-full font-bold py-1 px-3 mr-1 hover:scale-110"
                               onClick={() => {
                                 approveorRejectInstructorRequests({
                                   agreementId: item._id as string,
@@ -154,7 +154,7 @@ const Requests = ({ setNotification }: props) => {
                               Approve
                             </button>
                             <button
-                              className="dark:bg-c_color-colorSeven font-bold py-1 px-3 rounded-full hover:scale-110"
+                              className="bg-c_color-colorSeven font-bold py-1 px-3 rounded-full hover:scale-110"
                               onClick={() => {
                                 approveorRejectInstructorRequests({
                                   agreementId: item._id as string,
@@ -171,7 +171,7 @@ const Requests = ({ setNotification }: props) => {
                     </tbody>
                   </table>
 
-                  <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
+                  <div className=" bg-c_color-colorSeven p-3 flex justify-end gap-1">
                     <h4 className="me-2">4 of 5</h4>
                     <input
                       type="text"

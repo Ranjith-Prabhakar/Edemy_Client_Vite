@@ -66,7 +66,7 @@ const SignUp = () => {
   return (
     <section>
       <div className="flex flex-col  items-center justify-center px-4 py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full py-5 px-3 bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
+        <div className="w-full py-5 px-3 rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 bg-[#063134] ">
           <div className=" sm:p-8">
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl  mb-4">
@@ -240,7 +240,7 @@ export default SignUp;
 //   return (
 //     <section>
 //       <div className="flex flex-col  items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-//         <div className="w-full py-5 bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
+//         <div className="w-full py-5 bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 bg-[#063134] ">
 //           <div className=" sm:p-8">
 //             <div className="flex justify-between items-center">
 //               <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl  mb-4">
@@ -270,7 +270,7 @@ export default SignUp;
 //                   value={values.name}
 //                   onChange={handleChange}
 //                   onBlur={handleBlur} // to check whether click on the field
-//                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400   "
+//                   className="bg-gray-50 border border-gray-300 text-black text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400   "
 //                   placeholder="name@company.com"
 //                 />
 //                 {errors.name && touched.name && (
@@ -292,7 +292,7 @@ export default SignUp;
 //                   value={values.email}
 //                   onChange={handleChange}
 //                   onBlur={handleBlur} // to check whether click on the field
-//                   className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400"
+//                   className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400"
 //                   placeholder="name@company.com"
 //                 />
 //                 {errors.email && touched.email && (
@@ -314,7 +314,7 @@ export default SignUp;
 //                   onChange={handleChange}
 //                   onBlur={handleBlur}
 //                   placeholder="••••••••"
-//                   className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400"
+//                   className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400"
 //                 />
 //                 {errors.password && touched.password && (
 //                   <p className="text-red-600">{errors.password}</p>
@@ -335,7 +335,7 @@ export default SignUp;
 //                   onChange={handleChange}
 //                   onBlur={handleBlur}
 //                   placeholder="••••••••"
-//                   className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400"
+//                   className="bg-gray-50 border border-gray-300 text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400"
 //                 />
 //                 {errors.confirmPassword && touched.confirmPassword && (
 //                   <p className="text-red-600">{errors.confirmPassword}</p>
@@ -346,7 +346,7 @@ export default SignUp;
 //               ) : (
 //                 <button
 //                   type="submit"
-//                   className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "
+//                   className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#008E80] hover:bg-[#009B7D] "
 //                   disabled={isSubmitting} //
 //                 >
 //                   Sign in

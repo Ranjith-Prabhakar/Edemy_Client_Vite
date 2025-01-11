@@ -11,18 +11,14 @@ type Props = {
   setSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Model = ({
-  setOpen,
-  setModuleVideos,
-  setSubmit,
-}: Props) => {
+const Model = ({ setOpen, setModuleVideos, setSubmit }: Props) => {
   const [updateCourse] = useUpdateCourseMutation();
   const navigate = useNavigate();
   return (
     <div>
       <div
         id="alert-additional-content-1"
-        className="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+        className="p-4 mb-4  border  rounded-lg  bg-gray-800 text-blue-400 border-blue-800"
         role="alert"
       >
         <div className="flex items-center">
@@ -45,7 +41,7 @@ const Model = ({
         <div className="flex">
           <button
             type="button"
-            className="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center flex justify-center items-center dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800"
+            className=" focus:ring-4 focus:outline-none  font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center flex justify-center items-center bg-yellow-300 text-gray-800 hover:bg-yellow-400 focus:ring-yellow-800"
             onClick={async () => {
               await updateCourse({ submissionStatus: "completed" });
               setOpen(false);
@@ -59,7 +55,7 @@ const Model = ({
           </button>
           <button
             type="button"
-            className="text-yellow-800 bg-transparent border border-yellow-800 hover:bg-yellow-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-yellow-300 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-gray-800 dark:focus:ring-yellow-800"
+            className=" bg-transparent border  focus:ring-4 focus:outline-none  font-medium rounded-lg text-xs px-3 py-1.5 text-center hover:bg-yellow-300 border-yellow-300 text-yellow-300 hover:text-gray-800 focus:ring-yellow-800"
             data-dismiss-target="#alert-additional-content-4"
             aria-label="Close"
             onClick={() => {

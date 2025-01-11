@@ -39,7 +39,7 @@ const CourseRequestTable = () => {
     <>
       {tableData && tableData.length ? (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+          <table className="w-full text-sm text-left rtl:text-right  text-gray-400 ">
             <Thead>
               <tr>
                 <Th>Sl No</Th>
@@ -73,7 +73,7 @@ const CourseRequestTable = () => {
                   <Td>
                     <div className="flex justify-start gap-3 ">
                       <button
-                        className="dark:bg-cyan-500 py-1 px-4 rounded-full"
+                        className="bg-cyan-500 py-1 px-4 rounded-full"
                         onClick={() => {
                           approveOrRejectCourse({
                             courseId: item._id,
@@ -86,7 +86,7 @@ const CourseRequestTable = () => {
                         Approve
                       </button>
                       <button
-                        className="dark:bg-red-700 py-1 px-4 rounded-full"
+                        className="bg-red-700 py-1 px-4 rounded-full"
                         onClick={() => {
                           approveOrRejectCourse({
                             courseId: item._id,
@@ -104,7 +104,7 @@ const CourseRequestTable = () => {
               ))}
             </tbody>
           </table>
-          <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end gap-1">
+          <div className=" bg-c_color-colorSeven p-3 flex justify-end gap-1">
             <h4 className="me-2">4 of 5</h4>
             <input
               type="text"

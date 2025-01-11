@@ -16,7 +16,7 @@ const Categories = () => {
     <div className="h-full w-full">
       <div className="flex items-center justify-between mb-1">
         <button
-          className="dark:bg-c_color-colorSeven  px-3 rounded-sm h-[30px] flex items-center gap-1 font-bold"
+          className="bg-c_color-colorSeven  px-3 rounded-sm h-[30px] flex items-center gap-1 font-bold"
           onClick={() => {
             setAddCategory(!addCategory);
           }}

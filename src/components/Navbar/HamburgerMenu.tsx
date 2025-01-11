@@ -63,15 +63,15 @@ const HamburgerMenu = () => {
             />
             <div className=" mt-20 ps-4 flex flex-col ">
               <MobileSearch />
-              <div className="800px:hidden 400px:py-0 py-2  px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
-                <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+              <div className="800px:hidden 400px:py-0 py-2  px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
+                <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                   <MobileCourses setHamburgerDropDown={setHamburgerDropDown} />
                 </div>
               </div>
               {userData.role === "admin" && (
                 <>
                   {/* profile */}
-                  <div className="hover:text-[21px]  transition-all ease duration-700 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                  <div className="hover:text-[21px]  transition-all ease duration-700 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                     <div
                       onClick={() => {
                         setHamburgerDropDown(false);
@@ -90,11 +90,11 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/users`}
-                      className="py-2 px-3  rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 px-3  rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <FaUsers />
                       <h1 className=" font-semibold">Users</h1>
@@ -105,11 +105,11 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/instructors`}
-                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <GiTeacher />
                       <h1 className=" font-semibold">Instructors</h1>
@@ -120,11 +120,11 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/categories`}
-                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <TbCategoryPlus />
                       <h1 className=" font-semibold">Categories</h1>
@@ -135,11 +135,11 @@ const HamburgerMenu = () => {
                     onClick={() => {
                       setHamburgerDropDown(false);
                     }}
-                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                    className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                   >
                     <Link
                       to={`/admin/dash_bord/courses`}
-                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <FaPhotoVideo />
                       <h1 className=" font-semibold">Courses</h1>
@@ -151,7 +151,7 @@ const HamburgerMenu = () => {
                 {userData.role === "instructor" && (
                   <>
                     {/* // profile */}
-                    <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                       <div>
                         <div
                         // to={`/instructor/profile`}
@@ -162,8 +162,8 @@ const HamburgerMenu = () => {
                       <ThemeToggler />
                     </div>
                     {/*  *******/}
-                    <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
-                      <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
+                      <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                         <MobileCourses
                           setHamburgerDropDown={setHamburgerDropDown}
                         />
@@ -175,11 +175,11 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={`/instructor/addcourses`}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <FaPhotoVideo />
                         <h1 className=" font-semibold">Add Course</h1>
@@ -190,11 +190,11 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={`/instructor/mytutorials`}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <FaYoutube />
                         <h1 className=" font-semibold">My Tutorial</h1>
@@ -206,7 +206,7 @@ const HamburgerMenu = () => {
 
                 {userData.role === "user" && (
                   <>
-                    <div className="hover:text-[21px]  transition-all ease duration-700 py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="hover:text-[21px]  transition-all ease duration-700 py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                       <div
                         onClick={() => {
                           setHamburgerDropDown(false);
@@ -214,7 +214,7 @@ const HamburgerMenu = () => {
                       >
                         <div
                         // to={`/user/profile`}
-                        // className="py-2 px-3 rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        // className="py-2 px-3 rounded-lg  flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                         >
                           {userData.name.split(" ").shift()}
                         </div>
@@ -222,8 +222,8 @@ const HamburgerMenu = () => {
                       <ThemeToggler />
                     </div>
                     {/*  *******/}
-                    <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
-                      <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                    <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
+                      <div className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                         <MobileCourses
                           setHamburgerDropDown={setHamburgerDropDown}
                         />
@@ -234,7 +234,7 @@ const HamburgerMenu = () => {
                 )}
 
                 {!userData.role && (
-                  <div className="hover:text-[21px]  transition-all ease duration-700 py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white">
+                  <div className="hover:text-[21px]  transition-all ease duration-700 py-2 px-3 rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
                     <div
                       onClick={() => {
                         setHamburgerDropDown(false);
@@ -258,11 +258,11 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3  rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className="hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3  rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={"/be_instructor"}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 font-bold items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 font-bold items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <GiTeacher />
                         Teach on Edemy
@@ -276,11 +276,11 @@ const HamburgerMenu = () => {
                         onClick={() => {
                           setHamburgerDropDown(false);
                         }}
-                        className=" hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className=" hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <Link
                           to={`/instructor/my_learnings`}
-                          className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                          className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                         >
                           <FaBookOpenReader />
                           <h1 className=" font-semibold">My Learning</h1>
@@ -292,11 +292,11 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className=" hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3  rounded-lg mb-3 flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                      className=" hover:text-[21px]  transition-all ease duration-700 400px:py-0 py-2 px-3  rounded-lg mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                     >
                       <Link
                         to={"/be_instructor"}
-                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <FaCartPlus size={25} />
                         <h1>Cart</h1>
@@ -307,11 +307,11 @@ const HamburgerMenu = () => {
                       onClick={() => {
                         setHamburgerDropDown(false);
                       }}
-                      className="400px:py-0 py-2 px-3  rounded-lg  flex justify-between items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white hover:text-[21px]  transition-all ease duration-700"
+                      className="400px:py-0 py-2 px-3  rounded-lg  flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white hover:text-[21px]  transition-all ease duration-700"
                     >
                       <Link
                         to={"/be_instructor"}
-                        className="pt-2 pb-4 px-3 rounded-lg   flex justify-start gap-2 items-center w-full dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one dark:text-white"
+                        className="pt-2 pb-4 px-3 rounded-lg   flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
                       >
                         <IoIosNotifications size={25} />
                         <h1>Notification</h1>
@@ -319,7 +319,7 @@ const HamburgerMenu = () => {
                     </div>
 
                     <div
-                      className="my-3 flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 rounded-lg dark:bg-gradient-to-r from-body-gradient-two to-body-gradient-one hover:text-[21px]  transition-all ease duration-700"
+                      className="my-3 flex justify-start items-center gap-2 cursor-pointer ps-5 py-3 rounded-lg bg-gradient-to-r from-body-gradient-two to-body-gradient-one hover:text-[21px]  transition-all ease duration-700"
                       onClick={() => {
                         handleLogout();
                       }}

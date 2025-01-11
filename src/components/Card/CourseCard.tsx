@@ -22,7 +22,7 @@ type TResponse = {
     courseName: string;
     createdAt: string;
     updatedAt: string;
-    reviewAndRating: TReviewAndRating[]
+    reviewAndRating: TReviewAndRating[];
   };
   message: string;
   success: boolean;
@@ -35,7 +35,6 @@ type Props = {
 const CourseCard = ({ courseCategory }: Props): ReactNode => {
   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
     useGetThumbnailImagesPreSignedUrlMutation();
-
 
   const [
     getSingleCourseReviewAndRating,
@@ -64,25 +63,23 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
   // ] = useEnrollCourseMutation();
 
   useEffect(() => {
-     console.log(
-       "singleCourseReviewAndRatingData",
-       singleCourseReviewAndRatingData
-     );
+    console.log(
+      "singleCourseReviewAndRatingData",
+      singleCourseReviewAndRatingData
+    );
     getSingleCourseReviewAndRating({ courseId: courseCategory._id });
   }, []);
 
   useEffect(() => {
     if (singleCourseReviewAndRatingIsSuccess) {
-    
-       setCoursereviewAndRatingData(
-         (setCoursereviewAndRatingData as unknown as TResponse)?.data?.reviewAndRating 
-       );
+      setCoursereviewAndRatingData(
+        (setCoursereviewAndRatingData as unknown as TResponse)?.data
+          ?.reviewAndRating
+      );
     }
   }, [singleCourseReviewAndRatingIsSuccess]);
 
-
-  useEffect(() => {
-  }, [coursereviewAndRatingData]);
+  useEffect(() => {}, [coursereviewAndRatingData]);
 
   useEffect(() => {
     getThumbnailImagesPreSignedUrl({
@@ -117,7 +114,7 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
   return (
     <div
       key={courseCategory.courseName}
-      // className="flex flex-col w-[300px] rounded-2xl overflow-hidden dark:bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
+      // className="flex flex-col w-[300px] rounded-2xl overflow-hidden bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
       className="flex flex-col w-[300px] rounded-2xl overflow-hidden bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
     >
       <div className="relative">
@@ -198,8 +195,6 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
                 </button>
               )}
             </div> */}
-
-
           </div>
           <div className=""></div>
         </div>
@@ -209,7 +204,6 @@ const CourseCard = ({ courseCategory }: Props): ReactNode => {
 };
 
 export default CourseCard;
-
 
 // // import { ReactNode, useEffect, useState } from "react";
 // // import web_development from "../../../public/Assets/web_development.avif";
@@ -249,7 +243,6 @@ export default CourseCard;
 // //   const [getThumbnailImagesPreSignedUrl, { data, isSuccess }] =
 // //     useGetThumbnailImagesPreSignedUrlMutation();
 
-
 // //   const [
 // //     getSingleCourseReviewAndRating,
 // //     {
@@ -287,11 +280,10 @@ export default CourseCard;
 // //         singleCourseReviewAndRatingData
 // //       );
 // //        setCoursereviewAndRatingData(
-// //          (setCoursereviewAndRatingData as unknown as TResponse)?.data?.reviewAndRating 
+// //          (setCoursereviewAndRatingData as unknown as TResponse)?.data?.reviewAndRating
 // //        );
 // //     }
 // //   }, [singleCourseReviewAndRatingIsSuccess]);
-
 
 // //   useEffect(() => {
 // //     console.log("coursereviewAndRatingData", coursereviewAndRatingData);
@@ -330,7 +322,7 @@ export default CourseCard;
 // //   return (
 // //     <div
 // //       key={courseCategory.courseName}
-// //       className="flex flex-col w-[300px] rounded-2xl overflow-hidden dark:bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
+// //       className="flex flex-col w-[300px] rounded-2xl overflow-hidden bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
 // //     >
 // //       <div className="relative">
 // //         <div className="absolute right-3 top-3 cursor-pointer">
@@ -488,7 +480,7 @@ export default CourseCard;
 //   return (
 //     <div
 //       key={courseCategory.courseName}
-//       className="flex flex-col w-[300px] rounded-2xl overflow-hidden dark:bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
+//       className="flex flex-col w-[300px] rounded-2xl overflow-hidden bg-c_color-colorSeven shadow-lg pb-4 space-y-2"
 //     >
 //       <div className="relative">
 //         <div className="absolute right-3 top-3 cursor-pointer">

@@ -63,7 +63,7 @@ const Login = () => {
   return (
     <section>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-c_color-colorOne ">
+        <div className="w-full rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 bg-c_color-colorOne ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold leading-tight tracking-tight">
@@ -113,7 +113,7 @@ const Login = () => {
                       id="remember"
                       aria-describedby="remember"
                       type="checkbox"
-                      className="w-4 h-4 dark:bg-[#b7e2e6] rounded focus:outline-none"
+                      className="w-4 h-4 bg-[#b7e2e6] rounded focus:outline-none"
                     />
                   </div>
                   <br />
@@ -155,7 +155,6 @@ const Login = () => {
                   Sign up
                 </Link>
               </p>
-              
             </form>
           </div>
         </div>
@@ -236,7 +235,7 @@ export default Login;
 //   return (
 //     <section>
 //       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-//         <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#063134] ">
+//         <div className="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0 bg-[#063134] ">
 //           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 //             <div className="flex justify-between items-center">
 //               <h1 className="text-xl font-bold leading-tight tracking-tight">
@@ -266,7 +265,7 @@ export default Login;
 //                   value={values.email}
 //                   onChange={handleChange}
 //                   onBlur={handleBlur} // to check whether click on the field
-//                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400   "
+//                   className="bg-gray-50 border border-gray-300 text-black text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400   "
 //                   placeholder="name@company.com"
 //                 />
 //                 {errors.email && touched.email && (
@@ -288,7 +287,7 @@ export default Login;
 //                   onChange={handleChange}
 //                   onBlur={handleBlur}
 //                   placeholder="••••••••"
-//                   className="bg-gray-50 border border-gray-300 text-black dark:text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 dark:bg-[#b7e2e6]  dark:placeholder-gray-400   "
+//                   className="bg-gray-50 border border-gray-300 text-black text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400   "
 //                 />
 //                 {errors.password && touched.password && (
 //                   <p className="text-red-600">{errors.password}</p>
@@ -301,7 +300,7 @@ export default Login;
 //                       id="remember"
 //                       aria-describedby="remember"
 //                       type="checkbox"
-//                       className="w-4 h-4 dark:bg-[#b7e2e6] rounded focus:outline-none"
+//                       className="w-4 h-4 bg-[#b7e2e6] rounded focus:outline-none"
 //                     />
 //                   </div>
 //                   <br />
@@ -318,14 +317,14 @@ export default Login;
 //               </div>
 //               <button
 //                 type="submit"
-//                 className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] "
+//                 className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#008E80] hover:bg-[#009B7D] "
 //                 disabled={isSubmitting} //
 //               >
 //                 Sign in
 //               </button>
 
 //               <div className="flex gap-3">
-//                 <button className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#008E80] dark:hover:bg-[#009B7D] ">
+//                 <button className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#008E80] hover:bg-[#009B7D] ">
 //                   <p className="inline">
 //                     Login with
 //                     <span>

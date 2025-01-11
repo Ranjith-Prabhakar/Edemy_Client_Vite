@@ -77,7 +77,7 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+        <table className="w-full text-sm text-left rtl:text-right  text-gray-400 ">
           <Thead>
             <tr>
               <Th>Sl No</Th>
@@ -126,7 +126,7 @@ const Table = ({ setPageNo, permitedNext, pageNo }: Props) => {
             ))}
           </tbody>
         </table>
-        <div className=" dark:bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
+        <div className=" bg-c_color-colorSeven p-3 flex justify-end pe-10 gap-10">
           <FaRegArrowAltCircleLeft
             size={30}
             title="prev"

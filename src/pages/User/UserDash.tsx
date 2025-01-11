@@ -11,7 +11,7 @@
 //       <Header />
 //       <div className="h-[79vh] flex justify-start gap-2 mt-[4%] pb-2">
 //         <SideBar sideBarData={userSideBar} />
-//         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 dark:bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
+//         <div className="flex flex-col gap-2 h-full overflow-scroll scroll-m-1 bg-c_color-colorOne shadow-md ring-gray-400  p-3 rounded-md w-full relative">
 //           <Routes>
 //             {/* <Route path="dashboard" element={<Table />} /> */}
 //           </Routes>
