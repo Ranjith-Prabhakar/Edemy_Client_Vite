@@ -6,7 +6,6 @@ type ChildProp = {
 const ContainerLayout = ({ children }: ChildProp) => {
   return (
     <div className="w-full 400px:max-w-[95%]  400px:m-auto ">{children}</div>
-    // <div className="w-full ">{children}</div>
   );
 };
 

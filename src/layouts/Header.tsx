@@ -1,16 +1,14 @@
-// import ThemeToggler from "../components/utils/ThemeToggler";
 import { useEffect, useState } from "react";
 import useGetUser from "../hooks/useGetUser";
 import { ICategory } from "../redux/interfaces/Course/getCategories";
 import { useGetCategoryQuery } from "../redux/features/course/courseApi";
 import useInitialNotificationLoader from "../hooks/useInitialNotificationLoader";
-// import Cart from "../components/Navbar/Cart";
 import Brand from "../components/Navbar/Brand";
 import Search from "../components/Navbar/Search";
 import HamburgerMenu from "../components/Navbar/HamburgerMenu";
 import Notification from "../components/Navbar/Notification";
-// import ProfileMenu from "../components/Navbar/ProfileMenu";
 import ProfileDropDown from "../components/ProfileDropDown/ProfileDropDown";
+
 type props = {
   isScrolled?: boolean;
 };
