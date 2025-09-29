@@ -92,7 +92,6 @@ const CourseSinglePage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
   useEffect(() => {
     if (user) {
       let purchased: boolean = false;

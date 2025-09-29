@@ -36,12 +36,7 @@ const BeInstructor = () => {
     useToBeInstructorMutation();
   const [addToBucket] = useAddToBucketMutation();
 
-  const [
-    logout,
-    {
-      isSuccess: logoutIsSuccess,
-    },
-  ] = useLogoutMutation();
+  const [logout, { isSuccess: logoutIsSuccess }] = useLogoutMutation();
 
   const [
     login,

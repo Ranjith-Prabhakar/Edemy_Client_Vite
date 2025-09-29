@@ -27,7 +27,7 @@ const UserRoute = () => {
                   path="/profile"
                   element={<Profile sideBarData={userSideBar} />}
                 />
-                
+
                 <Route path="payment_success" element={<PaymentSucess />} />
                 <Route path="my_learnings" element={<MyLearninig />} />
               </Routes>
