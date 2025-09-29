@@ -7,7 +7,7 @@ import GeneralButton from "../../../components/Buttons/GeneralButton";
 
 const SignUp = () => {
   const {
-    loading,
+    isLoading,
     values,
     errors,
     touched,
@@ -42,7 +42,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="John Doe"
-                  label="Your name"
+                  label="Name"
                 />
                 {errors.name && touched.name && (
                   <p className="text-red-600">{errors.name}</p>
@@ -51,13 +51,13 @@ const SignUp = () => {
 
               <div>
                 <AuthInputs
-                  type="text"
+                  type="email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="johndoe@gmail.com"
-                  label="Your email"
+                  label="Email"
                 />
                 {errors.email && touched.email && (
                   <p className="text-red-600">{errors.email}</p>
@@ -91,7 +91,7 @@ const SignUp = () => {
                 )}
               </div>
               <br />
-              {loading ? (
+              {isLoading ? (
                 <SpinnerButton status="Validating Data" />
               ) : (
                 <GeneralButton type="submit" disabled={isSubmitting}>

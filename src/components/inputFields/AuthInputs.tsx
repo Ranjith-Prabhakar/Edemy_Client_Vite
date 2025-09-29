@@ -5,7 +5,6 @@ type InputProps = ComponentPropsWithRef<"input"> & {
 };
 
 const AuthInputs = ({ label, ...props }: InputProps) => {
-  // here we will get all the attributes and we can spread it into this props variable
   return (
     <>
       <label htmlFor={props.name} className="block mb-2 text-sm font-medium">

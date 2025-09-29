@@ -4,6 +4,7 @@ import useGetUser from "../hooks/useGetUser";
 import { Toaster } from "react-hot-toast";
 import { lazy, Suspense } from "react";
 
+// code spitting ---------------------------------------------------------
 const PageNotFound = lazy(() => import("../pages/PageNotFound"));
 const AuthRoute = lazy(() => import("../Routes/AuthRoute"));
 const AdminRoute = lazy(() => import("../Routes/AdminRoute"));
@@ -20,7 +21,7 @@ const AuthCookieChecker = lazy(
   () => import("../components/AuthCookieChecker/AuthCookieChecker")
 );
 const BeInstructor = lazy(() => import("../pages/User/BeInstructor"));
-
+// --------------------------------------------------------------------------
 const AppRoute = () => {
   const userName = useGetUser().name;
   return (
@@ -40,7 +41,6 @@ const AppRoute = () => {
           />
 
           <Route path="/google_auth/*" element={<AuthCookieChecker />} />
-          {/** need too work on  */}
           <Route path="/user/*" element={<UserRoute />} />
           <Route path="/be_instructor" element={<BeInstructor />} />
           <Route path="/instructor/*" element={<InstructorRoute />} />

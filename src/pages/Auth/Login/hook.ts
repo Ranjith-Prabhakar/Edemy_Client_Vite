@@ -21,7 +21,6 @@ export function useLogin() {
       setLoading(true);
       toast.loading;
     } else if (isError && error) {
-      console.log("erorr Login", error);
       setLoading(false);
       if ("data" in error) {
         if (error.data) {

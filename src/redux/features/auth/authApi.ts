@@ -14,13 +14,11 @@ import { userLoggedIn, userLoggedOut } from "./authSlice";
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<RegistrationRes, RegistrationReq>({
-      // api endpoint
       // Register -----------------------------------------------------------------------------
       query: (data) => ({
         url: "register",
         method: "post",
         body: data,
-        credentials: "include" as const,
       }),
     }),
     // create user -----------------------------------------------------------------------------

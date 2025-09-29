@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../../redux/features/auth/authApi";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import { signupSchema } from "../../../schema/authSchema";
@@ -11,20 +11,15 @@ export function useSignUp() {
   const [register, { isSuccess, isError, error, isLoading }] =
     useRegisterMutation();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isLoading) {
-      setLoading(true);
-    } else if (isSuccess) {
-      setLoading(false);
+    if (isSuccess) {
       toast.success("otp has been sent to your mail");
       navigate("/auth/otp_verification", { state: { fromSignup: true } });
     } else if (isError) {
-      setLoading(false);
       responseErrorCatch(error);
     }
-  }, [isSuccess, isError, error, isLoading, navigate]);
+  }, [isSuccess, isError, isLoading]);
 
   const {
     values,
@@ -58,7 +53,7 @@ export function useSignUp() {
   });
 
   return {
-    loading,
+    isLoading,
     values,
     errors,
     touched,

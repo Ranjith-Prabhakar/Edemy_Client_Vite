@@ -24,7 +24,7 @@ const Header = ({ isScrolled }: props) => {
         <div className="flex justify-between items-end ">
           <Brand />
           <Courses />
-          <Search isScrolled={isScrolled} categoryList={categoryList} />
+          <Search categoryList={categoryList} />
           <div>
             <HamburgerMenu />
             <div className="hidden 1200px:flex justify-center items-center gap-4">

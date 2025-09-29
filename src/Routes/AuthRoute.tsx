@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
 
+// code spitting ---------------------------------------------------------
 const Login = lazy(() => import("../pages/Auth/Login"));
 const SignUp = lazy(() => import("../pages/Auth/SignUp"));
 const OtpVerification = lazy(() => import("../pages/Auth/OtpVerification"));
@@ -12,6 +13,7 @@ const ResetForgotPassword = lazy(
   () => import("../pages/Auth/ResetForgotPassword")
 );
 
+// --------------------------------------------------------------------------
 const AuthRoute = () => {
   return (
     <Routes>

@@ -29,5 +29,5 @@ export function useMobileCourses() {
     }
   }, [isSuccess]);
 
-  return { sHovered, setIsHovered, navigate, categoryList };
+  return { isHovered, setIsHovered, navigate, categoryList };
 }

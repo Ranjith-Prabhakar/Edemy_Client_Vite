@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -26,7 +27,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <div className="h-screen w-screen flex justify-center items-center font-bold font-roboto text-2xl">
-          <h1>Something went wrong. Please try again</h1>
+          <Link to={"/"}>Something went wrong. Please try again</Link>
         </div>
       );
     }

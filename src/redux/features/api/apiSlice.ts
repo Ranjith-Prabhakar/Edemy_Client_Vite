@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; // react specific rtk query
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn } from "../auth/authSlice";
 import { catchError } from "../../../utils/catchError";
 import { IUser } from "../../interfaces/authApi";
@@ -17,13 +17,13 @@ export const apiSlice = createApi({
       }),
     }),
 
-    loadUser: builder.query<IUser,void>({
+    loadUser: builder.query<IUser, void>({
       query: () => ({
         url: "user_session",
         method: "GET",
         credentials: "include",
       }),
-      async onQueryStarted(_args,{ queryFulfilled, dispatch }) {
+      async onQueryStarted(_args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(
@@ -39,4 +39,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const {useLoadUserQuery} = apiSlice;
+export const { useLoadUserQuery } = apiSlice;

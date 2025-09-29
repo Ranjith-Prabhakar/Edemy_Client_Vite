@@ -3,7 +3,6 @@ import { ICategory } from "../../../redux/interfaces/Course/getCategories";
 import { useEffect, useState } from "react";
 import { catchError } from "../../../utils/catchError";
 import { useGetCategoryQuery } from "../../../redux/features/course/courseApi";
-import useGetScrollPosition from "../../../hooks/useGetScrollPosition";
 
 export function useSearch(categoryList: ICategory[]) {
   const [searchValue, setSearchValue] = useState("");
@@ -42,7 +41,6 @@ export function useSearch(categoryList: ICategory[]) {
 export function useMobileSearch() {
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   const { data, isSuccess } = useGetCategoryQuery();
-  const isScrolled = useGetScrollPosition();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
@@ -80,5 +78,5 @@ export function useMobileSearch() {
     }
   };
 
-  return { isScrolled, searchValue, setSearchValue, handleSearch };
+  return { searchValue, setSearchValue, handleSearch };
 }

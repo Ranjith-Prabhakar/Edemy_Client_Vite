@@ -45,7 +45,7 @@ const Login = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="name@company.com"
-                  label="Your email"
+                  label="Email"
                 />
                 {errors.email && touched.email && gButtonError && (
                   <p className="text-red-600">{errors.email}</p>
@@ -89,10 +89,7 @@ const Login = () => {
               {loading ? (
                 <SpinnerButton status="Validating Data" />
               ) : (
-                <GeneralButton
-                  type="submit"
-                  disabled={isSubmitting} //
-                >
+                <GeneralButton type="submit" disabled={isSubmitting}>
                   Sign in
                 </GeneralButton>
               )}
