@@ -1,54 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
-import { useFormik } from "formik";
-import { forgotPasswordEmailSchema } from "../../schema/forgotPasswordSchema";
-import { useForgotPasswordEmailSubmissionMutation } from "../../redux/features/auth/authApi";
-import { useEffect, useState } from "react";
-import responseErrorCatch from "../../utils/responseErrorToast";
-import toast from "react-hot-toast";
-import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
-import GeneralButton from "../../components/Buttons/GeneralButton";
+
+import { useForgotPassword } from "./hook";
+import { SpinnerButton } from "../../../components/Buttons/SpinnerButton";
+import GeneralButton from "../../../components/Buttons/GeneralButton";
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
-  const [
-    forgotPasswordEmailSubmission,
-    { isSuccess, data, isError, error, isLoading },
-  ] = useForgotPasswordEmailSubmissionMutation();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setLoading(false);
-      if (data && "message" in data) {
-        toast.success(data.message as string);
-        navigate("/auth/forgot_password_otp_verification");
-      }
-    } else if (isLoading) {
-      setLoading(true);
-    } else if (isError) {
-      setLoading(false);
-      responseErrorCatch(error);
-    }
-  }, [isSuccess, isError, data, navigate, error, isLoading]);
   const {
+    loading,
     values,
     errors,
     touched,
+    navigate,
     isSubmitting,
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: forgotPasswordEmailSchema,
-    onSubmit: async (values, actions) => {
-      await forgotPasswordEmailSubmission({ email: values.email });
-      actions.resetForm();
-    },
-  });
+  } = useForgotPassword();
 
   return (
     <section>

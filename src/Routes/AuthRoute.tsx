@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp";
 import OtpVerification from "../pages/Auth/OtpVerification";
-import ForgotPassword from "../pages/Auth/forgotPassword";
-import ForgotOtpPasswordOtpVerification from "../pages/Auth/forgotPasswordOtpVerification";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
+import ForgotOtpPasswordOtpVerification from "../pages/Auth/ForgotOtpPasswordOtpVerification";
 import ResetForgotPassword from "../pages/Auth/ResetForgotPassword";
 
 const AuthRoute = () => {
@@ -23,4 +23,3 @@ const AuthRoute = () => {
 };
 
 export default AuthRoute;
-

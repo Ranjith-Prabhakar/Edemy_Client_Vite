@@ -1,28 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
-import { useFormik } from "formik";
-import { resetForgotPasswordSchema } from "../../schema/resetForgotPasswordSchema";
 
-import { useResetPasswordMutation } from "../../redux/features/auth/authApi";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import AuthInputs from "../../components/inputFields/AuthInputs";
-import GeneralButton from "../../components/Buttons/GeneralButton";
-import responseErrorCatch from "../../utils/responseErrorToast";
+import { useResetForgotPassword } from "./hook";
+import AuthInputs from "../../../components/inputFields/AuthInputs";
+import GeneralButton from "../../../components/Buttons/GeneralButton";
 
 const ResetForgotPassword = () => {
-  const navigate = useNavigate();
-  const [resetPassword, { isSuccess, data, isError, error }] =
-    useResetPasswordMutation();
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(data.message);
-      navigate("/auth/login");
-    } else if (isError) {
-      responseErrorCatch(error);
-    }
-  }, [isSuccess, isError, data, navigate, error]);
   const {
     values,
     errors,
@@ -31,16 +14,7 @@ const ResetForgotPassword = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useFormik({
-    initialValues: {
-      password: "",
-    },
-    validationSchema: resetForgotPasswordSchema,
-    onSubmit: async (values, actions) => {
-      await resetPassword({ password: values.password });
-      actions.resetForm();
-    },
-  });
+  } = useResetForgotPassword();
 
   return (
     <section>

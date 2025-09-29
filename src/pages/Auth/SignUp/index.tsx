@@ -1,37 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
-import { useFormik } from "formik";
-import { signupSchema } from "../../schema/authSchema";
-import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
-
-import { useRegisterMutation } from "../../redux/features/auth/authApi";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { catchError } from "../../utils/catchError";
-import AuthInputs from "../../components/inputFields/AuthInputs";
-import GeneralButton from "../../components/Buttons/GeneralButton";
-import responseErrorCatch from "../../utils/responseErrorToast";
+import { useSignUp } from "./hook";
+import AuthInputs from "../../../components/inputFields/AuthInputs";
+import { SpinnerButton } from "../../../components/Buttons/SpinnerButton";
+import GeneralButton from "../../../components/Buttons/GeneralButton";
 
 const SignUp = () => {
-  const [register, { isSuccess, isError, error, isLoading }] =
-    useRegisterMutation();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (isLoading) {
-      setLoading(true);
-    } else if (isSuccess) {
-      setLoading(false);
-      toast.success("otp has been sent to your mail");
-      navigate("/auth/otp_verification", { state: { fromSignup: true } });
-    } else if (isError) {
-      setLoading(false);
-      responseErrorCatch(error);
-    }
-  }, [isSuccess, isError, error, isLoading, navigate]);
-
   const {
+    loading,
     values,
     errors,
     touched,
@@ -39,29 +15,7 @@ const SignUp = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: signupSchema,
-    onSubmit: async (values, actions) => {
-      try {
-        await register({
-          name: values.name,
-          email: values.email,
-          password: values.password,
-          confirmPassword: values.confirmPassword,
-        });
-        actions.resetForm();
-      } catch (error: unknown) {
-        catchError(error);
-      }
-    },
-  });
-
+  } = useSignUp();
   return (
     <section>
       <div className="flex flex-col  items-center justify-center px-4 py-8 mx-auto h-screen lg:py-0">

@@ -1,44 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
-import { useFormik } from "formik";
-import { loginSchema } from "../../schema/authSchema";
-import { useLoginMutation } from "../../redux/features/auth/authApi";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { ILoginRes } from "../../redux/interfaces/authApi";
-import AuthInputs from "../../components/inputFields/AuthInputs";
-import GeneralButton from "../../components/Buttons/GeneralButton";
-import { SpinnerButton } from "../../components/Buttons/SpinnerButton";
-// import GoogleButton from "../../components/Buttons/Google";
+import AuthInputs from "../../../components/inputFields/AuthInputs";
+import { useLogin } from "./hook";
+import { SpinnerButton } from "../../../components/Buttons/SpinnerButton";
+import GeneralButton from "../../../components/Buttons/GeneralButton";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
-  const [loading, setLoading] = useState(false);
-  const [gButtonError, setGButtonError] = useState(true);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setLoading(false);
-      toast.success("user logged in successfully");
-      navigate("/");
-    } else if (isLoading) {
-      setLoading(true);
-      toast.loading;
-    } else if (isError && error) {
-      console.log("erorr Login", error);
-      setLoading(false);
-      if ("data" in error) {
-        if (error.data) {
-          const dataType = error.data as ILoginRes;
-          toast.error(dataType.message);
-        }
-      }
-    }
-  }, [isSuccess, isLoading, isError, error, navigate]);
-
   const {
+    loading,
+    gButtonError,
+    setGButtonError,
     values,
     errors,
     touched,
@@ -46,17 +17,7 @@ const Login = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: loginSchema,
-    onSubmit: async (values, actions) => {
-      await login({ email: values.email, password: values.password });
-      actions.resetForm();
-    },
-  });
+  } = useLogin();
 
   return (
     <section>

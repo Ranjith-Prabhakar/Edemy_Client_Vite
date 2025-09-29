@@ -1,11 +1,10 @@
-import { useState, ChangeEvent, KeyboardEvent, useRef, useEffect } from "react";
-import toast from "react-hot-toast";
-import { BsShieldLockFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useForgotPasswordOtpVerificationMutation } from "../../redux/features/auth/authApi";
-import responseErrorCatch from "../../utils/responseErrorToast";
+import { useForgotPasswordOtpVerificationMutation } from "../../../redux/features/auth/authApi";
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import responseErrorCatch from "../../../utils/responseErrorToast";
 
-const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
+export function useForgotOtpPasswordOtpVerification() {
   const [
     forgotPasswordOtpVerification,
     { isSuccess, data, isError, isLoading, error },
@@ -25,7 +24,7 @@ const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
 
   useEffect(() => {
     if (isLoading) {
-      <div>Loading...</div>;
+      console.log("loading....");
     } else if (isSuccess) {
       toast.success("enter the new password");
       navigate("/auth/reset_forgot_password");
@@ -77,30 +76,11 @@ const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
     }
   };
 
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="flex  flex-col justify-center items-center   bg-c_color-colorOne text-white border p-6 pb-12 rounded-md shadow-sm">
-        <BsShieldLockFill size={60} className="mb-2 " />
-        <h1 className="text-3xl font-bold mb-5 ">Verify Otp</h1>
-        <div className="flex gap-2">
-          {otp.map((value, index) => (
-            <input
-              className="text-black w-[75px] h-[75px] rounded-lg focus focus:ring-1 focus:ring-[#FFD700]"
-              key={index}
-              type="text"
-              ref={(input) =>
-                (inputRefs.current[index] = input as HTMLInputElement)
-              }
-              value={value}
-              onChange={(e) => handleChange(index, e)}
-              onClick={() => handleClick(index)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ForgotOtpPasswordOtpVerification;
+  return {
+    otp,
+    inputRefs,
+    handleChange,
+    handleClick,
+    handleKeyDown,
+  };
+}
