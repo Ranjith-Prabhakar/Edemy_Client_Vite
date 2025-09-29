@@ -1,20 +1,22 @@
-import  { useState } from 'react'
-import { IoIosArrowRoundForward, IoIosNotifications } from 'react-icons/io';
-import { useSocketContext } from '../../context/SocketContextProvider';
-import { IoCloseCircleOutline } from 'react-icons/io5';
-import { ENotification, ENotificationMsg } from '../../hooks/useInitialNotificationLoader';
-import { useEditNotificationMutation } from '../../redux/features/notifications/notificationsApi';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { userRoleChange } from '../../redux/features/auth/authSlice';
+import { IoIosArrowRoundForward, IoIosNotifications } from "react-icons/io";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
+import { useNotification } from "./hook";
+import {
+  ENotification,
+  ENotificationMsg,
+} from "../../../hooks/useInitialNotificationLoader";
+import { userRoleChange } from "../../../redux/features/auth/authSlice";
 
 const Notification = () => {
-  const [notificationSideBar, setNotificationSideBar] = useState(false);
-  const { notificationStore } = useSocketContext();
-    const [editNotification] = useEditNotificationMutation();
-     const navigate = useNavigate();
-     const dispatch = useDispatch();
+  const {
+    notificationSideBar,
+    setNotificationSideBar,
+    notificationStore,
+    editNotification,
+    navigate,
+    dispatch,
+  } = useNotification();
   return (
     <div className="relative">
       <IoIosNotifications
@@ -149,6 +151,6 @@ const Notification = () => {
       )}
     </div>
   );
-}
+};
 
-export default Notification
+export default Notification;

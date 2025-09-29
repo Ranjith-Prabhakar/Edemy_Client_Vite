@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Courses from "./Courses";
 
 const Brand = () => {
   return (
@@ -9,7 +8,6 @@ const Brand = () => {
           <span className="text-2xl 400px:text-4xl">E</span>demy
         </h1>
       </Link>
-      <Courses />
     </div>
   );
 };

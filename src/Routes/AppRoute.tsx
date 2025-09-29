@@ -1,31 +1,46 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "../pages/General/Home";
-import PageNotFound from "../pages/PageNotFound";
 import useGetUser from "../hooks/useGetUser";
-import AuthRoute from "../Routes/AuthRoute";
-import AdminRoute from "../Routes/AdminRoute";
-import InstructorRoute from "../Routes/InstructorRoute";
-import UserRoute from "../Routes/UserRoute";
-import CourseSinglePage from "../pages/General/CourseSinglePage";
-import CategoryPage from "../pages/General/CategoryPage";
-import CourseSearchPage from "../pages/General/CourseSearchPage";
-import AuthCookieChecker from "../components/AuthCookieChecker/AuthCookieChecker";
-import BeInstructor from "../pages/User/BeInstructor";
 import { Toaster } from "react-hot-toast";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
+
+const PageNotFound = lazy(() => import("../pages/PageNotFound"));
+const AuthRoute = lazy(() => import("../Routes/AuthRoute"));
+const AdminRoute = lazy(() => import("../Routes/AdminRoute"));
+const InstructorRoute = lazy(() => import("../Routes/InstructorRoute"));
+const UserRoute = lazy(() => import("../Routes/UserRoute"));
+const CourseSinglePage = lazy(
+  () => import("../pages/General/CourseSinglePage")
+);
+const CategoryPage = lazy(() => import("../pages/General/CategoryPage"));
+const CourseSearchPage = lazy(
+  () => import("../pages/General/CourseSearchPage")
+);
+const AuthCookieChecker = lazy(
+  () => import("../components/AuthCookieChecker/AuthCookieChecker")
+);
+const BeInstructor = lazy(() => import("../pages/User/BeInstructor"));
 
 const AppRoute = () => {
   const userName = useGetUser().name;
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="h-screen w-screen flex justify-center items-center font-bold font-roboto text-2xl">
+            Loading...
+          </div>
+        }
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
             path="/auth/*"
             element={userName ? <Navigate to={"/"} /> : <AuthRoute />}
           />
+
           <Route path="/google_auth/*" element={<AuthCookieChecker />} />
+          {/** need too work on  */}
           <Route path="/user/*" element={<UserRoute />} />
           <Route path="/be_instructor" element={<BeInstructor />} />
           <Route path="/instructor/*" element={<InstructorRoute />} />

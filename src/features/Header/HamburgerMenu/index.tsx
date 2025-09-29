@@ -1,48 +1,23 @@
-import { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
-import useGetUser from "../../hooks/useGetUser";
-import { Link, useNavigate } from "react-router-dom";
-import ThemeToggler from "../utils/ThemeToggler";
+import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { useLogoutMutation } from "../../redux/features/auth/authApi";
-import toast from "react-hot-toast";
-import responseErrorCatch from "../../utils/responseErrorToast";
 import { FaUsers } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { TbCategoryPlus } from "react-icons/tb";
 import { FaPhotoVideo } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaBookOpenReader } from "react-icons/fa6";
-import { MobileSearch } from "./Search";
-import { MobileCourses } from "./Courses";
+import { MobileCourses } from "../Courses";
+import { useHamburgerMenu } from "./hook";
+import { MobileSearch } from "../Search";
 
 const HamburgerMenu = () => {
-  const userData = useGetUser();
-  const [hamburgerDropDown, setHamburgerDropDown] = useState(false);
-  const [logout, { data, isError, isSuccess, error }] = useLogoutMutation();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (isSuccess) {
-      if (data && data.message) {
-        toast.success(data.message);
-        navigate("/auth/login");
-      }
-    } else if (isError) {
-      responseErrorCatch(error);
-    }
-  }, [data, error, isError, isSuccess, navigate]);
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const { userData, hamburgerDropDown, setHamburgerDropDown, handleLogout } =
+    useHamburgerMenu();
   return (
     <div className="relative 1200px:hidden">
       <RxHamburgerMenu
@@ -83,7 +58,6 @@ const HamburgerMenu = () => {
                         </h1>
                       </Link>
                     </div>
-                    <ThemeToggler />
                   </div>
                   {/* users */}
                   <div
@@ -159,7 +133,6 @@ const HamburgerMenu = () => {
                           {userData.name.split(" ").shift()}
                         </div>
                       </div>
-                      <ThemeToggler />
                     </div>
                     {/*  *******/}
                     <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
@@ -219,7 +192,6 @@ const HamburgerMenu = () => {
                           {userData.name.split(" ").shift()}
                         </div>
                       </div>
-                      <ThemeToggler />
                     </div>
                     {/*  *******/}
                     <div className="400px:hidden 400px:py-0 py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white">
@@ -247,7 +219,6 @@ const HamburgerMenu = () => {
                         </h1>
                       </Link>
                     </div>
-                    <ThemeToggler />
                   </div>
                 )}
 

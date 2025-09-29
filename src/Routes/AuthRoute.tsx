@@ -1,10 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../pages/Auth/Login";
-import SignUp from "../pages/Auth/SignUp";
-import OtpVerification from "../pages/Auth/OtpVerification";
-import ForgotPassword from "../pages/Auth/ForgotPassword";
-import ForgotOtpPasswordOtpVerification from "../pages/Auth/ForgotOtpPasswordOtpVerification";
-import ResetForgotPassword from "../pages/Auth/ResetForgotPassword";
+import { lazy } from "react";
+
+const Login = lazy(() => import("../pages/Auth/Login"));
+const SignUp = lazy(() => import("../pages/Auth/SignUp"));
+const OtpVerification = lazy(() => import("../pages/Auth/OtpVerification"));
+const ForgotPassword = lazy(() => import("../pages/Auth/ForgotPassword"));
+const ForgotOtpPasswordOtpVerification = lazy(
+  () => import("../pages/Auth/ForgotOtpPasswordOtpVerification")
+);
+const ResetForgotPassword = lazy(
+  () => import("../pages/Auth/ResetForgotPassword")
+);
 
 const AuthRoute = () => {
   return (

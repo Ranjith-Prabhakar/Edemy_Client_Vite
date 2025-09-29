@@ -12,9 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <ErrorBoundary>
     <Provider store={store}>
       <SocketContextProvider>
-        <div className="font-poppins  bg-gradient-to-r from-body-gradient-one to-body-gradient-two text-white">
-          <AppRoute />
-        </div>
+        <AppRoute />
       </SocketContextProvider>
     </Provider>
   </ErrorBoundary>

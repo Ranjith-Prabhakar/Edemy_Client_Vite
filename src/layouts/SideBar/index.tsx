@@ -1,11 +1,11 @@
 import { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "../redux/features/auth/authApi";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import responseErrorCatch from "../utils/responseErrorToast";
+import responseErrorCatch from "../../utils/responseErrorToast";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import useGetUser from "../hooks/useGetUser";
+import useGetUser from "../../hooks/useGetUser";
 
 type Props = {
   sideBarData: { name: string; icon: IconType }[];
@@ -36,7 +36,11 @@ const SideBar = ({ sideBarData }: Props) => {
   };
 
   return (
-    <div className={`custom-scrollBar ${role === "admin" ? "" :"hidden"} 800px:flex flex-col h-full overflow-scroll  max-w-[15%] w-full m-auto rounded-lg text-xl bg-c_color-colorOne shadow-md ring-gray-400 space-y-3`}>
+    <div
+      className={`custom-scrollBar ${
+        role === "admin" ? "" : "hidden"
+      } 800px:flex flex-col h-full overflow-scroll  max-w-[15%] w-full m-auto rounded-lg text-xl bg-c_color-colorOne shadow-md ring-gray-400 space-y-3`}
+    >
       <div className="flex flex-col  w-full">
         {sideBarData &&
           sideBarData.map((item) => (
@@ -46,11 +50,14 @@ const SideBar = ({ sideBarData }: Props) => {
               onClick={() => {
                 if (role === "admin")
                   navigate(`/admin/dash_bord/${item.name.toLowerCase()}`);
-                else navigate(`/${role}/${item.name.toLowerCase().replace(/\s+/g, "")}`);// this regex is used for removing spaces between words 
+                else
+                  navigate(
+                    `/${role}/${item.name.toLowerCase().replace(/\s+/g, "")}`
+                  ); // this regex is used for removing spaces between words
               }}
             >
               <item.icon />
-              <h1 className="capitalize"> {item.name.replace(/_/g, ' ')}</h1>
+              <h1 className="capitalize"> {item.name.replace(/_/g, " ")}</h1>
             </div>
           ))}
         <div

@@ -25,8 +25,8 @@ const AuthCookieChecker = () => {
       dispatch(userLoggedIn({ userData: JSON.parse(userData) }));
 
       // api call to set cookie
-      let setCookie = async () => {
-        let result = await axios.post(
+      const setCookie = async () => {
+        const result = await axios.post(
           `${import.meta.env.VITE_BASEURL}/setCookie`,
           { accessToken, refreshToken },
           { withCredentials: true }

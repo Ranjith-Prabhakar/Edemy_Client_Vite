@@ -1,19 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ICategory } from "../../redux/interfaces/Course/getCategories";
-import { useGetCategoryQuery } from "../../redux/features/course/courseApi";
+import { useCourses, useMobileCourses } from "./hook";
 
 const Courses = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const navigate = useNavigate();
-  const { data, isSuccess } = useGetCategoryQuery();
-  const [categoryList, addCategoryList] = useState<ICategory[]>([]);
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("category", data);
-      addCategoryList(data.data as ICategory[]);
-    }
-  }, [isSuccess]);
+  const { isHovered, setIsHovered, navigate, categoryList } = useCourses();
 
   return (
     <div
@@ -71,15 +59,8 @@ type MobileProps = {
   setHamburgerDropDown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const MobileCourses = ({ setHamburgerDropDown }: MobileProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const navigate = useNavigate();
-  const { data, isSuccess } = useGetCategoryQuery();
-  const [categoryList, addCategoryList] = useState<ICategory[]>([]);
-  useEffect(() => {
-    if (isSuccess) {
-      addCategoryList(data.data as ICategory[]);
-    }
-  }, [isSuccess]);
+  const { isHovered, setIsHovered, navigate, categoryList } =
+    useMobileCourses();
 
   return (
     <div

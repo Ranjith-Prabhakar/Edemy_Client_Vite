@@ -1,84 +1,21 @@
-// import { FaBookOpenReader } from "react-icons/fa6";
-// import { Link } from "react-router-dom";
-
-// type Props = {
-//   role: string;
-//   setProfileDropDownMenu: React.Dispatch<React.SetStateAction<boolean>>;
-// };
-
-// const ProfileDropDown = ({ role, setProfileDropDownMenu }: Props) => {
-//   console.log(role);
-//   return (
-//     <>
-//       {role === "user" && (
-//         <div>
-//           <div
-//             onClick={() => {
-//               setProfileDropDownMenu(false);
-//             }}
-//             className=" py-2 px-3 rounded-lg  mb-3 flex justify-between items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
-//           >
-//             <Link
-//               to={`/instructor/my_learnings`}
-//               className="py-2 px-3 rounded-lg  flex justify-start gap-2 items-center w-full bg-gradient-to-r from-body-gradient-two to-body-gradient-one text-white"
-//             >
-//               <FaBookOpenReader />
-//               <h1 className=" font-semibold">My Learning</h1>
-//             </Link>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// };
-
-// export default ProfileDropDown;
-
-import { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import useGetUser from "../../hooks/useGetUser";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { useLogoutMutation } from "../../redux/features/auth/authApi";
-import toast from "react-hot-toast";
-import responseErrorCatch from "../../utils/responseErrorToast";
 import { FaPhotoVideo } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaBookOpenReader } from "react-icons/fa6";
 import { GiTeacher } from "react-icons/gi";
+import { useProfileDropDown } from "./hook";
 const ProfileDropDown = () => {
-  const [name, setName] = useState("");
-  const userData = useGetUser();
-  const [hamburgerDropDown, setHamburgerDropDown] = useState(false);
-  const [logout, { data, isError, isSuccess, error }] = useLogoutMutation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (userData.name) {
-      setName(
-        userData.name.substring(0, 1)[0].toUpperCase() +
-          userData.name.substring(1, 2)
-      );
-    }
-  }, [userData]);
-  useEffect(() => {
-    if (isSuccess) {
-      if (data && data.message) {
-        toast.success(data.message);
-        navigate("/auth/login");
-      }
-    } else if (isError) {
-      responseErrorCatch(error);
-    }
-  }, [data, error, isError, isSuccess, navigate]);
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    name,
+    hamburgerDropDown,
+    userData,
+    navigate,
+    setHamburgerDropDown,
+    handleLogout,
+  } = useProfileDropDown();
 
   return (
     <div className="relative">

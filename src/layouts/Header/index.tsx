@@ -1,9 +1,10 @@
-import Brand from "../../components/Navbar/Brand";
-import Search from "../../components/Navbar/Search";
-import HamburgerMenu from "../../components/Navbar/HamburgerMenu";
-import Notification from "../../components/Navbar/Notification";
-import ProfileDropDown from "../../components/ProfileDropDown/ProfileDropDown";
+import Brand from "../../features/Header/Brand";
+import Search from "../../features/Header/Search";
+import HamburgerMenu from "../../features/Header/HamburgerMenu";
+import Notification from "../../features/Header/Notification";
+import ProfileDropDown from "../../features/Header/ProfileDropDown";
 import { useHeaderHook } from "./hook";
+import Courses from "../../features/Header/Courses";
 
 type props = {
   isScrolled?: boolean;
@@ -22,6 +23,7 @@ const Header = ({ isScrolled }: props) => {
       >
         <div className="flex justify-between items-end ">
           <Brand />
+          <Courses />
           <Search isScrolled={isScrolled} categoryList={categoryList} />
           <div>
             <HamburgerMenu />
