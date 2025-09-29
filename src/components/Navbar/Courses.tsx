@@ -10,6 +10,7 @@ const Courses = () => {
   const [categoryList, addCategoryList] = useState<ICategory[]>([]);
   useEffect(() => {
     if (isSuccess) {
+      console.log("category", data);
       addCategoryList(data.data as ICategory[]);
     }
   }, [isSuccess]);

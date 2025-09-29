@@ -1,11 +1,6 @@
-// import { ICategory } from '../../redux/interfaces/Course/getCategories';
-import { Link } from 'react-router-dom';
-import Courses from './Courses';
+import { Link } from "react-router-dom";
+import Courses from "./Courses";
 
-// type Props = {
-//   categoryList: ICategory[];
-// };
-// {categoryList}: Props)
 const Brand = () => {
   return (
     <div className="flex justify-between items-end 1200px:flex-3 ">
@@ -19,4 +14,4 @@ const Brand = () => {
   );
 };
 
-export default Brand
+export default Brand;

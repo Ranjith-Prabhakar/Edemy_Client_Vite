@@ -49,7 +49,7 @@ const ForgotOtpPasswordOtpVerification = (): JSX.Element => {
     if (value && index < length - 1 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }
-    const combinedOtp = newOtp.join(""); // at this point if we console log otp it wont updated because it is asyncrounous so that take the newOtp
+    const combinedOtp = newOtp.join("");
     if (combinedOtp.length === length) {
       onSubmit(combinedOtp);
     }

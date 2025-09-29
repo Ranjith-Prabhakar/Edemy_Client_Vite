@@ -8,7 +8,7 @@ import { useResendOtpMutation } from "../../redux/features/auth/authApi";
 
 const OtpVerification = (): JSX.Element => {
   const [timer, serTimer] = useState("");
-  const [resendOtp, { isSuccess:resendOtpIsSuccess, data:resendOtpData }] =
+  const [resendOtp, { isSuccess: resendOtpIsSuccess, data: resendOtpData }] =
     useResendOtpMutation();
   const [createUser, { isLoading, isSuccess, isError, error }] =
     useCreateUserMutation();
@@ -17,7 +17,6 @@ const OtpVerification = (): JSX.Element => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
 
   const inputRefs = useRef<HTMLInputElement[]>([]);
-
 
   useEffect(() => {
     if (resendOtpIsSuccess) console.log("resendOtpData", resendOtpData);
@@ -39,7 +38,6 @@ const OtpVerification = (): JSX.Element => {
       console.log("error", error);
 
       toast.error("verification code mis-matches");
-      // catchError(error)
     }
   }, [isError, isLoading, isSuccess, navigate, error]);
 
@@ -62,7 +60,7 @@ const OtpVerification = (): JSX.Element => {
     if (value && index < length - 1 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }
-    const combinedOtp = newOtp.join(""); // at this point if we console log otp it wont updated because it is asyncrounous so that take the newOtp
+    const combinedOtp = newOtp.join("");
     if (combinedOtp.length === length) {
       onSubmit(combinedOtp);
     }
@@ -131,49 +129,49 @@ const OtpVerification = (): JSX.Element => {
     handleTimer();
   }, []);
 
-    useEffect(() => {
-     if (resendOtpIsSuccess) {
+  useEffect(() => {
+    if (resendOtpIsSuccess) {
       toast.success("OTP has been re-sent to the Mail");
-       const handleTimer = async () => {
-         // Set the initial minute and second values
-         let minutes = 1;
-         let seconds = 0;
+      const handleTimer = async () => {
+        // Set the initial minute and second values
+        let minutes = 1;
+        let seconds = 0;
 
-         // set  the initial time
-         formatTime(minutes, seconds);
+        // set  the initial time
+        formatTime(minutes, seconds);
 
-         // Create an interval that decrements the time every second
-         const timerInterval = setInterval(() => {
-           // Decrement the seconds
-           seconds--;
+        // Create an interval that decrements the time every second
+        const timerInterval = setInterval(() => {
+          // Decrement the seconds
+          seconds--;
 
-           // If seconds reach zero, decrement minutes and reset seconds to 59
-           if (seconds < 0) {
-             minutes--;
-             seconds = 5;
-           }
+          // If seconds reach zero, decrement minutes and reset seconds to 59
+          if (seconds < 0) {
+            minutes--;
+            seconds = 5;
+          }
 
-           // set the updated time
-           formatTime(minutes, seconds);
+          // set the updated time
+          formatTime(minutes, seconds);
 
-           // If the timer reaches zero, stop the interval
-           if (minutes === 0 && seconds === 0) {
-             clearInterval(timerInterval);
-             serTimer("Timer expired!");
-           }
-         }, 1000);
+          // If the timer reaches zero, stop the interval
+          if (minutes === 0 && seconds === 0) {
+            clearInterval(timerInterval);
+            serTimer("Timer expired!");
+          }
+        }, 1000);
 
-         // Helper function to format time
-         function formatTime(minutes: number, seconds: number) {
-           const timeString = `${minutes.toString().padStart(2, "0")}:${seconds
-             .toString()
-             .padStart(2, "0")}`;
-           serTimer(timeString);
-         }
-       };
-       handleTimer();
-     }
-    }, [resendOtpIsSuccess]);
+        // Helper function to format time
+        function formatTime(minutes: number, seconds: number) {
+          const timeString = `${minutes.toString().padStart(2, "0")}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+          serTimer(timeString);
+        }
+      };
+      handleTimer();
+    }
+  }, [resendOtpIsSuccess]);
 
   return (
     <>
@@ -214,8 +212,6 @@ const OtpVerification = (): JSX.Element => {
           </div>
         </div>
       </div>
-      
-
     </>
   );
 };

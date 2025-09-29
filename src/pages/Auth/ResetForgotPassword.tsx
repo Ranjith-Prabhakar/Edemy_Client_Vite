@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import ThemeToggler from "../../components/utils/ThemeToggler";
 import { resetForgotPasswordSchema } from "../../schema/resetForgotPasswordSchema";
 
 import { useResetPasswordMutation } from "../../redux/features/auth/authApi";
@@ -21,7 +20,7 @@ const ResetForgotPassword = () => {
       toast.success(data.message);
       navigate("/auth/login");
     } else if (isError) {
-      responseErrorCatch(error)
+      responseErrorCatch(error);
     }
   }, [isSuccess, isError, data, navigate, error]);
   const {
@@ -57,7 +56,6 @@ const ResetForgotPassword = () => {
                 <Link to={"/"}>
                   <IoHome />
                 </Link>
-                <ThemeToggler />
               </div>
             </div>
 
@@ -75,10 +73,7 @@ const ResetForgotPassword = () => {
                   <p className="text-red-600">{errors.password}</p>
                 )}
               </div>
-              <GeneralButton
-                type="submit"
-                disabled={isSubmitting} //
-              >
+              <GeneralButton type="submit" disabled={isSubmitting}>
                 Submit
               </GeneralButton>
             </form>

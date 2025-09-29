@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useFormik } from "formik";
-import ThemeToggler from "../../components/utils/ThemeToggler";
 import { forgotPasswordEmailSchema } from "../../schema/forgotPasswordSchema";
 import { useForgotPasswordEmailSubmissionMutation } from "../../redux/features/auth/authApi";
 import { useEffect, useState } from "react";
@@ -12,8 +11,10 @@ import GeneralButton from "../../components/Buttons/GeneralButton";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const [forgotPasswordEmailSubmission, { isSuccess, data, isError, error,isLoading }] =
-    useForgotPasswordEmailSubmissionMutation();
+  const [
+    forgotPasswordEmailSubmission,
+    { isSuccess, data, isError, error, isLoading },
+  ] = useForgotPasswordEmailSubmissionMutation();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const ForgotPassword = () => {
     validationSchema: forgotPasswordEmailSchema,
     onSubmit: async (values, actions) => {
       await forgotPasswordEmailSubmission({ email: values.email });
-      actions.resetForm(); // after submission to clear the fields
+      actions.resetForm();
     },
   });
 
@@ -63,7 +64,6 @@ const ForgotPassword = () => {
                 <Link to={"/"}>
                   <IoHome />
                 </Link>
-                <ThemeToggler />
               </div>
             </div>
 
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                   id="email"
                   value={values.email}
                   onChange={handleChange}
-                  onBlur={handleBlur} // to check whether click on the field
+                  onBlur={handleBlur}
                   className=" border border-gray-300  text-black sm:text-sm rounded-lg focus:ring-[#69D3DC] focus:border-[#69D3DC] block w-full p-2.5 bg-[#b7e2e6]  placeholder-gray-400   "
                   placeholder="name@company.com"
                 />
@@ -92,14 +92,10 @@ const ForgotPassword = () => {
               {loading ? (
                 <SpinnerButton status="Validating Data" />
               ) : (
-                <GeneralButton
-                  type="submit"
-                  disabled={isSubmitting} //
-                >
+                <GeneralButton type="submit" disabled={isSubmitting}>
                   Submit
                 </GeneralButton>
               )}
-              
             </form>
             <button
               className="w-full focus:ring-1 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#008E80] hover:bg-[#009B7D] "
