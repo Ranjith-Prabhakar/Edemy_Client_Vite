@@ -1,21 +1,8 @@
-import CourseCard from "../Card/CourseCard";
-import { useGetCoursesForUserQuery } from "../../redux/features/course/courseApi";
-import { ICourse } from "../../redux/interfaces/Course/generalInterface";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import CourseCard from "../../../components/Card/CourseCard";
+import { useOurBestCourse } from "./hook";
 
 const OurBestCourses = () => {
-  const navigate = useNavigate();
-  const { data, isSuccess } = useGetCoursesForUserQuery();
-  const [courseCategory, setCourseCategory] = useState<ICourse[]>([]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      const coursesData = data.data as ICourse[];
-
-      setCourseCategory(coursesData);
-    }
-  }, [data, isSuccess]);
+  const { navigate, courseCategory } = useOurBestCourse();
   return (
     <div className="flex flex-col items-center mt-[8%] overflow-x-scroll">
       <h1 className="text-3xl text-center p-1 400px:p-0 400px:text-start 400px:text-5xl font-bold italic">

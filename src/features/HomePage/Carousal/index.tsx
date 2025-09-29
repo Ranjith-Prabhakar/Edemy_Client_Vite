@@ -1,5 +1,4 @@
-import carousal from "../../../public/Assets/carousal.png";
-// import student from "../../../public/Assets/student.png";
+import carousal from "../../../../public/Assets/carousal.png";
 
 const Carousal = () => {
   return (
