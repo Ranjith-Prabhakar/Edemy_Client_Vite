@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import StudentVoice from "../../../public/Assets/StudentVoice.png";
 
 const Testimonial = () => {
   const testimonials = [
     {
       paragraph:
-        "Edemy is a game-changer! Its flexible approach accommodates my busy schedule, while interactive lessons and adaptive technology enhance comprehension. The diverse, multimedia-rich content fosters a supportive learning community. With a user-friendly interface and responsive support, Edemy has transformed my education, making it accessible, engaging, and tailored.",
-      name: "Tony Stark",
+        "Edemy completely changed how I study. The structured lessons and interactive exercises keep me engaged, and I finally feel confident learning complex topics at my own pace.",
+      name: "Sara",
+      image: "../../../public/Assets/testimonial-1.png",
     },
     {
       paragraph:
-        "Edemy is a game-changer! Its flexibility suits my busy schedule, interactive lessons, and adaptive tech boost comprehension. Diverse, multimedia-rich content cultivates a supportive learning community. The user-friendly interface and responsive support redefine education, making it accessible, engaging, and personalized.",
-      name: "Bruce Wyne",
+        "What I love most about Edemy is the flexibility. I can log in anytime, from anywhere, and continue exactly where I left off. It makes learning so much easier alongside my busy work schedule.",
+      name: "Natasha",
+      image: "../../../public/Assets/testimonial-2.png",
     },
     {
       paragraph:
-        "Edemy is a game-changer! Its flexible approach accommodates my busy schedule, while interactive lessons and adaptive technology enhance comprehension. The diverse, multimedia-rich content fosters a supportive learning community. With a user-friendly interface and responsive support, Edemy has transformed my education, making it accessible, engaging, and tailored.",
-      name: "Peter Parker",
-    },
-    {
-      paragraph:
-        "Edemy is a game-changer! Its flexibility suits my busy schedule, interactive lessons, and adaptive tech boost comprehension. Diverse, multimedia-rich content cultivates a supportive learning community. The user-friendly interface and responsive support redefine education, making it accessible, engaging, and personalized.",
-      name: "Bruce Wyne",
+        "The instructors are amazing! Their clear explanations and real-world examples helped me understand subjects I struggled with for years. I’m finally seeing real progress in my studies.",
+      name: "Peter",
+      image: "../../../public/Assets/testimonial-3.png",
     },
   ];
 
@@ -33,7 +30,7 @@ const Testimonial = () => {
       } else {
         setTestimonialData(testimonialData + 1);
       }
-    }, 2000);
+    }, 3000);
 
     return () => {
       clearInterval(interval);
@@ -46,20 +43,18 @@ const Testimonial = () => {
         <span className="text-[#FFD700]"> Our </span>
         Students Voice
       </h1>
-      <div className="400px:flex mt-5 h-full">
+      <div className="400px:flex mt-[50px] p-[15px] h-[400px] bg-white/5 backdrop-blur-md shadow-2xl overflow-hidden w-[80%] m-auto border rounded-xl">
         <div className="hidden 400px:block w-1/2">
           <img
-            src={StudentVoice}
+            src={testimonials[testimonialData].image}
             alt="student"
-            className="w-[80%] h-full"
+            className="w-[300px] h-[300px] object-cover rounded-xl mx-auto mt-3 "
           ></img>
         </div>
         <div className="flex flex-col justify-center 400px:w-1/2 text-xl italic opacity-85">
-          <p className="text-center p-2 pb-0">
-            {testimonials[testimonialData].paragraph}
-          </p>
+          <p className=" p-2 pb-0">{testimonials[testimonialData].paragraph}</p>
           <br />
-          <h4 className="text-center p-2 pt-0">
+          <h4 className="text-end p-2 pt-0">
             Name : {testimonials[testimonialData].name}
           </h4>
         </div>

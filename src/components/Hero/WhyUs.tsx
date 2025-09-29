@@ -24,8 +24,8 @@ const WhyUs = () => {
 
         <div className="flex flex-col items-center gap-5 ">
           <BiSupport size={45} color="#FFD700" />
-          <h3 className="text-center font-medium text-3xl italic">
-            Al Time Support
+          <h3 className="text-center font-bold text-3xl italic">
+            All Time Support
           </h3>
           <p className="text-center mb-2 p-2 400px:text-start me-4 leading-7 text-lg italic opacity-85">
             24/7 Support: Elevate your learning experience with our
@@ -37,14 +37,11 @@ const WhyUs = () => {
 
         <div className="flex flex-col items-center gap-5  ">
           <LiaCertificateSolid size={45} color="#FFD700" />
-          <h3 className="text-center font-medium text-3xl italic">
-            Certificate
-          </h3>
+          <h3 className="text-center font-bold text-3xl italic">Certificate</h3>
           <p className="text-center mb-2 p-2 400px:text-start leading-7 text-lg italic opacity-85">
-            24/7 Support: Elevate your learning experience with our
-            always-available support. Our dedicated team ensures immediate
-            assistance, making your educational journey seamless, responsive,
-            and stress-free. Choose uninterrupted guidance.
+            Earn industry-recognized certificates upon course completion.
+            Showcase your achievements to employers, boost your resume, and
+            stand out in today’s competitive job market.
           </p>
         </div>
       </div>
